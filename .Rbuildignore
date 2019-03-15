@@ -1,0 +1,5 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^regulationSimulatoR\.Rcheck$
+^regulationSimulatoR.*\.tar\.gz$
+^regulationSimulatoR.*\.tgz$
