@@ -52,7 +52,7 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
     mutate(afff_factor = select(., ends_with("anorm"))%>%reduce (`*`, .init = 1),
            degg_factor = select(., ends_with("dnorm"))%>%reduce (`*`, .init =1))%>%
     as_tbl_graph()%N>%
-    mutate(type = ifelse(str_detect(name, "(?i)mir"), "miRNA", "Competing"), node_id = 1:length(.N()$name))%E>%
+    mutate(type = ifelse(str_detect(name, paste(c("(?i)-mir", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%E>%
     mutate(comp_count_list = as.list(!!competing_exp), comp_count_pre = !!competing_exp, comp_count_current = !!competing_exp, mirna_count_list = as.list(!!mirna_exp), mirna_count_pre = !!mirna_exp, mirna_count_current = !!mirna_exp)%>%
     group_by(to)%>%
     mutate(mirna_count_per_dep = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_dep = ifelse(is.na(mirna_count_per_dep), 0, mirna_count_per_dep))%>%
