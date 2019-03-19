@@ -27,7 +27,7 @@ Installation of `regulationSimulatoR`:
 
 ```
 install.packages("devtools")
-devtools::install_github("...../regulationSimulatoR")
+devtools::install_github("selcenari/regulationSimulatoR")
 
 
 library(regulationSimulatoR)
@@ -46,11 +46,14 @@ The `regulationSimulatoR` provides various datasets for examination of method. T
 
 ## Vignettes
 
+The repository of regulationSimulatoR contents the vignettes that follow:
+
 - [Small example of approach and explanation of method](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/small_sample.html)
 - [How to find convenient iteration for simulation of the network](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/convenient_iteration.html)
 - [How to determine most effective node of network in equal conditions](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/perturbation_sample.html)
 - [How does the system do in the presence of interaction factors?](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/realexample.html)
 - [How does the system work only when the amounts of elements are taken into account?](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/mirtarbase_example.html)
+
 
 ## Tests
 
