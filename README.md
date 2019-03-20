@@ -62,7 +62,6 @@ To test package, should run the following:
 
 ```
 devtools::test()
-
 ```
 
 
