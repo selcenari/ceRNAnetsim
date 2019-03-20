@@ -17,6 +17,7 @@
    * [Local Files](#local-files)
    * [Vignettes](#vignettes)
    * [Tests](#tests)
+   * [License](#license)
    * [Issues](#issues)
    
  <!--te-->
@@ -57,7 +58,17 @@ The repository of regulationSimulatoR contents the vignettes that follow:
 
 ## Tests
 
+To test package, should run the following:
 
+```
+devtools::test()
+
+```
+
+
+## License
+
+see the [LICENCE.md](https://github.com/selcenari/regulationSimulatoR/blob/master/LICENSE) file for details.
 
 ## Issues
 
