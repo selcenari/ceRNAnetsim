@@ -60,6 +60,7 @@ The repository of regulationSimulatoR contents the vignettes that follow:
 ## Tests
 
 To test package, should run the following:
+<<<<<<< HEAD
 
 ```
 devtools::test()
@@ -67,6 +68,16 @@ devtools::test()
 ```
 ## License
 
+=======
+
+```
+devtools::test()
+```
+
+
+## License
+
+>>>>>>> 0d163de4d4545c394497ea71a183a59aeb9efdcd
 see the [LICENCE.md](https://github.com/selcenari/regulationSimulatoR/blob/master/LICENSE) file for details.
 
 ## Issues
