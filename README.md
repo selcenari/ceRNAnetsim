@@ -43,18 +43,18 @@ The `ceRNAnetsim` provides various datasets for examination of method. These are
 - *minsamp* contents 2 miRNAs and 6 genes which are targeted by them. *new_counts* is a helper dataset for *minsamp*.
 - *midsamp* includes 4 miRNAs and 20 competing target genes.
 - *huge_example* dataset was obtained by integration of three datasets: NGS-gene expression and miRNA expression of a breast cancer patient and  the mirna target dataset which is had from combined of two different high-throughput experimental studies.
-- The other datasets are used to reproducible example of methods shown as [Mirtarbase example](https://github.com/selcenari/ceRNAnetsim/blob/master/doc/mirtarbase_example.html)
+- The other datasets are used to reproducible example of methods shown as [Mirtarbase example](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/mirtarbase_example.html)
 
 
 ## Vignettes
 
 The repository of ceRNAnetsim contents the vignettes that follow:
 
-- [Small example of approach and explanation of method](https://github.com/selcenari/ceRNAnetsim/blob/master/doc/small_sample.html)
-- [How to find convenient iteration for simulation of the network](https://github.com/selcenari/ceRNAnetsim/blob/master/doc/convenient_iteration.html)
-- [How to determine most effective node of network in equal conditions](https://github.com/selcenari/ceRNAnetsim/blob/master/doc/perturbation_sample.html)
-- [How does the system do in the presence of interaction factors?](https://github.com/selcenari/ceRNAnetsim/blob/master/doc/realexample.html)
-- [How does the system work only when the amounts of elements are taken into account?](https://github.com/selcenari/ceRNAnetsim/blob/master/doc/mirtarbase_example.html)
+- [Small example of approach and explanation of method](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/small_sample.html)
+- [How to find convenient iteration for simulation of the network](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/convenient_iteration.html)
+- [How to determine most effective node of network in equal conditions](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/perturbation_sample.html)
+- [How does the system do in the presence of interaction factors?](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/realexample.html)
+- [How does the system work only when the amounts of elements are taken into account?](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/mirtarbase_example.html)
 
 
 ## Tests
