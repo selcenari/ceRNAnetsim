@@ -1,5 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^regulationSimulatoR\.Rcheck$
-^regulationSimulatoR.*\.tar\.gz$
-^regulationSimulatoR.*\.tgz$
+^ceRNAnetsim\.Rcheck$
+^ceRNAnetsim.*\.tar\.gz$
+^ceRNAnetsim.*\.tgz$

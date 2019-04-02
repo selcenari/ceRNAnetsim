@@ -45,7 +45,7 @@ find_iteration <- function(df, competing_count, miRNA_count, aff_factor=dummy, d
     dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%reduce (`*`, .init = 1),
                   degg_factor = dplyr::select(., ends_with("dnorm"))%>%reduce (`*`, .init =1))%>%
     as_tbl_graph()%N>%
-    tidygraph::mutate(type = ifelse(str_detect(name, paste(c("(?i)-mir", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%E>%
+    tidygraph::mutate(type = ifelse(str_detect(name, paste(c("mir", "miR", "Mir", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%E>%
     tidygraph::mutate(comp_count_list = as.list(!!competing_exp), comp_count_pre = !!competing_exp, comp_count_current = !!competing_exp, mirna_count_list = as.list(!!mirna_exp), mirna_count_pre = !!mirna_exp, mirna_count_current = !!mirna_exp)%>%
     tidygraph::group_by(to)%>%
     tidygraph::mutate(mirna_count_per_dep = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_dep = ifelse(is.na(mirna_count_per_dep), 0, mirna_count_per_dep))%>%
@@ -111,24 +111,25 @@ iteration_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, 
   iteration <- data.frame(iter = seq(1,.iter, 1), effect= rep(0))
 
   df <- df%>%
-    mutate(competing = df[,1], miRNA= df[,2], Competing_name = df[,1], miRNA_name= df[,2], dummy=1)%>%
-    select(competing, miRNA, Competing_name, miRNA_name, !!competing_exp, !!mirna_exp, !!!affinity, !!!degradation, dummy)
+    dplyr::mutate(competing = df[,1], miRNA= df[,2], Competing_name = df[,1], miRNA_name= df[,2], dummy=1)%>%
+    dplyr::select(competing, miRNA, Competing_name, miRNA_name, !!competing_exp, !!mirna_exp, !!!affinity, !!!degradation, dummy)
 
 
   df%>%
-    group_by(miRNA)%>%
-    mutate_at(vars(!!!affinity), list(anorm= ~normalize))%>%
-    mutate_at(vars(!!!degradation), list(dnorm = ~normalize))%>%
-    ungroup()%>%
-    mutate(afff_factor = select(., ends_with("anorm")) %>% reduce (`*`, .init = 1), degg_factor = select(., ends_with("dnorm")) %>% reduce (`*`, .init =1))%>%
+    dplyr::group_by(miRNA)%>%
+    dplyr::mutate_at(vars(!!!affinity), list(anorm= ~normalize))%>%
+    dplyr::mutate_at(vars(!!!degradation), list(dnorm = ~normalize))%>%
+    dplyr::ungroup()%>%
+    dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%reduce (`*`, .init = 1),
+                  degg_factor = dplyr::select(., ends_with("dnorm"))%>%reduce (`*`, .init =1))%>%
     as_tbl_graph()%N>%
-    mutate(type = ifelse(str_detect(name, "(?i)mir"), "miRNA", "Competing"), node_id = 1:length(.N()$name))%E>%
-    mutate(comp_count_list = as.list(!!competing_exp), comp_count_pre = !!competing_exp, comp_count_current = !!competing_exp, mirna_count_list = as.list(!!mirna_exp), mirna_count_pre = !!mirna_exp, mirna_count_current = !!mirna_exp)%>%
-    group_by(to)%>%
-    mutate(mirna_count_per_comp = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_comp = ifelse(is.na(mirna_count_per_comp), 0, mirna_count_per_comp))%>%
-    ungroup()%>%
-    mutate(effect_current = mirna_count_per_comp*degg_factor, effect_pre = effect_current, effect_list = as.list(effect_current))%>%
-    select(-ends_with("norm"), dummy)%>%
+    tidygraph::mutate(type = ifelse(str_detect(name, paste(c("mir", "miR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%E>%
+    tidygraph::mutate(comp_count_list = as.list(!!competing_exp), comp_count_pre = !!competing_exp, comp_count_current = !!competing_exp, mirna_count_list = as.list(!!mirna_exp), mirna_count_pre = !!mirna_exp, mirna_count_current = !!mirna_exp)%>%
+    tidygraph::group_by(to)%>%
+    tidygraph::mutate(mirna_count_per_dep = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_dep = ifelse(is.na(mirna_count_per_dep), 0, mirna_count_per_dep))%>%
+    tidygraph::ungroup()%>%
+    tidygraph::mutate(effect_current = mirna_count_per_dep*degg_factor, effect_pre = effect_current, effect_list = as.list(effect_current))%>%
+    tidygraph::select(-ends_with("norm"), dummy)%>%
     update_nodes(once = TRUE)%>%
     update_how(node_name, how)%N>%
     simulate(cycle = .iter)->result_100
@@ -153,13 +154,3 @@ iteration_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, 
            ylab("(%) The Disturbed Element"))
 
 }
-
-
-
-
-
-
-
-
-
-
