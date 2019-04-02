@@ -43,6 +43,10 @@ This vignette is about the integration of gene miRNA pairs and their expression 
 ```{r, warning= FALSE}
 #install ceRNAnetsim
 
+#install.packages("devtools")
+#devtools::install_github("selcenari/ceRNAnetsim")
+
+
 library(ceRNAnetsim)
 ```
 NOTE that if the mirna:target dataset includes miRNA genes as targets, the priming_graph() function can get fail. Because, the function define to miRNAs and targets without distinguishing between uppercase or lowercase.

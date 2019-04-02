@@ -33,6 +33,10 @@ For these reasons, these are important to know the start point of perturbation a
 ## Installation of ceRNAnetsim
 
 ```{r, message=FALSE}
+#install.packages("devtools")
+#devtools::install_github("selcenari/ceRNAnetsim")
+
+
 library(ceRNAnetsim)
 ```
 

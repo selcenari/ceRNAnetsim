@@ -46,6 +46,10 @@ knitr::include_graphics("model_vignette.png")
 ## Installation of ceRNAnetsim
 
 ```{r, message=FALSE}
+#install.packages("devtools")
+#devtools::install_github("selcenari/ceRNAnetsim")
+
+
 library(ceRNAnetsim)
 ```
 

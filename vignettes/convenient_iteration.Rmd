@@ -19,6 +19,10 @@ knitr::opts_chunk$set(
 ## ceRNAnetsim
 
 ```{r, message=FALSE}
+#install.packages("devtools")
+#devtools::install_github("selcenari/ceRNAnetsim")
+
+
 library(ceRNAnetsim)
 ```
 
