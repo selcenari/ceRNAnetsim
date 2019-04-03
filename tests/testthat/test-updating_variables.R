@@ -47,10 +47,22 @@ test_that("Check the functions which update the values on the datasets with inte
   forthf <- thirdgf%>%
     update_nodes()
 
+  midsamp%>%
+    priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression)%>%
+    update_nodes(once=TRUE)%>%
+    update_how("Gene15", 0.3)%>%
+    update_nodes()%>%
+    simulate(10)%>%
+    as_tibble()%>%
+    dplyr::mutate(count_current= round(count_current, 2))%>%
+    dplyr::select(count_current)%>%
+    pull() -> outputall
+
 
   expect_equal(ncol(as_tibble(secondergf%>%activate(edges))), 22)
   expect_equal(ncol(as_tibble(thirdgf%>%activate(edges))), 22)
   expect_equal(ncol(as_tibble(forthf%>%activate(edges))), 22)
+  expect_equal(outputall, c(9999.79, 9999.79, 4999.90, 9974.16, 4999.65, 9975.21, 6981.25, 2991.97, 5999.03, 1999.68, 7998.70, 1499.76,  499.92, 6982.40, 1020.79, 1994.64, 5984.21,  999.93, 6499.55, 4799.67, 1000.00, 2000.00, 3000.00, 5000.00))
 
 
 })
