@@ -24,6 +24,8 @@ normalize <- function(x){abs(x)/max(abs(x))}
 #'
 #' @details priming_graph provides grouping of competing targets and evaluation of targets within the groups taking into account miRNA:target, target:total target, interaction and degradation parameters. The target groups are determined according to miRNAs. If the factors that are important in target interactions are specified as arguments, the factors also are evaluated separately within each group.
 #' priming_graph also calculates the miRNA efficiency in steady-state conditions. It is assumed that quantity of competing targets and miRNAs are shown in the steady-state system after the miRNAs exhibit repressive efficiency.
+#' Note that the data must not include missing values such as NA or "-".
+#'
 #'
 #' @examples
 #'
@@ -33,6 +35,13 @@ normalize <- function(x){abs(x)/max(abs(x))}
 
 priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, deg_factor=dummy){
 
+
+  if(sum(is.na.data.frame(df)) !=0){
+
+    stop("Missing or NA value in dataframe")
+  }
+
+  else{
 
   competing_exp <- enquo(competing_count)
   mirna_exp <- enquo(miRNA_count)
@@ -52,7 +61,7 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
     dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%reduce (`*`, .init = 1),
                   degg_factor = dplyr::select(., ends_with("dnorm"))%>%reduce (`*`, .init =1))%>%
     as_tbl_graph()%N>%
-    tidygraph::mutate(type = ifelse(str_detect(name, paste(c("mir", "miR", "Mir", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%E>%
+    tidygraph::mutate(type = ifelse(str_detect(name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%E>%
     tidygraph::mutate(comp_count_list = as.list(!!competing_exp), comp_count_pre = !!competing_exp, comp_count_current = !!competing_exp, mirna_count_list = as.list(!!mirna_exp), mirna_count_pre = !!mirna_exp, mirna_count_current = !!mirna_exp)%>%
     tidygraph::group_by(to)%>%
     tidygraph::mutate(mirna_count_per_dep = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_dep = ifelse(is.na(mirna_count_per_dep), 0, mirna_count_per_dep))%>%
@@ -62,6 +71,7 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
 
   warning("First variable processes as competing and the second as miRNA.
 ")
+  }
 
   input_graph
 

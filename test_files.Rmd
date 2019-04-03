@@ -45,6 +45,7 @@ perturb_test<- midsamp%>%
 is.data.frame(perturb_test)
 
 ```
+
 ```{r}
 
 midsamp%>%
@@ -69,6 +70,7 @@ priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression,
   
   ncol(as_tibble(forth%>%activate(nodes)))
 ```
+
 ```{r}
   primergf <- midsamp%>%
     priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression, aff_factor = c(seeds, Energy), deg_factor = targeting_region)
@@ -99,5 +101,64 @@ midsamp%>%
   class()
 ```
 
+
+```{r}
+testdata2 <- data.frame(competing = c("TP53", "Gene-2", "ABCC1", "Gene 4", "Gene 4", "Gene5", "PTEN"),
+           miRNA = c("mir1", "mir1","hsa-mir3", "mir1", "MiR2", "MiR2", "miR4"),
+           Competing_expression = c(10000, 10000, 5000, 10000, 10000, 5000, 10000),
+           miRNA_expression = c(1000, 1000, 1000, 1000, 2000, 2000, 2000),
+           stringsAsFactors = FALSE)
+
+
+priming_graph(testdata2, competing_count = Competing_expression, miRNA_count= miRNA_expression)%N>%
+      as_tibble()%>%
+      filter(type == "miRNA")%>%
+      count()%>%
+   pull()
+
+priming_graph(testdata2, competing_count = Competing_expression, miRNA_count= miRNA_expression)%N>%
+     as_tibble()%>%
+     filter(type == "Competing")%>%
+     count()%>%
+   pull()
+
+```
+
+```{r}
+testdata2 <- data.frame(competing = c("TP53", "Gene-2", "ABCC1", "Gene 4", "Gene 4", "Gene5", "PTEN"),
+           miRNA = c("mir1", "mir1","hsa-mir3", "mir1", "MiR2", "MiR2", "miR4"),
+           Competing_expression = c(NA, 10000, 5000, 10000, 10000, 5000, 10000),
+           miRNA_expression = c(1000, 1000, 1000, 1000, 2000, 2000, 2000),
+           stringsAsFactors = FALSE)
+```
+
+```{r}
+priming_graph(testdata2, competing_count = Competing_expression, miRNA_count= miRNA_expression)%>%
+  update_nodes(once = TRUE)%>%
+  update_how("ABCC1",3)%>%
+  update_nodes()%>%
+  simulate(2)
+
+sum(is.na.data.frame(testdata2))
+```
+
+```{r}
+data("midsamp")
+midsamp%>%
+  priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression)%>%
+  update_nodes(once=TRUE)%>%
+  update_how("Gene15", 0.3)%>%
+  update_nodes()%>%
+  simulate(10)%>%
+  as_tibble()%>%
+  dplyr::mutate(count_current= round(count_current, 2))%>%
+  dplyr::select(count_current)%>%
+  pull()
+
+c(9999.79, 9999.79, 4999.90, 9974.16, 4999.65, 9975.21, 6981.25, 2991.97, 5999.03, 1999.68, 7998.70, 1499.76,  499.92, 6982.40, 1020.79, 1994.64, 5984.21,  999.93, 6499.55, 4799.67, 1000.00, 2000.00, 3000.00, 5000.00)
+
+
+  
+```
 
 
