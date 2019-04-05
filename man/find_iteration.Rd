@@ -5,7 +5,7 @@
 \title{find_iteration}
 \usage{
 find_iteration(df, competing_count, miRNA_count, aff_factor = dummy,
-  deg_factor = dummy, node_name, how, .iter = 100, limit = 0.2)
+  deg_factor = dummy, node_name, how, .iter = 100, limit = 0.1)
 }
 \arguments{
 \item{df}{A data frame that includes the miRNA and competing targets.}

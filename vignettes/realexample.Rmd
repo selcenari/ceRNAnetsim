@@ -17,10 +17,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Installation of regulationSimulatoR
+## Installation of ceRNAnetsim
 
 ```{r, message=FALSE}
-library(regulationSimulatoR)
+#install.packages("devtools")
+#devtools::install_github("selcenari/ceRNAnetsim")
+
+
+library(ceRNAnetsim)
 ```
 
 ```{r, echo=FALSE, message= FALSE, warning=FALSE}

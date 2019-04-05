@@ -1,11 +1,12 @@
 
 
-## What does the `regulationSimulatoR` do?
+## What does the `ceRNAnetsim` do?
 
 <p align="center">
   <img width="500" height="300" src="https://media.giphy.com/media/l0ErNdz1w5vt3YdZm/giphy.gif">
 </p>
-`regulationSimulatoR` helps understanding complex miRNA:target interactions with the network based approach. It utilizes the amounts of miRNAs and their targets and interaction parameters optionally.
+
+`ceRNAnetsim` helps understanding complex miRNA:target interactions with the network based approach. It utilizes the amounts of miRNAs and their targets and interaction parameters optionally.
 
 
 ## Table of contents
@@ -23,18 +24,19 @@
 
 ## Installation
 
-Installation of `regulationSimulatoR`:
+Installation of `ceRNAnetsim`:
 
 ```
 install.packages("devtools")
-devtools::install_github("selcenari/regulationSimulatoR")
+devtools::install_github("selcenari/ceRNAnetsim")
 
-library(regulationSimulatoR)
+library(ceRNAnetsim)
+
 ```
 
 ## Local Files
 
-The `regulationSimulatoR` provides various datasets for experimenting with package functions. These are:
+The `ceRNAnetsim` provides various datasets for experimenting with package functions. These are:
 
 - *minsamp* : the minimum sample consists of 2 miRNAs and 6 genes which are targeted by them. *new_counts* is a helper dataset for *minsamp*.
 - *midsamp* : middle-sized sample is a network of 4 miRNAs and 20 competing target genes.
@@ -44,26 +46,24 @@ The `regulationSimulatoR` provides various datasets for experimenting with packa
   - and the miRNA:target dataset gathered from two different high-throughput experimental studies. (Link?)
 - The remaining datasets are used as reproducible example of methods shown as [Mirtarbase example](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/mirtarbase_example.html)
 
-
 ## Vignettes
 
-The repository of regulationSimulatoR contents the vignettes that follow:
+The repository of ceRNAnetsim contents the vignettes that follow:
 
-- [Small example demonstrating the approach and the method](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/small_sample.html)
-- [How to calculate proper number of iterations for simulation of the network](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/convenient_iteration.html)
-- [How to determine most effective node of network in equal conditions](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/perturbation_sample.html)
-- [How does the system work only when the amounts of expression are taken into account?](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/mirtarbase_example.html)
-- [How does the system behave in the presence of interaction factors?](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/realexample.html)
-
+- [Small example demonstrating the approach and the method](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/small_sample.html)
+- [How to calculate proper number of iterations for simulation of the network](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/convenient_iteration.html)
+- [How to determine most effective node of network in equal conditions](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/perturbation_sample.html)
+- [How does the system do in the presence of interaction factors?](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/realexample.html)
+- [How does the system behave in the presence of interaction factors?](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/mirtarbase_example.html)
 
 ## License
 
-see the [LICENCE.md](https://github.com/selcenari/regulationSimulatoR/blob/master/LICENSE) file for details.
+see the [LICENCE.md](https://github.com/selcenari/ceRNAnetsim/blob/master/LICENSE) file for details.
 
 ## Issues
 
 Contact us for any issue or bug via:
 
-- [Issues](https://github.com/selcenari/regulationSimulatoR/issues)
+- [Issues](https://github.com/selcenari/ceRNAnetsim/issues)
 - [Alper Yilmaz](mailto:alperyilmaz@gmail.com)
 - [Selcen Ari](mailto:selcenarii@gmail.com)

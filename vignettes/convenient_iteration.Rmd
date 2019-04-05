@@ -16,10 +16,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Installation of regulationSimulatoR
+## ceRNAnetsim
 
 ```{r, message=FALSE}
-library(regulationSimulatoR)
+#install.packages("devtools")
+#devtools::install_github("selcenari/ceRNAnetsim")
+
+
+library(ceRNAnetsim)
 ```
 
 ```{r, echo=FALSE, message= FALSE}
@@ -37,7 +41,7 @@ library(png)
 
 # What is the problem or point?
 
-In the `regulationSimulatoR` package, regulations of miRNA:target pairs are observed via direct or indirect interactions of elements in network. In this approach, change in expression level of single gene or miRNA can affect the whole network like water wave. So, when the change is applied the system, it affects to primary neighborhood firstly, and then the secondary. 
+In the `ceRNAnetsim` package, regulations of miRNA:target pairs are observed via direct or indirect interactions of elements in network. In this approach, change in expression level of single gene or miRNA can affect the whole network like water wave. So, when the change is applied the system, it affects to primary neighborhood firstly, and then the secondary. 
 
 In the simple interaction network like *minsamp*, the water wave-like behavior could be understood, because the neighborhoods of the primary linked elements of trigger element are not interacted to each other. The non-complex interaction can be facilitated to provide the steady-state, after the network is disturbed.
 

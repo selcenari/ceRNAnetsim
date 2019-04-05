@@ -12,7 +12,7 @@
 
 <meta name="author" content="Selcen Ari" />
 
-<meta name="date" content="2019-03-11" />
+<meta name="date" content="2019-04-02" />
 
 <title>How to Determine Perturbation in A Sample Dataset</title>
 
@@ -291,6 +291,9 @@ code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
+
+
+
 </head>
 
 <body>
@@ -299,8 +302,8 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <h1 class="title toc-ignore">How to Determine Perturbation in A Sample Dataset</h1>
-<h4 class="author"><em>Selcen Ari</em></h4>
-<h4 class="date"><em>2019-03-11</em></h4>
+<h4 class="author">Selcen Ari</h4>
+<h4 class="date">2019-04-02</h4>
 
 
 
@@ -313,10 +316,14 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <li><p>In the our approach,if the properties of miRNA:target interactions are degreed according to experimental studies, these factors takes into account in the regulations of miRNA:target interactions. But these factors are optionally evaluated. So, if the interaction factors are not specified, they are not taken into account and the system are ran based on miRNA and target amounts.</p></li>
 <li><p>On the other hand, these interaction factors affect the efficiency of perturbation of the change. For instance, if the change are applied in a element which is weakly interacted with others, the perturbation efficiency of this element on the network will be low.</p></li>
 </ul>
-<p>For these reasons, these are important to know the start point of perturbation and how much elements affected from change. In this way, we deveoped the <code>calc_perturbation()</code> and <code>find_node_perturbation()</code> functions in <code>regulationSimulatoR</code> package.</p>
-<div id="installation-of-regulationsimulator" class="section level2">
-<h2>Installation of regulationSimulatoR</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(regulationSimulatoR)</a></code></pre></div>
+<p>For these reasons, these are important to know the start point of perturbation and how much elements affected from change. In this way, we deveoped the <code>calc_perturbation()</code> and <code>find_node_perturbation()</code> functions in <code>ceRNAnetsim</code> package.</p>
+<div id="installation-of-cernanetsim" class="section level2">
+<h2>Installation of ceRNAnetsim</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#install.packages(&quot;devtools&quot;)</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#devtools::install_github(&quot;selcenari/ceRNAnetsim&quot;)</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">library</span>(ceRNAnetsim)</a></code></pre></div>
 </div>
 <div id="load-the-midsamp" class="section level2">
 <h2>Load the <em>midsamp</em></h2>

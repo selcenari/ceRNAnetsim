@@ -28,12 +28,16 @@ The perturbation means that the disturbance efficiency of an element in the netw
 
 - On the other hand, these interaction factors affect the efficiency of perturbation of the change. For instance, if the change are applied in a element which is weakly interacted with others, the perturbation efficiency of this element on the network will be low.
 
-For these reasons, these are important to know the start point of perturbation and how much elements affected from change. In this way, we deveoped the `calc_perturbation()` and `find_node_perturbation()` functions in `regulationSimulatoR` package.
+For these reasons, these are important to know the start point of perturbation and how much elements affected from change. In this way, we deveoped the `calc_perturbation()` and `find_node_perturbation()` functions in `ceRNAnetsim` package.
 
-## Installation of regulationSimulatoR
+## Installation of ceRNAnetsim
 
 ```{r, message=FALSE}
-library(regulationSimulatoR)
+#install.packages("devtools")
+#devtools::install_github("selcenari/ceRNAnetsim")
+
+
+library(ceRNAnetsim)
 ```
 
 ```{r, echo=FALSE, message= FALSE}

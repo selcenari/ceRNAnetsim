@@ -1,5 +1,5 @@
 library(testthat)
-library(regulationSimulatoR)
+library(ceRNAnetsim)
 
 
-test_check("regulationSimulatoR")
+test_check("ceRNAnetsim")

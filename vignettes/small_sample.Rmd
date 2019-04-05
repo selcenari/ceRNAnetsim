@@ -20,9 +20,9 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-This vignette demonstrates how to analysis miRNA:Competing interactions via `regulationSimulatoR` package.The perturbations in the miRNA:target interactions are handled step by step in `regulationSimulatoR`. The package determines and simulates regulation of miRNA:competing RNA interactions based on amounts of miRNA and the targets and interaction factors.
+This vignette demonstrates how to analysis miRNA:Competing interactions via `ceRNAnetsim` package.The perturbations in the miRNA:target interactions are handled step by step in `ceRNAnetsim`. The package determines and simulates regulation of miRNA:competing RNA interactions based on amounts of miRNA and the targets and interaction factors.
 
-The `regulationSimulatoR` works as followings:
+The `ceRNAnetsim` works as followings:
 
 - The dataset that is wanted to analysis  is organized. The first variable is arranged as competing and the second as miRNA.
 - The dataset is ran with `priming_graph()` for convertion to graph. This function makes calculations that are depended on miRNA amount, target (competing) amount and the interaction factors. It determines the efficiency of mirna to each target and saves that values as egde data. All calculations are performed in edge data. After that, results of calculations are used in node data.
@@ -33,7 +33,7 @@ The `regulationSimulatoR` works as followings:
 - As the results of these processes, the different outputs could be obtained such as views of graphs or graph objects.
 
 
-The workflow of `regulationSimulatoR` are shown as following:
+The workflow of `ceRNAnetsim` are shown as following:
 
 
 
@@ -43,10 +43,14 @@ knitr::include_graphics("model_vignette.png")
 
 
 
-## Installation of regulationSimulatoR
+## Installation of ceRNAnetsim
 
 ```{r, message=FALSE}
-library(regulationSimulatoR)
+#install.packages("devtools")
+#devtools::install_github("selcenari/ceRNAnetsim")
+
+
+library(ceRNAnetsim)
 ```
 
 ```{r, echo=FALSE, message= FALSE}
@@ -106,7 +110,7 @@ minsamp%>%
 
 In the steady-state, the mirna efficiency are assumed as stabil. But, If one or more change appears in the network, the system tends to be steady-state again. 
 
-The `regulationSimulatoR` pakage exhibits two method for change in data. `update_variables()` and `update_how()` provide to apply the trigger that can start the unsteady-state. 
+The `ceRNAnetsim` pakage exhibits two method for change in data. `update_variables()` and `update_how()` provide to apply the trigger that can start the unsteady-state. 
 
 The update_variables: An additional dataset that is equal in terms of nodes is used. The dataset includes changed and unchanged values of node amounts. 
 

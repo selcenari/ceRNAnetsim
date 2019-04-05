@@ -27,6 +27,7 @@ The function converts the given dataframe using first variable as competing and 
 \details{
 priming_graph provides grouping of competing targets and evaluation of targets within the groups taking into account miRNA:target, target:total target, interaction and degradation parameters. The target groups are determined according to miRNAs. If the factors that are important in target interactions are specified as arguments, the factors also are evaluated separately within each group.
 priming_graph also calculates the miRNA efficiency in steady-state conditions. It is assumed that quantity of competing targets and miRNAs are shown in the steady-state system after the miRNAs exhibit repressive efficiency.
+Note that the data must not include missing values such as NA or "-".
 }
 \examples{
 
