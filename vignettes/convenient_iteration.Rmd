@@ -28,12 +28,7 @@ library(ceRNAnetsim)
 
 ```{r, echo=FALSE, message= FALSE}
 library(rlang)
-library(dplyr)
-library(tidyr)
-library(stringr)
-library(stringi)
 library(tidyverse)
-library(ggplot2)
 library(tidygraph)
 library(igraph)
 library(ggraph)
@@ -46,7 +41,7 @@ library(png)
 
 # What is the problem or point?
 
-In the `ceRNAnetsim` package, regulations of miRNA:target pairs are observed via direct or indirect interactions of elements in network. In this approach, the change affect the whole network like water wave. So, when the change is applied the system, it affects to primary neighborhood firstly, and then the secondary. 
+In the `ceRNAnetsim` package, regulations of miRNA:target pairs are observed via direct or indirect interactions of elements in network. In this approach, change in expression level of single gene or miRNA can affect the whole network like water wave. So, when the change is applied the system, it affects to primary neighborhood firstly, and then the secondary. 
 
 In the simple interaction network like *minsamp*, the water wave-like behavior could be understood, because the neighborhoods of the primary linked elements of trigger element are not interacted to each other. The non-complex interaction can be facilitated to provide the steady-state, after the network is disturbed.
 
@@ -102,8 +97,6 @@ priming_graph(Gene_expression, miRNA_expression)%>%
   update_nodes()%>%
    simulate_vis(title = "Minsamp: Common element as trigger", 25)
 ```
-
-
 
 The workflow that is aforementioned in this vignette should be thought as suggestion. Because the `cycle` is a critical argument that is used with `simulate()` function and affects all results of analysis. In light of this vignette and functions, the approach can be developed according to persent dataset.
 

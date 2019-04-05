@@ -2,24 +2,18 @@ Package: ceRNAnetsim
 Type: Package
 Title: Regulation Simulator of Interaction between miRNA and Competing RNAs (ceRNA)
 Version: 0.1.0
-Author: Alper Yilmaz [aut, cre],     Selcen Ari [aut, cre]
-Maintainer: Alper Yilmaz <alyilmaz@yildiz.edu.tr>, Selcen Ari <selcenarii@gmail.com>
-Description: This package simulates regulations of ceRNAs' expressions after the change which occured in interacted miRNA and target RNAs. The package also presents a workflow or methodlogy for miRNA:target interactions and target regulation.     
-    The package associates miRNA and ceRNA interactions with the regulation parameters optionally as well as expression levels of miRNA and target RNAs.The functions handle the given dataset as graph object and the processes progress via edge and node variables.
+Author: Selcen Ari [aut, cre], Alper Yilmaz [aut]
+Maintainer: Selcen Ari <selcenarii@gmail.com >
+Description: This package simulates regulations of ceRNA expression levels after a expression level change in one or more miRNA/mRNAs. The methodolgy adopted by the package has potential to incorparate any ceRNA (circRNA, lincRNA, etc.) into miRNA:target interaction network.
+    The package basically distributes miRNA expression over available ceRNAs where each ceRNA attracks miRNAs proportional to its amount. However, the package can utilize multiple parameters that modify miRNA effect on its target (seed type, binding energy, binding location, etc.). The functions handle the given dataset as graph object and the processes progress via edge and node variables.
 License: GPL-3.0
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    dplyr, 
-    tidygraph, 
-    tidyr, 
-    stringr, 
-    stringi, 
     tidyverse, 
+    tidygraph, 
     igraph, 
     ggraph, 
-    ggplot2,
-    purrr, 
     rlang,
     future,
     furrr, 

@@ -6,21 +6,20 @@
   <img width="500" height="300" src="https://media.giphy.com/media/l0ErNdz1w5vt3YdZm/giphy.gif">
 </p>
 
-`ceRNAnetsim` helps to understanding whole miRNA:target interactions with the network based approach. It uses the amounts of miRNAs and their targets and interaction parameters optionally.
+`ceRNAnetsim` helps understanding complex miRNA:target interactions with the network based approach. It utilizes the amounts of miRNAs and their targets and interaction parameters optionally.
 
 
 ## Table of contents
 
 <!--ts-->
- 
+
    * [Installation](#installation)
    * [Local Files](#local-files)
    * [Vignettes](#vignettes)
-   * [Tests](#tests)
    * [License](#license)
    * [Issues](#issues)
 
-   
+
  <!--te-->
 
 ## Installation
@@ -31,39 +30,31 @@ Installation of `ceRNAnetsim`:
 install.packages("devtools")
 devtools::install_github("selcenari/ceRNAnetsim")
 
-
 library(ceRNAnetsim)
 
 ```
 
 ## Local Files
 
-The `ceRNAnetsim` provides various datasets for examination of method. These are:
+The `ceRNAnetsim` provides various datasets for experimenting with package functions. These are:
 
-- *minsamp* contents 2 miRNAs and 6 genes which are targeted by them. *new_counts* is a helper dataset for *minsamp*.
-- *midsamp* includes 4 miRNAs and 20 competing target genes.
-- *huge_example* dataset was obtained by integration of three datasets: NGS-gene expression and miRNA expression of a breast cancer patient and  the mirna target dataset which is had from combined of two different high-throughput experimental studies.
-- The other datasets are used to reproducible example of methods shown as [Mirtarbase example](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/mirtarbase_example.html)
-
+- *minsamp* : the minimum sample consists of 2 miRNAs and 6 genes which are targeted by them. *new_counts* is a helper dataset for *minsamp*.
+- *midsamp* : middle-sized sample is a network of 4 miRNAs and 20 competing target genes.
+- *huge_example* : this dataset is comprised of a large network which incorporates three datasets: 
+  - gene expression levels (RNA-Seq) retrieved from [TCGA-BRCA](https://portal.gdc.cancer.gov/projects?filters=%7B%22op%22%3A%22and%22%2C%22content%22%3A%5B%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22projects.project_id%22%2C%22value%22%3A%5B%22TCGA-BRCA%22%5D%7D%7D%5D%7D) breast cancer 
+  - miRNA expression of a breast cancer patient (from TCGA)
+  - and the miRNA:target dataset gathered from two different high-throughput experimental studies. (Link?)
+- The remaining datasets are used as reproducible example of methods shown as [Mirtarbase example](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/mirtarbase_example.html)
 
 ## Vignettes
 
 The repository of ceRNAnetsim contents the vignettes that follow:
 
-- [Small example of approach and explanation of method](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/small_sample.html)
-- [How to find convenient iteration for simulation of the network](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/convenient_iteration.html)
+- [Small example demonstrating the approach and the method](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/small_sample.html)
+- [How to calculate proper number of iterations for simulation of the network](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/convenient_iteration.html)
 - [How to determine most effective node of network in equal conditions](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/perturbation_sample.html)
 - [How does the system do in the presence of interaction factors?](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/realexample.html)
-- [How does the system work only when the amounts of elements are taken into account?](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/mirtarbase_example.html)
-
-
-## Tests
-
-To test package, should run the following:
-
-```
-devtools::test()
-```
+- [How does the system behave in the presence of interaction factors?](https://github.com/selcenari/ceRNAnetsim/blob/master/documents/mirtarbase_example.html)
 
 ## License
 
