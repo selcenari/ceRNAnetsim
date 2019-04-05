@@ -15,7 +15,6 @@
    * [Installation](#installation)
    * [Local Files](#local-files)
    * [Vignettes](#vignettes)
-   * [Tests](#tests)
    * [License](#license)
    * [Issues](#issues)
 
