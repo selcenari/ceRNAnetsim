@@ -6,19 +6,18 @@
   <img width="500" height="300" src="https://media.giphy.com/media/l0ErNdz1w5vt3YdZm/giphy.gif">
 </p>
 
-`ceRNAnetsim` helps understanding complex miRNA:target interactions with the network based approach. It utilizes the amounts of miRNAs and their targets and interaction parameters optionally.
+`ceRNAnetsim` helps to understanding complex miRNA:target interactions with the network based approach. It utilizes the amounts of miRNAs and their targets and interaction parameters optionally.
 
 
 ## Table of contents
 
 <!--ts-->
-
+ 
    * [Installation](#installation)
    * [Local Files](#local-files)
    * [Vignettes](#vignettes)
    * [License](#license)
    * [Issues](#issues)
-
 
  <!--te-->
 
@@ -29,6 +28,7 @@ Installation of `ceRNAnetsim`:
 ```
 install.packages("devtools")
 devtools::install_github("selcenari/ceRNAnetsim")
+
 
 library(ceRNAnetsim)
 

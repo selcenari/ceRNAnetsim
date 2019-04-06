@@ -40,7 +40,7 @@ For these reasons, these are important to know the start point of perturbation a
 library(ceRNAnetsim)
 ```
 
-```{r, echo=FALSE, message= FALSE}
+```{r, echo=FALSE, message= FALSE, warning=FALSE}
 library(rlang)
 library(dplyr)
 library(tidyr)

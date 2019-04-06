@@ -38,6 +38,7 @@ The workflow of `ceRNAnetsim` are shown as following:
 
 
 ```{r pressure, echo=FALSE, fig.align='center', fig.width=4, fig.height=3, dpi=120}
+
 knitr::include_graphics("model_vignette.png")
 ```
 
@@ -45,7 +46,7 @@ knitr::include_graphics("model_vignette.png")
 
 ## Installation of ceRNAnetsim
 
-```{r, message=FALSE}
+```{r, message=FALSE,warning=FALSE}
 #install.packages("devtools")
 #devtools::install_github("selcenari/ceRNAnetsim")
 
@@ -53,7 +54,7 @@ knitr::include_graphics("model_vignette.png")
 library(ceRNAnetsim)
 ```
 
-```{r, echo=FALSE, message= FALSE}
+```{r, echo=FALSE, message= FALSE, warning=FALSE}
 library(rlang)
 library(dplyr)
 library(tidyr)
@@ -207,7 +208,7 @@ minsamp%>%
 
 The `vis_graph` is carried out the visualisation of graph object. The initial graph object (steady-state) is visualized as following:
   
-```{r, fig.width=5, fig.height=4, dpi= 120, fig.align='center'}
+```{r, fig.height=4, fig.width=5, warning=FALSE, dpi= 120, fig.align='center'}
 minsamp%>%
    priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression,
                  aff_factor = c(energy, seed_type), deg_factor = region)%>%
@@ -219,7 +220,7 @@ minsamp%>%
   
   Also, The graph can be visualized into any step of process.
 
-```{rfig.align='center', fig.width=5, fig.height=4, dpi= 120}
+```{r, fig.height=4, fig.width=5, warning=FALSE, dpi= 120, fig.align='center'}
 minsamp%>%
    priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression,
                  aff_factor = c(energy, seed_type), deg_factor = region)%>%
@@ -232,7 +233,7 @@ minsamp%>%
 
   On the other hand, the view of each steps can be obtained by using `simulate_vis()` separately. `simulate_vis` processes the given graph like in `simulate()` and gives the views of each steps.
   
-```{r, fig.height=4, fig.width=5, fig.show='animate', aniopts="controls,loop"}
+```{r, fig.height=4, fig.width=5, warning=FALSE, message=FALSE, fig.show='hide'}
 minsamp%>%
    priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression,
                  aff_factor = c(energy, seed_type), deg_factor = region)%>%
@@ -241,6 +242,8 @@ minsamp%>%
    update_nodes()%>%
    simulate_vis(3, title = "Minsamp Graph After Each Iteration")
 ```
+
+![Minsamp with 3 iteraion](small_sample.gif)
 
  See the other vignettes to more.
 

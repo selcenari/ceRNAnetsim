@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
 ```
 
 
-
 ```{r, echo=FALSE, message= FALSE, warning=FALSE}
 library(dplyr)
 library(readr)
@@ -40,7 +39,7 @@ This vignette is about the integration of gene miRNA pairs and their expression 
 
 - The homo sapiens miRNA:target dataset is obtained via directly downloading from miRTarBase website. The dataset that is found in the working directory is processed as following:
 
-```{r, warning= FALSE}
+```{r, warning= FALSE, warning=FALSE}
 #install ceRNAnetsim
 
 #install.packages("devtools")
@@ -152,7 +151,7 @@ TCGA_E9_A1N5_tumor%>%
 ```
 
 
-```{r, fig.height=4, fig.width=5, fig.align='center', warning=FALSE}
+```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
 iteration_graph(as.data.frame(TCGA_E9_A1N5_mirnagene), competing_count = gene_expression, miRNA_count = total_read, node_name = "ACTB", .iter = 10, how = 1.87)
 ```
 

@@ -18,15 +18,14 @@ knitr::opts_chunk$set(
 
 ## ceRNAnetsim
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning= FALSE}
 #install.packages("devtools")
 #devtools::install_github("selcenari/ceRNAnetsim")
-
 
 library(ceRNAnetsim)
 ```
 
-```{r, echo=FALSE, message= FALSE}
+```{r, echo=FALSE, message= FALSE, warning=FALSE}
 library(rlang)
 library(tidyverse)
 library(tidygraph)
@@ -41,11 +40,11 @@ library(png)
 
 # What is the problem or point?
 
-In the `ceRNAnetsim` package, regulations of miRNA:target pairs are observed via direct or indirect interactions of elements in network. In this approach, change in expression level of single gene or miRNA can affect the whole network like water wave. So, when the change is applied the system, it affects to primary neighborhood firstly, and then the secondary. 
+In the `regulationSimulatoR` package, regulations of miRNA:target pairs are observed via direct or indirect interactions of elements in network. In this approach, change in expression level of single gene or miRNA can affect the whole network like water wave. So, when the change is applied the system, it affects to primary neighborhood firstly, and then the secondary. 
 
 In the simple interaction network like *minsamp*, the water wave-like behavior could be understood, because the neighborhoods of the primary linked elements of trigger element are not interacted to each other. The non-complex interaction can be facilitated to provide the steady-state, after the network is disturbed.
 
-```{r, fig.height=4, fig.width=5, fig.show='animate', aniopts="controls,loop"}
+```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
 data("minsamp")
 
 minsamp%>%
@@ -57,10 +56,12 @@ minsamp%>%
 
 ```
 
+![Minsamp common target perturbation](con_iter_chunk3.gif)
+
 For example, in *minsamp* dataset, the steady-state is occured at iteration-14, as seen above. However, when interactions are more complex, the number of iterations required to maintain steady-state may increase. While the iteration-14 is sufficient for *minsamp* dataset, the steady-state could not be ensured at iteration-15 for *midsamp*, as seen following.
 
 
-```{r, fig.height=4, fig.width=5, fig.show='animate', aniopts="controls,loop"}
+```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
 data("midsamp")
 
 midsamp
@@ -72,6 +73,8 @@ priming_graph(Gene_expression, miRNA_expression)%>%
   update_nodes()%>%
    simulate_vis(title = "Minsamp: Common element as trigger", 15)
 ```
+
+![Midsamp Gene17 perturbation with 15 iteration](con_iter_chunk4.gif)
 
 For these reasons, we developed an approach to  find optimal iteration of the given network. `find_iteration()` function analyses the dataset for given iteration number (`.iter` argument) and offers the iteration that has maximum affected nodes' count. The other argument is `limit` that is the minimum amount of change of any node. The `limit` argument takes into account while the amount of affected node is calculated. Note that a slightly difference on the amount of the any elements on the network can be cause the excessive results.
 
@@ -89,7 +92,7 @@ iteration_graph(midsamp, competing_count = Gene_expression, miRNA_count = miRNA_
 
 As shown the plot in the above, gaining the steady-state is after the iteration-22. If we try to simulate the network with iteration-25, the results are as following:
 
-```{r, fig.height=4, fig.width=5, fig.show='animate', aniopts="controls,loop"}
+```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
 midsamp%>%
 priming_graph(Gene_expression, miRNA_expression)%>%
   update_nodes(once = TRUE)%>%
@@ -97,6 +100,8 @@ priming_graph(Gene_expression, miRNA_expression)%>%
   update_nodes()%>%
    simulate_vis(title = "Minsamp: Common element as trigger", 25)
 ```
+
+![Midsamp Gene17 perturbation with 25 iteration](con_iter_chunk7.gif)
 
 The workflow that is aforementioned in this vignette should be thought as suggestion. Because the `cycle` is a critical argument that is used with `simulate()` function and affects all results of analysis. In light of this vignette and functions, the approach can be developed according to persent dataset.
 

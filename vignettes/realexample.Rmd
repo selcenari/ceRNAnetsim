@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 
 ## Installation of ceRNAnetsim
 
-```{r, message=FALSE}
+```{r, message=FALSE, warning=FALSE}
 #install.packages("devtools")
 #devtools::install_github("selcenari/ceRNAnetsim")
 
@@ -77,7 +77,7 @@ head(clear_example)
 
 On the other hand, we chose also the node *GAPDH* according to interaction count of the nodes. With the simulation, the graph was visualized after node *GAPDH* was increased to five fold.
 
-```{r, fig.height=4, fig.width=5, fig.align='center', warning=FALSE}
+```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
 
 clear_example%>%
   priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal, aff_factor = Energy)%>%
@@ -90,7 +90,7 @@ clear_example%>%
 
 The graph was visualized after the disturbtion of GAPDH gene. This disturbtion is used as trigger in the network.
 
-```{r, fig.height=4, fig.width=5, fig.align='center', warning=FALSE}
+```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE, fig.show='hide'}
 clear_example%>%
   priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal, aff_factor = Energy)%>%
   update_nodes(once = TRUE)%>%
@@ -99,6 +99,8 @@ clear_example%>%
   simulate_vis(title = "GAPDH over expression in the real dataset", 3)
 
 ```
+
+![GAPDH over expression in real dataset](realexample.gif)
 
 It was shown the conditions after the first disturbtion of GAPDH gene. 
 
