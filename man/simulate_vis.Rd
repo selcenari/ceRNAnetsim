@@ -40,7 +40,7 @@ simulate_vis gives the last graph object and each iterations' image.
 
 ## new_counts, the dataset that includes the current counts of nodes.
 
-priming_graph(sample_data, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = c(region))\%>\%
+priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = c(region))\%>\%
    update_nodes(once = TRUE)\%>\%
    update_variables(new_counts)\%>\%
    update_nodes()\%>\%

@@ -21,7 +21,7 @@
 #'
 #' ## new_counts, the dataset that includes the current counts of nodes.
 #'
-#' priming_graph(sample_data, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = c(region))%>%
+#' priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = c(region))%>%
 #'    update_nodes(once = TRUE)%>%
 #'    update_variables(new_counts)%>%
 #'    update_nodes()%>%
@@ -46,6 +46,8 @@ simulate_vis <- function(input_graph, cycle=1, Competing_color = "green", mirna_
       update_nodes()-> input_graph
 
     vis_graph(input_graph, Competing_color, mirna_color, Upregulation, Downregulation, title = paste(title, "-",i), layout)-> graph_vis
+
+     ggsave(paste(title, ".png", sep = ""))
 
     print(graph_vis)
   }
