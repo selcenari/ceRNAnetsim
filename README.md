@@ -66,4 +66,4 @@ Contact us for any issue or bug via:
 - [Issues](https://github.com/selcenari/ceRNAnetsim/issues)
 - [Alper Yilmaz](mailto:alperyilmaz@gmail.com)
 - [Selcen Ari](mailto:selcenarii@gmail.com)
->>>>>>> 56ec58b00bb4a7530696461ceee66e4381626fc5
+
