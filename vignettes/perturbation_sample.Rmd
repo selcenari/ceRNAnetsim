@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ---
 title: "How to Determine Perturbation in A Sample Dataset"
 author: "Selcen Ari"
@@ -98,3 +99,105 @@ The results of the `find_node_perturbation()` could be used to find effectivenes
 
 `find_node_perturbation()` analyses on all nodes in the network with parallelization. This parallelization are made with help of the `future` and `furrr` packages. In this vignette, the process are shown on the `midsamp` data. This dataset is not a great dataset in comparison of the biological miRNA:target gene dataset. Although `find_node_perturbation()` works with parallelization , it could be non-practical in real huge biological dataset. 
 
+=======
+---
+title: "How to Determine Perturbation in A Sample Dataset"
+author: "Selcen Ari"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to Determine Perturbation in A Sample Dataset}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# What is the perturbation?
+
+The perturbation means that the disturbance efficiency of an element in the network. When the change was applied on the miRNA:target interaction network, this simple change affects the all associated elements of network. But the regulations of elements in network varies to depends on different parameters:
+
+- The count of the trigger element: The trigger element can be an miRNA or competing target. The perturbation efficiency is affected from miRNA amounts against whole targets' or the amount of competing element among whole competing elements. For example, when it was assumed that the trigger is an miRNA with 1500 in terms of count, if this miRNA has 1000000 target amount, the change to 2 fold in this miRNA will not efficient most probably. So, miRNA:target ratio is also significant for regulation of interaction network.
+
+- In a biological system, the miRNA:target interactions does not depend only stoichiometry, unfortunately. MiRNAs affect the targets via degradation or inhibition after the binding. The experimental studies have been show that the features of miRNA:target interactions determine the binding and degradation efficiency. For example, binding energy between miRNA and target and seed structure of miRNA determine the binding efficiency of complex. In addition, the binding region on the target affects the degradation of target. 
+
+- In the our approach,if the properties of miRNA:target interactions are degreed according to experimental studies, these factors takes into account in the regulations of miRNA:target interactions. But these factors are optionally evaluated. So, if the interaction factors are not specified, they are not taken into account and the system are ran based on miRNA and target amounts.
+
+- On the other hand, these interaction factors affect the efficiency of perturbation of the change. For instance, if the change are applied in a element which is weakly interacted with others, the perturbation efficiency of this element on the network will be low.
+
+For these reasons, these are important to know the start point of perturbation and how much elements affected from change. In this way, we deveoped the `calc_perturbation()` and `find_node_perturbation()` functions in `ceRNAnetsim` package.
+
+## Installation of ceRNAnetsim
+
+```{r, message=FALSE}
+#install.packages("devtools")
+#devtools::install_github("selcenari/ceRNAnetsim")
+
+
+library(ceRNAnetsim)
+```
+
+```{r, echo=FALSE, message= FALSE, warning=FALSE}
+library(rlang)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(stringi)
+library(tidyverse)
+library(ggplot2)
+library(tidygraph)
+library(igraph)
+library(ggraph)
+library(purrr)
+library(future)
+library(furrr)
+library(png)
+```
+
+## Load the *midsamp*
+
+```{r}
+data("midsamp")
+
+midsamp
+```
+
+## How does the `calc_perturbation()` work?
+
+This function works for a given node from network. It gives perturbation efficiency that is the mean of percentage of expression changes of all elements in the network and the count of disturbed nodes for given iteration number and limit (the minimum change that takes into account for the amounts of elements). 
+
+```{r}
+midsamp%>%
+priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression, 
+              aff_factor = c(Energy,seeds), deg_factor = targeting_region)%>%
+    calc_perturbation("Gene17",3, cycle = 30, limit = 0.1)
+```
+
+It could be insufficient for understanding the regulations of interactions. So, the comparisons in the network could be handled with `find_node_perturbation()` function for all of elements with the same iteration and change.
+
+## How does the `find_node_perturbation()` work?
+
+The `find_node_perturbation()` function calculates the perturbation efficiency and perturbed node count of each node in network. The perturbation efficiency is the mean of percentage of expression changes of the elements in the network. The perturbed elements' count are calculated with `find_node_perturbation()`. This value symbolizes the affected node amount. 
+
+```{r}
+midsamp%>%
+priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression, 
+              aff_factor = c(Energy,seeds), deg_factor = targeting_region)%>%
+find_node_perturbation(how = 3, cycle = 4, limit = 0.1) 
+# each elements in the dataset increases to two fold, and runs 4 iteration. 
+#The `limit` symbolizes the percentage of minimum change of node expressions.
+
+```
+
+The results of the `find_node_perturbation()` could be used to find effectiveness of elements in the network. If it is wanted to start a regulation in network, this function can help to select the starting element of effective perturbation.
+
+## What are the limitations?
+
+`find_node_perturbation()` analyses on all nodes in the network with parallelization. This parallelization are made with help of the `future` and `furrr` packages. In this vignette, the process are shown on the `midsamp` data. This dataset is not a great dataset in comparison of the biological miRNA:target gene dataset. Although `find_node_perturbation()` works with parallelization , it could be non-practical in real huge biological dataset. 
+
+>>>>>>> 56ec58b00bb4a7530696461ceee66e4381626fc5
