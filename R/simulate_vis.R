@@ -47,11 +47,10 @@ simulate_vis <- function(input_graph, cycle=1, Competing_color = "green", mirna_
 
     vis_graph(input_graph, Competing_color, mirna_color, Upregulation, Downregulation, title = paste(title, "-",i), layout)-> graph_vis
 
-     ggsave(paste(title, ".png", sep = ""))
+    ggsave(paste(title, ".png", sep = ""))
 
     print(graph_vis)
   }
   input_graph
 
 }
-

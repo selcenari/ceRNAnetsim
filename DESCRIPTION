@@ -3,7 +3,7 @@ Type: Package
 Title: Regulation Simulator of Interaction between miRNA and Competing RNAs (ceRNA)
 Version: 0.1.0
 Author: Selcen Ari [aut, cre], Alper Yilmaz [aut]
-Maintainer: Selcen Ari <selcenarii@gmail.com >
+Maintainer: Selcen Ari <selcenarii@gmail.com>
 Description: This package simulates regulations of ceRNA expression levels after a expression level change in one or more miRNA/mRNAs. The methodolgy adopted by the package has potential to incorparate any ceRNA (circRNA, lincRNA, etc.) into miRNA:target interaction network.
     The package basically distributes miRNA expression over available ceRNAs where each ceRNA attracks miRNAs proportional to its amount. However, the package can utilize multiple parameters that modify miRNA effect on its target (seed type, binding energy, binding location, etc.). 
     The functions handle the given dataset as graph object and the processes progress via edge and node variables.
