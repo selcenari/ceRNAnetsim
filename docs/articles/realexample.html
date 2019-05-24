@@ -83,6 +83,7 @@
   </div>
 <!--/.container -->
 </div>
+<<<<<<< HEAD
 <!--/.navbar -->
 
       
@@ -102,6 +103,27 @@
     
     
 <div id="installation-of-cernanetsim" class="section level2">
+=======
+<!--/.navbar -->
+
+      
+      </header><div class="row">
+  <div class="col-md-9 contents">
+    <div class="page-header toc-ignore">
+      <h1>Approach in A Real Dataset</h1>
+                        <h4 class="author">Selcen Ari</h4>
+            
+            <h4 class="date">2019-04-12</h4>
+      
+      <small class="dont-index">Source: <a href="https://github.com/selcenari/ceRNAnetsim/blob/master/vignettes/realexample.Rmd"><code>vignettes/realexample.Rmd</code></a></small>
+      <div class="hidden name"><code>realexample.Rmd</code></div>
+
+    </div>
+
+    
+    
+<div id="installation-of-cernanetsim" class="section level2">
+>>>>>>> 781c61c40dcc0db10e9d2d57914691e47147f00f
 <h2 class="hasAnchor">
 <a href="#installation-of-cernanetsim" class="anchor"></a>Installation of ceRNAnetsim</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages("devtools")</span>
@@ -134,6 +156,7 @@
 <span class="co">#&gt; 6          0.42             0.01</span></code></pre></div>
 <div id="select-the-node-" class="section level2">
 <h2 class="hasAnchor">
+<<<<<<< HEAD
 <a href="#select-the-node-" class="anchor"></a>Select the node.</h2>
 <p>The node that starts to simulation is determined according to the point of the research.</p>
 <p>As an example, we eliminated some nodes for making an understandable process. For this, we selected the most interacted nodes in network as followings:</p>
@@ -212,6 +235,86 @@ clear_example<span class="op">%&gt;%</span>
 <img src="realexample.gif" alt="GAPDH over expression in real dataset"><p class="caption">GAPDH over expression in real dataset</p>
 </div>
 <p>It was shown the conditions after the first disturbtion of GAPDH gene.</p>
+=======
+<a href="#select-the-node-" class="anchor"></a>Select the node.</h2>
+<p>The node that starts to simulation is determined according to the point of the research.</p>
+<p>As an example, we eliminated some nodes for making an understandable process. For this, we selected the most interacted nodes in network as followings:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">huge_example<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(competing)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>()<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">inner_join</span>(huge_example, <span class="dt">by =</span> <span class="st">"competing"</span>)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>n)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">distinct</span>()<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.data.frame">as.data.frame</a></span>()-&gt;<span class="st"> </span>clear_example
+
+<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(clear_example)
+<span class="co">#&gt;   competing           miRNA competing_counts mirnaexpression_normal Energy</span>
+<span class="co">#&gt; 1      A1CF hsa-miR-130a-3p               10               65.33329  -19.7</span>
+<span class="co">#&gt; 2      A1CF   hsa-miR-16-5p               10              296.68999  -24.2</span>
+<span class="co">#&gt; 3      A1CF   hsa-miR-17-5p               10               89.92935  -19.4</span>
+<span class="co">#&gt; 4      A1CF  hsa-miR-18a-5p               10                2.56209  -25.6</span>
+<span class="co">#&gt; 5      A1CF hsa-miR-193a-3p               10                5.12418  -19.4</span>
+<span class="co">#&gt; 6      A1CF  hsa-miR-194-5p               10              125.02997  -16.8</span>
+<span class="co">#&gt;   region_effect seed_type_effect</span>
+<span class="co">#&gt; 1          0.42             0.04</span>
+<span class="co">#&gt; 2          0.01             0.43</span>
+<span class="co">#&gt; 3          0.01             0.21</span>
+<span class="co">#&gt; 4          0.84             0.25</span>
+<span class="co">#&gt; 5          0.42             0.01</span>
+<span class="co">#&gt; 6          0.84             0.05</span></code></pre></div>
+<p>On the other hand, we chose also the node <em>GAPDH</em> according to interaction count of the nodes. With the simulation, the graph was visualized after node <em>GAPDH</em> was increased to five fold.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+clear_example<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> competing_counts, <span class="dt">miRNA_count =</span> mirnaexpression_normal, <span class="dt">aff_factor =</span> Energy)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/update_nodes.html">update_nodes</a></span>(<span class="dt">once =</span> <span class="ot">TRUE</span>)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="st">"GAPDH"</span>, <span class="dv">5</span>)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/update_nodes.html">update_nodes</a></span>()<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/vis_graph.html">vis_graph</a></span>(<span class="dt">title =</span> <span class="st">"Disturbtion of GAPDH gene node"</span>)</code></pre></div>
+<p><img src="realexample_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;"></p>
+<p>The graph was visualized after the disturbtion of GAPDH gene. This disturbtion is used as trigger in the network.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clear_example<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> competing_counts, <span class="dt">miRNA_count =</span> mirnaexpression_normal, <span class="dt">aff_factor =</span> Energy)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/update_nodes.html">update_nodes</a></span>(<span class="dt">once =</span> <span class="ot">TRUE</span>)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="st">"GAPDH"</span>, <span class="dv">5</span>)<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/update_nodes.html">update_nodes</a></span>()<span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw"><a href="../reference/simulate_vis.html">simulate_vis</a></span>(<span class="dt">title =</span> <span class="st">"GAPDH over expression in the real dataset"</span>, <span class="dv">3</span>)
+<span class="co">#&gt; Saving 6 x 5 in image</span>
+<span class="co">#&gt; Saving 6 x 5 in image</span>
+<span class="co">#&gt; Saving 6 x 5 in image</span>
+<span class="co">#&gt; # A tbl_graph: 1526 nodes and 11384 edges</span>
+<span class="co">#&gt; #</span>
+<span class="co">#&gt; # A directed acyclic simple graph with 1 component</span>
+<span class="co">#&gt; #</span>
+<span class="co">#&gt; # Node Data: 1,526 x 7 (active)</span>
+<span class="co">#&gt;   name  type  node_id initial_count count_pre count_current</span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 A1CF  Comp~       1            10      10.0          10.0</span>
+<span class="co">#&gt; 2 AAK1  Comp~       2          3298    3298.         3298. </span>
+<span class="co">#&gt; 3 AARS  Comp~       3         10769   10769.        10769. </span>
+<span class="co">#&gt; 4 ABCA1 Comp~       4          2522    2522.         2522. </span>
+<span class="co">#&gt; 5 ABCB7 Comp~       5          1827    1827.         1827. </span>
+<span class="co">#&gt; 6 ABCC1 Comp~       6          3344    3344.         3344. </span>
+<span class="co">#&gt; # ... with 1,520 more rows, and 1 more variable: changes_variable &lt;chr&gt;</span>
+<span class="co">#&gt; #</span>
+<span class="co">#&gt; # Edge Data: 11,384 x 21</span>
+<span class="co">#&gt;    from    to Competing_name miRNA_name competing_counts mirnaexpression~</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;                 &lt;dbl&gt;            &lt;dbl&gt;</span>
+<span class="co">#&gt; 1     1  1255 A1CF           hsa-miR-1~               10             65.3</span>
+<span class="co">#&gt; 2     1  1256 A1CF           hsa-miR-1~               10            297. </span>
+<span class="co">#&gt; 3     1  1257 A1CF           hsa-miR-1~               10             89.9</span>
+<span class="co">#&gt; # ... with 1.138e+04 more rows, and 15 more variables: Energy &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   dummy &lt;dbl&gt;, afff_factor &lt;dbl&gt;, degg_factor &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   comp_count_list &lt;list&gt;, comp_count_pre &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   comp_count_current &lt;dbl&gt;, mirna_count_list &lt;list&gt;,</span>
+<span class="co">#&gt; #   mirna_count_pre &lt;dbl&gt;, mirna_count_current &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   mirna_count_per_dep &lt;dbl&gt;, effect_current &lt;dbl&gt;, effect_pre &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   effect_list &lt;list&gt;, mirna_count_per_comp &lt;dbl&gt;</span></code></pre></div>
+<div class="figure">
+<img src="realexample.gif" alt="GAPDH over expression in real dataset"><p class="caption">GAPDH over expression in real dataset</p>
+</div>
+<p>It was shown the conditions after the first disturbtion of GAPDH gene.</p>
+>>>>>>> 781c61c40dcc0db10e9d2d57914691e47147f00f
 <ul>
 <li><p>In the first graph, the responses of the other competing elements to the GAPDH disturbtions were obtained increased amount, although the decreased expression level of GAPDH was determined.</p></li>
 <li><p>The changing regulations (up or down) were observed as a result of interactions in the second graph.</p></li>
