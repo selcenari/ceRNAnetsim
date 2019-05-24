@@ -18,6 +18,10 @@
 #'
 #' @examples
 #'
+#' data("minsamp")
+#'
+#' find_iteration(minsamp, Competing_expression, miRNA_expression, node_name = "Gene2", how =2)
+#'
 #' find_iteration(minsamp, Competing_expression, miRNA_expression, aff_factor = energy, deg_factor = region, node_name = "Gene2", how= 3)
 #'
 #' @export
@@ -25,10 +29,10 @@
 
 find_iteration <- function(df, competing_count, miRNA_count, aff_factor=dummy, deg_factor=dummy, node_name, how, .iter = 100, limit= 0.1){
 
-  competing_exp <- enquo(competing_count)
-  mirna_exp <- enquo(miRNA_count)
-  affinity <- enquos(aff_factor)
-  degradation <- enquos(deg_factor)
+  competing_exp <- rlang::enquo(competing_count)
+  mirna_exp <- rlang::enquo(miRNA_count)
+  affinity <- rlang::enquos(aff_factor)
+  degradation <- rlang::enquos(deg_factor)
 
   iteration <- data.frame(iter = seq(1,.iter, 1), effect= rep(0))
 
@@ -42,25 +46,29 @@ find_iteration <- function(df, competing_count, miRNA_count, aff_factor=dummy, d
     dplyr::mutate_at(vars(!!!affinity), list(anorm= ~normalize))%>%
     dplyr::mutate_at(vars(!!!degradation), list(dnorm = ~normalize))%>%
     dplyr::ungroup()%>%
-    dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%reduce (`*`, .init = 1),
-                  degg_factor = dplyr::select(., ends_with("dnorm"))%>%reduce (`*`, .init =1))%>%
-    as_tbl_graph()%N>%
-    tidygraph::mutate(type = ifelse(str_detect(name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%E>%
+    dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%purrr::reduce (`*`, .init = 1),
+                  degg_factor = dplyr::select(., ends_with("dnorm"))%>%purrr::reduce (`*`, .init =1))%>%
+    as_tbl_graph()%>%
+    tidygraph::activate(nodes)%>%
+    tidygraph::mutate(type = ifelse(stringr::str_detect(.N()$name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%>%
+    tidygraph::activate(edges)%>%
     tidygraph::mutate(comp_count_list = as.list(!!competing_exp), comp_count_pre = !!competing_exp, comp_count_current = !!competing_exp, mirna_count_list = as.list(!!mirna_exp), mirna_count_pre = !!mirna_exp, mirna_count_current = !!mirna_exp)%>%
     tidygraph::group_by(to)%>%
     tidygraph::mutate(mirna_count_per_dep = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_dep = ifelse(is.na(mirna_count_per_dep), 0, mirna_count_per_dep))%>%
     tidygraph::ungroup()%>%
     tidygraph::mutate(effect_current = mirna_count_per_dep*degg_factor, effect_pre = effect_current, effect_list = as.list(effect_current))%>%
-    tidygraph::select(-ends_with("norm"), dummy)%>%
+    tidygraph::select(-dplyr::ends_with("norm"), dummy)%>%
     update_nodes(once = TRUE)%>%
-    update_how(node_name, how)%N>%
+    update_how(node_name, how)%>%
+    tidygraph::activate(nodes)%>%
     simulate(cycle = .iter)->result_100
 
 
      for(i in 1:.iter){
 
-     result_100%E>%
-      as_tibble()%>%
+     result_100%>%
+         tidygraph::activate(edges)%>%
+      tibble::as_tibble()%>%
       dplyr::select(from, comp_count_list)%>%
       mutate(dif= (abs(map_dbl(comp_count_list,i+1)) - abs(map_dbl(comp_count_list,i))))%>%
       dplyr::select(-comp_count_list)%>%
@@ -97,16 +105,20 @@ find_iteration <- function(df, competing_count, miRNA_count, aff_factor=dummy, d
 #'
 #' @examples
 #'
-#' find_iteration(minsamp, Competing_expression, miRNA_expression, aff_factor = energy, deg_factor = region, node_name = "Gene2", how= 3)
+#'data("midsamp")
+#'
+#' iteration_graph(midsamp, competing_count = Gene_expression, miRNA_count = miRNA_expression, node_name = "Gene17", how = 2)
+#'
+#' iteration_graph(midsamp, competing_count = Gene_expression, miRNA_count = miRNA_expression, node_name = "Gene17", .iter= 50, how = 2, limit=0 )
 #'
 #' @export
 
 iteration_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, deg_factor=dummy, node_name, how, .iter = 100, limit= 0.2){
 
-  competing_exp <- enquo(competing_count)
-  mirna_exp <- enquo(miRNA_count)
-  affinity <- enquos(aff_factor)
-  degradation <- enquos(deg_factor)
+  competing_exp <- rlang::enquo(competing_count)
+  mirna_exp <- rlang::enquo(miRNA_count)
+  affinity <- rlang::enquos(aff_factor)
+  degradation <- rlang::enquos(deg_factor)
 
   iteration <- data.frame(iter = seq(1,.iter, 1), effect= rep(0))
 
@@ -117,27 +129,31 @@ iteration_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, 
 
   df%>%
     dplyr::group_by(miRNA)%>%
-    dplyr::mutate_at(vars(!!!affinity), list(anorm= ~normalize))%>%
-    dplyr::mutate_at(vars(!!!degradation), list(dnorm = ~normalize))%>%
+    dplyr::mutate_at(dplyr::vars(!!!affinity), list(anorm= ~normalize))%>%
+    dplyr::mutate_at(dplyr::vars(!!!degradation), list(dnorm = ~normalize))%>%
     dplyr::ungroup()%>%
     dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%reduce (`*`, .init = 1),
                   degg_factor = dplyr::select(., ends_with("dnorm"))%>%reduce (`*`, .init =1))%>%
-    as_tbl_graph()%N>%
-    tidygraph::mutate(type = ifelse(str_detect(name, paste(c("mir", "miR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%E>%
+    as_tbl_graph()%>%
+    tidygraph::activate(nodes)%>%
+    tidygraph::mutate(type = ifelse(stringr::str_detect(.N()$name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%>%
+    tidygraph::activate(edges)%>%
     tidygraph::mutate(comp_count_list = as.list(!!competing_exp), comp_count_pre = !!competing_exp, comp_count_current = !!competing_exp, mirna_count_list = as.list(!!mirna_exp), mirna_count_pre = !!mirna_exp, mirna_count_current = !!mirna_exp)%>%
     tidygraph::group_by(to)%>%
     tidygraph::mutate(mirna_count_per_dep = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_dep = ifelse(is.na(mirna_count_per_dep), 0, mirna_count_per_dep))%>%
     tidygraph::ungroup()%>%
     tidygraph::mutate(effect_current = mirna_count_per_dep*degg_factor, effect_pre = effect_current, effect_list = as.list(effect_current))%>%
-    tidygraph::select(-ends_with("norm"), dummy)%>%
+    tidygraph::select(-dplyr::ends_with("norm"), dummy)%>%
     update_nodes(once = TRUE)%>%
-    update_how(node_name, how)%N>%
+    update_how(node_name, how)%>%
+    tidygraph::activate(nodes)%>%
     simulate(cycle = .iter)->result_100
 
   for(i in 1:.iter){
 
-    result_100%E>%
-      as_tibble()%>%
+    result_100%>%
+      tidygraph::activate(edges)%>%
+      tibble::as_tibble()%>%
       dplyr::select(from, comp_count_list)%>%
       mutate(dif= (abs(map_dbl(comp_count_list,i+1)) - abs(map_dbl(comp_count_list,i))))%>%
       dplyr::select(-comp_count_list)%>%

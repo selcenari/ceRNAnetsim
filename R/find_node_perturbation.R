@@ -14,17 +14,26 @@
 #'
 #' @examples
 #'
-#' minsamp%>%
-#'    priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression, aff_factor = c(energy,seed_type), deg_factor = region)%>%
-#'    find_node_perturbation(how = 3, cycle = 4)
+#' data("minsamp")
+#'
+#'  minsamp%>%
+#'   priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression)%>%
+#'   find_node_perturbation()
+#'
+#'
+#'  minsamp%>%
+#'   priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression, aff_factor = c(energy,seed_type), deg_factor = region)%>%
+#'   find_node_perturbation(how = 3, cycle = 4)
+#'
 #'
 #' @export
 
 find_node_perturbation <- function(input_graph, how = 2, cycle=1, limit= 0){
 
-  input_graph%N>%
+  input_graph%>%
+    activate(nodes)%>%
     mutate(eff_count =future_map(V(input_graph)$name, ~calc_perturbation(input_graph, .x, how, cycle, limit)))%>%
-    as_tibble()-> result
+    tibble::as_tibble()-> result
 
   result%>%
     unnest(eff_count)%>%

@@ -37,6 +37,10 @@ The function calculates the number of disturbed nodes for each iteration and tha
 }
 \examples{
 
-find_iteration(minsamp, Competing_expression, miRNA_expression, aff_factor = energy, deg_factor = region, node_name = "Gene2", how= 3)
+data("midsamp")
+
+iteration_graph(midsamp, competing_count = Gene_expression, miRNA_count = miRNA_expression, node_name = "Gene17", how = 2)
+
+iteration_graph(midsamp, competing_count = Gene_expression, miRNA_count = miRNA_expression, node_name = "Gene17", .iter= 50, how = 2, limit=0 )
 
 }

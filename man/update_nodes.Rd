@@ -23,8 +23,10 @@ If the carrying process performs after priming_graph function, the argument must
 }
 \examples{
 
-minsamp\%>\%
-priming_graph(Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)\%>\%
+data("minsamp")
+
+ minsamp\%>\%
+ priming_graph(Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)\%>\%
    update_nodes(once = TRUE)
 
 }

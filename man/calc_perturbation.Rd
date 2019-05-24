@@ -30,7 +30,13 @@ calc_perturbation calculates mean expression changes of elements after the chang
 }
 \examples{
 
+data("minsamp")
+
 minsamp\%>\%
+   priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression)\%>\%
+   calc_perturbation("Gene6", how= 3, cycle = 4)
+
+ minsamp\%>\%
    priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression, aff_factor = c(energy,seed_type), deg_factor = region)\%>\%
    calc_perturbation("Gene6",3, cycle = 4)
 

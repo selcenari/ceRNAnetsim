@@ -27,8 +27,16 @@ find_node_perturbation calculates mean expression changes of elements after the 
 }
 \examples{
 
-minsamp\%>\%
-   priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression, aff_factor = c(energy,seed_type), deg_factor = region)\%>\%
-   find_node_perturbation(how = 3, cycle = 4)
+data("minsamp")
+
+ minsamp\%>\%
+  priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression)\%>\%
+  find_node_perturbation()
+
+
+ minsamp\%>\%
+  priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression, aff_factor = c(energy,seed_type), deg_factor = region)\%>\%
+  find_node_perturbation(how = 3, cycle = 4)
+
 
 }

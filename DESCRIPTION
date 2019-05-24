@@ -16,6 +16,7 @@ Imports:
     tidyverse, 
     tidygraph, 
     igraph, 
+    stringr,
     ggraph, 
     rlang,
     future,

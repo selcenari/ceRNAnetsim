@@ -37,6 +37,10 @@ find_iteration searches the iteration that provides maximum affected node number
 }
 \examples{
 
+data("minsamp")
+
+find_iteration(minsamp, Competing_expression, miRNA_expression, node_name = "Gene2", how =2)
+
 find_iteration(minsamp, Competing_expression, miRNA_expression, aff_factor = energy, deg_factor = region, node_name = "Gene2", how= 3)
 
 }

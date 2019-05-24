@@ -29,7 +29,12 @@ normalize <- function(x){abs(x)/max(abs(x))}
 #'
 #' @examples
 #'
+#' data("minsamp")
+#'
+#' priming_graph(minsamp, Competing_expression, miRNA_expression)
+#'
 #' priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)
+#'
 #'
 #' @export
 
@@ -43,10 +48,10 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
 
   else{
 
-  competing_exp <- enquo(competing_count)
-  mirna_exp <- enquo(miRNA_count)
-  affinity <- enquos(aff_factor)
-  degradation <- enquos(deg_factor)
+  competing_exp <- rlang::enquo(competing_count)
+  mirna_exp <- rlang::enquo(miRNA_count)
+  affinity <- rlang::enquos(aff_factor)
+  degradation <- rlang::enquos(deg_factor)
 
   df <- df%>%
     dplyr::mutate(competing = df[,1], miRNA= df[,2], Competing_name = df[,1], miRNA_name= df[,2], dummy=1)%>%
@@ -55,19 +60,21 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
 
   df%>%
     dplyr::group_by(miRNA)%>%
-    dplyr::mutate_at(vars(!!!affinity), list(anorm= ~normalize))%>%
-    dplyr::mutate_at(vars(!!!degradation), list(dnorm = ~normalize))%>%
+    dplyr::mutate_at(dplyr::vars(!!!affinity), list(anorm= ~normalize))%>%
+    dplyr::mutate_at(dplyr::vars(!!!degradation), list(dnorm = ~normalize))%>%
     dplyr::ungroup()%>%
-    dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%reduce (`*`, .init = 1),
-                  degg_factor = dplyr::select(., ends_with("dnorm"))%>%reduce (`*`, .init =1))%>%
-    as_tbl_graph()%N>%
-    tidygraph::mutate(type = ifelse(str_detect(name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%E>%
+    dplyr::mutate(afff_factor = dplyr::select(., dplyr::ends_with("anorm"))%>%reduce (`*`, .init = 1),
+                  degg_factor = dplyr::select(., dplyr::ends_with("dnorm"))%>%reduce (`*`, .init =1))%>%
+    as_tbl_graph()%>%
+    tidygraph::activate(nodes)%>%
+    tidygraph::mutate(type = ifelse(str_detect(.N()$name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%>%
+    tidygraph::activate(edges)%>%
     tidygraph::mutate(comp_count_list = as.list(!!competing_exp), comp_count_pre = !!competing_exp, comp_count_current = !!competing_exp, mirna_count_list = as.list(!!mirna_exp), mirna_count_pre = !!mirna_exp, mirna_count_current = !!mirna_exp)%>%
     tidygraph::group_by(to)%>%
     tidygraph::mutate(mirna_count_per_dep = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_dep = ifelse(is.na(mirna_count_per_dep), 0, mirna_count_per_dep))%>%
     tidygraph::ungroup()%>%
     tidygraph::mutate(effect_current = mirna_count_per_dep*degg_factor, effect_pre = effect_current, effect_list = as.list(effect_current))%>%
-    tidygraph::select(-ends_with("norm"), dummy)-> input_graph
+    tidygraph::select(-dplyr::ends_with("norm"), dummy)-> input_graph
 
   warning("First variable processes as competing and the second as miRNA.
 ")

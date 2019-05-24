@@ -10,7 +10,7 @@
 
 prepare_rhs_once <- function(input_graph){
 
-  bind_rows((as_tibble(input_graph%>%
+  dplyr::bind_rows((as_tibble(input_graph%>%
                          activate(edges)%>%
                          dplyr::select(comp_count_current, comp_count_pre))%>%
                mutate(initial_count = comp_count_pre)%>%
@@ -38,7 +38,7 @@ prepare_rhs_once <- function(input_graph){
 
 prepare_rhs <- function(input_graph){
 
-  bind_rows((as_tibble(input_graph%>%
+  dplyr::bind_rows((as_tibble(input_graph%>%
                          activate(edges))%>%
                dplyr::select(id = from, count_current = comp_count_current)%>%
                dplyr::distinct()),
@@ -62,8 +62,10 @@ prepare_rhs <- function(input_graph){
 #'
 #' @examples
 #'
-#' minsamp%>%
-#' priming_graph(Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)%>%
+#' data("minsamp")
+#'
+#'  minsamp%>%
+#'  priming_graph(Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)%>%
 #'    update_nodes(once = TRUE)
 #'
 #' @export
@@ -75,7 +77,8 @@ update_nodes <- function(input_graph, once = FALSE){
     rhs_table <- prepare_rhs(input_graph)
   }
   if (!once){
-    input_graph <- input_graph%N>%
+    input_graph <- input_graph%>%
+      tidygraph::activate(nodes)%>%
       dplyr::select(-count_pre)%>%
       dplyr::select(name, type, node_id, initial_count, count_pre = count_current)
   }

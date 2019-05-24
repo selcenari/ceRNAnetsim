@@ -21,7 +21,15 @@
 #'
 #' ## new_counts, the dataset that includes the current counts of nodes.
 #'
-#' priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = c(region))%>%
+#' data("minsamp")
+#'
+#' priming_graph(minsamp, Competing_expression, miRNA_expression)%>%
+#'    update_nodes(once = TRUE)%>%
+#'    update_variables(new_counts)%>%
+#'    update_nodes()%>%
+#'    simulate_vis()
+#'
+#'  priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = c(region))%>%
 #'    update_nodes(once = TRUE)%>%
 #'    update_variables(new_counts)%>%
 #'    update_nodes()%>%
@@ -34,7 +42,8 @@ simulate_vis <- function(input_graph, cycle=1, Competing_color = "green", mirna_
 
   for(i in seq_along(1:cycle)){
 
-    input_graph%E>%
+    input_graph%>%
+      tidygraph::activate(edges)%>%
       group_by(to)%>%
       mutate(mirna_count_per_comp = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_comp = ifelse(is.na(mirna_count_per_comp), 0, mirna_count_per_comp))%>%
       ungroup()%>%
@@ -42,7 +51,8 @@ simulate_vis <- function(input_graph, cycle=1, Competing_color = "green", mirna_
       group_by(from)%>%
       mutate(comp_count_pre = ifelse(comp_count_current< 0, 1, comp_count_current), comp_count_current = comp_count_pre - (sum(effect_current)-sum(effect_pre)), comp_count_current = ifelse(comp_count_current< 0, 1, comp_count_current))%>%
       ungroup()%>%
-      mutate(comp_count_list = pmap(list(comp_count_list, comp_count_current), c), effect_list = pmap(list(effect_list, effect_current), c), mirna_count_list = pmap(list(mirna_count_list, mirna_count_current), c))%N>%
+      mutate(comp_count_list = pmap(list(comp_count_list, comp_count_current), c), effect_list = pmap(list(effect_list, effect_current), c), mirna_count_list = pmap(list(mirna_count_list, mirna_count_current), c))%>%
+      tidygraph::activate(nodes)%>%
       update_nodes()-> input_graph
 
     vis_graph(input_graph, Competing_color, mirna_color, Upregulation, Downregulation, title = paste(title, "-",i), layout)-> graph_vis

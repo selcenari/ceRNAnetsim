@@ -24,8 +24,16 @@ update_how function calculates the current value of given mirna or gene node on 
 }
 \examples{
 
-priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)\%>\%
+data("minsamp")
+
+priming_graph(minsamp, Competing_expression, miRNA_expression)\%>\%
+   update_nodes(once = TRUE)\%>\%
+   update_how("Gene1")
+
+ priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)\%>\%
    update_nodes(once = TRUE)\%>\%
    update_how("Gene1", 3)
+
+
 
 }
