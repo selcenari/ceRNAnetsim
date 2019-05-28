@@ -63,8 +63,8 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
     dplyr::mutate_at(dplyr::vars(!!!affinity), list(anorm= ~normalize))%>%
     dplyr::mutate_at(dplyr::vars(!!!degradation), list(dnorm = ~normalize))%>%
     dplyr::ungroup()%>%
-    dplyr::mutate(afff_factor = dplyr::select(., dplyr::ends_with("anorm"))%>%reduce (`*`, .init = 1),
-                  degg_factor = dplyr::select(., dplyr::ends_with("dnorm"))%>%reduce (`*`, .init =1))%>%
+    dplyr::mutate(afff_factor = dplyr::select(., dplyr::ends_with("anorm"))%>%purrr::reduce(`*`, .init = 1),
+                  degg_factor = dplyr::select(., dplyr::ends_with("dnorm"))%>%purrr::reduce(`*`, .init =1))%>%
     as_tbl_graph()%>%
     tidygraph::activate(nodes)%>%
     tidygraph::mutate(type = ifelse(str_detect(.N()$name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%>%
