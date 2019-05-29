@@ -34,6 +34,8 @@
 
 vis_graph <-function(input_graph, Competing_color = "green", mirna_color = "orange", Upregulation = "red", Downregulation = "blue", title = "GRAPH", layout= "kk"){
 
+  font_import(paths = NULL, recursive = TRUE, prompt = TRUE,pattern = "Times")
+
   sample_layout <- create_layout(graph = input_graph, layout = layout)
 
   if(missing(layout)){

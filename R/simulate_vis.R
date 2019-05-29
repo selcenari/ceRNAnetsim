@@ -40,6 +40,9 @@
 
 simulate_vis <- function(input_graph, cycle=1, Competing_color = "green", mirna_color = "orange", Upregulation = "red", Downregulation = "blue", title = "GRAPH", layout= "kk"){
 
+  font_import(paths = NULL, recursive = TRUE, prompt = TRUE,pattern = "Times")
+
+
   for(i in seq_along(1:cycle)){
 
     input_graph%>%

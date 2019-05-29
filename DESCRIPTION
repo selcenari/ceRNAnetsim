@@ -19,6 +19,7 @@ Imports:
     stringr,
     ggraph, 
     rlang,
+    purrr,
     future,
     furrr, 
     devtools

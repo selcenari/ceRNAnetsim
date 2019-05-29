@@ -42,6 +42,7 @@ library(purrr)
 library(future)
 library(furrr)
 library(png)
+library(extrafont)
 ```
 
 # What is the *huge_example* dataset? TCGA_A7_A0CE

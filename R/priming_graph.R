@@ -60,8 +60,8 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
 
   df%>%
     dplyr::group_by(miRNA)%>%
-    dplyr::mutate_at(dplyr::vars(!!!affinity), list(anorm= ~normalize))%>%
-    dplyr::mutate_at(dplyr::vars(!!!degradation), list(dnorm = ~normalize))%>%
+    dplyr::mutate_at(dplyr::vars(!!!affinity), dplyr::funs(anorm = normalize))%>%
+    dplyr::mutate_at(dplyr::vars(!!!degradation), dplyr::funs(dnorm = normalize))%>%
     dplyr::ungroup()%>%
     dplyr::mutate(afff_factor = dplyr::select(., dplyr::ends_with("anorm"))%>%purrr::reduce(`*`, .init = 1),
                   degg_factor = dplyr::select(., dplyr::ends_with("dnorm"))%>%purrr::reduce(`*`, .init =1))%>%

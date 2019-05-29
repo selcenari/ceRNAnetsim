@@ -22,26 +22,30 @@ testdata3 <- data.frame(competing = c("TP53", "Gene-2", "ABCC1", "Gene 4", "Gene
 test_that("Can dataset be correctly converted to graph ? ", {
 
 
- prime_type_1 <-  (priming_graph(testdata, competing_count = Competing_expression, miRNA_count= miRNA_expression)%N>%
+ prime_type_1 <-  (priming_graph(testdata, competing_count = Competing_expression, miRNA_count= miRNA_expression)%>%
+                      tidygraph::activate(nodes)%>%
       as_tibble()%>%
       filter(type == "miRNA")%>%
       count())%>%
    pull()
 
- prime_type_2 <-priming_graph(testdata, competing_count = Competing_expression, miRNA_count= miRNA_expression)%N>%
+ prime_type_2 <-priming_graph(testdata, competing_count = Competing_expression, miRNA_count= miRNA_expression)%>%
+                   tidygraph::activate(nodes)%>%
      as_tibble()%>%
      filter(type == "Competing")%>%
      count()%>%
    pull()
 
 
- prime_type_3 <-  (priming_graph(testdata2, competing_count = Competing_expression, miRNA_count= miRNA_expression)%N>%
+ prime_type_3 <-  (priming_graph(testdata2, competing_count = Competing_expression, miRNA_count= miRNA_expression)%>%
+                      tidygraph::activate(nodes)%>%
                      as_tibble()%>%
                      filter(type == "miRNA")%>%
                      count())%>%
    pull()
 
- prime_type_4 <-priming_graph(testdata2, competing_count = Competing_expression, miRNA_count= miRNA_expression)%N>%
+ prime_type_4 <-priming_graph(testdata2, competing_count = Competing_expression, miRNA_count= miRNA_expression)%>%
+    tidygraph::activate(nodes)%>%
    as_tibble()%>%
    filter(type == "Competing")%>%
    count()%>%
@@ -62,7 +66,8 @@ test_that("Is there any missing value that is caused by calculations in graph?",
   sum(is.na.data.frame(priming_graph(testdata, competing_count = Competing_expression, miRNA_count= miRNA_expression)%>%
                          as.tibble()))->missings1
 
-  sum(is.na.data.frame(priming_graph(testdata, competing_count = Competing_expression, miRNA_count= miRNA_expression)%N>%
+  sum(is.na.data.frame(priming_graph(testdata, competing_count = Competing_expression, miRNA_count= miRNA_expression)%>%
+                          tidygraph::activate(nodes)%>%
                          as.tibble()))->missings2
 
   expect_equal(c(missings1, missings2), c(0,0))

@@ -69,6 +69,7 @@ library(purrr)
 library(future)
 library(furrr)
 library(png)
+library(extrafont)
 ```
 
 ## Load the *minsamp*

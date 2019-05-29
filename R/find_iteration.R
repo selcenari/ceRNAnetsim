@@ -34,6 +34,7 @@ find_iteration <- function(df, competing_count, miRNA_count, aff_factor=dummy, d
   affinity <- rlang::enquos(aff_factor)
   degradation <- rlang::enquos(deg_factor)
 
+
   iteration <- data.frame(iter = seq(1,.iter, 1), effect= rep(0))
 
   df <- df%>%
@@ -43,8 +44,8 @@ find_iteration <- function(df, competing_count, miRNA_count, aff_factor=dummy, d
 
   df%>%
     dplyr::group_by(miRNA)%>%
-    dplyr::mutate_at(vars(!!!affinity), list(anorm= ~normalize))%>%
-    dplyr::mutate_at(vars(!!!degradation), list(dnorm = ~normalize))%>%
+    dplyr::mutate_at(dplyr::vars(!!!affinity), funs(anorm = normalize))%>%
+    dplyr::mutate_at(dplyr::vars(!!!degradation), funs(dnorm = normalize))%>%
     dplyr::ungroup()%>%
     dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%purrr::reduce (`*`, .init = 1),
                   degg_factor = dplyr::select(., ends_with("dnorm"))%>%purrr::reduce (`*`, .init =1))%>%
@@ -129,8 +130,8 @@ iteration_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, 
 
   df%>%
     dplyr::group_by(miRNA)%>%
-    dplyr::mutate_at(dplyr::vars(!!!affinity), list(anorm= ~normalize))%>%
-    dplyr::mutate_at(dplyr::vars(!!!degradation), list(dnorm = ~normalize))%>%
+    dplyr::mutate_at(dplyr::vars(!!!affinity), funs(anorm = normalize))%>%
+    dplyr::mutate_at(dplyr::vars(!!!degradation), funs(dnorm = normalize))%>%
     dplyr::ungroup()%>%
     dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%reduce (`*`, .init = 1),
                   degg_factor = dplyr::select(., ends_with("dnorm"))%>%reduce (`*`, .init =1))%>%
