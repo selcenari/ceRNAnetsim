@@ -39,7 +39,7 @@ data("midsamp")
     update_nodes(once = TRUE)%>%
     update_how(sample_n(midsamp, 1)$Genes, 3)%>%
     update_nodes()%>%
-    simulate_vis(4)%>%
+    simulate(4)%>%
     class()
 
   expect_equal(classofout, classofout2)
