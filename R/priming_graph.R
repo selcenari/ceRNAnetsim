@@ -65,9 +65,9 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
     dplyr::ungroup()%>%
     dplyr::mutate(afff_factor = dplyr::select(., dplyr::ends_with("anorm"))%>%purrr::reduce(`*`, .init = 1),
                   degg_factor = dplyr::select(., dplyr::ends_with("dnorm"))%>%purrr::reduce(`*`, .init =1))%>%
-    as_tbl_graph()%>%
+    tidygraph::as_tbl_graph()%>%
     tidygraph::activate(nodes)%>%
-    tidygraph::mutate(type = ifelse(str_detect(.N()$name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%>%
+    tidygraph::mutate(type = ifelse(stringr::str_detect(.N()$name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%>%
     tidygraph::activate(edges)%>%
     tidygraph::mutate(comp_count_list = as.list(!!competing_exp), comp_count_pre = !!competing_exp, comp_count_current = !!competing_exp, mirna_count_list = as.list(!!mirna_exp), mirna_count_pre = !!mirna_exp, mirna_count_current = !!mirna_exp)%>%
     tidygraph::group_by(to)%>%

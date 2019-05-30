@@ -32,14 +32,14 @@ update_how <- function (input_graph, node_name, how){
   if(node_name %in% E(input_graph)$Competing_name){
 
     input_graph <- input_graph%>%
-      activate(edges)%>%
-      mutate(comp_count_current = ifelse(node_name == E(input_graph)$Competing_name, comp_count_current*how, comp_count_current))
+      tidygraph::activate(edges)%>%
+      tidygraph::mutate(comp_count_current = ifelse(node_name == E(input_graph)$Competing_name, comp_count_current*how, comp_count_current))
 
   } else if(node_name %in% E(input_graph)$miRNA_name){
 
    input_graph <- input_graph%>%
-     activate(edges)%>%
-      mutate(mirna_count_current = ifelse(node_name == E(input_graph)$miRNA_name, mirna_count_current*how, mirna_count_current))
+     tidygraph::activate(edges)%>%
+     tidygraph::mutate(mirna_count_current = ifelse(node_name == E(input_graph)$miRNA_name, mirna_count_current*how, mirna_count_current))
 
   } else{
 

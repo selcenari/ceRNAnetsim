@@ -49,7 +49,7 @@ find_iteration <- function(df, competing_count, miRNA_count, aff_factor=dummy, d
     dplyr::ungroup()%>%
     dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%purrr::reduce (`*`, .init = 1),
                   degg_factor = dplyr::select(., ends_with("dnorm"))%>%purrr::reduce (`*`, .init =1))%>%
-    as_tbl_graph()%>%
+    tidygraph::as_tbl_graph()%>%
     tidygraph::activate(nodes)%>%
     tidygraph::mutate(type = ifelse(stringr::str_detect(.N()$name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%>%
     tidygraph::activate(edges)%>%
@@ -135,7 +135,7 @@ iteration_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, 
     dplyr::ungroup()%>%
     dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%reduce (`*`, .init = 1),
                   degg_factor = dplyr::select(., ends_with("dnorm"))%>%reduce (`*`, .init =1))%>%
-    as_tbl_graph()%>%
+    tidygraph::as_tbl_graph()%>%
     tidygraph::activate(nodes)%>%
     tidygraph::mutate(type = ifelse(stringr::str_detect(.N()$name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%>%
     tidygraph::activate(edges)%>%

@@ -173,13 +173,33 @@
 
  <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>)<span class='kw'>%&gt;%</span>
-  <span class='fu'>find_node_perturbation</span>()</div><div class='output co'>#&gt; <span class='error'>Error in as_tbl_graph(.): "as_tbl_graph" fonksiyonu bulunamadı</span></div><div class='input'>
+  <span class='fu'>find_node_perturbation</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable processes as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 8 x 5</span><span>
+#&gt;   name  type      node_id perturbation_efficiency perturbed_count
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>                   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Gene1 Competing       1                    12.5               4
+#&gt; </span><span style='color: #555555;'>2</span><span> Gene2 Competing       2                    12.5               4
+#&gt; </span><span style='color: #555555;'>3</span><span> Gene3 Competing       3                    12.4               4
+#&gt; </span><span style='color: #555555;'>4</span><span> Gene4 Competing       4                    12.7               6
+#&gt; </span><span style='color: #555555;'>5</span><span> Gene5 Competing       5                    12.2               3
+#&gt; </span><span style='color: #555555;'>6</span><span> Gene6 Competing       6                    12.6               3
+#&gt; </span><span style='color: #555555;'>7</span><span> Mir1  miRNA           7                    13.9               5
+#&gt; </span><span style='color: #555555;'>8</span><span> Mir2  miRNA           8                    15.5               4</div><div class='input'>
 
  <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>energy</span>,<span class='no'>seed_type</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
-  <span class='fu'>find_node_perturbation</span>(<span class='kw'>how</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='error'>Error in as_tbl_graph(.): "as_tbl_graph" fonksiyonu bulunamadı</span></div><div class='input'>
+  <span class='fu'>find_node_perturbation</span>(<span class='kw'>how</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable processes as competing and the second as miRNA.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 5</span><span>
+#&gt;   name  type      node_id perturbation_efficiency perturbed_count
+#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>                   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span> Gene1 Competing       1                    25.0               6
+#&gt; </span><span style='color: #555555;'>2</span><span> Gene2 Competing       2                    25.3               6
+#&gt; </span><span style='color: #555555;'>3</span><span> Gene3 Competing       3                    24.8               6
+#&gt; </span><span style='color: #555555;'>4</span><span> Gene4 Competing       4                    24.9               6
+#&gt; </span><span style='color: #555555;'>5</span><span> Gene5 Competing       5                    25.0               6
+#&gt; </span><span style='color: #555555;'>6</span><span> Gene6 Competing       6                    25.0               6
+#&gt; </span><span style='color: #555555;'>7</span><span> Mir1  miRNA           7                    26.4               7
+#&gt; </span><span style='color: #555555;'>8</span><span> Mir2  miRNA           8                    29.9               7</div><div class='input'>
 
-</div></pre>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -198,7 +218,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Selcen Ari.</p>
+  <p>Developed by Selcen Ari, Alper Yilmaz.</p>
 </div>
 
 <div class="pkgdown">
