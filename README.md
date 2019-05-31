@@ -1,5 +1,5 @@
 
-## What does the `ceRNAnetsim` do?
+## ceRNAnetsim
 
 <p align="center">
   <img width="500" height="300" src="https://media.giphy.com/media/l0ErNdz1w5vt3YdZm/giphy.gif">
