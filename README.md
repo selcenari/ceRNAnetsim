@@ -13,6 +13,7 @@
 <!--ts-->
  
    * [Installation](#installation)
+   * [Example](#example)   
    * [Local Files](#local-files)
    * [Vignettes](#vignettes)
    * [License](#license)
@@ -32,6 +33,18 @@ devtools::install_github("selcenari/ceRNAnetsim")
 library(ceRNAnetsim)
 
 ```
+
+## Example
+
+```
+data("minsamp")
+
+minsamp
+
+priming_graph(minsamp, competing_count = Competing_expression, miRNA_count = miRNA_expression)
+
+```
+
 
 ## Local Files
 
