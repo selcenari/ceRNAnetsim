@@ -101,7 +101,7 @@ clear_example%>%
 
 ```
 
-![GAPDH over expression in real dataset](realexample.gif)
+![GAPDH over expression in real dataset](gifs/realexample.gif)
 
 It was shown the conditions after the first disturbtion of GAPDH gene. 
 

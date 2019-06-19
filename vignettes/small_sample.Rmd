@@ -39,10 +39,8 @@ The workflow of `ceRNAnetsim` are shown as following:
 
 ```{r pressure, echo=FALSE, fig.align='center', fig.width=4, fig.height=3, dpi=120}
 
-knitr::include_graphics("model_vignette.png")
+knitr::include_graphics("gifs/model_vignette.png")
 ```
-
-
 
 ## Installation of ceRNAnetsim
 
@@ -244,7 +242,7 @@ minsamp%>%
    simulate_vis(3, title = "Minsamp Graph After Each Iteration")
 ```
 
-![Minsamp with 3 iteraion](small_sample.gif)
+![Minsamp with 3 iteration](gifs/small_sample.gif)
 
  See the other vignettes to more.
 
