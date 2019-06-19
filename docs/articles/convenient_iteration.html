@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>An Offer: How to Find the Appropriate Iteration for Simulation • ceRNAnetsim</title>
+<title>A Suggestion: How to Find the Appropriate Iteration for Simulation • ceRNAnetsim</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="An Offer: How to Find the Appropriate Iteration for Simulation">
+<script src="../pkgdown.js"></script><meta property="og:title" content="A Suggestion: How to Find the Appropriate Iteration for Simulation">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -53,7 +53,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/convenient_iteration.html">An Offer: How to Find the Appropriate Iteration for Simulation</a>
+      <a href="../articles/convenient_iteration.html">A Suggestion: How to Find the Appropriate Iteration for Simulation</a>
     </li>
     <li>
       <a href="../articles/mirtarbase_example.html">An TCGA dataset application</a>
@@ -89,10 +89,10 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>An Offer: How to Find the Appropriate Iteration for Simulation</h1>
+      <h1>A Suggestion: How to Find the Appropriate Iteration for Simulation</h1>
                         <h4 class="author">Selcen Ari</h4>
             
-            <h4 class="date">2019-05-30</h4>
+            <h4 class="date">2019-06-19</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/selcenari/ceRNAnetsim/blob/master/vignettes/convenient_iteration.Rmd"><code>vignettes/convenient_iteration.Rmd</code></a></small>
       <div class="hidden name"><code>convenient_iteration.Rmd</code></div>
@@ -183,7 +183,7 @@
 <a class="sourceLine" id="cb2-67" title="67"><span class="co">#&gt; #   effect_current &lt;dbl&gt;, effect_pre &lt;dbl&gt;, effect_list &lt;list&gt;,</span></a>
 <a class="sourceLine" id="cb2-68" title="68"><span class="co">#&gt; #   mirna_count_per_comp &lt;dbl&gt;</span></a></code></pre></div>
 <div class="figure">
-<img src="con_iter_chunk3.gif" alt="Minsamp common target perturbation"><p class="caption">Minsamp common target perturbation</p>
+<img src="gifs/con_iter_chunk3.gif" alt="Minsamp common target perturbation"><p class="caption">Minsamp common target perturbation</p>
 </div>
 <p>For example, in <em>minsamp</em> dataset, the steady-state is occured at iteration-14, as seen above. However, when interactions are more complex, the number of iterations required to maintain steady-state may increase. While the iteration-14 is sufficient for <em>minsamp</em> dataset, the steady-state could not be ensured at iteration-15 for <em>midsamp</em>, as seen following.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"midsamp"</span>)</a>
@@ -311,7 +311,7 @@
 <a class="sourceLine" id="cb3-123" title="123"><span class="co">#&gt; #   effect_current &lt;dbl&gt;, effect_pre &lt;dbl&gt;, effect_list &lt;list&gt;,</span></a>
 <a class="sourceLine" id="cb3-124" title="124"><span class="co">#&gt; #   mirna_count_per_comp &lt;dbl&gt;</span></a></code></pre></div>
 <div class="figure">
-<img src="con_iter_chunk4.gif" alt="Midsamp Gene17 perturbation with 15 iteration"><p class="caption">Midsamp Gene17 perturbation with 15 iteration</p>
+<img src="gifs/con_iter_chunk4.gif" alt="Midsamp Gene17 perturbation with 15 iteration"><p class="caption">Midsamp Gene17 perturbation with 15 iteration</p>
 </div>
 <p>For these reasons, we developed an approach to find optimal iteration of the given network. <code><a href="../reference/find_iteration.html">find_iteration()</a></code> function analyses the dataset for given iteration number (<code>.iter</code> argument) and offers the iteration that has maximum affected nodes’ count. The other argument is <code>limit</code> that is the minimum amount of change of any node. The <code>limit</code> argument takes into account while the amount of affected node is calculated. Note that a slightly difference on the amount of the any elements on the network can be cause the excessive results.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="../reference/find_iteration.html">find_iteration</a></span>(midsamp, Gene_expression, miRNA_expression, <span class="dt">node_name =</span> <span class="st">"Gene2"</span>, <span class="dt">.iter=</span> <span class="dv">50</span>, <span class="dt">how =</span> <span class="dv">2</span>, <span class="dt">limit=</span><span class="dv">0</span>)</a>
@@ -319,9 +319,9 @@
 <p>When <code><a href="../reference/iteration_graph.html">iteration_graph()</a></code> function are used with <code><a href="../reference/find_iteration.html">find_iteration()</a></code>, the disturbed elements’ count (%) with iteration number can also be viewed in a plot. Optionally, the iteration number (cycle) that is used in <code><a href="../reference/simulate.html">simulate()</a></code> function can be selected with help of obtained graph.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="../reference/iteration_graph.html">iteration_graph</a></span>(midsamp, <span class="dt">competing_count =</span> Gene_expression, <span class="dt">miRNA_count =</span> miRNA_expression, <span class="dt">node_name =</span> <span class="st">"Gene17"</span>, <span class="dt">.iter=</span> <span class="dv">50</span>, <span class="dt">how =</span> <span class="dv">2</span>, <span class="dt">limit=</span><span class="dv">0</span> )</a></code></pre></div>
 <p><img src="convenient_iteration_files/figure-html/unnamed-chunk-6-1.png" width="600" style="display: block; margin: auto;"></p>
-<div id="lets-try-offer-of-iteration_graph-for-gene17-" class="section level2">
+<div id="lets-try-the-suggestion-of-iteration_graph-for-gene17-" class="section level2">
 <h2 class="hasAnchor">
-<a href="#lets-try-offer-of-iteration_graph-for-gene17-" class="anchor"></a>Let’s try offer of <code>iteration_graph</code> for Gene17.</h2>
+<a href="#lets-try-the-suggestion-of-iteration_graph-for-gene17-" class="anchor"></a>Let’s try the suggestion of <code>iteration_graph</code> for Gene17.</h2>
 <p>As shown the plot in the above, gaining the steady-state is after the iteration-22. If we try to simulate the network with iteration-25, the results are as following:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">midsamp<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(Gene_expression, miRNA_expression)<span class="op">%&gt;%</span></a>
@@ -410,7 +410,7 @@
 <a class="sourceLine" id="cb6-85" title="85"><span class="co">#&gt; #   effect_current &lt;dbl&gt;, effect_pre &lt;dbl&gt;, effect_list &lt;list&gt;,</span></a>
 <a class="sourceLine" id="cb6-86" title="86"><span class="co">#&gt; #   mirna_count_per_comp &lt;dbl&gt;</span></a></code></pre></div>
 <div class="figure">
-<img src="con_iter_chunk7.gif" alt="Midsamp Gene17 perturbation with 25 iteration"><p class="caption">Midsamp Gene17 perturbation with 25 iteration</p>
+<img src="gifs/con_iter_chunk7.gif" alt="Midsamp Gene17 perturbation with 25 iteration"><p class="caption">Midsamp Gene17 perturbation with 25 iteration</p>
 </div>
 <p>The workflow that is aforementioned in this vignette should be thought as suggestion. Because the <code>cycle</code> is a critical argument that is used with <code><a href="../reference/simulate.html">simulate()</a></code> function and affects all results of analysis. In light of this vignette and functions, the approach can be developed according to persent dataset.</p>
 </div>
@@ -425,7 +425,7 @@
 <li><a href="#cernanetsim">ceRNAnetsim</a></li>
       <li>
 <a href="#what-is-the-problem-or-point">What is the problem or point?</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#lets-try-offer-of-iteration_graph-for-gene17-">Let’s try offer of <code>iteration_graph</code> for Gene17.</a></li>
+<li><a href="#lets-try-the-suggestion-of-iteration_graph-for-gene17-">Let’s try the suggestion of <code>iteration_graph</code> for Gene17.</a></li>
       </ul>
 </li>
       </ul>
