@@ -8,19 +8,6 @@
 `ceRNAnetsim` helps to understanding complex miRNA:target interactions with the network based approach. It utilizes the amounts of miRNAs and their targets and interaction parameters optionally.
 
 
-## Table of contents
-
-<!--ts-->
- 
-   * [Installation](#installation)
-   * [Example](#example)   
-   * [Local Files](#local-files)
-   * [Vignettes](#vignettes)
-   * [License](#license)
-   * [Issues](#issues)
-
- <!--te-->
-
 ## Installation
 
 Installation of `ceRNAnetsim`:
