@@ -1,10 +1,10 @@
 ---
-title: "An Offer: How to Find the Appropriate Iteration for Simulation"
+title: "A Suggestion: How to Find the Appropriate Iteration for Simulation"
 author: "Selcen Ari"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{An Offer: How to Find the Appropriate Iteration for Simulation}
+  %\VignetteIndexEntry{A Suggestion: How to Find the Appropriate Iteration for Simulation}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -90,7 +90,7 @@ When `iteration_graph()` function are used with `find_iteration()`, the disturbe
 iteration_graph(midsamp, competing_count = Gene_expression, miRNA_count = miRNA_expression, node_name = "Gene17", .iter= 50, how = 2, limit=0 )
 ```
 
-## Let's try offer of `iteration_graph` for Gene17.
+## Let's try the suggestion of `iteration_graph` for Gene17.
 
 As shown the plot in the above, gaining the steady-state is after the iteration-22. If we try to simulate the network with iteration-25, the results are as following:
 
