@@ -220,10 +220,10 @@ minsamp %>%
                  aff_factor = c(energy, seed_type), 
                  deg_factor = region) %>%
    update_nodes(once=TRUE) %>%
-   update_variables(current_counts = new_counts)
+   update_variables(current_counts = new_counts)%>%
+   update_nodes()
 ```
 
-(TOFIX bu tabloda count_current kolonunda Gene2 20000 olmasý gerekmiyor muydu?)
 
 ### The change in dataset: Method 2
 
