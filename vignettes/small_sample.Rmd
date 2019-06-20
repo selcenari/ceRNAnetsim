@@ -169,7 +169,7 @@ minimal sample `minsamp` is processed with `priming_graph()` function in first s
 - The competing elements (Genes in *minsamp*) are grouped according to the miRNAs they are associated with.
 - In graph object, the **optional** interaction factors are processed and graded within the groups.
 - The amounts (expressions) of miRNAs are distributed according to competing:total competing ratio.
-- miRNA efficiency in steady-state is calculated by taking into account of expression distribution and effecting factors. The **optional** factors might have two types of effect; 1) affinity, 2) degree(?) effect. Any column which has effect on affinity should be provided as a vector to `aff_factor` argument. 
+- miRNA efficiency in steady-state is calculated by taking into account of expression distribution and effecting factors. The **optional** factors might have two types of effect; 1) affinity, 2) degradation effect. Any column which has effect on affinity should be provided as a vector to `aff_factor` argument. 
 
 ```{r}
 priming_graph(minsamp, 
