@@ -30,7 +30,9 @@ data("minsamp")
 
 minsamp
 
-priming_graph(minsamp, competing_count = Competing_expression, miRNA_count = miRNA_expression)
+priming_graph(minsamp, 
+                competing_count = Competing_expression, 
+                miRNA_count = miRNA_expression)
 
 ```
 
