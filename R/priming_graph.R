@@ -76,7 +76,7 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
     tidygraph::mutate(effect_current = mirna_count_per_dep*degg_factor, effect_pre = effect_current, effect_list = as.list(effect_current))%>%
     tidygraph::select(-dplyr::ends_with("norm"), dummy)-> input_graph
 
-  warning("First variable processes as competing and the second as miRNA.
+  warning("First variable is processed as competing and the second as miRNA.
 ")
   }
 
