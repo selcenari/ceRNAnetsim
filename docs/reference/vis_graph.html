@@ -86,7 +86,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/convenient_iteration.html">An Offer: How to Find the Appropriate Iteration for Simulation</a>
+      <a href="../articles/convenient_iteration.html">A Suggestion: How to Find the Appropriate Iteration for Simulation</a>
     </li>
     <li>
       <a href="../articles/mirtarbase_example.html">An TCGA dataset application</a>
@@ -101,6 +101,9 @@
       <a href="../articles/small_sample.html">Approach of the Method in A Small Sample</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -186,16 +189,14 @@
 
  <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>seed_type</span>,<span class='no'>energy</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
    <span class='fu'><a href='update_nodes.html'>update_nodes</a></span>(<span class='kw'>once</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>vis_graph</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable processes as competing and the second as miRNA.</span></div><div class='output co'>#&gt; Importing fonts may take a few minutes, depending on the number of fonts and the speed of the system.
-#&gt; Continue? [y/n] </div><div class='output co'>#&gt; <span class='message'>Exiting.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Kamada-Kawai (kk) layout was used.</span></div><div class='img'><img src='vis_graph-1.png' alt='' width='700' height='433' /></div><div class='input'>
+   <span class='fu'>vis_graph</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Kamada-Kawai (kk) layout was used.</span></div><div class='img'><img src='vis_graph-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Visualisation of graph after the change.</span>
 
  <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>seed_type</span>,<span class='no'>energy</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
    <span class='fu'><a href='update_nodes.html'>update_nodes</a></span>(<span class='kw'>once</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)<span class='kw'>%&gt;%</span>
    <span class='fu'><a href='update_variables.html'>update_variables</a></span>(<span class='no'>new_counts</span>)<span class='kw'>%&gt;%</span>
    <span class='fu'><a href='update_nodes.html'>update_nodes</a></span>()<span class='kw'>%&gt;%</span>
-   <span class='fu'>vis_graph</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable processes as competing and the second as miRNA.</span></div><div class='output co'>#&gt; Importing fonts may take a few minutes, depending on the number of fonts and the speed of the system.
-#&gt; Continue? [y/n] </div><div class='output co'>#&gt; <span class='message'>Exiting.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Kamada-Kawai (kk) layout was used.</span></div><div class='img'><img src='vis_graph-2.png' alt='' width='700' height='433' /></div><div class='input'>
+   <span class='fu'>vis_graph</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Kamada-Kawai (kk) layout was used.</span></div><div class='img'><img src='vis_graph-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

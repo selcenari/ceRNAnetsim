@@ -86,7 +86,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/convenient_iteration.html">An Offer: How to Find the Appropriate Iteration for Simulation</a>
+      <a href="../articles/convenient_iteration.html">A Suggestion: How to Find the Appropriate Iteration for Simulation</a>
     </li>
     <li>
       <a href="../articles/mirtarbase_example.html">An TCGA dataset application</a>
@@ -101,6 +101,9 @@
       <a href="../articles/small_sample.html">Approach of the Method in A Small Sample</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -178,11 +181,11 @@
 
 <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
    <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>, <span class='kw'>how</span><span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable processes as competing and the second as miRNA.</span></div><div class='output co'>#&gt; perturbation_efficiency         perturbed_count 
+   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>, <span class='kw'>how</span><span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; perturbation_efficiency         perturbed_count 
 #&gt;                 25.2144                  6.0000 </div><div class='input'>
  <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
    <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>energy</span>,<span class='no'>seed_type</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>,<span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable processes as competing and the second as miRNA.</span></div><div class='output co'>#&gt; perturbation_efficiency         perturbed_count 
+   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>,<span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; perturbation_efficiency         perturbed_count 
 #&gt;                25.02175                 6.00000 </div><div class='input'>
 
 </div></pre>

@@ -86,7 +86,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/convenient_iteration.html">An Offer: How to Find the Appropriate Iteration for Simulation</a>
+      <a href="../articles/convenient_iteration.html">A Suggestion: How to Find the Appropriate Iteration for Simulation</a>
     </li>
     <li>
       <a href="../articles/mirtarbase_example.html">An TCGA dataset application</a>
@@ -101,6 +101,9 @@
       <a href="../articles/small_sample.html">Approach of the Method in A Small Sample</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -173,7 +176,7 @@
 
  <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>)<span class='kw'>%&gt;%</span>
-  <span class='fu'>find_node_perturbation</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable processes as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 8 x 5</span><span>
+  <span class='fu'>find_node_perturbation</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 8 x 5</span><span>
 #&gt;   name  type      node_id perturbation_efficiency perturbed_count
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>                   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> Gene1 Competing       1                    12.5               4
@@ -187,7 +190,7 @@
 
  <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>energy</span>,<span class='no'>seed_type</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
-  <span class='fu'>find_node_perturbation</span>(<span class='kw'>how</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable processes as competing and the second as miRNA.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 5</span><span>
+  <span class='fu'>find_node_perturbation</span>(<span class='kw'>how</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 8 x 5</span><span>
 #&gt;   name  type      node_id perturbation_efficiency perturbed_count
 #&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>                   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'>1</span><span> Gene1 Competing       1                    25.0               6
