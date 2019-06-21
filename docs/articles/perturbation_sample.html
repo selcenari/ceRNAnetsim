@@ -69,6 +69,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -92,7 +95,7 @@
       <h1>How to Determine Perturbation in A Sample Dataset</h1>
                         <h4 class="author">Selcen Ari</h4>
             
-            <h4 class="date">2019-06-19</h4>
+            <h4 class="date">2019-06-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/selcenari/ceRNAnetsim/blob/master/vignettes/perturbation_sample.Rmd"><code>vignettes/perturbation_sample.Rmd</code></a></small>
       <div class="hidden name"><code>perturbation_sample.Rmd</code></div>
@@ -191,7 +194,7 @@
 <a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> Gene_expression, <span class="dt">miRNA_count =</span> miRNA_expression, </a>
 <a class="sourceLine" id="cb3-3" title="3">              <span class="dt">aff_factor =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(Energy,seeds), <span class="dt">deg_factor =</span> targeting_region)<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="st">    </span><span class="kw"><a href="../reference/calc_perturbation.html">calc_perturbation</a></span>(<span class="st">"Gene17"</span>,<span class="dv">3</span>, <span class="dt">cycle =</span> <span class="dv">30</span>, <span class="dt">limit =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; Warning in priming_graph(., competing_count = Gene_expression, miRNA_count = miRNA_expression, : First variable processes as competing and the second as miRNA.</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; Warning in priming_graph(., competing_count = Gene_expression, miRNA_count = miRNA_expression, : First variable is processed as competing and the second as miRNA.</span></a>
 <a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt; perturbation_efficiency         perturbed_count </span></a>
 <a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt;                8.366527                9.000000</span></a></code></pre></div>
 <p>It could be insufficient for understanding the regulations of interactions. So, the comparisons in the network could be handled with <code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> function for all of elements with the same iteration and change.</p>
@@ -204,7 +207,7 @@
 <a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> Gene_expression, <span class="dt">miRNA_count =</span> miRNA_expression, </a>
 <a class="sourceLine" id="cb4-3" title="3">              <span class="dt">aff_factor =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(Energy,seeds), <span class="dt">deg_factor =</span> targeting_region)<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb4-4" title="4"><span class="kw"><a href="../reference/find_node_perturbation.html">find_node_perturbation</a></span>(<span class="dt">how =</span> <span class="dv">3</span>, <span class="dt">cycle =</span> <span class="dv">4</span>, <span class="dt">limit =</span> <span class="fl">0.1</span>) </a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; Warning in priming_graph(., competing_count = Gene_expression, miRNA_count = miRNA_expression, : First variable processes as competing and the second as miRNA.</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; Warning in priming_graph(., competing_count = Gene_expression, miRNA_count = miRNA_expression, : First variable is processed as competing and the second as miRNA.</span></a>
 <a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; # A tibble: 24 x 5</span></a>
 <a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt;    name   type      node_id perturbation_efficiency perturbed_count</span></a>
 <a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt;    &lt;chr&gt;  &lt;chr&gt;       &lt;int&gt;                   &lt;dbl&gt;           &lt;dbl&gt;</span></a>
