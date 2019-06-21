@@ -55,7 +55,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/convenient_iteration.html">An Offer: How to Find the Appropriate Iteration for Simulation</a>
+      <a href="articles/convenient_iteration.html">A Suggestion: How to Find the Appropriate Iteration for Simulation</a>
     </li>
     <li>
       <a href="articles/mirtarbase_example.html">An TCGA dataset application</a>
@@ -70,6 +70,9 @@
       <a href="articles/small_sample.html">Approach of the Method in A Small Sample</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -91,25 +94,13 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<div id="what-does-the-cernanetsim-do" class="section level2">
+<div id="cernanetsim" class="section level2">
 <h2 class="hasAnchor">
-<a href="#what-does-the-cernanetsim-do" class="anchor"></a>What does the <code>ceRNAnetsim</code> do?</h2>
+<a href="#cernanetsim" class="anchor"></a>ceRNAnetsim</h2>
+
 <p align="center">
   <img width="500" height="300" src="https://media.giphy.com/media/l0ErNdz1w5vt3YdZm/giphy.gif"></p>
 <p><code>ceRNAnetsim</code> helps to understanding complex miRNA:target interactions with the network based approach. It utilizes the amounts of miRNAs and their targets and interaction parameters optionally.</p>
-</div>
-<div id="table-of-contents" class="section level2">
-<h2 class="hasAnchor">
-<a href="#table-of-contents" class="anchor"></a>Table of contents</h2>
-<!--ts-->
-<ul>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#local-files">Local Files</a></li>
-<li><a href="#vignettes">Vignettes</a></li>
-<li><a href="#license">License</a></li>
-<li><a href="#issues">Issues</a></li>
-</ul>
-<p><!--te--></p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -120,6 +111,18 @@ devtools::install_github("selcenari/ceRNAnetsim")
 
 
 library(ceRNAnetsim)
+</code></pre>
+</div>
+<div id="example" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example" class="anchor"></a>Example</h2>
+<pre><code>data("minsamp")
+
+minsamp
+
+priming_graph(minsamp, 
+                competing_count = Competing_expression, 
+                miRNA_count = miRNA_expression)
 </code></pre>
 </div>
 <div id="local-files" class="section level2">
@@ -148,11 +151,11 @@ library(ceRNAnetsim)
 <a href="#vignettes" class="anchor"></a>Vignettes</h2>
 <p>The repository of ceRNAnetsim contents the vignettes that follow:</p>
 <ul>
-<li><a href="https://github.com/selcenari/ceRNAnetsim/blob/master/documents/small_sample.html">Small example demonstrating the approach and the method</a></li>
-<li><a href="https://github.com/selcenari/ceRNAnetsim/blob/master/documents/convenient_iteration.html">How to calculate proper number of iterations for simulation of the network</a></li>
-<li><a href="https://github.com/selcenari/ceRNAnetsim/blob/master/documents/perturbation_sample.html">How to determine most effective node of network in equal conditions</a></li>
-<li><a href="https://github.com/selcenari/ceRNAnetsim/blob/master/documents/realexample.html">How does the system do in the presence of interaction factors?</a></li>
-<li><a href="https://github.com/selcenari/ceRNAnetsim/blob/master/documents/mirtarbase_example.html">How does the system behave in the presence of interaction factors?</a></li>
+<li><a href="https://selcenari.github.io/ceRNAnetsim/articles/small_sample.html">Small example demonstrating the approach and the method</a></li>
+<li><a href="https://selcenari.github.io/ceRNAnetsim/articles/convenient_iteration.html">How to calculate proper number of iterations for simulation of the network</a></li>
+<li><a href="https://selcenari.github.io/ceRNAnetsim/articles/perturbation_sample.html">How to determine most effective node of network in equal conditions</a></li>
+<li><a href="https://selcenari.github.io/ceRNAnetsim/articles/realexample.html">How does the system do in the presence of interaction factors?</a></li>
+<li><a href="https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html">How does the system behave in the presence of interaction factors?</a></li>
 </ul>
 </div>
 <div id="license" class="section level2">
@@ -198,7 +201,13 @@ library(ceRNAnetsim)
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="http://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPL%20v3-blue.svg" alt="License: GPL v3"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
       <footer><div class="copyright">
