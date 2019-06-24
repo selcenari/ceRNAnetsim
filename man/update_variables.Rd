@@ -15,9 +15,11 @@ update_variables(input_graph, current_counts)
 the graph object.
 }
 \description{
-The function replace new values with previous values of competing or miRNA counts.
+The function replaces new values with previous values of competing or miRNA counts.
 }
 \details{
+Replaces new values with previous values of competing or miRNA counts.
+
 update_variables function provides updating edge variables to current values. If the microRNA or competing expression (or both) change (decreasing or increasing), this function switches the values that are found in a new dataset provided by user. But the current value dataset must be equal with initial dataset in terms of node name.
 }
 \examples{

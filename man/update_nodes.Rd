@@ -18,6 +18,8 @@ the graph object.
 The function carries variables from edge to node.
 }
 \details{
+Carries variables from edge to node.
+
 If the carrying process performs after priming_graph function, the argument must be TRUE.
     The function helps to visualisation of processed graph object, especially that includes too many nodes.This step makes it easily to follow the processes.
 }

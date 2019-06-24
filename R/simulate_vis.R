@@ -1,3 +1,5 @@
+#' Provides visualisation of the graph in addition to simulate function.
+#'
 #' @title simulate_vis
 #'
 #' @description  simulate_vis provides visualisation of the graph in addition to simulate function.

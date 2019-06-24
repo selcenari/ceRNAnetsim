@@ -1,3 +1,5 @@
+#' Utilizes the change in expression value/s as triggering.
+#'
 #' @title simulate
 #'
 #' @description  simulate function uses the change in expression value/s as triggering.

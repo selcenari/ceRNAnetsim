@@ -32,6 +32,8 @@ It gives a graph and the images of states in each iteration until the end of the
 simulate_vis provides visualisation of the graph in addition to simulate function.
 }
 \details{
+Provides visualisation of the graph in addition to simulate function.
+
 simulate_vis gives the last graph object and each iterations' image.
 }
 \examples{

@@ -1,3 +1,5 @@
+#' Finds the iteration which provides maximum affected node number
+#'
 #' @title find_iteration
 #'
 #' @description find_iteration searches the iteration that provides maximum affected node number. The user defines a symbolic iteration with .iter. The function calculates the number of affected nodes for each iteration and than selects the iteration that has maximum affected nodes' number.
@@ -86,9 +88,11 @@ find_iteration <- function(df, competing_count, miRNA_count, aff_factor=dummy, d
 
 
 
+#' Calculates the number of disturbed nodes for each iteration and then gives the plot that is ratio of iteration and affected node in terms of percentage.
+#'
 #' @title iteration_graph
 #'
-#' @description The function calculates the number of disturbed nodes for each iteration and than gives the plot that is ratio of iteration and affected node  in terms of percentage. .
+#' @description The function calculates the number of disturbed nodes for each iteration and then gives the plot that is ratio of iteration and affected node in terms of percentage.
 #'
 #' @return It gives the plot.
 #'

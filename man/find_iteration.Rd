@@ -33,7 +33,7 @@ It gives an iteration number to use in simulate() function.
 find_iteration searches the iteration that provides maximum affected node number. The user defines a symbolic iteration with .iter. The function calculates the number of affected nodes for each iteration and than selects the iteration that has maximum affected nodes' number.
 }
 \details{
-
+Finds the iteration which provides maximum affected node number
 }
 \examples{
 

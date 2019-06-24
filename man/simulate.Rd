@@ -18,6 +18,8 @@ The graph.
 simulate function uses the change in expression value/s as triggering.
 }
 \details{
+Utilizes the change in expression value/s as triggering.
+
 The steady-state conditions of the system are disturbed after the change in the graph (with update_how or update_variables). In this case, the system tend to be steady state again. The arrangement of competetive profiles of the targets continue until all nodes are updated and steady-state nearly.
 }
 \examples{

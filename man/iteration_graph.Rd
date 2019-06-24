@@ -30,10 +30,10 @@ iteration_graph(df, competing_count, miRNA_count, aff_factor = dummy,
 It gives the plot.
 }
 \description{
-The function calculates the number of disturbed nodes for each iteration and than gives the plot that is ratio of iteration and affected node  in terms of percentage. .
+The function calculates the number of disturbed nodes for each iteration and then gives the plot that is ratio of iteration and affected node in terms of percentage.
 }
 \details{
-
+Calculates the number of disturbed nodes for each iteration and then gives the plot that is ratio of iteration and affected node in terms of percentage.
 }
 \examples{
 

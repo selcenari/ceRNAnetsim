@@ -1,3 +1,5 @@
+#' Calculates average expression changes of all  nodes and finds the perturbed node count for all nodes in system.
+#'
 #' @title find_node_perturbation
 #'
 #' @description  calculates the mean of expression changes of all  nodes and finds the perturbed node count for all nodes in system.

@@ -1,6 +1,8 @@
+#' Replaces new values with previous values of competing or miRNA counts.
+#'
 #' @title update_variables
 #'
-#' @description  The function replace new values with previous values of competing or miRNA counts.
+#' @description  The function replaces new values with previous values of competing or miRNA counts.
 #'
 #' @return the graph object.
 #'

@@ -1,6 +1,8 @@
+#' Calculates average expression changes of all  nodes and finds the perturbed node count for a given node.
+#'
 #' @title calc_perturbation
 #'
-#' @description  calculates mean of expression changes of all  nodes and finds the perturbed node count for a given node.
+#' @description calculates mean of expression changes of all  nodes and finds the perturbed node count for a given node.
 #'
 #' @return gives a vector about the perturbation efficiency and number of perturbed nodes.
 #'

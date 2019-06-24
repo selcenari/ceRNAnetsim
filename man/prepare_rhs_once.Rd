@@ -13,5 +13,7 @@ prepare_rhs_once(input_graph)
 Carries the variables from edge to node.
 }
 \details{
+Carries the variables from edge to node.
+
 The function is a helper function for processing of graph object with update_nodes function.
 }

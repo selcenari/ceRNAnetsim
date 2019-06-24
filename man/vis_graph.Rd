@@ -27,9 +27,11 @@ vis_graph(input_graph, Competing_color = "green",
 The graph object.
 }
 \description{
-vis_graph provides to visualisation of the graph.
+vis_graph provides visualisation of the graph.
 }
 \details{
+provides visualisation of the graph.
+
 vis_graph ensures the process to be followed.
 }
 \examples{

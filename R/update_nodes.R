@@ -1,3 +1,5 @@
+#' Carries the variables from edge to node.
+#'
 #' @title prepare_rhs_once
 #'
 #' @description  Carries the variables from edge to node.
@@ -48,6 +50,8 @@ prepare_rhs <- function(input_graph){
                dplyr::distinct()))
 }
 
+#' Carries variables from edge to node.
+#'
 #' @title update_nodes
 #'
 #' @description  The function carries variables from edge to node.

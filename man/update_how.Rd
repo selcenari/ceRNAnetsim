@@ -20,6 +20,8 @@ the graph object.
 update_how converts the count value of the given node.
 }
 \details{
+Converts the count value of the given node.
+
 update_how function calculates the current value of given mirna or gene node on the graph object. User must specify current value as fold change.
 }
 \examples{

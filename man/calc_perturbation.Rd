@@ -25,6 +25,8 @@ gives a vector about the perturbation efficiency and number of perturbed nodes.
 calculates mean of expression changes of all  nodes and finds the perturbed node count for a given node.
 }
 \details{
+Calculates average expression changes of all  nodes and finds the perturbed node count for a given node.
+
 calc_perturbation calculates mean expression changes of elements after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
  The function determines the perturbation efficiency and number of perturbed nodes after given change with how, cycle and limit parameter.
 }
