@@ -1,0 +1,55 @@
+title: ceRNAnetsim
+url: https://selcenari.github.io/ceRNAnetsim/
+template:
+  params:
+    bootswatch: flatly
+    ganalytics: UA-84499524-2
+    docsearch:
+      api_key: fbd8d79ed49f21fc9ca7b2cf601a3f5b
+      index_name: ceRNAnetsim
+reference:
+- title: All functions
+  desc: ~
+  contents:
+  - calc_perturbation
+  - find_iteration
+  - find_node_perturbation
+  - iteration_graph
+  - normalize
+  - prepare_rhs
+  - prepare_rhs_once
+  - priming_graph
+  - simulate
+  - simulate_vis
+  - update_how
+  - update_nodes
+  - update_variables
+  - vis_graph
+navbar:
+  type: inverse
+  left:
+    - icon: fa-home
+      href: index.html
+  right:
+    - text: "Articles"
+      icon: fas fa-book
+      menu:
+      -  text: Small example demonstrating the approach and the method
+         href: articles/small_sample.html
+      -  text: How to calculate proper number of iterations for simulation of the network
+         href: articles/convenient_iteration.html
+      -  text: How to determine most effective node of network in equal conditions
+         href: articles/perturbation_sample.html
+      -  text: How does the system do in the presence of interaction factors?
+         href: articles/realexample.html
+      -  text: How does the system behave in the presence of interaction factors?
+         href: articles/mirtarbase_example.html
+    - icon: fa-newspaper-o
+      text: "news"
+      href: news/index.html
+    - icon: fa-file-code-o
+      text: "functions"
+      href: reference/index.html
+    - icon: fa-github fa-lg
+      text: "github"
+      href: https://github.com/selcenari/ceRNAnetsim
