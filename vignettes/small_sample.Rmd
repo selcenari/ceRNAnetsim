@@ -50,24 +50,10 @@ library(ceRNAnetsim)
 ```
 
 ```{r, echo=FALSE, message= FALSE, warning=FALSE}
-library(rlang)
-library(dplyr)
-library(tidyr)
-library(stringr)
-library(stringi)
-library(tidyverse)
-library(ggplot2)
-library(tidygraph)
-library(igraph)
-library(ggraph)
-library(purrr)
-library(future)
-library(furrr)
 library(png)
-library(extrafont)
 ```
 
-## Load the *minsamp*
+## Load the minimal sample
 
 In this vignette, the model functions are demonstrated with minimal sample dataset.
 *minsamp* is a sample dataset that includes 6 genes, 2 miRNAs and interaction factors of miRNA:gene pairs.
@@ -162,14 +148,14 @@ interaction_complex
 
 By joining these 3 different tables, third table being simple or complex, your data will be ready for analysis.
 
-## How to convert the dataset to graph
+## Convert the dataset to graph
 
 minimal sample `minsamp` is processed with `priming_graph()` function in first step. This provides conversion of dataset from data frame to graph object. This step comprises of:
 
 - The competing elements (Genes in *minsamp*) are grouped according to the miRNAs they are associated with.
 - In graph object, the **optional** interaction factors are processed and graded within the groups.
 - The amounts (expressions) of miRNAs are distributed according to competing:total competing ratio.
-- miRNA efficiency in steady-state is calculated by taking into account of expression distribution and effecting factors. The **optional** factors might have two types of effect; 1) affinity, 2) degradation effect. Any column which has effect on affinity should be provided as a vector to `aff_factor` argument. 
+- miRNA efficiency in steady-state is calculated by taking into account of expression distribution and effecting factors. The **optional** factors might have two types of effect; 1) affinity, 2) degradation effect. Any column which has effect on affinity should be provided as a vector to `aff_factor` argument and any column that effects degradation of target RNA should be as a vector to `deg_factor` argument. 
 
 ```{r}
 priming_graph(minsamp, 
@@ -179,7 +165,7 @@ priming_graph(minsamp,
               deg_factor = region)
 ```
 
-## How to process edge data as node variables
+## Update node values (expression level) from edge data
 
 In the processed data, the values are carried as node variables with `update_nodes(once=TRUE)`. This function defines variable types, hence the `type` column. In addition to `type` column, many more columns are initialized which are to be used in subsequent steps.
 
@@ -192,26 +178,41 @@ minsamp %>%
    update_nodes(once=TRUE)
 ```
 
-## The change in the graph object
+## Change expression level of one or more nodes in the graph
 
-In the steady-state, the mirna efficiency are assumed as stable (ie. in equilibrium). But, if one or more nodes have altered expression level, the system tends to reach steady-state again. 
+In the steady-state, the miRNA degradation effect on gene expression is assumed to be stable (*i.e.* in equilibrium). But, if one or more nodes have altered expression level, the system tends to reach steady-state again. 
 
-The `ceRNAnetsim` package utilizes two methods to simulate change in data. `update_variables()` and `update_how()` functions provide a trigger that can start the unsteady-state. 
+The `ceRNAnetsim` package utilizes two methods to simulate change in expression level, `update_how()` and `update_variables()` functions provide unstable state from which calculations are triggered to reach steady-state. 
 
-The update_variables: An additional dataset with equal number of nodes is used. The dataset includes changed and unchanged values of node amounts. 
+### Method 1: change expression level of single node
 
-Firstly load the `new_count` (current_count dataset of minsamp):
-
-```{r}
-data(new_counts) #The Competing_count of Gene2 node is increased two fold.)
-
-new_counts
-
+If updating expression level of single node is desired then  `update_how()` function should be used. In the example below, expression level of Gene3 is increased 2-fold.
+  
+```{r results='hold'}
+minsamp %>%
+   priming_graph(competing_count = Competing_expression, 
+                 miRNA_count = miRNA_expression,
+                 aff_factor = c(energy, seed_type), 
+                 deg_factor = region) %>%
+   update_nodes(once=TRUE) %>%
+   update_how(node_name = "Gene3", how = 2) %>% 
+   # following line is just for focusing on necessary
+   # columns to see the change in edge data
+   select(3:4,comp_count_pre,comp_count_current)
 ```
 
-### The change in dataset: Method 1
+### Method 2: update expression level of all nodes
 
-`update_variables()` replaces the changed values with previous values. The function checks all values of the given dataset, so it allows more than one change. 
+The `update_variables()` function uses an external dataset which has number of rows equal to number of nodes in graph. The external dataset might include changed and unchanged expression values for each node. 
+
+Load the `new_count` dataset (provided with package sample data) in which expression level of Gene2 is increased 2 fold (from 10,000 to 20,000).
+
+```{r}
+data(new_counts) 
+new_counts
+```
+
+`update_variables()` function replaces the existing expression values with new values. The function checks for updates in all rows after importing expression values, thus it's possible to introduce multiple changes at once. 
 
 ```{r}
 minsamp %>%
@@ -223,72 +224,50 @@ minsamp %>%
    update_variables(current_counts = new_counts)
 ```
 
-
-### The change in dataset: Method 2
-
-The other method is the change in given node name with `update_how()`. If the user wants to apply the change in single node, `update_how()` could be used. In the example below, expression level of Gene3 is increased 2-fold.
-  
-```{r}
-minsamp %>%
-   priming_graph(competing_count = Competing_expression, 
-                 miRNA_count = miRNA_expression,
-                 aff_factor = c(energy, seed_type), 
-                 deg_factor = region) %>%
-   update_nodes(once=TRUE) %>%
-   update_how(node_name = "Gene3", how = 2)
-```
-
-With these functions (**update_nodes**, **update_how**) the current value(s) of element on the network, is updated in edge variables. After that, if **update_nodes** function is applied (as shown in following chunk), the change(s) can be seen in node variables.
-
-
 ## Update the node variables with edge variables.
 
-The node variables updates after the change in edge. This step are applied for easy tracking.
+The functions `update_variables()` and `update_how()` updates edge data. After that, `update_nodes()` function should be applied in order to reflect changes in edge data over to node data. In other words, if there's a change in edge data, nodes can be updated accordingly with `update_nodes()` function.
 
 ```{r}
 minsamp %>%
-   priming_graph(competing_count = Competing_expression, 
-                 miRNA_count = miRNA_expression,
-                 aff_factor = c(energy, seed_type), 
-                 deg_factor = region) %>%
-   update_nodes(once=TRUE) %>%
-   update_variables(current_counts = new_counts) %>%
-   update_nodes()
+  priming_graph(competing_count = Competing_expression, 
+                miRNA_count = miRNA_expression,
+                aff_factor = c(energy, seed_type), 
+                deg_factor = region) %>%
+  update_nodes(once=TRUE) %>%
+  update_how("Gene2", how = 2) %>%
+  update_nodes()
 
-#or
-
-minsamp %>%
-   priming_graph(competing_count = Competing_expression, 
-                 miRNA_count = miRNA_expression,
-                 aff_factor = c(energy, seed_type), 
-                 deg_factor = region) %>%
-   update_nodes(once=TRUE) %>%
-   update_how("Gene2", how = 2) %>%
-   update_nodes()
-
+# OR
+# minsamp %>%
+#   priming_graph(competing_count = Competing_expression, 
+#                 miRNA_count = miRNA_expression,
+#                 aff_factor = c(energy, seed_type), 
+#                 deg_factor = region) %>%
+#   update_nodes(once=TRUE) %>%
+#   update_variables(current_counts = new_counts) %>%
+#   update_nodes()
 ```
 
 ## Simulate the model
 
-When the change in expression level of a gene is applied to the interaction network, due of disruption in the interactions of miRNA:target ratios in groups, the steady-state conditions are assumed to be perturbed. So, the system tends to reach steady-state again. The change triggers the changes of other interactions in network, and then the rearrangement continues until the reaching steady-state.
+Change in expression level of one or more nodes will trigger a perturbation in the system which will effect neighboring miRNA:target interactions. The effect will propagate and iterate over until it reaches steady-state.
 
-With `simulate()` function the changes in the system, are calculated continuously.
+With `simulate()` function the changes in the system, are calculated iteratively. For example, in the example below, simulation will proceed ten cycles only.
 
 ```{r}
-
 minsamp %>%
-   priming_graph(competing_count = Competing_expression, 
-                 miRNA_count = miRNA_expression,
-                 aff_factor = c(energy, seed_type), 
-                 deg_factor = region) %>%
-   update_nodes(once=TRUE) %>%
-   update_variables(current_counts = new_counts) %>%
-   update_nodes() %>%
-   simulate(cycle=10)
-
+  priming_graph(competing_count = Competing_expression, 
+                miRNA_count = miRNA_expression,
+                aff_factor = c(energy, seed_type), 
+                deg_factor = region) %>%
+  update_nodes(once=TRUE) %>%
+  update_variables(current_counts = new_counts) %>%
+  update_nodes() %>%
+  simulate(cycle=10)
 ```
 
-`simulate()` saves the variables of each iteration in lists that are found in edge data of graph. The changes in variables can be monitored in lists with using basic `dplyr` functions. For example:
+`simulate()` saves the expression level of previous iterations in list columns in edge data. The changes in expression level throughout the simulate cycles are accessible with standard `dplyr` functions. For example:
   
 ```{r}
 minsamp %>%
@@ -300,15 +279,37 @@ minsamp %>%
    update_variables(current_counts = new_counts) %>%
    update_nodes() %>%
    simulate(cycle=10) %>%
-   activate(edges)%>%       #from tidygraph package 
-   select(comp_count_list, mirna_count_list)
+   activate(edges) %>%       #from tidygraph package 
+   select(comp_count_list, mirna_count_list) %>%
+   activate(nodes)   
 ```
 
-Here, `comp_count_list` and `mirna_count_list` are list-columns which track changes in both competing RNA and miRNA levels.
+Here, `comp_count_list` and `mirna_count_list` are list-columns which track changes in both competing RNA and miRNA levels. In the sample above, "Gene4" has initial expression level of 10000 and reached level of 10029 at 9th cycle (count_pre) and also stayed at 10029 in last cycle (count_current). The full history of expression level for Gene4 is as follows:
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+minsamp %>%
+   priming_graph(competing_count = Competing_expression, 
+                 miRNA_count = miRNA_expression,
+                 aff_factor = c(energy, seed_type), 
+                 deg_factor = region) %>%
+   update_nodes(once=TRUE) %>%
+   update_variables(current_counts = new_counts) %>%
+   update_nodes() %>%
+   simulate(cycle=10) %>%
+   activate(edges) %>%       #from tidygraph package 
+   select(comp_count_list, mirna_count_list) %>%
+   as_tibble() %>% 
+   filter(from==4, to==7) %>% 
+   pull(comp_count_list) %>% 
+   .[[1]] %>% 
+   round()
+```
+
+(#TODO gene5 stays at 5000 and gene6 stays at 10000 for 10 cycles, is that normal?)
 
 ## Visualisation of the graph
 
-The `vis_graph` is used for visualisation of the graph object. The initial graph object (steady-state) is visualized as following:
+The `vis_graph()` function is used for visualisation of the graph object. The initial graph object (steady-state) is visualized as following:
   
 ```{r, fig.height=4, fig.width=5, warning=FALSE, dpi= 120, fig.align='center'}
 minsamp %>%
@@ -320,8 +321,7 @@ minsamp %>%
    vis_graph(title = "Minsamp initial Graph")
 ```
 
-
-Also, The graph can be visualized at any step of process, for example, after simulation of step 3.
+Also, The graph can be visualized at any step of process, for example, after simulation of 3 cycles the graph will look like:
 
 ```{r, fig.height=4, fig.width=5, warning=FALSE, dpi= 120, fig.align='center'}
 minsamp %>%
@@ -336,7 +336,7 @@ minsamp %>%
    vis_graph(title = "Minsamp Graph After 3 Iteration")
 ```
 
-On the other hand, the view of each steps can be obtained by using `simulate_vis()` separately. `simulate_vis` processes the given graph like in `simulate()` and gives the views of each step.
+On the other hand, the network of each step can be plotted individually by using `simulate_vis()` function. `simulate_vis()` processes the given network just like `simulate()` function does while saving image of each step.
   
 ```{r, fig.height=4, fig.width=5, warning=FALSE, message=FALSE, fig.show='hide'}
 minsamp %>%
@@ -352,4 +352,6 @@ minsamp %>%
 
 ![Minsamp with 3 iteration](gifs/small_sample.gif)
 
- See the other vignettes for more information.
+> The animated gif is generated by combining gif of each step (#TODO am I saying this right?)
+
+ See the other vignettes for more advanced examples.
