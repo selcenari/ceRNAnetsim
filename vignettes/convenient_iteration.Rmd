@@ -1,5 +1,5 @@
 ---
-title: "A Suggestion: How to Find the Appropriate Iteration for Simulation"
+title: "Calculating Number of Iterations Required to Reach Steady-State"
 author: "Selcen Ari"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -26,84 +26,94 @@ library(ceRNAnetsim)
 ```
 
 ```{r, echo=FALSE, message= FALSE, warning=FALSE}
-library(rlang)
-library(tidyverse)
-library(tidygraph)
-library(stringr)
-library(igraph)
-library(ggraph)
-library(purrr)
-library(future)
-library(furrr)
 library(png)
-library(extrafont)
 ```
-
 
 # What is the problem or point?
 
-In the `ceRNAnetsim` package, regulations of miRNA:target pairs are observed via direct or indirect interactions of elements in network. In this approach, change in expression level of single gene or miRNA can affect the whole network like water wave. So, when the change is applied the system, it affects to primary neighborhood firstly, and then the secondary. 
+In the `ceRNAnetsim` package, regulations of miRNA:target pairs are observed via direct or indirect interactions of elements in network. In this approach, change in expression level of single gene or miRNA can affect the whole network via "ripple effect". So, when the change is applied the system, it affects to primary neighborhood firstly, and then propagates to further neighborhoods.
 
-In the simple interaction network like *minsamp*, the water wave-like behavior could be understood, because the neighborhoods of the primary linked elements of trigger element are not interacted to each other. The non-complex interaction can be facilitated to provide the steady-state, after the network is disturbed.
+In the simple interaction network like *minsamp*, the ripple effect could be observed when expression level of *Gene4* changes and subsequently effecting other genes. (#TODO didnt understand this sentence: The non-complex interaction can be facilitated to provide the steady-state, after the network is disturbed.)
 
 ```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
 data("minsamp")
 
-minsamp%>%
-   priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression)%>%
-   update_nodes(once=TRUE)%>%
-   update_how("Gene4",2)%>%
-  update_nodes()%>%
-   simulate_vis(title = "Minsamp: Common element as trigger", 15)
-
+minsamp %>%
+  priming_graph(competing_count = Competing_expression, 
+                miRNA_count = miRNA_expression) %>%
+  update_nodes(once=TRUE) %>%
+  update_how("Gene4",2) %>%
+  update_nodes() %>%
+  simulate_vis(title = "Minsamp: Common element as trigger", 15)
 ```
+
+
 
 ![Minsamp common target perturbation](gifs/con_iter_chunk3.gif)
 
-For example, in *minsamp* dataset, the steady-state is occured at iteration-14, as seen above. However, when interactions are more complex, the number of iterations required to maintain steady-state may increase. While the iteration-14 is sufficient for *minsamp* dataset, the steady-state could not be ensured at iteration-15 for *midsamp*, as seen following.
+For example, in *minsamp* dataset, the steady-state is occured at iteration-14, as seen above. However, when network is larger and interactions are more complex, the number of iterations required to reach steady-state may increase. While at cycle 14 *minsamp* dataset has reached steady-state, the *midsamp* (middle sized sample) dataset has not reached steady-state after 15 cycles. In the example below, in *midsamp* data, *Gene17* is upregulated 2 fold as a trigger and simulation is run for 15 cycles.
 
+(#TODO how should readed know the steady-state is not reached, are they supposed to look for green circles? indicating genes without change?)
 
-```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
+(#TODO the steady state occurs much earlier, at step 3, I had a question in small_sample vignette about this)
+
+```{r}
 data("midsamp")
 
 midsamp
-
-midsamp%>%
-priming_graph(Gene_expression, miRNA_expression)%>%
-  update_nodes(once = TRUE)%>%
-  update_how("Gene17",2)%>%
-  update_nodes()%>%
-   simulate_vis(title = "Minsamp: Common element as trigger", 15)
 ```
 
-![Midsamp Gene17 perturbation with 15 iteration](gifs/con_iter_chunk4.gif)
+```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
+midsamp %>%
+  priming_graph(Gene_expression, miRNA_expression) %>%
+  update_nodes(once = TRUE) %>%
+  update_how("Gene17",2) %>%
+  update_nodes() %>%
+  simulate_vis(title = "Midsamp: Gene with higher degree as trigger", 15)
+```
 
-For these reasons, we developed an approach to  find optimal iteration of the given network. `find_iteration()` function analyses the dataset for given iteration number (`.iter` argument) and offers the iteration that has maximum affected nodes' count. The other argument is `limit` that is the minimum amount of change of any node. The `limit` argument takes into account while the amount of affected node is calculated. Note that a slightly difference on the amount of the any elements on the network can be cause the excessive results.
+![Midsamp Gene17 perturbation followed with 15 iterations](gifs/con_iter_chunk4.gif)
+
+Guessing or performing trial and error for large networks is not practical, thus we developed a function which calculates optimal iteration in a network after particular trigger. `find_iteration()` function analyses the dataset for given iteration number (`.iter` argument) and offers the iteration at which maximum number of nodes are affected. The other argument is `limit` which sets the threshold below which is considered "no change", in other words, any node should have level of change greater than the threshold to be considered "changed". (#TODO didnt understand this sentence: The `limit` argument takes into account while the amount of affected node is calculated.) Please be aware that small threshold values will cause excessively long calculation time expecially in large networks.
+
+In the example below, *Gene2* is upregulated 2-fold and then iteration number at which maximum number of nodes affected will be calculated. The search for iteration number will go up to 50. Also, since we are searching for maximal propagation, limit is set to zero.
 
 ```{r}
 find_iteration(midsamp, Gene_expression, miRNA_expression, node_name = "Gene2", .iter= 50, how = 2, limit=0)
 ```
 
-When `iteration_graph()` function are used with `find_iteration()`, the disturbed elements' count (%) with iteration number can also be viewed in a plot. Optionally, the iteration number (cycle) that is used in `simulate()` function can be selected with help of obtained graph.
+(#TODO wouldn't this function be more modular if function works in this manner:
+midsamp %>%
+  priming_graph(competing_count = Gene_expression, 
+                miRNA_count = miRNA_expression) %>%
+  update_nodes(once=TRUE) %>%
+  update_how("Gene2", how = 2) %>%
+  update_nodes() %>% 
+  **find_iteration(.iter=50, limit=0)**
+  
+because modular way of calling the function will allow "update_variables(current_counts = new_counts)" approach as well
+)
+
+`find_iteration()` function will return a single number: the iteration number at which maximum propagation is achieved. An alternative function `iteration_graph()`, will calculate percent of perturbed nodes for each iteration number and will return a plot. The latter can be used for picking appropriate number of cycles for `simulate()` function.
 
 ```{r, fig.align='center', fig.width=5, fig.height=3, dpi= 120}
 iteration_graph(midsamp, competing_count = Gene_expression, miRNA_count = miRNA_expression, node_name = "Gene17", .iter= 50, how = 2, limit=0 )
 ```
 
-## Let's try the suggestion of `iteration_graph` for Gene17.
+## Find appropriate iteration number with `iteration_graph` and then simulate accordingly
 
-As shown the plot in the above, gaining the steady-state is after the iteration-22. If we try to simulate the network with iteration-25, the results are as following:
+As shown in plot above, if "Gene17" is upregulated 2-fold, the network will need around 22 iterations to reach the steady-state. Since we have an idea about appropriate iteration number, let's use `simulate()` function and iterate for 25 cycles using same trigger (Gene17 2-fold):
 
 ```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
-midsamp%>%
-priming_graph(Gene_expression, miRNA_expression)%>%
-  update_nodes(once = TRUE)%>%
-  update_how("Gene17",2)%>%
-  update_nodes()%>%
-   simulate_vis(title = "Minsamp: Common element as trigger", 25)
+midsamp %>%
+  priming_graph(Gene_expression, miRNA_expression) %>%
+  update_nodes(once = TRUE) %>%
+  update_how("Gene17", 2) %>%
+  update_nodes() %>%
+  simulate_vis(title = "Midsamp: Gene17 2 fold increase, 25 cycles", 25)
 ```
 
 ![Midsamp Gene17 perturbation with 25 iteration](gifs/con_iter_chunk7.gif)
 
-The workflow that is aforementioned in this vignette should be thought as suggestion. Because the `cycle` is a critical argument that is used with `simulate()` function and affects all results of analysis. In light of this vignette and functions, the approach can be developed according to persent dataset.
+The workflow that is aforementioned in this vignette should be considered as suggestion. Because the `cycle` is a critical argument that is used with `simulate()` function and affects results of analysis. (#TODO didnt understand what "present dataset" refers to: In light of this vignette and functions, the approach can be developed according to persent dataset.)
 
