@@ -82,14 +82,14 @@ In the example below, *Gene2* is upregulated 2-fold and then iteration number at
 find_iteration(midsamp, Gene_expression, miRNA_expression, node_name = "Gene2", .iter= 50, how = 2, limit=0)
 ```
 
-(#TODO wouldn't this function be more modular if function works in this manner:
+(#TODO wouldn't this function and iteration_graph() function be more modular if function works in this manner:
 midsamp %>%
   priming_graph(competing_count = Gene_expression, 
                 miRNA_count = miRNA_expression) %>%
   update_nodes(once=TRUE) %>%
   update_how("Gene2", how = 2) %>%
   update_nodes() %>% 
-  **find_iteration(.iter=50, limit=0)**
+  **find_iteration(.iter=50, limit=0)** OR **iteration_graph(.iter=50, limit=0)**
   
 because modular way of calling the function will allow "update_variables(current_counts = new_counts)" approach as well
 )
