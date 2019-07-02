@@ -35,15 +35,8 @@ find_node_perturbation <- function(input_graph, how = 2, cycle=1, limit= 0){
   input_graph%>%
     activate(nodes)%>%
     mutate(eff_count =future_map(V(input_graph)$name, ~calc_perturbation(input_graph, .x, how, cycle, limit)))%>%
-    tibble::as_tibble()-> result
-
-  result%>%
-    unnest(eff_count)%>%
-    group_by(name) %>%
-    mutate(col=seq_along(name)) %>%
-    spread(key=col, value=eff_count)%>%
-    ungroup()%>%
-    dplyr::rename(perturbation_efficiency= "1", perturbed_count = "2") -> result
+    tibble::as_tibble() %>%
+    unnest(eff_count) -> result
 
   return(result)
 }
