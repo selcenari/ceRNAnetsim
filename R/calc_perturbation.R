@@ -43,5 +43,5 @@ calc_perturbation <- function(input_graph, node_name, how=1 , cycle=1, limit=0){
 
   as.double((res%>%filter((abs(count_current-initial_count)*100/initial_count) > limit)%>%count())[[1]])->perturbed_count
 
-  return(c(perturbation_efficiency= perturbation_eff, perturbed_count = perturbed_count))
+  return(tibble(perturbation_efficiency= perturbation_eff, perturbed_count = perturbed_count))
 }
