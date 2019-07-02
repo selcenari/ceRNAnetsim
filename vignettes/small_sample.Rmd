@@ -347,8 +347,8 @@ minsamp %>%
                  aff_factor = c(energy, seed_type), 
                  deg_factor = region) %>%
    update_nodes(once=TRUE) %>%
-   update_variables(current_counts = new_counts)%>%
-   update_nodes()%>%
+   update_variables(current_counts = new_counts) %>%
+   update_nodes() %>%
    simulate_vis(3, title = "Minsamp Graph After Each Iteration")
 ```
 
