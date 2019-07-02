@@ -25,7 +25,7 @@ This vignette demonstrates how to analyse miRNA:Competing interactions via `ceRN
 The `ceRNAnetsim` works by executing following steps:
 
 - The input dataset is prepared for analysis. The first variable is arranged as competing and the second as miRNA.
-- The dataset is primed with `priming_graph()` function so that it's converted into a graph. This function makes calculations that are depended on miRNA amount, target (competing) amount and the interaction factors. It determines the efficiency of miRNA to each target and saves that values as egde data. All calculations are performed in edge data. After that, results of calculations are used in node data.
+- The dataset is primed with `priming_graph()` function so that it's converted into a graph. This function makes calculations that are depended on miRNA amount, target (competing) amount and the interaction factors. It determines the efficiency of miRNA to each target and saves that values as edge data. All calculations are performed in edge data. After that, results of calculations are used in node data.
 - The calculated values in edge are carried to node data through `update_nodes()` function. Note that the function should be used with `once = TRUE` argument after the `priming_graph()`.
 - Now, the change in expression level of either miRNA or competing RNA can be introduced with `update_variables()` or `update_how()` functions.
 - The change is perceived as a trigger and network-wise calculations are performed.
@@ -311,7 +311,7 @@ minsamp %>%
 
 ## Visualisation of the graph
 
-The `vis_graph()` function is used for visualisation of the graph object. The initial graph object (steady-state) is visualized as following:
+The `vis_graph()` function is used for visualization of the graph object. The initial graph object (steady-state) is visualized as following:
   
 ```{r, fig.height=4, fig.width=5, warning=FALSE, dpi= 120, fig.align='center'}
 minsamp %>%

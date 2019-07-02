@@ -1,5 +1,5 @@
 ---
-title: "How to Determine Perturbation in A Sample Dataset"
+title: "How to Determine Perturbation Coverage in A Sample Dataset"
 author: "Selcen Ari"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
