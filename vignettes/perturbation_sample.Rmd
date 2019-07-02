@@ -65,7 +65,7 @@ midsamp %>%
   calc_perturbation("Gene17", 3, cycle = 30, limit = 0.1)
 ```
 
-If you are insterested in testing various fold change values of a given node, then we can use `map` (actually parallelized version `future_map`) to run function for set of input values.
+If you are interested in testing various fold change values of a given node, then we can use `map` (actually parallelized version `future_map`) to run function for set of input values.
 
 First, let's keep the primed version of graph in an object
 
@@ -87,7 +87,7 @@ seq(2,10) %>%
   future_map_dfr(~ primed_mid %>% calc_perturbation("Gene17", .x, cycle = 30, limit = 0.1), .id="fold_change")
 ```
 
-If you're insterested in screening nodes instead of fold changes then you don't have to write a complicated `map` command, there's already a function available for that purpose.
+If you're interested in screening nodes instead of fold changes then you don't have to write a complicated `map` command, there's already a function available for that purpose.
 
 ## How does the `find_node_perturbation()` work?
 
