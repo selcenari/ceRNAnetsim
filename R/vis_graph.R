@@ -1,8 +1,6 @@
 #' provides visualisation of the graph.
 #'
-#' @title vis_graph
-#'
-#' @description  vis_graph provides visualisation of the graph.
+#' `vis_graph`` provides visualisation of the graph.
 #'
 #' @return The graph object.
 #'

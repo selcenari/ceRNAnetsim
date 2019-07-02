@@ -15,9 +15,6 @@ reference:
   - find_iteration
   - find_node_perturbation
   - iteration_graph
-  - normalize
-  - prepare_rhs
-  - prepare_rhs_once
   - priming_graph
   - simulate
   - simulate_vis

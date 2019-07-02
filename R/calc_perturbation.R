@@ -1,10 +1,6 @@
-#' Calculates average expression changes of all  nodes and finds the perturbed node count for a given node.
+#' Calculates average expression changes of all nodes and finds the perturbed node count for a given node.
 #'
-#' @title calc_perturbation
-#'
-#' @description calculates mean of expression changes of all  nodes and finds the perturbed node count for a given node.
-#'
-#' @return gives a vector about the perturbation efficiency and number of perturbed nodes.
+#' calculates mean of expression changes of all nodes and finds the perturbed node count for a given node.
 #'
 #' @details calc_perturbation calculates mean expression changes of elements after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
 #'  The function determines the perturbation efficiency and number of perturbed nodes after given change with how, cycle and limit parameter.
@@ -14,6 +10,8 @@
 #' @param how The change of count of the given node in terms of fold change.
 #' @param cycle The iteration of simulation.
 #' @param limit The minimum fold change which can be taken into account for perturbation calculation on all nodes in terms of percentage.
+#'
+#' @return a tibble with two columns, the perturbation efficiency and number of perturbed nodes.
 #'
 #' @examples
 #'

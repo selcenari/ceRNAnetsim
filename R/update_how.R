@@ -1,8 +1,6 @@
 #' Converts the count value of the given node.
 #'
-#' @title update_how
-#'
-#' @description  update_how converts the count value of the given node.
+#' this function converts the count value of the given node.
 #'
 #' @return the graph object.
 #'

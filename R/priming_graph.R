@@ -12,9 +12,7 @@ normalize <- function(x){abs(x)/max(abs(x))}
 
 #' Converts the given dataframe using first variable as competing and the second as miRNA.
 #'
-#' @title priming_graph
-#'
-#' @description The function converts the given dataframe using first variable as competing and the second as miRNA. If user defines interaction factors as affinity or degradation, the factors are taken into account.
+#'  The function converts the given dataframe using first variable as competing and the second as miRNA. If user defines interaction factors as affinity or degradation, the factors are taken into account.
 #'
 #' @return the graph object.
 #'

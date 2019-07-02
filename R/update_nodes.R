@@ -1,8 +1,6 @@
 #' Carries the variables from edge to node.
 #'
-#' @title prepare_rhs_once
-#'
-#' @description  Carries the variables from edge to node.
+#' Carries the variables from edge to node.
 #'
 #' @details The function is a helper function for processing of graph object with update_nodes function.
 #'
@@ -28,9 +26,9 @@ prepare_rhs_once <- function(input_graph){
 
 }
 
-#' @title prepare_rhs
+#' Carries the variables from edge to node
 #'
-#' @description  Carries the variables from edge to node.
+#' Carries the variables from edge to node.
 #'
 #' @details The function is a helper function for processing of graph object with update_nodes function.
 #'
@@ -52,9 +50,7 @@ prepare_rhs <- function(input_graph){
 
 #' Carries variables from edge to node.
 #'
-#' @title update_nodes
-#'
-#' @description  The function carries variables from edge to node.
+#' This function carries variables from edge to node.
 #'
 #' @return the graph object.
 #'

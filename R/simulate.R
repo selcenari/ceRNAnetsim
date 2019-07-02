@@ -1,8 +1,6 @@
 #' Utilizes the change in expression value/s as triggering.
 #'
-#' @title simulate
-#'
-#' @description  simulate function uses the change in expression value/s as triggering.
+#' simulate function uses the change in expression value/s as triggering.
 #'
 #' @return The graph.
 #'
