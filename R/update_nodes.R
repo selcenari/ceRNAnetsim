@@ -86,7 +86,11 @@ update_nodes <- function(input_graph, once = FALSE){
   input_graph <- input_graph%>%
     tidygraph::activate(nodes)%>%
     left_join(rhs_table, by=c("node_id"="id"))%>%
-    mutate(changes_variable = ifelse( count_current-count_pre != 0, "Down", type), changes_variable = ifelse(count_current-count_pre > 0, "Up", changes_variable))
+    #TODO following code fails here
+    #tibble(genename=c("geneX","geneY"), mirname=c("let7","let7"), genexp=c(1000,2000), mirexp=c(100,200)) %>%
+    # priming_graph(genexp, mirexp)
+    mutate(changes_variable = ifelse( count_current-count_pre != 0, "Down", type),
+           changes_variable = ifelse(count_current-count_pre > 0, "Up", changes_variable))
 
   input_graph
 }
