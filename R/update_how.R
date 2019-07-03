@@ -28,6 +28,13 @@
 
 update_how <- function (input_graph, node_name, how){
 
+  if ( how < 0) stop("Fold change should not be less than zero.
+                     Please use decimal values for decrease. e.g. 0.5 for 2-fold decrease",
+                     call. = FALSE)
+  #TODO how==0 is a special case, if a gene is knocked down, update_node
+  # or other functions should not *generate* transcript for knocked down gene
+
+
 
   if(node_name %in% E(input_graph)$Competing_name){
 

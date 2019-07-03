@@ -29,6 +29,9 @@
 
 simulate <- function(input_graph, cycle=1){
 
+  # seq_along causes unwanted behavor for 1:-2, so check no of cycles
+  if ( cycle < 1 ) stop("number of cycles should be more than 1", call. = FALSE)
+
   for(i in seq_along(1:cycle)){
 
     input_graph%>%
