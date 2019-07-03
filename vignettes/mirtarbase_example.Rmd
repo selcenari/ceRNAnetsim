@@ -1,5 +1,5 @@
 ---
-title: "An TCGA dataset application"
+title: "A TCGA dataset application"
 author: "Selcen Ari"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -18,90 +18,88 @@ knitr::opts_chunk$set(
 
 
 ```{r, echo=FALSE, message= FALSE, warning=FALSE}
-library(dplyr)
-library(readr)
-library(tidyr)
-library(stringr)
-library(stringi)
-library(tidygraph)
-library(igraph)
-library(ggraph)
-library(tidyverse)
-library(ggplot2)
 library(svglite)
-library(devtools)
-library(extrafont)
-
 ```
 
 # Introduction
 
-This vignette is about the integration of gene miRNA pairs and their expression dataset and analysis. Let's try to analysis of these dataset with `ceRNAnetsim`. First of all, obtain the datasets for analysis:
+This vignette is about the integration of gene and miRNA pairs and their expression dataset and analysis. The sample dataset in this demonstration, which contains human miRNA:target pairs, was retrieved from [miRTarBase](http://mirtarbase.mbc.nctu.edu.tw/php/download.php) website (Release 7.0).
 
-- The homo sapiens miRNA:target dataset is obtained via directly downloading from miRTarBase website. The dataset that is found in the working directory is processed as following:
+## miRNA:target pairs
 
-```{r, warning= FALSE, warning=FALSE}
-#install ceRNAnetsim
-
-#install.packages("devtools")
-#devtools::install_github("selcenari/ceRNAnetsim")
-
+```{r, warning= FALSE, message=FALSE}
+# install.packages("devtools")
+# devtools::install_github("selcenari/ceRNAnetsim")
 
 library(ceRNAnetsim)
-```
-NOTE that if the mirna:target dataset includes miRNA genes as targets, the priming_graph() function can get fail. Because, the function define to miRNAs and targets without distinguishing between uppercase or lowercase.
-
-```{r}
 data("mirtarbasegene")
-
 head(mirtarbasegene)
 ```
 
-- The gene and mirna expression counts of patient barcoded with TCGA-E9-A1N5 is obtained via `TCGAbiolinks` package from `Bioconductor`. The instructions of `TCGAbiolinks` can be followed. (For this step an other method (package) can be used.)
+> **NOTE** if the mirna:target dataset includes miRNA genes as targets, the `priming_graph()` function can fail. Because, the function define to miRNAs and targets without distinguishing between uppercase or lowercase.(#TODO we should fix this issue, labeling "competing" should not be regex based)
+
+## Gene expression in normal and tumor samples
+
+The gene and mirna expression counts of patient barcoded with TCGA-E9-A1N5 is retrieved from TCGA via `TCGAbiolinks` package from `Bioconductor`. The instructions of retrieving data can be found at `TCGAbiolinks` manual. 
+
+For this step you don't have to use TCGA data, any other source or package can be utilized.
 
 ```{r}
 data("TCGA_E9_A1N5_normal")
 head(TCGA_E9_A1N5_normal)
+```
 
-
+```{r}
 data("TCGA_E9_A1N5_tumor")
 head(TCGA_E9_A1N5_tumor)
-
 ```
+
+## miRNA expression data
 
 ```{r}
 data("TCGA_E9_A1N5_mirnatumor")
-
 head(TCGA_E9_A1N5_mirnatumor)
+```
 
+```{r}
 data("TCGA_E9_A1N5_mirnanormal")
-
 head(TCGA_E9_A1N5_mirnanormal)
-
 ```
 
-- All of these datasets are integrated. So, we obtains the miRNA:target dataset that contains miRNA and gene expression values.
+Here's the summary of size of each dataset
+
+|Dataset name| Number of rows |
+|------------|----------------|
+| `mirtarbasegene`           | `r nrow(mirtarbasegene)`           |
+| `TCGA_E9_A1N5_normal`      | `r nrow(TCGA_E9_A1N5_normal)`      |
+| `TCGA_E9_A1N5_tumor`       | `r nrow(TCGA_E9_A1N5_tumor)`       |
+| `TCGA_E9_A1N5_mirnanormal` | `r nrow(TCGA_E9_A1N5_mirnanormal)` |
+| `TCGA_E9_A1N5_mirnatumor`  | `r nrow(TCGA_E9_A1N5_mirnatumor)`  |
+
+# Integrating data
+
+All of these datasets are integrated using the code below resulting in  miRNA:target dataset that contains miRNA and gene expression values.
 
 ```{r}
+TCGA_E9_A1N5_mirnanormal %>%
+  inner_join(mirtarbasegene, by= "miRNA") %>%
+  inner_join(TCGA_E9_A1N5_normal, 
+             by = c("Target"= "external_gene_name")) %>%
+  select(Target, miRNA, total_read, gene_expression) %>%
+  distinct() -> TCGA_E9_A1N5_mirnagene
 
-TCGA_E9_A1N5_mirnanormal%>%
-  inner_join(mirtarbasegene, by= "miRNA")%>%
-  inner_join(TCGA_E9_A1N5_normal, by = c("Target"= "external_gene_name"))%>%
-  select(Target, miRNA, total_read, gene_expression)%>%
-  distinct()->TCGA_E9_A1N5_mirnagene
+TCGA_E9_A1N5_mirnagene %>%    #TODO what is the purpose of this
+  group_by(Target) %>%        # part, are there multiple expression values?
+  mutate(gene_expression= max(gene_expression)) %>%
+  distinct() %>%
+  ungroup() -> TCGA_E9_A1N5_mirnagene
 
-
-TCGA_E9_A1N5_mirnagene%>%
-  group_by(Target)%>%
-  mutate(gene_expression= max(gene_expression))%>%
-  distinct()%>%
-  ungroup()->TCGA_E9_A1N5_mirnagene
+head(TCGA_E9_A1N5_mirnagene)
 ```
 
-- We compare the two gene expression dataset of TCGA-E9A1N5 patient. So, we selected the gene which increased to 30 fold. (This gene node have been selected as an example.) Note that the selected node must be non-isolated one. If the isolated node selects, the system can not be affected from this distrubtion.
+When we compared the two gene expression dataset of TCGA-E9A1N5 patient, and selected a gene which has 30-fold increased expression, (gene name: HIST1H3H), this gene node will be used in the example. Note that the selected node must not be isolated one. If the an isolated node is selected the change in expression will not propagate in network. (#TODO the code below can be archived in another file, and code should also be improved since it does not check isolation)
 
 ```{r}
-
 TCGA_E9_A1N5_tumor%>%
   inner_join(TCGA_E9_A1N5_normal, by= "external_gene_name")%>%
   select(patient = patient.x, external_gene_name, tumor_exp = gene_expression.x, normal_exp = gene_expression.y)%>%
@@ -114,28 +112,34 @@ TCGA_E9_A1N5_tumor%>%
 #HIST1H3H : non-isolated gene. 30 FC.
 ```
 
+(#TODO table has many genes which have gene expression==1, there might be some cleaning done before using the expression datasets. Through simulation or statistics we can determine a threshold, say FPKM 10, and below that number can be considered not expressed)
 
 The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with *HIST1H3H* node.
 
 ```{r, fig.height=4, fig.width=5, fig.align='center', warning=FALSE}
-iteration_graph(as.data.frame(TCGA_E9_A1N5_mirnagene), competing_count = gene_expression, miRNA_count = total_read, node_name = "HIST1H3H", .iter = 10, how = 30)
+iteration_graph(as.data.frame(TCGA_E9_A1N5_mirnagene), 
+                competing_count = gene_expression, 
+                miRNA_count = total_read, 
+                node_name = "HIST1H3H", 
+                .iter = 10, 
+                how = 30)
 ```
 
-
-The graph was shown that the change of HIST1H3H results in weak perturbation efficiency, although strong change. The results of the simulation was shown in following:
+The graph was shown that the change in expression level of HIST1H3H results in weak perturbation efficiency, despite 30-fold change. The results of the simulation was shown in following:
 
 ```{r}
-as.data.frame(TCGA_E9_A1N5_mirnagene)%>%
-  priming_graph(competing_count = gene_expression, miRNA_count = total_read)%>%
-  update_nodes(once = TRUE)%>%
-  update_how("HIST1H3H", 30)%>%
-  update_nodes()%>%
+as.data.frame(TCGA_E9_A1N5_mirnagene) %>%
+  priming_graph(competing_count = gene_expression, 
+                miRNA_count = total_read) %>%
+  update_nodes(once = TRUE) %>%
+  update_how("HIST1H3H", 30) %>%
+  update_nodes() %>%
   simulate(10)
-
 ```
 
 
-- And then, we tried to simulate the network with the gene which has higher expression amount. For this, we selected *ACTB* node as shown in following:
+And then, we tried to simulate the network with the gene which has higher expression amount. For this, we selected *ACTB* node as shown in following:
+(#TODO as for HIST1H3H code, they can be archived somewhere else)
 
 ```{r}
 
@@ -153,23 +157,34 @@ TCGA_E9_A1N5_tumor%>%
 
 
 ```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
-iteration_graph(as.data.frame(TCGA_E9_A1N5_mirnagene), competing_count = gene_expression, miRNA_count = total_read, node_name = "ACTB", .iter = 10, how = 1.87)
+iteration_graph(as.data.frame(TCGA_E9_A1N5_mirnagene), 
+                competing_count = gene_expression, 
+                miRNA_count = total_read, 
+                node_name = "ACTB", 
+                .iter = 10, 
+                how = 1.87)
 ```
 
 
 ```{r}
-as.data.frame(TCGA_E9_A1N5_mirnagene)%>%
-  priming_graph(competing_count = gene_expression, miRNA_count = total_read)%>%
-  update_nodes(once = TRUE)%>%
-  update_how("ACTB", 1.87)%>%
-  update_nodes()%>%
+as.data.frame(TCGA_E9_A1N5_mirnagene) %>%
+  priming_graph(competing_count = gene_expression, 
+                miRNA_count = total_read) %>%
+  update_nodes(once = TRUE) %>%
+  update_how("ACTB", 1.87) %>%
+  update_nodes() %>%
   simulate(10)
 ```
 
+(#TODO what is the conclusion or point of the output table of simulate?)
+(#TODO we are talking about perturbation efficiencies of these two genes, so we should print out their calc_perturb results)
 
 # The comparison of two conditions:
 
-- When the gene that has low expression level with high changing was used for perturbation of network, it displayed low efficiency with comparison to the gene which has low changing in higher expression level.
+In a real biological sample, we tested perturbation efficiencies of two genes;
+* one with low expression but high fold change (HIST1H3H, 30-fold increase in tumor) 
+* another one with high expression but small change in expression level (ACTB, 1.87-fold increase in tumor)
 
-- If the perturbed node has lower target:total target ratio in group or groups, the efficiency of it can be weak, or vice versa. The efficiency of ACTB gene may be high for this reason. But, ACTB has not strong perturbation efficiency too. This could be arisen from low miRNA:target ratio or impotent target nodes which have very low expression levels.
+Despite high fold change, former gene caused little perturbation. On the contrary, high expressing gene with very low fold increase in tumor caused greater perturbation in the network.
 
+Thus, if the perturbed node has lower target:total target ratio in group or groups, the efficiency of it can be weak, or vice versa. The efficiency of ACTB gene may be high for this reason. ACTB has not strong perturbation efficiency too (#TODO is perturb efficiency high or not?). This could be arisen from low miRNA:target ratio or impotent (#TODO important?) target nodes which have very low expression levels.
