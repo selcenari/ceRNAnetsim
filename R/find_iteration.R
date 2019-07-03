@@ -36,7 +36,7 @@ find_iteration <- function(df, competing_count, miRNA_count, aff_factor=dummy, d
   iteration <- data.frame(iter = seq(1,.iter, 1), effect= rep(0))
 
   df <- df%>%
-    dplyr::mutate(competing = df[,1], miRNA= df[,2], Competing_name = df[,1], miRNA_name= df[,2], dummy=1)%>%
+    dplyr::mutate(competing = .[[1]], miRNA= .[[2]], Competing_name = .[[1]], miRNA_name= .[[2]], dummy=1)%>%
     dplyr::select(competing, miRNA, Competing_name, miRNA_name, !!competing_exp, !!mirna_exp, !!!affinity, !!!degradation, dummy)
 
 
@@ -122,7 +122,7 @@ iteration_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, 
   iteration <- data.frame(iter = seq(1,.iter, 1), effect= rep(0))
 
   df <- df%>%
-    dplyr::mutate(competing = df[,1], miRNA= df[,2], Competing_name = df[,1], miRNA_name= df[,2], dummy=1)%>%
+    dplyr::mutate(competing = .[[1]], miRNA= .[[2]], Competing_name = .[[1]], miRNA_name= .[[2]], dummy=1)%>%
     dplyr::select(competing, miRNA, Competing_name, miRNA_name, !!competing_exp, !!mirna_exp, !!!affinity, !!!degradation, dummy)
 
 

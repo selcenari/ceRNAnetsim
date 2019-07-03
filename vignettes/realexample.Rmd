@@ -46,14 +46,11 @@ The node that initiates simulation can be determined according your interest or 
 
 The dataset, which is a data frame, can be manipulated with [tidyverse packages](https://www.tidyverse.org/packages/). As an example, competing RNAs targeted by less than 5 miRNAs are eliminated to make the network manageable size.
 
-> due to limitations of `priming_graph` function, the data frame should **not** be in tibble format, thus `as.data.frame()` might be used after manipulating the data frame.
-
 ```{r}
 huge_example %>%
   add_count(competing) %>%
   filter(n > 5) %>%
-  select(-n) %>% 
-  as.data.frame()-> filtered_example
+  select(-n) -> filtered_example
 
 head(filtered_example)
 ```

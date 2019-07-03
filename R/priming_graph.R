@@ -40,13 +40,9 @@ normalize <- function(x){abs(x)/max(abs(x))}
 
 priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, deg_factor=dummy){
 
-
-  if(sum(is.na.data.frame(df)) !=0){
-
-    stop("Missing or NA value in dataframe")
-  }
-
-  else{
+  if (any(is.na(df))) stop("Missing or NA value in dataframe", call. = FALSE)
+  #TODO instead of quitting here, we can count NA lines and drop them and
+  # tell user how many lines are dropped due to NA and continue
 
   competing_exp <- rlang::enquo(competing_count)
   mirna_exp <- rlang::enquo(miRNA_count)
@@ -54,7 +50,7 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
   degradation <- rlang::enquos(deg_factor)
 
   df <- df%>%
-    dplyr::mutate(competing = df[,1], miRNA= df[,2], Competing_name = df[,1], miRNA_name= df[,2], dummy=1)%>%
+    dplyr::mutate(competing = .[[1]], miRNA= .[[2]], Competing_name = .[[1]], miRNA_name= .[[2]], dummy=1)%>%
     dplyr::select(competing, miRNA, Competing_name, miRNA_name, !!competing_exp, !!mirna_exp, !!!affinity, !!!degradation, dummy)
 
 
@@ -76,9 +72,8 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
     tidygraph::mutate(effect_current = mirna_count_per_dep*degg_factor, effect_pre = effect_current, effect_list = as.list(effect_current))%>%
     tidygraph::select(-dplyr::ends_with("norm"), dummy)-> input_graph
 
-  warning("First variable is processed as competing and the second as miRNA.
+  warning("First column is processed as competing and the second as miRNA.
 ")
-  }
 
   input_graph
 
