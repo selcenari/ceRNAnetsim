@@ -32,7 +32,6 @@
 calc_perturbation <- function(input_graph, node_name, how=1 , cycle=1, limit=0){
 
   input_graph%>%
-    update_nodes(once=TRUE)%>%
     update_how(node_name, how)%>%
     simulate(cycle)%>%
     tibble::as_tibble()-> res
