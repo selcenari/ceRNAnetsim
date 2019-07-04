@@ -4,15 +4,9 @@
 #'
 #' @return It gives an iteration number to use in simulate() function.
 #'
-#' @param df A data frame that includes the miRNA and competing targets.
-#' @param competing_count The counts (expression) of competing elements of the dataset.
-#' @param miRNA_count The counts (expression) of repressive element (miRNA) of the dataset.
-#' @param aff_factor The parameter/s of binding between miRNA and targets.
-#' @param deg_factor The parameter/s for degradation of bound miRNA:target complex.
-#' @param node_name The name f node that is used as trigger.
-#' @param how The change of count (expression) of the given node in terms of fold change.
-#' @param .iter The maximum iteration prescribed by the user.
+#' @param df A tbl graph that includes the miRNA and competing targets triggered and simulated for number of cycles.
 #' @param limit The minimum amount of change of any node.
+#' @param plot If TRUE, returns a plot.
 #'
 #' @examples
 #'
@@ -24,133 +18,13 @@
 #'
 #' @export
 
+find_iteration <- function(df,  limit= 0.1, plot=FALSE){
+  len <- df %E>% as_tibble() %>% .$comp_count_list %>% .[[1]] %>%  length()
+  iteration <- data.frame(iter = seq(1,len-1, 1), effect= rep(0))
 
-find_iteration <- function(df, competing_count, miRNA_count, aff_factor=dummy, deg_factor=dummy, node_name, how, .iter = 100, limit= 0.1){
+  for(i in 1:(len-1)){
 
-  competing_exp <- rlang::enquo(competing_count)
-  mirna_exp <- rlang::enquo(miRNA_count)
-  affinity <- rlang::enquos(aff_factor)
-  degradation <- rlang::enquos(deg_factor)
-
-
-  iteration <- data.frame(iter = seq(1,.iter, 1), effect= rep(0))
-
-  df <- df%>%
-    dplyr::mutate(competing = .[[1]], miRNA= .[[2]], Competing_name = .[[1]], miRNA_name= .[[2]], dummy=1)%>%
-    dplyr::select(competing, miRNA, Competing_name, miRNA_name, !!competing_exp, !!mirna_exp, !!!affinity, !!!degradation, dummy)
-
-
-  df%>%
-    dplyr::group_by(miRNA)%>%
-    dplyr::mutate_at(dplyr::vars(!!!affinity), funs(anorm = normalize))%>%
-    dplyr::mutate_at(dplyr::vars(!!!degradation), funs(dnorm = normalize))%>%
-    dplyr::ungroup()%>%
-    dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%purrr::reduce (`*`, .init = 1),
-                  degg_factor = dplyr::select(., ends_with("dnorm"))%>%purrr::reduce (`*`, .init =1))%>%
-    tidygraph::as_tbl_graph()%>%
-    tidygraph::activate(nodes)%>%
-    tidygraph::mutate(type = ifelse(stringr::str_detect(.N()$name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%>%
-    tidygraph::activate(edges)%>%
-    tidygraph::mutate(comp_count_list = as.list(!!competing_exp), comp_count_pre = !!competing_exp, comp_count_current = !!competing_exp, mirna_count_list = as.list(!!mirna_exp), mirna_count_pre = !!mirna_exp, mirna_count_current = !!mirna_exp)%>%
-    tidygraph::group_by(to)%>%
-    tidygraph::mutate(mirna_count_per_dep = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_dep = ifelse(is.na(mirna_count_per_dep), 0, mirna_count_per_dep))%>%
-    tidygraph::ungroup()%>%
-    tidygraph::mutate(effect_current = mirna_count_per_dep*degg_factor, effect_pre = effect_current, effect_list = as.list(effect_current))%>%
-    tidygraph::select(-dplyr::ends_with("norm"), dummy)%>%
-    update_nodes(once = TRUE)%>%
-    update_how(node_name, how)%>%
-    tidygraph::activate(nodes)%>%
-    simulate(cycle = .iter)->result_100
-
-
-     for(i in 1:.iter){
-
-     result_100%>%
-         tidygraph::activate(edges)%>%
-      tibble::as_tibble()%>%
-      dplyr::select(from, comp_count_list)%>%
-      mutate(dif= (abs(map_dbl(comp_count_list,i+1)) - abs(map_dbl(comp_count_list,i))))%>%
-      dplyr::select(-comp_count_list)%>%
-      distinct()%>%
-      mutate(non_zero = ifelse(abs(dif)>limit, 1, 0))%>%
-      summarise(per= sum(non_zero)*100/n())%>%pull() -> iteration$effect[i]
-
-  }
-
-  return((iteration%>%
-           filter(effect== max(effect)))[1,1])
-}
-
-
-
-
-#' Calculates the number of disturbed nodes for each iteration and then gives the plot that is ratio of iteration and affected node in terms of percentage.
-#'
-#' The function calculates the number of disturbed nodes for each iteration and then gives the plot that is ratio of iteration and affected node in terms of percentage.
-#'
-#' @return It gives the plot.
-#'
-#' @param df A data frame that includes the miRNA and competing targets.
-#' @param competing_count The counts (expression) of competing elements of the dataset.
-#' @param miRNA_count The counts (expression) of repressive element (miRNA) of the dataset.
-#' @param aff_factor The parameter/s of binding between miRNA and targets.
-#' @param deg_factor The parameter/s for degradation of bound miRNA:target complex.
-#' @param node_name The name f node that is used as trigger.
-#' @param how The change of count (expression) of the given node in terms of fold change.
-#' @param .iter The maximum iteration prescribed by the user.
-#' @param limit The minimum amount of change of any node.
-#'
-#' @details
-#'
-#' @examples
-#'
-#'data("midsamp")
-#'
-#' iteration_graph(midsamp, competing_count = Gene_expression, miRNA_count = miRNA_expression, node_name = "Gene17", how = 2)
-#'
-#' iteration_graph(midsamp, competing_count = Gene_expression, miRNA_count = miRNA_expression, node_name = "Gene17", .iter= 50, how = 2, limit=0 )
-#'
-#' @export
-
-iteration_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, deg_factor=dummy, node_name, how, .iter = 100, limit= 0.2){
-
-  competing_exp <- rlang::enquo(competing_count)
-  mirna_exp <- rlang::enquo(miRNA_count)
-  affinity <- rlang::enquos(aff_factor)
-  degradation <- rlang::enquos(deg_factor)
-
-  iteration <- data.frame(iter = seq(1,.iter, 1), effect= rep(0))
-
-  df <- df%>%
-    dplyr::mutate(competing = .[[1]], miRNA= .[[2]], Competing_name = .[[1]], miRNA_name= .[[2]], dummy=1)%>%
-    dplyr::select(competing, miRNA, Competing_name, miRNA_name, !!competing_exp, !!mirna_exp, !!!affinity, !!!degradation, dummy)
-
-
-  df%>%
-    dplyr::group_by(miRNA)%>%
-    dplyr::mutate_at(dplyr::vars(!!!affinity), funs(anorm = normalize))%>%
-    dplyr::mutate_at(dplyr::vars(!!!degradation), funs(dnorm = normalize))%>%
-    dplyr::ungroup()%>%
-    dplyr::mutate(afff_factor = dplyr::select(., ends_with("anorm"))%>%reduce (`*`, .init = 1),
-                  degg_factor = dplyr::select(., ends_with("dnorm"))%>%reduce (`*`, .init =1))%>%
-    tidygraph::as_tbl_graph()%>%
-    tidygraph::activate(nodes)%>%
-    tidygraph::mutate(type = ifelse(stringr::str_detect(.N()$name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%>%
-    tidygraph::activate(edges)%>%
-    tidygraph::mutate(comp_count_list = as.list(!!competing_exp), comp_count_pre = !!competing_exp, comp_count_current = !!competing_exp, mirna_count_list = as.list(!!mirna_exp), mirna_count_pre = !!mirna_exp, mirna_count_current = !!mirna_exp)%>%
-    tidygraph::group_by(to)%>%
-    tidygraph::mutate(mirna_count_per_dep = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_dep = ifelse(is.na(mirna_count_per_dep), 0, mirna_count_per_dep))%>%
-    tidygraph::ungroup()%>%
-    tidygraph::mutate(effect_current = mirna_count_per_dep*degg_factor, effect_pre = effect_current, effect_list = as.list(effect_current))%>%
-    tidygraph::select(-dplyr::ends_with("norm"), dummy)%>%
-    update_nodes(once = TRUE)%>%
-    update_how(node_name, how)%>%
-    tidygraph::activate(nodes)%>%
-    simulate(cycle = .iter)->result_100
-
-  for(i in 1:.iter){
-
-    result_100%>%
+    df%>%
       tidygraph::activate(edges)%>%
       tibble::as_tibble()%>%
       dplyr::select(from, comp_count_list)%>%
@@ -161,11 +35,15 @@ iteration_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, 
       summarise(per= sum(non_zero)*100/n())%>%pull() -> iteration$effect[i]
 
   }
+  if (plot){
+    return(iteration%>%
+             ggplot(aes(y=effect, x=iter))+
+             geom_line()+
+             xlab("Iteration")+
+             ylab("(%) The Disturbed Element"))
 
-  return(iteration%>%
-           ggplot(aes(y=effect, x=iter))+
-           geom_line()+
-           xlab("Iteration")+
-           ylab("(%) The Disturbed Element"))
-
+  } else{
+    return((iteration%>%
+              filter(effect== max(effect)))[1,1])
+  }
 }
