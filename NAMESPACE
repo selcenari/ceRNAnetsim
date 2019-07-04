@@ -3,7 +3,6 @@
 export(calc_perturbation)
 export(find_iteration)
 export(find_node_perturbation)
-export(iteration_graph)
 export(priming_graph)
 export(simulate)
 export(simulate_vis)

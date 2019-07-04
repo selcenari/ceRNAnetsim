@@ -41,12 +41,10 @@ data("minsamp")
 minsamp %>%
   priming_graph(competing_count = Competing_expression, 
                 miRNA_count = miRNA_expression) %>%
-  update_nodes(once=TRUE) %>%
   update_how("Gene4",2) %>%
   update_nodes() %>%
   simulate_vis(title = "Minsamp: Common element as trigger", 15)
 ```
-
 
 
 ![Minsamp common target perturbation](gifs/con_iter_chunk3.gif)
@@ -66,7 +64,6 @@ midsamp
 ```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
 midsamp %>%
   priming_graph(Gene_expression, miRNA_expression) %>%
-  update_nodes(once = TRUE) %>%
   update_how("Gene17",2) %>%
   update_nodes() %>%
   simulate_vis(title = "Midsamp: Gene with higher degree as trigger", 15)
@@ -74,40 +71,39 @@ midsamp %>%
 
 ![Midsamp Gene17 perturbation followed with 15 iterations](gifs/con_iter_chunk4.gif)
 
-Guessing or performing trial and error for large networks is not practical, thus we developed a function which calculates optimal iteration in a network after particular trigger. `find_iteration()` function analyses the dataset for given iteration number (`.iter` argument) and offers the iteration at which maximum number of nodes are affected. The other argument is `limit` which sets the threshold below which is considered "no change", in other words, any node should have level of change greater than the threshold to be considered "changed". (#TODO didn't understand this sentence: The `limit` argument takes into account while the amount of affected node is calculated.) Please be aware that small threshold values will cause excessively long calculation time especially in large networks.
+Guessing or performing trial and error for large networks is not practical, thus we developed a function which calculates optimal iteration in a network after triggerand simulation steps. `find_iteration()` function analyses the simulated graph and suggests the iteration at which maximum number of nodes are affected. An important argument is `limit` which sets the threshold below which is considered "no change", in other words, any node should have level of change greater than the threshold to be considered "changed". (#TODO didn't understand this sentence: The `limit` argument takes into account while the amount of affected node is calculated.) Please be aware that small threshold values will cause excessively long calculation time especially in large networks.
 
 In the example below, *Gene2* is upregulated 2-fold and then iteration number at which maximum number of nodes affected will be calculated. The search for iteration number will go up to 50. Also, since we are searching for maximal propagation, limit is set to zero.
 
 ```{r}
-find_iteration(midsamp, Gene_expression, miRNA_expression, node_name = "Gene2", .iter= 50, how = 2, limit=0)
+midsamp %>%
+  priming_graph(Gene_expression, miRNA_expression) %>%
+  update_how("Gene2",2) %>%
+  update_nodes() %>% 
+  simulate(50) %>% 
+  find_iteration(limit=0)
 ```
 
-(#TODO wouldn't this function and iteration_graph() function be more modular if function works in this manner:
-midsamp %>%
-  priming_graph(competing_count = Gene_expression, 
-                miRNA_count = miRNA_expression) %>%
-  update_nodes(once=TRUE) %>%
-  update_how("Gene2", how = 2) %>%
-  update_nodes() %>% 
-  **find_iteration(.iter=50, limit=0)** OR **iteration_graph(.iter=50, limit=0)**
-  
-because modular way of calling the function will allow "update_variables(current_counts = new_counts)" approach as well
-)
+(#TODO now the function is modular so it's possible to do "update_variables(current_counts = new_counts)" approach as well, we can prepare a small example about that)
 
-`find_iteration()` function will return a single number: the iteration number at which maximum propagation is achieved. An alternative function `iteration_graph()`, will calculate percent of perturbed nodes for each iteration number and will return a plot. The latter can be used for picking appropriate number of cycles for `simulate()` function.
+`find_iteration()` function will return a single number: the iteration number at which maximum propagation is achieved. If `plot=TRUE` argument is used then the function will return a plot which calculates percent of perturbed nodes for each iteration number. The latter can be used for picking appropriate number of cycles for `simulate()` function.
 
 ```{r, fig.align='center', fig.width=5, fig.height=3, dpi= 120}
-iteration_graph(midsamp, competing_count = Gene_expression, miRNA_count = miRNA_expression, node_name = "Gene17", .iter= 50, how = 2, limit=0 )
+midsamp %>%
+  priming_graph(Gene_expression, miRNA_expression) %>%
+  update_how("Gene17",2) %>%
+  update_nodes() %>% 
+  simulate(50) %>% 
+  find_iteration(limit=0, plot=TRUE)
 ```
 
-## Find appropriate iteration number with `iteration_graph` and then simulate accordingly
+## Find appropriate iteration number with `find_iteration` and then simulate accordingly
 
 As shown in plot above, if "Gene17" is upregulated 2-fold, the network will need around 22 iterations to reach the steady-state. Since we have an idea about appropriate iteration number, let's use `simulate()` function and iterate for 25 cycles using same trigger (Gene17 2-fold):
 
 ```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
 midsamp %>%
   priming_graph(Gene_expression, miRNA_expression) %>%
-  update_nodes(once = TRUE) %>%
   update_how("Gene17", 2) %>%
   update_nodes() %>%
   simulate_vis(title = "Midsamp: Gene17 2 fold increase, 25 cycles", 25)

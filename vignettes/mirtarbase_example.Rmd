@@ -36,7 +36,7 @@ data("mirtarbasegene")
 head(mirtarbasegene)
 ```
 
-> **NOTE** if the mirna:target dataset includes miRNA genes as targets, the `priming_graph()` function can fail. Because, the function define to miRNAs and targets without distinguishing between uppercase or lowercase.(#TODO we should fix this issue, labeling "competing" should not be regex based)
+> **NOTE** if the mirna:target dataset includes miRNA genes as targets, the `priming_graph()` function can fail. Because, the function define to miRNAs and targets without distinguishing between uppercase or lowercase.(#TODO we should fix this issue, labeling "competing" should not be regex based)(#TODO priming_graph is fixed, it's not regex based anymore but this issue, miRNA affecting miRNA gene might need care, we should advice user about naming mature miRNA and miRNA gene in a distinguishable way)
 
 ## Gene expression in normal and tumor samples
 
@@ -117,12 +117,13 @@ TCGA_E9_A1N5_tumor%>%
 The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with *HIST1H3H* node.
 
 ```{r, fig.height=4, fig.width=5, fig.align='center', warning=FALSE}
-iteration_graph(TCGA_E9_A1N5_mirnagene, 
-                competing_count = gene_expression, 
-                miRNA_count = total_read, 
-                node_name = "HIST1H3H", 
-                .iter = 10, 
-                how = 30)
+TCGA_E9_A1N5_mirnagene %>% 
+  priming_graph(competing_count = gene_expression, 
+                miRNA_count = total_read) %>% 
+  update_how(node_name = "HIST1H3H", how =30) %>% 
+  update_nodes() %>% 
+  simulate(20) %>% 
+  find_iteration(plot=TRUE)
 ```
 
 The graph was shown that the change in expression level of HIST1H3H results in weak perturbation efficiency, despite 30-fold change. The results of the simulation was shown in following:
@@ -131,7 +132,6 @@ The graph was shown that the change in expression level of HIST1H3H results in w
 TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>%
-  update_nodes(once = TRUE) %>%
   update_how("HIST1H3H", 30) %>%
   update_nodes() %>%
   simulate(10)
@@ -160,12 +160,13 @@ TCGA_E9_A1N5_tumor%>%
 
 
 ```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
-iteration_graph(TCGA_E9_A1N5_mirnagene, 
-                competing_count = gene_expression, 
-                miRNA_count = total_read, 
-                node_name = "ACTB", 
-                .iter = 10, 
-                how = 1.87)
+TCGA_E9_A1N5_mirnagene %>% 
+  priming_graph(competing_count = gene_expression, 
+                miRNA_count = total_read) %>% 
+  update_how(node_name = "ACTB", how =1.87) %>% 
+  update_nodes() %>% 
+  simulate(10) %>% 
+  find_iteration(plot=TRUE)
 ```
 
 
@@ -173,7 +174,6 @@ iteration_graph(TCGA_E9_A1N5_mirnagene,
 TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>%
-  update_nodes(once = TRUE) %>%
   update_how("ACTB", 1.87) %>%
   update_nodes() %>%
   simulate(10)

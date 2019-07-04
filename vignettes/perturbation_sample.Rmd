@@ -80,7 +80,7 @@ primed_mid <- midsamp %>%
 Now, let's calculate perturbation efficiency caused by 2-fold to 10-fold increase in Gene17
 
 ```{r}
-plan(multiprocess)
+plan(multiprocess)  # for parallel processing
 
 seq(2,10) %>%
   set_names() %>% 

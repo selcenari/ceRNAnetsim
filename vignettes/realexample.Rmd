@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
 
 ```{r, echo=FALSE, message= FALSE, warning=FALSE}
 library(png)
-
 ```
 
 # Description of the *huge_example* dataset?
@@ -62,7 +61,6 @@ filtered_example %>%
   priming_graph(competing_count = competing_counts, 
                 miRNA_count = mirnaexpression_normal, 
                 aff_factor = Energy) %>%
-  update_nodes(once = TRUE) %>%
   update_how("GAPDH", 5) %>%
   update_nodes() %>%
   vis_graph(title = "Distribution of GAPDH gene node")
@@ -75,7 +73,6 @@ filtered_example %>%
   priming_graph(competing_count = competing_counts, 
                 miRNA_count = mirnaexpression_normal, 
                 aff_factor = Energy) %>%
-  update_nodes(once = TRUE) %>%
   update_how("GAPDH", 5) %>%
   update_nodes() %>%
   simulate_vis(title = "GAPDH over expression in the real dataset", 3)
