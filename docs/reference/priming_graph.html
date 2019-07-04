@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>priming_graph — priming_graph • ceRNAnetsim</title>
+<title>Converts the given dataframe using first variable as competing and the second as miRNA. — priming_graph • ceRNAnetsim</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -36,7 +36,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="priming_graph — priming_graph" />
+<meta property="og:title" content="Converts the given dataframe using first variable as competing and the second as miRNA. — priming_graph" />
 
 <meta property="og:description" content="The function converts the given dataframe using first variable as competing and the second as miRNA. If user defines interaction factors as affinity or degradation, the factors are taken into account." />
 <meta name="twitter:card" content="summary" />
@@ -159,7 +159,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>priming_graph</h1>
+    <h1>Converts the given dataframe using first variable as competing and the second as miRNA.</h1>
     
     <div class="hidden name"><code>priming_graph.Rd</code></div>
     </div>
@@ -204,8 +204,7 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Converts the given dataframe using first variable as competing and the second as miRNA.</p>
-<p>priming_graph provides grouping of competing targets and evaluation of targets within the groups taking into account miRNA:target, target:total target, interaction and degradation parameters. The target groups are determined according to miRNAs. If the factors that are important in target interactions are specified as arguments, the factors also are evaluated separately within each group.
+    <p>priming_graph provides grouping of competing targets and evaluation of targets within the groups taking into account miRNA:target, target:total target, interaction and degradation parameters. The target groups are determined according to miRNAs. If the factors that are important in target interactions are specified as arguments, the factors also are evaluated separately within each group.
 priming_graph also calculates the miRNA efficiency in steady-state conditions. It is assumed that quantity of competing targets and miRNAs are shown in the steady-state system after the miRNAs exhibit repressive efficiency.
 Note that the data must not include missing values such as NA or "-".</p>
     
@@ -214,59 +213,59 @@ Note that the data must not include missing values such as NA or "-".</p>
     <pre class="examples"><div class='input'>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>"minsamp"</span>)
 
-<span class='fu'>priming_graph</span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tbl_graph: 8 nodes and 7 edges
+<span class='fu'>priming_graph</span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tbl_graph: 8 nodes and 7 edges
 #&gt; #
 #&gt; # A rooted tree
 #&gt; #
-#&gt; # Edge Data: 7 x 19 (active)</span><span>
-#&gt;    from    to Competing_name miRNA_name Competing_expre~ miRNA_expression dummy
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     7 Gene1          Mir1                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000     1
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     7 Gene2          Mir1                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000     1
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     7 Gene3          Mir1                   </span><span style='text-decoration: underline;'>5</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000     1
-#&gt; </span><span style='color: #555555;'>4</span><span>     4     7 Gene4          Mir1                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000     1
-#&gt; </span><span style='color: #555555;'>5</span><span>     4     8 Gene4          Mir2                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>2</span><span>000     1
-#&gt; </span><span style='color: #555555;'>6</span><span>     5     8 Gene5          Mir2                   </span><span style='text-decoration: underline;'>5</span><span>000             </span><span style='text-decoration: underline;'>2</span><span>000     1
-#&gt; </span><span style='color: #555555;'># ... with 1 more row, and 12 more variables: afff_factor </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   degg_factor </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, comp_count_list </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, comp_count_pre </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   comp_count_current </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mirna_count_list </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, mirna_count_pre </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mirna_count_current </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mirna_count_per_dep </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, effect_current </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   effect_pre </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, effect_list </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>#
-#&gt; # Node Data: 8 x 3</span><span>
-#&gt;   name  type      node_id
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Gene1 Competing       1
-#&gt; </span><span style='color: #555555;'>2</span><span> Gene2 Competing       2
-#&gt; </span><span style='color: #555555;'>3</span><span> Gene3 Competing       3
-#&gt; </span><span style='color: #555555;'># ... with 5 more rows</span><span></div><div class='input'>
-<span class='fu'>priming_graph</span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>seed_type</span>,<span class='no'>energy</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tbl_graph: 8 nodes and 7 edges
+#&gt; # Node Data: 8 x 7 (active)</span><span>
+#&gt;   name  type      node_id initial_count count_pre count_current changes_variable
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> Gene1 Competing       1         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> Gene2 Competing       2         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> Gene3 Competing       3          </span><span style='text-decoration: underline;'>5</span><span>000      </span><span style='text-decoration: underline;'>5</span><span>000          </span><span style='text-decoration: underline;'>5</span><span>000 Competing       
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> Gene4 Competing       4         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> Gene5 Competing       5          </span><span style='text-decoration: underline;'>5</span><span>000      </span><span style='text-decoration: underline;'>5</span><span>000          </span><span style='text-decoration: underline;'>5</span><span>000 Competing       
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> Gene6 Competing       6         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
+#&gt; </span><span style='color: #949494;'># … with 2 more rows</span><span>
+#&gt; </span><span style='color: #949494;'>#
+#&gt; # Edge Data: 7 x 19</span><span>
+#&gt;    from    to Competing_name miRNA_name Competing_expre… miRNA_expression dummy
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     7 Gene1          Mir1                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000     1
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     7 Gene2          Mir1                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000     1
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     7 Gene3          Mir1                   </span><span style='text-decoration: underline;'>5</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000     1
+#&gt; </span><span style='color: #949494;'># … with 4 more rows, and 12 more variables: afff_factor </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   degg_factor </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, comp_count_list </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span style='color: #949494;'>, comp_count_pre </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   comp_count_current </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, mirna_count_list </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span style='color: #949494;'>, mirna_count_pre </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   mirna_count_current </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, mirna_count_per_dep </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, effect_current </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   effect_pre </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, effect_list </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span></div><div class='input'>
+<span class='fu'>priming_graph</span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>seed_type</span>,<span class='no'>energy</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tbl_graph: 8 nodes and 7 edges
 #&gt; #
 #&gt; # A rooted tree
 #&gt; #
-#&gt; # Edge Data: 7 x 22 (active)</span><span>
-#&gt;    from    to Competing_name miRNA_name Competing_expre~ miRNA_expression
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     7 Gene1          Mir1                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     7 Gene2          Mir1                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     7 Gene3          Mir1                   </span><span style='text-decoration: underline;'>5</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000
-#&gt; </span><span style='color: #555555;'>4</span><span>     4     7 Gene4          Mir1                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000
-#&gt; </span><span style='color: #555555;'>5</span><span>     4     8 Gene4          Mir2                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>2</span><span>000
-#&gt; </span><span style='color: #555555;'>6</span><span>     5     8 Gene5          Mir2                   </span><span style='text-decoration: underline;'>5</span><span>000             </span><span style='text-decoration: underline;'>2</span><span>000
-#&gt; </span><span style='color: #555555;'># ... with 1 more row, and 16 more variables: seed_type </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, energy </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   region </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, dummy </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, afff_factor </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, degg_factor </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   comp_count_list </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, comp_count_pre </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, comp_count_current </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mirna_count_list </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, mirna_count_pre </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mirna_count_current </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mirna_count_per_dep </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, effect_current </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, effect_pre </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   effect_list </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>#
-#&gt; # Node Data: 8 x 3</span><span>
-#&gt;   name  type      node_id
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Gene1 Competing       1
-#&gt; </span><span style='color: #555555;'>2</span><span> Gene2 Competing       2
-#&gt; </span><span style='color: #555555;'>3</span><span> Gene3 Competing       3
-#&gt; </span><span style='color: #555555;'># ... with 5 more rows</span><span></div><div class='input'>
+#&gt; # Node Data: 8 x 7 (active)</span><span>
+#&gt;   name  type      node_id initial_count count_pre count_current changes_variable
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>           
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span> Gene1 Competing       1         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span> Gene2 Competing       2         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span> Gene3 Competing       3          </span><span style='text-decoration: underline;'>5</span><span>000      </span><span style='text-decoration: underline;'>5</span><span>000          </span><span style='text-decoration: underline;'>5</span><span>000 Competing       
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span> Gene4 Competing       4         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span> Gene5 Competing       5          </span><span style='text-decoration: underline;'>5</span><span>000      </span><span style='text-decoration: underline;'>5</span><span>000          </span><span style='text-decoration: underline;'>5</span><span>000 Competing       
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span> Gene6 Competing       6         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
+#&gt; </span><span style='color: #949494;'># … with 2 more rows</span><span>
+#&gt; </span><span style='color: #949494;'>#
+#&gt; # Edge Data: 7 x 22</span><span>
+#&gt;    from    to Competing_name miRNA_name Competing_expre… miRNA_expression
+#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>     1     7 Gene1          Mir1                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>     2     7 Gene2          Mir1                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>     3     7 Gene3          Mir1                   </span><span style='text-decoration: underline;'>5</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000
+#&gt; </span><span style='color: #949494;'># … with 4 more rows, and 16 more variables: seed_type </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, energy </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   region </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, dummy </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, afff_factor </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, degg_factor </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   comp_count_list </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span style='color: #949494;'>, comp_count_pre </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, comp_count_current </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   mirna_count_list </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span style='color: #949494;'>, mirna_count_pre </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, mirna_count_current </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   mirna_count_per_dep </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, effect_current </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>, effect_pre </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #949494;'>,
+#&gt; #   effect_list </span><span style='color: #949494;font-style: italic;'>&lt;list&gt;</span><span></div><div class='input'>
 
 </div></span></pre>
   </div>

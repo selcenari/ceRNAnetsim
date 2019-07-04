@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>calc_perturbation — calc_perturbation • ceRNAnetsim</title>
+<title>Calculates average expression changes of all nodes and finds the perturbed node count for a given node. — calc_perturbation • ceRNAnetsim</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -36,9 +36,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="calc_perturbation — calc_perturbation" />
+<meta property="og:title" content="Calculates average expression changes of all nodes and finds the perturbed node count for a given node. — calc_perturbation" />
 
-<meta property="og:description" content="calculates mean of expression changes of all  nodes and finds the perturbed node count for a given node." />
+<meta property="og:description" content="calculates mean of expression changes of all nodes and finds the perturbed node count for a given node." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -159,14 +159,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>calc_perturbation</h1>
+    <h1>Calculates average expression changes of all nodes and finds the perturbed node count for a given node.</h1>
     
     <div class="hidden name"><code>calc_perturbation.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>calculates mean of expression changes of all  nodes and finds the perturbed node count for a given node.</p>
+    <p>calculates mean of expression changes of all nodes and finds the perturbed node count for a given node.</p>
     
     </div>
 
@@ -200,12 +200,11 @@
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>gives a vector about the perturbation efficiency and number of perturbed nodes.</p>
+    <p>a tibble with two columns, the perturbation efficiency and number of perturbed nodes.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Calculates average expression changes of all  nodes and finds the perturbed node count for a given node.</p>
-<p>calc_perturbation calculates mean expression changes of elements after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
+    <p>calc_perturbation calculates mean expression changes of elements after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
  The function determines the perturbation efficiency and number of perturbed nodes after given change with how, cycle and limit parameter.</p>
     
 
@@ -215,14 +214,18 @@
 
 <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
    <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>, <span class='kw'>how</span><span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; perturbation_efficiency         perturbed_count 
-#&gt;                 25.2144                  6.0000 </div><div class='input'>
+   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>, <span class='kw'>how</span><span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 2</span><span>
+#&gt;   perturbation_efficiency perturbed_count
+#&gt;                     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>                    25.2               6</div><div class='input'>
  <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
    <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>energy</span>,<span class='no'>seed_type</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>,<span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; perturbation_efficiency         perturbed_count 
-#&gt;                25.02175                 6.00000 </div><div class='input'>
+   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>,<span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
+#&gt;   perturbation_efficiency perturbed_count
+#&gt;                     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>                    25.0               6</div><div class='input'>
 
-</div></pre>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

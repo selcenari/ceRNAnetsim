@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>find_iteration — find_iteration • ceRNAnetsim</title>
+<title>Finds the iteration which provides maximum affected node number — find_iteration • ceRNAnetsim</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -36,9 +36,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="find_iteration — find_iteration" />
+<meta property="og:title" content="Finds the iteration which provides maximum affected node number — find_iteration" />
 
-<meta property="og:description" content="find_iteration searches the iteration that provides maximum affected node number. The user defines a symbolic iteration with .iter. The function calculates the number of affected nodes for each iteration and than selects the iteration that has maximum affected nodes' number." />
+<meta property="og:description" content="searches the iteration that provides maximum affected node number. The user defines a symbolic iteration with .iter. The function calculates the number of affected nodes for each iteration and than selects the iteration that has maximum affected nodes' number." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -159,58 +159,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>find_iteration</h1>
+    <h1>Finds the iteration which provides maximum affected node number</h1>
     
     <div class="hidden name"><code>find_iteration.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>find_iteration searches the iteration that provides maximum affected node number. The user defines a symbolic iteration with .iter. The function calculates the number of affected nodes for each iteration and than selects the iteration that has maximum affected nodes' number.</p>
+    <p>searches the iteration that provides maximum affected node number. The user defines a symbolic iteration with .iter. The function calculates the number of affected nodes for each iteration and than selects the iteration that has maximum affected nodes' number.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>find_iteration</span>(<span class='no'>df</span>, <span class='no'>competing_count</span>, <span class='no'>miRNA_count</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='no'>dummy</span>,
-  <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>dummy</span>, <span class='no'>node_name</span>, <span class='no'>how</span>, <span class='kw'>.iter</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>0.1</span>)</pre>
+    <pre class="usage"><span class='fu'>find_iteration</span>(<span class='no'>df</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>A data frame that includes the miRNA and competing targets.</p></td>
-    </tr>
-    <tr>
-      <th>competing_count</th>
-      <td><p>The counts (expression) of competing elements of the dataset.</p></td>
-    </tr>
-    <tr>
-      <th>miRNA_count</th>
-      <td><p>The counts (expression) of repressive element (miRNA) of the dataset.</p></td>
-    </tr>
-    <tr>
-      <th>aff_factor</th>
-      <td><p>The parameter/s of binding between miRNA and targets.</p></td>
-    </tr>
-    <tr>
-      <th>deg_factor</th>
-      <td><p>The parameter/s for degradation of bound miRNA:target complex.</p></td>
-    </tr>
-    <tr>
-      <th>node_name</th>
-      <td><p>The name f node that is used as trigger.</p></td>
-    </tr>
-    <tr>
-      <th>how</th>
-      <td><p>The change of count (expression) of the given node in terms of fold change.</p></td>
-    </tr>
-    <tr>
-      <th>.iter</th>
-      <td><p>The maximum iteration prescribed by the user.</p></td>
+      <td><p>A tbl graph that includes the miRNA and competing targets triggered and simulated for number of cycles.</p></td>
     </tr>
     <tr>
       <th>limit</th>
       <td><p>The minimum amount of change of any node.</p></td>
+    </tr>
+    <tr>
+      <th>plot</th>
+      <td><p>If TRUE, returns a plot.</p></td>
     </tr>
     </table>
     
@@ -218,17 +193,13 @@
 
     <p>It gives an iteration number to use in simulate() function.</p>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Finds the iteration which provides maximum affected node number</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>"minsamp"</span>)
 
-<span class='fu'>find_iteration</span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>, <span class='kw'>node_name</span> <span class='kw'>=</span> <span class='st'>"Gene2"</span>, <span class='kw'>how</span> <span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 2</div><div class='input'>
-<span class='fu'>find_iteration</span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='no'>energy</span>, <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>, <span class='kw'>node_name</span> <span class='kw'>=</span> <span class='st'>"Gene2"</span>, <span class='kw'>how</span><span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; [1] 2</div><div class='input'>
+<span class='fu'>find_iteration</span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>, <span class='kw'>node_name</span> <span class='kw'>=</span> <span class='st'>"Gene2"</span>, <span class='kw'>how</span> <span class='kw'>=</span><span class='fl'>2</span>)</div><div class='output co'>#&gt; <span class='error'>Error in find_iteration(minsamp, Competing_expression, miRNA_expression,     node_name = "Gene2", how = 2): unused arguments (node_name = "Gene2", how = 2)</span></div><div class='input'>
+<span class='fu'>find_iteration</span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='no'>energy</span>, <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>, <span class='kw'>node_name</span> <span class='kw'>=</span> <span class='st'>"Gene2"</span>, <span class='kw'>how</span><span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; <span class='error'>Error in find_iteration(minsamp, Competing_expression, miRNA_expression,     aff_factor = energy, deg_factor = region, node_name = "Gene2",     how = 3): unused arguments (aff_factor = energy, deg_factor = region, node_name = "Gene2", how = 3)</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -237,8 +208,6 @@
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

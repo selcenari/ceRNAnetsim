@@ -2,7 +2,7 @@
 % Please edit documentation in R/priming_graph.R
 \name{priming_graph}
 \alias{priming_graph}
-\title{priming_graph}
+\title{Converts the given dataframe using first variable as competing and the second as miRNA.}
 \usage{
 priming_graph(df, competing_count, miRNA_count, aff_factor = dummy,
   deg_factor = dummy)
@@ -25,8 +25,6 @@ the graph object.
 The function converts the given dataframe using first variable as competing and the second as miRNA. If user defines interaction factors as affinity or degradation, the factors are taken into account.
 }
 \details{
-Converts the given dataframe using first variable as competing and the second as miRNA.
-
 priming_graph provides grouping of competing targets and evaluation of targets within the groups taking into account miRNA:target, target:total target, interaction and degradation parameters. The target groups are determined according to miRNAs. If the factors that are important in target interactions are specified as arguments, the factors also are evaluated separately within each group.
 priming_graph also calculates the miRNA efficiency in steady-state conditions. It is assumed that quantity of competing targets and miRNAs are shown in the steady-state system after the miRNAs exhibit repressive efficiency.
 Note that the data must not include missing values such as NA or "-".

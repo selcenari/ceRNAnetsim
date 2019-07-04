@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_vis.R
 \name{simulate_vis}
 \alias{simulate_vis}
-\title{simulate_vis}
+\title{Provides visualisation of the graph in addition to simulate function.}
 \usage{
 simulate_vis(input_graph, cycle = 1, Competing_color = "green",
   mirna_color = "orange", Upregulation = "red",
@@ -32,8 +32,6 @@ It gives a graph and the images of states in each iteration until the end of the
 simulate_vis provides visualisation of the graph in addition to simulate function.
 }
 \details{
-Provides visualisation of the graph in addition to simulate function.
-
 simulate_vis gives the last graph object and each iterations' image.
 }
 \examples{

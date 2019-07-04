@@ -2,7 +2,7 @@
 % Please edit documentation in R/update_nodes.R
 \name{prepare_rhs_once}
 \alias{prepare_rhs_once}
-\title{prepare_rhs_once}
+\title{Carries the variables from edge to node.}
 \usage{
 prepare_rhs_once(input_graph)
 }
@@ -13,7 +13,5 @@ prepare_rhs_once(input_graph)
 Carries the variables from edge to node.
 }
 \details{
-Carries the variables from edge to node.
-
 The function is a helper function for processing of graph object with update_nodes function.
 }

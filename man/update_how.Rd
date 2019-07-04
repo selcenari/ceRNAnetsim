@@ -2,7 +2,7 @@
 % Please edit documentation in R/update_how.R
 \name{update_how}
 \alias{update_how}
-\title{update_how}
+\title{Converts the count value of the given node.}
 \usage{
 update_how(input_graph, node_name, how)
 }
@@ -17,11 +17,9 @@ update_how(input_graph, node_name, how)
 the graph object.
 }
 \description{
-update_how converts the count value of the given node.
+this function converts the count value of the given node.
 }
 \details{
-Converts the count value of the given node.
-
 update_how function calculates the current value of given mirna or gene node on the graph object. User must specify current value as fold change.
 }
 \examples{

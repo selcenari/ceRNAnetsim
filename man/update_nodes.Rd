@@ -2,7 +2,7 @@
 % Please edit documentation in R/update_nodes.R
 \name{update_nodes}
 \alias{update_nodes}
-\title{update_nodes}
+\title{Carries variables from edge to node.}
 \usage{
 update_nodes(input_graph, once = FALSE)
 }
@@ -15,11 +15,9 @@ update_nodes(input_graph, once = FALSE)
 the graph object.
 }
 \description{
-The function carries variables from edge to node.
+This function carries variables from edge to node.
 }
 \details{
-Carries variables from edge to node.
-
 If the carrying process performs after priming_graph function, the argument must be TRUE.
     The function helps to visualisation of processed graph object, especially that includes too many nodes.This step makes it easily to follow the processes.
 }

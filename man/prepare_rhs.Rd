@@ -2,7 +2,7 @@
 % Please edit documentation in R/update_nodes.R
 \name{prepare_rhs}
 \alias{prepare_rhs}
-\title{prepare_rhs}
+\title{Carries the variables from edge to node}
 \usage{
 prepare_rhs(input_graph)
 }

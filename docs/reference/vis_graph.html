@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>vis_graph — vis_graph • ceRNAnetsim</title>
+<title>provides visualisation of the graph. — vis_graph • ceRNAnetsim</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -36,9 +36,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="vis_graph — vis_graph" />
+<meta property="og:title" content="provides visualisation of the graph. — vis_graph" />
 
-<meta property="og:description" content="vis_graph provides visualisation of the graph." />
+<meta property="og:description" content="`vis_graph`` provides visualisation of the graph." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -159,14 +159,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>vis_graph</h1>
+    <h1>provides visualisation of the graph.</h1>
     
     <div class="hidden name"><code>vis_graph.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>vis_graph provides visualisation of the graph.</p>
+    <p>`vis_graph`` provides visualisation of the graph.</p>
     
     </div>
 
@@ -213,8 +213,7 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>provides visualisation of the graph.</p>
-<p>vis_graph ensures the process to be followed.</p>
+    <p>vis_graph ensures the process to be followed.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -223,14 +222,14 @@
 
  <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>seed_type</span>,<span class='no'>energy</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
    <span class='fu'><a href='update_nodes.html'>update_nodes</a></span>(<span class='kw'>once</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>vis_graph</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Kamada-Kawai (kk) layout was used.</span></div><div class='img'><img src='vis_graph-1.png' alt='' width='700' height='433' /></div><div class='input'>
+   <span class='fu'>vis_graph</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span class='error'>Error in ifelse(count_current - count_pre != 0, "Down", type): object 'count_current' not found</span></div><div class='input'>
 <span class='co'># Visualisation of graph after the change.</span>
 
  <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>seed_type</span>,<span class='no'>energy</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
    <span class='fu'><a href='update_nodes.html'>update_nodes</a></span>(<span class='kw'>once</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)<span class='kw'>%&gt;%</span>
    <span class='fu'><a href='update_variables.html'>update_variables</a></span>(<span class='no'>new_counts</span>)<span class='kw'>%&gt;%</span>
    <span class='fu'><a href='update_nodes.html'>update_nodes</a></span>()<span class='kw'>%&gt;%</span>
-   <span class='fu'>vis_graph</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Kamada-Kawai (kk) layout was used.</span></div><div class='img'><img src='vis_graph-2.png' alt='' width='700' height='433' /></div><div class='input'>
+   <span class='fu'>vis_graph</span>()</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span class='error'>Error in ifelse(count_current - count_pre != 0, "Down", type): object 'count_current' not found</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -2,38 +2,22 @@
 % Please edit documentation in R/find_iteration.R
 \name{find_iteration}
 \alias{find_iteration}
-\title{find_iteration}
+\title{Finds the iteration which provides maximum affected node number}
 \usage{
-find_iteration(df, competing_count, miRNA_count, aff_factor = dummy,
-  deg_factor = dummy, node_name, how, .iter = 100, limit = 0.1)
+find_iteration(df, limit = 0.1, plot = FALSE)
 }
 \arguments{
-\item{df}{A data frame that includes the miRNA and competing targets.}
-
-\item{competing_count}{The counts (expression) of competing elements of the dataset.}
-
-\item{miRNA_count}{The counts (expression) of repressive element (miRNA) of the dataset.}
-
-\item{aff_factor}{The parameter/s of binding between miRNA and targets.}
-
-\item{deg_factor}{The parameter/s for degradation of bound miRNA:target complex.}
-
-\item{node_name}{The name f node that is used as trigger.}
-
-\item{how}{The change of count (expression) of the given node in terms of fold change.}
-
-\item{.iter}{The maximum iteration prescribed by the user.}
+\item{df}{A tbl graph that includes the miRNA and competing targets triggered and simulated for number of cycles.}
 
 \item{limit}{The minimum amount of change of any node.}
+
+\item{plot}{If TRUE, returns a plot.}
 }
 \value{
 It gives an iteration number to use in simulate() function.
 }
 \description{
-find_iteration searches the iteration that provides maximum affected node number. The user defines a symbolic iteration with .iter. The function calculates the number of affected nodes for each iteration and than selects the iteration that has maximum affected nodes' number.
-}
-\details{
-Finds the iteration which provides maximum affected node number
+searches the iteration that provides maximum affected node number. The user defines a symbolic iteration with .iter. The function calculates the number of affected nodes for each iteration and than selects the iteration that has maximum affected nodes' number.
 }
 \examples{
 

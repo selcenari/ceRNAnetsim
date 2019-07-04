@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>update_nodes — update_nodes • ceRNAnetsim</title>
+<title>Carries variables from edge to node. — update_nodes • ceRNAnetsim</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -36,9 +36,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="update_nodes — update_nodes" />
+<meta property="og:title" content="Carries variables from edge to node. — update_nodes" />
 
-<meta property="og:description" content="The function carries variables from edge to node." />
+<meta property="og:description" content="This function carries variables from edge to node." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -159,14 +159,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>update_nodes</h1>
+    <h1>Carries variables from edge to node.</h1>
     
     <div class="hidden name"><code>update_nodes.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>The function carries variables from edge to node.</p>
+    <p>This function carries variables from edge to node.</p>
     
     </div>
 
@@ -191,8 +191,7 @@
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Carries variables from edge to node.</p>
-<p>If the carrying process performs after priming_graph function, the argument must be TRUE.
+    <p>If the carrying process performs after priming_graph function, the argument must be TRUE.
     The function helps to visualisation of processed graph object, especially that includes too many nodes.This step makes it easily to follow the processes.</p>
     
 
@@ -202,34 +201,8 @@
 
  <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
  <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>seed_type</span>,<span class='no'>energy</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>update_nodes</span>(<span class='kw'>once</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First variable is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tbl_graph: 8 nodes and 7 edges
-#&gt; #
-#&gt; # A rooted tree
-#&gt; #
-#&gt; # Node Data: 8 x 7 (active)</span><span>
-#&gt;   name  type      node_id initial_count count_pre count_current changes_variable
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
-#&gt; </span><span style='color: #555555;'>1</span><span> Gene1 Competing       1         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
-#&gt; </span><span style='color: #555555;'>2</span><span> Gene2 Competing       2         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
-#&gt; </span><span style='color: #555555;'>3</span><span> Gene3 Competing       3          </span><span style='text-decoration: underline;'>5</span><span>000      </span><span style='text-decoration: underline;'>5</span><span>000          </span><span style='text-decoration: underline;'>5</span><span>000 Competing       
-#&gt; </span><span style='color: #555555;'>4</span><span> Gene4 Competing       4         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
-#&gt; </span><span style='color: #555555;'>5</span><span> Gene5 Competing       5          </span><span style='text-decoration: underline;'>5</span><span>000      </span><span style='text-decoration: underline;'>5</span><span>000          </span><span style='text-decoration: underline;'>5</span><span>000 Competing       
-#&gt; </span><span style='color: #555555;'>6</span><span> Gene6 Competing       6         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
-#&gt; </span><span style='color: #555555;'># ... with 2 more rows</span><span>
-#&gt; </span><span style='color: #555555;'>#
-#&gt; # Edge Data: 7 x 22</span><span>
-#&gt;    from    to Competing_name miRNA_name Competing_expre~ miRNA_expression
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>          </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span>     1     7 Gene1          Mir1                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000
-#&gt; </span><span style='color: #555555;'>2</span><span>     2     7 Gene2          Mir1                  </span><span style='text-decoration: underline;'>10</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000
-#&gt; </span><span style='color: #555555;'>3</span><span>     3     7 Gene3          Mir1                   </span><span style='text-decoration: underline;'>5</span><span>000             </span><span style='text-decoration: underline;'>1</span><span>000
-#&gt; </span><span style='color: #555555;'># ... with 4 more rows, and 16 more variables: seed_type </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, energy </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   region </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, dummy </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, afff_factor </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, degg_factor </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   comp_count_list </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, comp_count_pre </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, comp_count_current </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mirna_count_list </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span style='color: #555555;'>, mirna_count_pre </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, mirna_count_current </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   mirna_count_per_dep </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, effect_current </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, effect_pre </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   effect_list </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span></div><div class='input'>
-</div></span></pre>
+   <span class='fu'>update_nodes</span>(<span class='kw'>once</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span class='error'>Error in ifelse(count_current - count_pre != 0, "Down", type): object 'count_current' not found</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

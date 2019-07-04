@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_node_perturbation.R
 \name{find_node_perturbation}
 \alias{find_node_perturbation}
-\title{find_node_perturbation}
+\title{Calculates average expression changes of all  nodes and finds the perturbed node count for all nodes in system.}
 \usage{
 find_node_perturbation(input_graph, how = 2, cycle = 1, limit = 0)
 }
@@ -22,8 +22,6 @@ It gives a tibble form dataset that includes node names, perturbation efficiency
 calculates the mean of expression changes of all  nodes and finds the perturbed node count for all nodes in system.
 }
 \details{
-Calculates average expression changes of all  nodes and finds the perturbed node count for all nodes in system.
-
 find_node_perturbation calculates mean expression changes of elements after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
   The outputs of the function are the perturbation efficiency and perturbed count of nodes for each nodes.
 }

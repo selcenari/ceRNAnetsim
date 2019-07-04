@@ -2,7 +2,7 @@
 % Please edit documentation in R/vis_graph.R
 \name{vis_graph}
 \alias{vis_graph}
-\title{vis_graph}
+\title{provides visualisation of the graph.}
 \usage{
 vis_graph(input_graph, Competing_color = "green",
   mirna_color = "orange", Upregulation = "red",
@@ -27,11 +27,9 @@ vis_graph(input_graph, Competing_color = "green",
 The graph object.
 }
 \description{
-vis_graph provides visualisation of the graph.
+`vis_graph`` provides visualisation of the graph.
 }
 \details{
-provides visualisation of the graph.
-
 vis_graph ensures the process to be followed.
 }
 \examples{
