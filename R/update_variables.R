@@ -15,9 +15,7 @@
 #'
 #'  minsamp%>%
 #'  priming_graph(Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)%>%
-#'    update_nodes(once = TRUE)%>%
 #'    update_variables(new_counts)  #the dataset that includes the current counts of nodes.
-#'
 #'
 #' @export
 

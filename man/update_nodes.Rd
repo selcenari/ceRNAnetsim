@@ -9,13 +9,14 @@ update_nodes(input_graph, once = FALSE)
 \arguments{
 \item{input_graph}{Processed graph object in previous step.}
 
-\item{once}{The argument is about when the carrying process runs.}
+\item{once}{The argument is about when the carrying process runs (internal use only)}
 }
 \value{
 the graph object.
 }
 \description{
-This function carries variables from edge to node.
+This function carries variables from edge to node and should be used
+after `update_how` or `update_variables` functions
 }
 \details{
 If the carrying process performs after priming_graph function, the argument must be TRUE.
@@ -25,8 +26,9 @@ If the carrying process performs after priming_graph function, the argument must
 
 data("minsamp")
 
- minsamp\%>\%
- priming_graph(Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)\%>\%
-   update_nodes(once = TRUE)
+minsamp \%>\%
+  priming_graph(Gene_expression, miRNA_expression) \%>\%
+  update_how("Gene2",2) \%>\%
+  update_nodes() \%>\%
 
 }

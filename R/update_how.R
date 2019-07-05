@@ -15,11 +15,9 @@
 #' data("minsamp")
 #'
 #' priming_graph(minsamp, Competing_expression, miRNA_expression)%>%
-#'    update_nodes(once = TRUE)%>%
 #'    update_how("Gene1",3)
 #'
 #'  priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)%>%
-#'    update_nodes(once = TRUE)%>%
 #'    update_how("Gene1", 3)
 #'
 #'

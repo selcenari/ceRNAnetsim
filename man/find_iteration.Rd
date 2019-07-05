@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_iteration.R
 \name{find_iteration}
 \alias{find_iteration}
-\title{Finds the iteration which provides maximum affected node number}
+\title{find_iteration}
 \usage{
 find_iteration(df, limit = 0.1, plot = FALSE)
 }
@@ -17,14 +17,20 @@ find_iteration(df, limit = 0.1, plot = FALSE)
 It gives an iteration number to use in simulate() function.
 }
 \description{
+Finds the iteration which provides maximum affected node number
+}
+\details{
 searches the iteration that provides maximum affected node number. The user defines a symbolic iteration with .iter. The function calculates the number of affected nodes for each iteration and than selects the iteration that has maximum affected nodes' number.
 }
 \examples{
 
-data("minsamp")
+data("midsamp")
 
-find_iteration(minsamp, Competing_expression, miRNA_expression, node_name = "Gene2", how =2)
-
-find_iteration(minsamp, Competing_expression, miRNA_expression, aff_factor = energy, deg_factor = region, node_name = "Gene2", how= 3)
+midsamp \%>\%
+  priming_graph(Gene_expression, miRNA_expression) \%>\%
+  update_how("Gene2",2) \%>\%
+  update_nodes() \%>\%
+  simulate(10) \%>\%
+  find_iteration(limit=0)
 
 }

@@ -1,3 +1,5 @@
+#' find_iteration
+#'
 #' Finds the iteration which provides maximum affected node number
 #'
 #' searches the iteration that provides maximum affected node number. The user defines a symbolic iteration with .iter. The function calculates the number of affected nodes for each iteration and than selects the iteration that has maximum affected nodes' number.
@@ -10,15 +12,19 @@
 #'
 #' @examples
 #'
-#' data("minsamp")
+#' data("midsamp")
 #'
-#' find_iteration(minsamp, Competing_expression, miRNA_expression, node_name = "Gene2", how =2)
-#'
-#' find_iteration(minsamp, Competing_expression, miRNA_expression, aff_factor = energy, deg_factor = region, node_name = "Gene2", how= 3)
+#' midsamp %>%
+#'   priming_graph(Gene_expression, miRNA_expression) %>%
+#'   update_how("Gene2",2) %>%
+#'   update_nodes() %>%
+#'   simulate(10) %>%
+#'   find_iteration(limit=0)
 #'
 #' @export
 
 find_iteration <- function(df,  limit= 0.1, plot=FALSE){
+
   len <- df %E>% as_tibble() %>% .$comp_count_list %>% .[[1]] %>%  length()
   iteration <- data.frame(iter = seq(1,len-1, 1), effect= rep(0))
 

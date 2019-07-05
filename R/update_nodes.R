@@ -50,12 +50,13 @@ prepare_rhs <- function(input_graph){
 
 #' Carries variables from edge to node.
 #'
-#' This function carries variables from edge to node.
+#' This function carries variables from edge to node and should be used
+#' after `update_how` or `update_variables` functions
 #'
 #' @return the graph object.
 #'
 #' @param input_graph Processed graph object in previous step.
-#' @param once The argument is about when the carrying process runs.
+#' @param once The argument is about when the carrying process runs (internal use only)
 #'
 #' @details If the carrying process performs after priming_graph function, the argument must be TRUE.
 #'     The function helps to visualisation of processed graph object, especially that includes too many nodes.This step makes it easily to follow the processes.
@@ -64,9 +65,10 @@ prepare_rhs <- function(input_graph){
 #'
 #' data("minsamp")
 #'
-#'  minsamp%>%
-#'  priming_graph(Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)%>%
-#'    update_nodes(once = TRUE)
+#' minsamp %>%
+#'   priming_graph(Gene_expression, miRNA_expression) %>%
+#'   update_how("Gene2",2) %>%
+#'   update_nodes() %>%
 #'
 #' @export
 
