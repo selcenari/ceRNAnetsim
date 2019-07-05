@@ -36,7 +36,7 @@ data("mirtarbasegene")
 head(mirtarbasegene)
 ```
 
-> **NOTE** if the mirna:target dataset includes miRNA genes as targets, the `priming_graph()` function can fail. Because, the function define to miRNAs and targets without distinguishing between uppercase or lowercase.(#TODO we should fix this issue, labeling "competing" should not be regex based)(#TODO priming_graph is fixed, it's not regex based anymore but this issue, miRNA affecting miRNA gene might need care, we should advice user about naming mature miRNA and miRNA gene in a distinguishable way)
+> **NOTE** if the mirna:target dataset includes miRNA genes as targets, the `priming_graph()` function can fail. Because, the function define to miRNAs and targets without distinguishing between uppercase or lowercase. <!-- #TODO we should fix this issue, labeling "competing" should not be regex based  #TODO priming_graph is fixed, it's not regex based anymore but this issue, miRNA affecting miRNA gene might need care, we should advice user about naming mature miRNA and miRNA gene in a distinguishable way -->
 
 ## Gene expression in normal and tumor samples
 
@@ -88,8 +88,8 @@ TCGA_E9_A1N5_mirnanormal %>%
   select(Target, miRNA, total_read, gene_expression) %>%
   distinct() -> TCGA_E9_A1N5_mirnagene
 
-TCGA_E9_A1N5_mirnagene %>%    #TODO what is the purpose of this
-  group_by(Target) %>%        # part, are there multiple expression values?
+TCGA_E9_A1N5_mirnagene %>%    
+  group_by(Target) %>%        
   mutate(gene_expression= max(gene_expression)) %>%
   distinct() %>%
   ungroup() -> TCGA_E9_A1N5_mirnagene
@@ -97,7 +97,9 @@ TCGA_E9_A1N5_mirnagene %>%    #TODO what is the purpose of this
 head(TCGA_E9_A1N5_mirnagene)
 ```
 
-When we compared the two gene expression dataset of TCGA-E9A1N5 patient, and selected a gene which has 30-fold increased expression, (gene name: HIST1H3H), this gene node will be used in the example. Note that the selected node must not be isolated one. If the an isolated node is selected the change in expression will not propagate in network. (#TODO the code below can be archived in another file, and code should also be improved since it does not check isolation)
+<!-- #TODO in the code above what is the purpose of TCGA_E9_A1N5_mirnagene %>% group_by(Target) %>% mutate(gene_expression= max(gene_expression)) %>% distinct() %>% ungroup() , are there multiple expressions per gene/miRNA-->
+
+When we compared the two gene expression dataset of TCGA-E9A1N5 patient, and selected a gene which has 30-fold increased expression, (gene name: HIST1H3H), this gene node will be used in the example. Note that the selected node must not be isolated one. If the an isolated node is selected the change in expression will not propagate in network. <!-- #TODO the code below can be archived in another file, and code should also be improved since it does not check isolation -->
 
 ```{r}
 TCGA_E9_A1N5_tumor%>%
@@ -112,7 +114,7 @@ TCGA_E9_A1N5_tumor%>%
 #HIST1H3H : non-isolated gene. 30 FC.
 ```
 
-(#TODO table has many genes which have gene expression==1, there might be some cleaning done before using the expression datasets. Through simulation or statistics we can determine a threshold, say FPKM 10, and below that number can be considered not expressed)
+<!-- #TODO table has many genes which have gene expression==1, there might be some cleaning done before using the expression datasets. Through simulation or statistics we can determine a threshold, say FPKM 10, and below that number can be considered not expressed -->
 
 The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with *HIST1H3H* node.
 
@@ -139,7 +141,7 @@ TCGA_E9_A1N5_mirnagene %>%
 
 
 And then, we tried to simulate the network with the gene which has higher expression amount. For this, we selected *ACTB* node as shown in following:
-(#TODO as for HIST1H3H code, they can be archived somewhere else)
+<!-- #TODO as for HIST1H3H code, they can be archived somewhere else -->
 
 ```{r}
 TCGA_E9_A1N5_tumor%>%
@@ -179,8 +181,9 @@ TCGA_E9_A1N5_mirnagene %>%
   simulate(10)
 ```
 
-(#TODO what is the conclusion or point of the output table of simulate?)
-(#TODO we are talking about perturbation efficiencies of these two genes, so we should print out their calc_perturb results)
+<!-- #TODO what is the conclusion or point of the output table of simulate? -->
+
+<!-- #TODO we are talking about perturbation efficiencies of these two genes, so we should print out their calc_perturb results -->
 
 # The comparison of two conditions:
 
@@ -190,4 +193,4 @@ In a real biological sample, we tested perturbation efficiencies of two genes;
 
 Despite high fold change, former gene caused little perturbation. On the contrary, high expressing gene with very low fold increase in tumor caused greater perturbation in the network.
 
-Thus, if the perturbed node has lower target:total target ratio in group or groups, the efficiency of it can be weak, or vice versa. The efficiency of ACTB gene may be high for this reason. ACTB has not strong perturbation efficiency too (#TODO is perturb efficiency high or not?). This could be arisen from low miRNA:target ratio or impotent (#TODO important?) target nodes which have very low expression levels.
+Thus, if the perturbed node has lower target:total target ratio in group or groups, the efficiency of it can be weak, or vice versa. The efficiency of ACTB gene may be high for this reason. ACTB has not strong perturbation efficiency too <!-- #TODO is perturb efficiency high or not? -->. This could be arisen from low miRNA:target ratio or impotent <!-- #TODO important?--> target nodes which have very low expression levels.

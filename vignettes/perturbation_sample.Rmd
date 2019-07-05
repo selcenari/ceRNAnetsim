@@ -24,7 +24,7 @@ The perturbation efficiency means that the disturbance and propagation efficienc
 
 - In a biological system, the miRNA:target interactions does not depend solely on stoichiometry, unfortunately. miRNAs affect the targets via degradation or inhibition after the binding. The experimental studies have shown that the features of miRNA:target interactions determine the binding and degradation efficiency. For example, binding energy between miRNA and target and seed structure of miRNA determine the binding efficiency of complex. In addition, the binding region on the target affects the degradation of target. 
 
-- In our approach,if the properties of miRNA:target interactions are degreed according to experimental studies, these factors takes into account in the regulations of miRNA:target interactions. But these factors are optionally evaluated. So, if the interaction factors are not specified, they are not taken into account and the system are ran based on miRNA and target amounts. (#TODO we can remove this item, does not explain factors effecting perturbation. also kind of reduntant with previous item)
+- In our approach,if the properties of miRNA:target interactions are degreed according to experimental studies, these factors takes into account in the regulations of miRNA:target interactions. But these factors are optionally evaluated. So, if the interaction factors are not specified, they are not taken into account and the system are ran based on miRNA and target amounts. <!-- #TODO we can remove this item, does not explain factors effecting perturbation. also kind of reduntant with previous item -->
 
 - On the other hand, interaction factors affecting binding and degradation of miRNA to its targets also have impact one efficiency of perturbation of the change. For instance, if a node has very low binding affinity to targeting miRNA, change in expression level of that node will cause weak or no perturbation.
 
@@ -54,7 +54,7 @@ This function works for a given node from network. It calculates and returns two
 * **perturbation efficiency** : mean of percentage of expression changes of all elements in the network 
 * **perturbed count** : count of disturbed nodes for given iteration number and limit (the minimum change in expression level needed to be considered "disturbed" or "changed"). 
 
-In the example below, "Gene17" is up-regulated 3-fold in *midsamp* dataset where `Energy` and `seeds` columns are used for calculating affinity effect and `targeting_region` columns is used for calculating degradation effect. The network will be iterated over 30 times and 0.1 percent of change will be taken as threshold (#TODO below you said: "The `limit` symbolizes the percentage of minimum change of node expressions." you mean for single node, right?) and number of disturbed nodes will be counted.
+In the example below, "Gene17" is up-regulated 3-fold in *midsamp* dataset where `Energy` and `seeds` columns are used for calculating affinity effect and `targeting_region` columns is used for calculating degradation effect. The network will be iterated over 30 times and 0.1 percent of change will be taken as threshold <!-- #TODO below you said: "The `limit` symbolizes the percentage of minimum change of node expressions." you mean for single node, right? --> and number of disturbed nodes will be counted.
 
 ```{r}
 midsamp %>%
