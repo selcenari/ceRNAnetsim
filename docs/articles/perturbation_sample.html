@@ -120,7 +120,7 @@
       <h1>Perturbation Efficiency in A Sample Dataset</h1>
                         <h4 class="author">Selcen Ari</h4>
             
-            <h4 class="date">2019-07-04</h4>
+            <h4 class="date">2019-07-05</h4>
       
       
       <div class="hidden name"><code>perturbation_sample.Rmd</code></div>
@@ -136,7 +136,7 @@
 <ul>
 <li><p>Expression level and type of trigger element plays a crucial role. The trigger element can be an miRNA or competing target. The perturbation efficiency is affected from ratio of miRNA amount to sum of expression levels of its targets. Also, amount of competing element among whole competing elements is important since it determines distribution of miRNA. For example, if trigger is an miRNA with expression level of 1500 and if sum of expression levels of its targets is 1000000, then this miRNA will not perturb its neighborhood efficiently. So, miRNA:target ratio is important for regulation of interaction network.</p></li>
 <li><p>In a biological system, the miRNA:target interactions does not depend solely on stoichiometry, unfortunately. miRNAs affect the targets via degradation or inhibition after the binding. The experimental studies have shown that the features of miRNA:target interactions determine the binding and degradation efficiency. For example, binding energy between miRNA and target and seed structure of miRNA determine the binding efficiency of complex. In addition, the binding region on the target affects the degradation of target.</p></li>
-<li><p>In our approach,if the properties of miRNA:target interactions are degreed according to experimental studies, these factors takes into account in the regulations of miRNA:target interactions. But these factors are optionally evaluated. So, if the interaction factors are not specified, they are not taken into account and the system are ran based on miRNA and target amounts. (#TODO we can remove this item, does not explain factors effecting perturbation. also kind of reduntant with previous item)</p></li>
+<li><p>In our approach,if the properties of miRNA:target interactions are degreed according to experimental studies, these factors takes into account in the regulations of miRNA:target interactions. But these factors are optionally evaluated. So, if the interaction factors are not specified, they are not taken into account and the system are ran based on miRNA and target amounts. <!-- #TODO we can remove this item, does not explain factors effecting perturbation. also kind of reduntant with previous item --></p></li>
 <li><p>On the other hand, interaction factors affecting binding and degradation of miRNA to its targets also have impact one efficiency of perturbation of the change. For instance, if a node has very low binding affinity to targeting miRNA, change in expression level of that node will cause weak or no perturbation.</p></li>
 </ul>
 <p>Thus, we developed functions which can calculate perturbation efficiency of a given node or all nodes. <code><a href="../reference/calc_perturbation.html">calc_perturbation()</a></code> function calculates perturbation efficiency for given trigger (<em>e.g.</em> Gene17 2-fold). <code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> function screens the whole network and calculate perturbation efficiency of all nodes.</p>
@@ -214,7 +214,7 @@
 <li>
 <strong>perturbed count</strong> : count of disturbed nodes for given iteration number and limit (the minimum change in expression level needed to be considered “disturbed” or “changed”).</li>
 </ul>
-<p>In the example below, “Gene17” is up-regulated 3-fold in <em>midsamp</em> dataset where <code>Energy</code> and <code>seeds</code> columns are used for calculating affinity effect and <code>targeting_region</code> columns is used for calculating degradation effect. The network will be iterated over 30 times and 0.1 percent of change will be taken as threshold (#TODO below you said: “The <code>limit</code> symbolizes the percentage of minimum change of node expressions.” you mean for single node, right?) and number of disturbed nodes will be counted.</p>
+<p>In the example below, “Gene17” is up-regulated 3-fold in <em>midsamp</em> dataset where <code>Energy</code> and <code>seeds</code> columns are used for calculating affinity effect and <code>targeting_region</code> columns is used for calculating degradation effect. The network will be iterated over 30 times and 0.1 percent of change will be taken as threshold <!-- #TODO below you said: "The `limit` symbolizes the percentage of minimum change of node expressions." you mean for single node, right? --> and number of disturbed nodes will be counted.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">midsamp <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> Gene_expression, </a>
 <a class="sourceLine" id="cb2-3" title="3">                <span class="dt">miRNA_count =</span> miRNA_expression,</a>

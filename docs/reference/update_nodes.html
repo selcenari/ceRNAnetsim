@@ -38,7 +38,8 @@
 
 <meta property="og:title" content="Carries variables from edge to node. — update_nodes" />
 
-<meta property="og:description" content="This function carries variables from edge to node." />
+<meta property="og:description" content="This function carries variables from edge to node and should be used
+after `update_how` or `update_variables` functions" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -166,7 +167,8 @@
 
     <div class="ref-description">
     
-    <p>This function carries variables from edge to node.</p>
+    <p>This function carries variables from edge to node and should be used
+after `update_how` or `update_variables` functions</p>
     
     </div>
 
@@ -181,7 +183,7 @@
     </tr>
     <tr>
       <th>once</th>
-      <td><p>The argument is about when the carrying process runs.</p></td>
+      <td><p>The argument is about when the carrying process runs (internal use only)</p></td>
     </tr>
     </table>
     
@@ -197,12 +199,17 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>"minsamp"</span>)
+data("minsamp")
 
- <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
- <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>seed_type</span>,<span class='no'>energy</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>update_nodes</span>(<span class='kw'>once</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span class='error'>Error in ifelse(count_current - count_pre != 0, "Down", type): object 'count_current' not found</span></div><div class='input'>
-</div></pre>
+minsamp %>%
+  priming_graph(Gene_expression, miRNA_expression) %>%
+  update_how("Gene2",2) %>%
+  update_nodes() %>%
+
+</div><div class='output co'>#&gt; <span class='error'>Error: &lt;text&gt;:10:0: unexpected end of input</span>
+#&gt; <span class='error'>8: </span>
+#&gt; <span class='error'>9: </span>
+#&gt; <span class='error'>  ^</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
