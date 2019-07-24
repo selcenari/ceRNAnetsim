@@ -37,6 +37,6 @@ update_variables <- function (input_graph, current_counts){
   }
 
 
-  return(input_graph)
+  return(input_graph%>%update_nodes())
 
 }

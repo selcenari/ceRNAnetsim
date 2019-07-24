@@ -40,9 +40,12 @@ normalize <- function(x){abs(x)/max(abs(x))}
 
 priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, deg_factor=dummy){
 
-  if (any(is.na(df))) stop("Missing or NA value in dataframe", call. = FALSE)
-  #TODO instead of quitting here, we can count NA lines and drop them and
-  # tell user how many lines are dropped due to NA and continue
+  if (any(is.na(df))){
+
+    warning(paste("dataframe includes", sum(is.na(aaa)), "NA values. Dataframe is processed after NA removing. "))
+    df<-na.omit(df)
+
+  }
 
   competing_exp <- rlang::enquo(competing_count)
   mirna_exp <- rlang::enquo(miRNA_count)
@@ -63,7 +66,6 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
                   degg_factor = dplyr::select(., dplyr::ends_with("dnorm"))%>%purrr::reduce(`*`, .init =1))%>%
     tidygraph::as_tbl_graph()%>%
     tidygraph::activate(nodes)%>%
-    #tidygraph::mutate(type = ifelse(stringr::str_detect(.N()$name, paste(c("mir", "miR", "Mir","MiR", "hsa-"), collapse="|")), "miRNA", "Competing"), node_id = 1:length(.N()$name))%>%
     tidygraph::mutate(type = ifelse( centrality_degree(mode="in") > 0,
                                      "miRNA",
                                      "Competing") ) %>%
@@ -87,7 +89,9 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
   warning("First column is processed as competing and the second as miRNA.
 ")
 
-  return( input_graph %>% update_nodes(once=TRUE))
+  input_graph<- input_graph%>% update_nodes(once=TRUE)
+
+  return(input_graph)
 
 }
 

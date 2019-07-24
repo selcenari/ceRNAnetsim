@@ -52,6 +52,6 @@ update_how <- function (input_graph, node_name, how){
 
   }
 
-  return(input_graph)
+  return(input_graph%>%update_nodes())
 }
 
