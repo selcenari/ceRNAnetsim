@@ -89,9 +89,8 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
   warning("First column is processed as competing and the second as miRNA.
 ")
 
-  input_graph<- input_graph%>% update_nodes(once=TRUE)
 
-  return(input_graph)
+  return(input_graph%>% update_nodes(once=TRUE))
 
 }
 
