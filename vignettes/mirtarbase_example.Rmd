@@ -36,7 +36,10 @@ data("mirtarbasegene")
 head(mirtarbasegene)
 ```
 
-> **NOTE** if the mirna:target dataset includes miRNA genes as targets, the `priming_graph()` function can fail. Because, the function define to miRNAs and targets without distinguishing between uppercase or lowercase. <!-- #TODO we should fix this issue, labeling "competing" should not be regex based  #TODO priming_graph is fixed, it's not regex based anymore but this issue, miRNA affecting miRNA gene might need care, we should advice user about naming mature miRNA and miRNA gene in a distinguishable way -->
+> **NOTE** if the mirna:target dataset includes miRNA genes as targets, the `priming_graph()` function can fail. Because, the function define to miRNAs and targets without distinguishing between uppercase or lowercase. 
+
+
+<!-- #TODO we should fix this issue, labeling "competing" should not be regex based  #TODO priming_graph is fixed, it's not regex based anymore but this issue, miRNA affecting miRNA gene might need care, we should advice user about naming mature miRNA and miRNA gene in a distinguishable way -->
 
 ## Gene expression in normal and tumor samples
 

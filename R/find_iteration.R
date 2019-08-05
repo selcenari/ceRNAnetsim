@@ -41,6 +41,7 @@ find_iteration <- function(df,  limit= 0.1, plot=FALSE){
       summarise(per= sum(non_zero)*100/n())%>%pull() -> iteration$effect[i]
 
   }
+
   if (plot){
     return(iteration%>%
              ggplot(aes(y=effect, x=iter))+
