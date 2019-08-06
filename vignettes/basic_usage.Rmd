@@ -1,0 +1,118 @@
+---
+title: "Basic Example for Usage of ceRNAnetsim"
+author: "Selcen Ari"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{basic_usage}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(ceRNAnetsim)
+```
+
+You can obtain your own dataset with basic commands as following:
+
+```{r echo=FALSE}
+# datapasta::tribble_paste()
+gene_expression <- tibble::tribble(
+                  ~competing, ~Competing_expression,
+                     "Gene1",                 10000,
+                     "Gene2",                 10000,
+                     "Gene3",                  5000,
+                     "Gene4",                 10000,
+                     "Gene5",                  5000,
+                     "Gene6",                 10000
+                  )
+```
+
+```{r}
+gene_expression
+```
+
+```{r echo=FALSE}
+# datapasta::tribble_paste()
+mirna_expression <- tibble::tribble(
+                             ~miRNA, ~miRNA_expression,
+                             "Mir1",              1000,
+                             "Mir2",              2000
+                             )
+```
+
+```{r}
+mirna_expression
+```
+
+Third table should contain miRNA:gene interactions. This table can be as simple as
+
+```{r echo=FALSE}
+#datapasta::tribble_paste()
+interaction_simple <- tibble::tribble(
+                     ~competing, ~miRNA,
+                        "Gene1", "Mir1",
+                        "Gene2", "Mir1",
+                        "Gene3", "Mir1",
+                        "Gene4", "Mir1",
+                        "Gene4", "Mir2",
+                        "Gene5", "Mir2",
+                        "Gene6", "Mir2"
+                     )
+```
+
+
+```{r}
+interaction_simple
+```
+
+```{r}
+interaction_simple%>%
+  inner_join(gene_expression, by = "competing")%>%
+  inner_join(mirna_expression, "miRNA")->basic_data
+```
+
+# What does ceRNAnetsim do?
+
+ceRNAnetsim processes your dataset as graph object and simulates competing behaviours of targets when steady-state is perturbed via one or more change. Let's
+
+## 1. Handle that basic dataset
+
+```{r}
+#Convertion of dataset to graph.
+
+priming_graph(basic_data, competing_count = Competing_expression, miRNA_count =miRNA_expression)
+```
+
+## Trigger a change
+
+```{r}
+
+priming_graph(basic_data, competing_count = Competing_expression, miRNA_count =miRNA_expression)%>%
+  update_how(node_name = "Gene2", how=2)
+
+```
+
+You can see the current count of Gene2 node is 20000 and its change is specified as "Up" in changes_variable column of node data of graph.
+
+## Simulate the changes in graph
+
+```{r}
+
+priming_graph(basic_data, competing_count = Competing_expression, miRNA_count =miRNA_expression)%>%
+  update_how(node_name = "Gene2", how=2)%>%
+  simulate(cycle = 5)
+
+```
+
+Briefly, ceRNAnetsim utilizes the change(s) as trigger and provides regulation of targets according to miRNA:target and target:total target ratios. 
+
+See the other vignettes for more information.
+

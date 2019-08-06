@@ -90,6 +90,10 @@ TCGA_E9_A1N5_mirnanormal %>%
              by = c("Target"= "external_gene_name")) %>%
   select(Target, miRNA, total_read, gene_expression) %>%
   distinct() -> TCGA_E9_A1N5_mirnagene
+```
+
+
+```{r, echo=FALSE}
 
 TCGA_E9_A1N5_mirnagene %>%    
   group_by(Target) %>%        
@@ -97,10 +101,18 @@ TCGA_E9_A1N5_mirnagene %>%
   distinct() %>%
   ungroup() -> TCGA_E9_A1N5_mirnagene
 
-head(TCGA_E9_A1N5_mirnagene)
+TCGA_E9_A1N5_mirnagene%>%
+  group_by(Target, miRNA)%>%
+  count()%>%
+  filter(n==2)
 ```
 
-<!-- #TODO in the code above what is the purpose of TCGA_E9_A1N5_mirnagene %>% group_by(Target) %>% mutate(gene_expression= max(gene_expression)) %>% distinct() %>% ungroup() , are there multiple expressions per gene/miRNA-->
+<!-- #TODO in the code above what is the purpose of TCGA_E9_A1N5_mirnagene %>% group_by(Target) %>% mutate(gene_expression= max(gene_expression)) %>% distinct() %>% ungroup() , are there multiple expressions per gene/miRNA--> 
+<!-- yes, I also did not understand why it occur, when I processed the dataset. In chunk 9, you can see that dataset contains 2 expression values for 3 genes. If you have an advice, I can try. -->
+
+```{r}
+head(TCGA_E9_A1N5_mirnagene)
+```
 
 When we compared the two gene expression dataset of TCGA-E9A1N5 patient, and selected a gene which has 30-fold increased expression, (gene name: HIST1H3H), this gene node will be used in the example. Note that the selected node must not be isolated one. If the an isolated node is selected the change in expression will not propagate in network. <!-- #TODO the code below can be archived in another file, and code should also be improved since it does not check isolation -->
 
