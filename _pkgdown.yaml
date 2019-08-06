@@ -42,6 +42,8 @@ navbar:
          href: articles/realexample.html
       -  text: How does the system behave in mirtarbase dataset without interaction factors?
          href: articles/mirtarbase_example.html
+      -  text: Helper Commands
+         href: articles/auxiliary_commands.html
     - icon: fa-newspaper-o
       text: "news"
       href: news/index.html

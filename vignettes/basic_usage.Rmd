@@ -16,13 +16,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message= FALSE, warning=FALSE}
 library(ceRNAnetsim)
 ```
 
 You can obtain your own dataset with basic commands as following:
 
-```{r echo=FALSE}
+```{r, message= FALSE, warning=FALSE}
 # datapasta::tribble_paste()
 gene_expression <- tibble::tribble(
                   ~competing, ~Competing_expression,
@@ -39,7 +39,7 @@ gene_expression <- tibble::tribble(
 gene_expression
 ```
 
-```{r echo=FALSE}
+```{r, message= FALSE, warning=FALSE}
 # datapasta::tribble_paste()
 mirna_expression <- tibble::tribble(
                              ~miRNA, ~miRNA_expression,
@@ -54,7 +54,7 @@ mirna_expression
 
 Third table should contain miRNA:gene interactions. This table can be as simple as
 
-```{r echo=FALSE}
+```{r, message= FALSE, warning=FALSE}
 #datapasta::tribble_paste()
 interaction_simple <- tibble::tribble(
                      ~competing, ~miRNA,
@@ -79,11 +79,11 @@ interaction_simple%>%
   inner_join(mirna_expression, "miRNA")->basic_data
 ```
 
-# What does ceRNAnetsim do?
+## What does ceRNAnetsim do?
 
-ceRNAnetsim processes your dataset as graph object and simulates competing behaviours of targets when steady-state is perturbed via one or more change. Let's
+ceRNAnetsim processes your dataset as graph object and simulates competing behaviours of targets when steady-state is perturbed via one or more change. Let's run three steps
 
-## 1. Handle that basic dataset
+## 1. Handle basic dataset
 
 ```{r}
 #Convertion of dataset to graph.
@@ -91,7 +91,7 @@ ceRNAnetsim processes your dataset as graph object and simulates competing behav
 priming_graph(basic_data, competing_count = Competing_expression, miRNA_count =miRNA_expression)
 ```
 
-## Trigger a change
+## 2. Trigger a change
 
 ```{r}
 
@@ -102,7 +102,7 @@ priming_graph(basic_data, competing_count = Competing_expression, miRNA_count =m
 
 You can see the current count of Gene2 node is 20000 and its change is specified as "Up" in changes_variable column of node data of graph.
 
-## Simulate the changes in graph
+## 3. Simulate the changes in graph
 
 ```{r}
 

@@ -183,6 +183,7 @@ minsamp %>%
                  aff_factor = c(energy, seed_type), 
                  deg_factor = region) %>%
    update_how(node_name = "Gene4", how = 2) %>% 
+   activate(edges)%>%
    # following line is just for focusing on necessary
    # columns to see the change in edge data
    select(3:4,comp_count_pre,comp_count_current)
@@ -303,10 +304,6 @@ minsamp %>%
    as_tibble()
 
 ```
-
-<!-- #TODO in convenient_iteration.Rmd vignette, the animated gif /gifs/con_iter_chunk3.gif shows there's change in expression at each cycle, but actually there's no change after cycle 3 for Gene4, is it due to `limit=0` case?, 
-
-No, actually here we take account entire interaction factors. So, there are two different command in these vignettes. It just might be due to the fact that the system provides steady-state early when we use the interaction factors in priming_graph function. -->
 
 ## Visualisation of the graph
 

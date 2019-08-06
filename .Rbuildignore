@@ -3,3 +3,5 @@
 ^ceRNAnetsim\.Rcheck$
 ^ceRNAnetsim.*\.tar\.gz$
 ^ceRNAnetsim.*\.tgz$
+^doc$
+^Meta$

@@ -97,7 +97,8 @@ midsamp %>%
                 miRNA_count = miRNA_expression,
                 aff_factor = c(Energy,seeds),
                 deg_factor = targeting_region) %>%
-  find_node_perturbation(how = 3, cycle = 4, limit = 0.1)
+  find_node_perturbation(how = 3, cycle = 4, limit = 0.1)%>%
+  select(name, perturbation_efficiency, perturbed_count)
 ```
 
 The results of the `find_node_perturbation()` will list effectiveness or importance of nodes in the network. This function can help selecting nodes which will have effective perturbation in network.

@@ -95,41 +95,37 @@ TCGA_E9_A1N5_mirnanormal %>%
 
 ```{r, echo=FALSE}
 
+TCGA_E9_A1N5_mirnagene%>%
+  group_by(Target, miRNA)%>%
+  count()%>%
+  filter(n==2)
+
 TCGA_E9_A1N5_mirnagene %>%    
   group_by(Target) %>%        
   mutate(gene_expression= max(gene_expression)) %>%
   distinct() %>%
   ungroup() -> TCGA_E9_A1N5_mirnagene
 
-TCGA_E9_A1N5_mirnagene%>%
-  group_by(Target, miRNA)%>%
-  count()%>%
-  filter(n==2)
+
 ```
 
 <!-- #TODO in the code above what is the purpose of TCGA_E9_A1N5_mirnagene %>% group_by(Target) %>% mutate(gene_expression= max(gene_expression)) %>% distinct() %>% ungroup() , are there multiple expressions per gene/miRNA--> 
-<!-- yes, I also did not understand why it occur, when I processed the dataset. In chunk 9, you can see that dataset contains 2 expression values for 3 genes. If you have an advice, I can try. -->
+
+
+<!-- yes, I did not understand why it occur when I processed the dataset. In chunk 9, you can see that dataset contains 2 expression values for 3 genes. Furthermore, you can find the integration process of this dataset in article repository and see that I have made merging process through ensembl gene id. Do you have any advice about that? -->
 
 ```{r}
 head(TCGA_E9_A1N5_mirnagene)
 ```
 
-When we compared the two gene expression dataset of TCGA-E9A1N5 patient, and selected a gene which has 30-fold increased expression, (gene name: HIST1H3H), this gene node will be used in the example. Note that the selected node must not be isolated one. If the an isolated node is selected the change in expression will not propagate in network. <!-- #TODO the code below can be archived in another file, and code should also be improved since it does not check isolation -->
+When we compared the two gene expression dataset of TCGA-E9A1N5 patient, and selected a gene which has 30-fold increased expression, (gene name: HIST1H3H), this gene node will be used in the example. Note that the selected node must not be isolated one. If the an isolated node is selected the change in expression will not propagate in network. (You can see commands for node selection in the vignette [The auxiliary commands which can help to the users](https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html))
+
+Optionally, you can filter the low expressed gene nodes because they are not effective elements.
 
 ```{r}
-TCGA_E9_A1N5_tumor%>%
-  inner_join(TCGA_E9_A1N5_normal, by= "external_gene_name")%>%
-  select(patient = patient.x, external_gene_name, tumor_exp = gene_expression.x, normal_exp = gene_expression.y)%>%
-  distinct()%>%
-  inner_join(TCGA_E9_A1N5_mirnagene, by = c("external_gene_name"= "Target"))%>%
-  filter(tumor_exp != 0, normal_exp != 0)%>%
-  mutate(FC= tumor_exp/normal_exp)%>%
-  arrange(desc(FC))
-
-#HIST1H3H : non-isolated gene. 30 FC.
+TCGA_E9_A1N5_mirnagene%>%
+  filter(gene_expression > 10)->TCGA_E9_A1N5_mirnagene
 ```
-
-<!-- #TODO table has many genes which have gene expression==1, there might be some cleaning done before using the expression datasets. Through simulation or statistics we can determine a threshold, say FPKM 10, and below that number can be considered not expressed -->
 
 The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with *HIST1H3H* node.
 
@@ -151,29 +147,13 @@ TCGA_E9_A1N5_mirnagene %>%
                 miRNA_count = total_read) %>%
   update_how("HIST1H3H", 30) %>%
   update_nodes() %>%
-  simulate(10)
+  simulate(10)%>%
+  as_tibble()%>%
+  mutate(FC= count_current/initial_count)%>%
+  arrange(desc(FC))
 ```
 
-
-And then, we tried to simulate the network with the gene which has higher expression amount. For this, we selected *ACTB* node as shown in following:
-<!-- #TODO as for HIST1H3H code, they can be archived somewhere else -->
-
-```{r}
-TCGA_E9_A1N5_tumor%>%
-  inner_join(TCGA_E9_A1N5_normal, by= "external_gene_name") %>%
-  select(patient = patient.x, 
-         external_gene_name, 
-         tumor_exp = gene_expression.x, 
-         normal_exp = gene_expression.y) %>%
-  distinct() %>%
-  inner_join(TCGA_E9_A1N5_mirnagene, 
-             by = c("external_gene_name"= "Target")) %>%
-  filter(tumor_exp != 0, normal_exp != 0) %>%
-  mutate(FC= tumor_exp/normal_exp) %>%
-  arrange(desc(normal_exp))
-
-# ACTB 1.87 fold
-```
+And then, we tried to simulate the network with the gene which has higher expression amount. For this, we selected *ACTB* node as shown in [The auxiliary commands which can help to the users](vignettes/auxiliary_commands.Rmd)
 
 
 ```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
@@ -193,19 +173,20 @@ TCGA_E9_A1N5_mirnagene %>%
                 miRNA_count = total_read) %>%
   update_how("ACTB", 1.87) %>%
   update_nodes() %>%
-  simulate(10)
+  simulate(10)%>%
+  as_tibble()%>%
+  mutate(FC= count_current/initial_count)%>%
+  arrange(desc(FC))
 ```
 
-<!-- #TODO what is the conclusion or point of the output table of simulate? -->
-
-<!-- #TODO we are talking about perturbation efficiencies of these two genes, so we should print out their calc_perturb results -->
-
-# The comparison of two conditions:
+# The sum of two conditions:
 
 In a real biological sample, we tested perturbation efficiencies of two genes;
 * one with low expression but high fold change (HIST1H3H, 30-fold increase in tumor) 
 * another one with high expression but small change in expression level (ACTB, 1.87-fold increase in tumor)
 
+With these two samples, we have been obtained that expression values of genes, rest of the perturbed gene, changed slightly
+
 Despite high fold change, former gene caused little perturbation. On the contrary, high expressing gene with very low fold increase in tumor caused greater perturbation in the network.
 
-Thus, if the perturbed node has lower target:total target ratio in group or groups, the efficiency of it can be weak, or vice versa. The efficiency of ACTB gene may be high for this reason. ACTB has not strong perturbation efficiency too <!-- #TODO is perturb efficiency high or not? -->. This could be arisen from low miRNA:target ratio or impotent <!-- #TODO important?--> target nodes which have very low expression levels.
+Thus, if the perturbed node has lower target:total target ratio in group or groups, the efficiency of it can be weak, or vice versa. The efficiency of ACTB gene may be high for this reason, in comparison with HIST1H3H perturbation. In fact, it has been observed that ACTB has not strong perturbation efficiency too. This could be arisen from low miRNA:target ratio or ineffective target nodes which have very low expression levels.

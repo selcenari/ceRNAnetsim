@@ -64,6 +64,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/basic_usage.html">What does ceRNAnetsim do?</a>
+    </li>
+    <li>
       <a href="articles/small_sample.html">Small example demonstrating the approach and the method</a>
     </li>
     <li>
@@ -76,7 +79,10 @@
       <a href="articles/realexample.html">How does the system do in the presence of interaction factors?</a>
     </li>
     <li>
-      <a href="articles/mirtarbase_example.html">How does the system behave in the presence of interaction factors?</a>
+      <a href="articles/mirtarbase_example.html">How does the system behave in mirtarbase dataset without interaction factors?</a>
+    </li>
+    <li>
+      <a href="articles/auxiliary_commands.html">Helper Commands</a>
     </li>
   </ul>
 </li>
@@ -131,24 +137,24 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Installation of <code>ceRNAnetsim</code>:</p>
-<pre><code><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages("devtools")
+<pre><code>install.packages("devtools")
 devtools::install_github("selcenari/ceRNAnetsim")
 
 
 library(ceRNAnetsim)
-</a></code></pre>
+</code></pre>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
-<pre><code><a href="https://www.rdocumentation.org/packages/utils/topics/data">data("minsamp")
+<pre><code>data("minsamp")
 
 minsamp
 
 priming_graph(minsamp, 
                 competing_count = Competing_expression, 
                 miRNA_count = miRNA_expression)
-</a></code></pre>
+</code></pre>
 </div>
 <div id="local-files" class="section level2">
 <h2 class="hasAnchor">

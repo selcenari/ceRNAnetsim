@@ -104,6 +104,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/basic_usage.html">What does ceRNAnetsim do?</a>
+    </li>
+    <li>
       <a href="../articles/small_sample.html">Small example demonstrating the approach and the method</a>
     </li>
     <li>
@@ -116,7 +119,10 @@
       <a href="../articles/realexample.html">How does the system do in the presence of interaction factors?</a>
     </li>
     <li>
-      <a href="../articles/mirtarbase_example.html">How does the system behave in the presence of interaction factors?</a>
+      <a href="../articles/mirtarbase_example.html">How does the system behave in mirtarbase dataset without interaction factors?</a>
+    </li>
+    <li>
+      <a href="../articles/auxiliary_commands.html">Helper Commands</a>
     </li>
   </ul>
 </li>
@@ -214,16 +220,16 @@
 
 <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
    <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>, <span class='kw'>how</span><span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 1 x 2</span><span>
+   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>, <span class='kw'>how</span><span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;   perturbation_efficiency perturbed_count
-#&gt;                     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>                    25.2               6</div><div class='input'>
+#&gt;                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>                    25.2               6</div><div class='input'>
  <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
    <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>energy</span>,<span class='no'>seed_type</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>,<span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; </span><span style='color: #949494;'># A tibble: 1 x 2</span><span>
+   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>,<span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;   perturbation_efficiency perturbed_count
-#&gt;                     </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>                    25.0               6</div><div class='input'>
+#&gt;                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>                    25.0               6</div><div class='input'>
 
 </div></span></pre>
   </div>
