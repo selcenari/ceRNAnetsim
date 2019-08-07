@@ -28,7 +28,8 @@ Depends:
     furrr, 
     devtools,
     extrafont, 
-    png
+    png, 
+    svglite
 Suggests:
     knitr,
     rmarkdown,
