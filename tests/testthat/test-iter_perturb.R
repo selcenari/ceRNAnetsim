@@ -11,9 +11,17 @@ calc_test<- midsamp%>%
 perturb_test<- midsamp%>%
   priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression)
 
+midsamp %>%
+  priming_graph(competing_count = Gene_expression,
+                miRNA_count = miRNA_expression) %>%
+  update_how(node_name = sample_n(midsamp, 1)$Genes, how= 3) %>%
+  simulate(10) %>%
+  find_iteration() -> minsamp_iteration_test
 
-  expect_is(find_iteration(midsamp,Gene_expression, miRNA_expression, node_name = sample_n(midsamp, 1)$Genes, how= 3), 'numeric')
-  expect_gt(find_iteration(midsamp,Gene_expression, miRNA_expression, node_name = sample_n(midsamp, 1)$Genes, how= 3),  0)
+
+
+  expect_is(minsamp_iteration_test, 'numeric')
+  expect_gt(minsamp_iteration_test,  0)
   expect_equal(attr(calc_test, "names"), c("perturbation_efficiency", "perturbed_count" ))
   expect_true(is.data.frame(find_node_perturbation(perturb_test)))
 
@@ -27,18 +35,14 @@ data("midsamp")
 
   classofout<- midsamp%>%
     priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression)%>%
-    update_nodes(once = TRUE)%>%
     update_how(sample_n(midsamp, 1)$Genes, 3)%>%
-    update_nodes()%>%
     simulate(15)%>%
     class()
 
 
   classofout2<-midsamp%>%
     priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression)%>%
-    update_nodes(once = TRUE)%>%
     update_how(sample_n(midsamp, 1)$Genes, 3)%>%
-    update_nodes()%>%
     simulate(4)%>%
     class()
 

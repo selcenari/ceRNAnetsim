@@ -42,7 +42,7 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
 
   if (any(is.na(df))){
 
-    warning(paste("dataframe includes", sum(is.na(aaa)), "NA values. Dataframe is processed after NA removing. "))
+    warning(paste("Dataframe includes", sum(is.na(df)), "NA values. Dataframe will be processed after NA removing. "))
     df<-na.omit(df)
 
   }

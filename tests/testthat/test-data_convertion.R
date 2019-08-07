@@ -79,7 +79,7 @@ test_that("Is there any missing value that is caused by calculations in graph?",
 
 test_that("When missing value is found in dataframe", {
 
-   expect_error(priming_graph(testdata3, competing_count = Competing_expression, miRNA_count= miRNA_expression), "Missing or NA value in dataframe")
+   expect_warning(priming_graph(testdata3, competing_count = Competing_expression, miRNA_count= miRNA_expression), "Dataframe includes 1 NA values. Dataframe will be processed after NA removing. ")
 
           }
 

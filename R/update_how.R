@@ -29,10 +29,6 @@ update_how <- function (input_graph, node_name, how){
   if ( how < 0) stop("Fold change should not be less than zero.
                      Please use decimal values for decrease. e.g. 0.5 for 2-fold decrease",
                      call. = FALSE)
-  #TODO how==0 is a special case, if a gene is knocked down, update_node
-  # or other functions should not *generate* transcript for knocked down gene
-
-
 
   if(node_name %in% E(input_graph)$Competing_name){
 
@@ -55,3 +51,45 @@ update_how <- function (input_graph, node_name, how){
   return(input_graph%>%update_nodes())
 }
 
+
+
+#' Knocks down given node.
+#'
+#'
+#' @return the graph object.
+#'
+#' @details knocks down a given gene target.
+#'
+#' @param input_graph The graph object that processed in previous step/s.
+#' @param node_name The name of the node whose count is to be knocked down.
+#' @param knockdown default is TRUE
+#'
+#' @examples
+#'
+#' data("minsamp")
+#'
+#' minsamp %>%
+#' priming_graph(competing_count = Competing_expression,
+#'               miRNA_count = miRNA_expression)%>%
+#'      gene_knockdown("Gene4", knockdown = TRUE)
+#'
+#'
+#' @export
+
+
+gene_knockdown <- function (input_graph, node_name, knockdown= TRUE){
+
+  if (knockdown){
+
+    input_graph <- input_graph%>%
+      tidygraph::activate(edges)%>%
+      tidygraph::mutate(comp_count_current = ifelse(node_name == E(input_graph)$Competing_name, 0, comp_count_current))
+
+    return(input_graph%>% update_nodes())
+
+
+  } else
+
+    stop("Please use 'update_how' or 'update_variables'.")
+
+}

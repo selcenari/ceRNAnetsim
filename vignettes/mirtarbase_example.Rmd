@@ -134,7 +134,6 @@ TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
   update_how(node_name = "HIST1H3H", how =30) %>% 
-  update_nodes() %>% 
   simulate(20) %>% 
   find_iteration(plot=TRUE)
 ```
@@ -146,7 +145,6 @@ TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>%
   update_how("HIST1H3H", 30) %>%
-  update_nodes() %>%
   simulate(10)%>%
   as_tibble()%>%
   mutate(FC= count_current/initial_count)%>%
@@ -161,7 +159,6 @@ TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
   update_how(node_name = "ACTB", how =1.87) %>% 
-  update_nodes() %>% 
   simulate(10) %>% 
   find_iteration(plot=TRUE)
 ```
@@ -172,7 +169,6 @@ TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>%
   update_how("ACTB", 1.87) %>%
-  update_nodes() %>%
   simulate(10)%>%
   as_tibble()%>%
   mutate(FC= count_current/initial_count)%>%

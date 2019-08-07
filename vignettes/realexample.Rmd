@@ -64,7 +64,6 @@ filtered_example %>%
                 miRNA_count = mirnaexpression_normal, 
                 aff_factor = Energy) %>%
   update_how("GAPDH", 5) %>%
-  update_nodes() %>%
   vis_graph(title = "Distribution of GAPDH gene node")
 ```
 
@@ -76,7 +75,6 @@ filtered_example %>%
                 miRNA_count = mirnaexpression_normal, 
                 aff_factor = Energy) %>%
   update_how("GAPDH", 5) %>%
-  update_nodes() %>%
   simulate_vis(title = "GAPDH over expression in the real dataset", 3)
 ```
 

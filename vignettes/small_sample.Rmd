@@ -26,7 +26,7 @@ The `ceRNAnetsim` works by executing following steps:
 - The input dataset is prepared for analysis. The first variable is arranged as competing and the second as miRNA.
 - The dataset is primed with `priming_graph()` function so that it's converted into a graph. This function makes calculations that are depended on miRNA amount, target (competing) amount and the interaction factors. It determines the efficiency of miRNA to each target and saves that values as edge data. All calculations are performed in edge data. After that, results of calculations are used in node data.
 - Now, the change in expression level of either miRNA or competing RNA can be introduced with `update_variables()` or `update_how()` functions.
-- The calculated values in edge are carried to node data through `update_nodes()` function.
+- The calculated values in edge are carried to node data through a helper function `update_nodes()`.
 - The change is perceived as a trigger and network-wise calculations are performed.
 - The trigger is used for simulation of regulations in `simulate()` or `simulate_vis()`.
 - These processes can generate various outputs such as graphs or graph objects.
@@ -214,7 +214,7 @@ minsamp %>%
 
 ## Update the node variables with edge variables.
 
-The functions `update_variables()` and `update_how()` updates edge data. After that, `update_nodes()` function should be applied in order to reflect changes in edge data over to node data. In other words, if there's a change in edge data, nodes can be updated accordingly with `update_nodes()` function.
+The functions `update_variables()` and `update_how()` updates edge data. In these functions, `update_nodes()` function is applied in order to reflect changes in edge data over to node data. In other words, if there's a change in edge data, nodes can be updated accordingly with `update_nodes()` function.
 
 ```{r}
 minsamp %>%
@@ -222,8 +222,7 @@ minsamp %>%
                 miRNA_count = miRNA_expression,
                 aff_factor = c(energy, seed_type), 
                 deg_factor = region) %>%
-  update_how("Gene4", how = 2) %>%
-  update_nodes()
+  update_how("Gene4", how = 2) 
 
 # OR
 # minsamp %>%
@@ -231,8 +230,7 @@ minsamp %>%
 #                 miRNA_count = miRNA_expression,
 #                 aff_factor = c(energy, seed_type), 
 #                 deg_factor = region) %>%
-#   update_variables(current_counts = new_counts) %>%
-#   update_nodes()
+#   update_variables(current_counts = new_counts) 
 ```
 
 
@@ -249,7 +247,6 @@ minsamp %>%
                 aff_factor = c(energy, seed_type), 
                 deg_factor = region) %>%
   update_how("Gene4", how = 2) %>%
-  update_nodes() %>%
   simulate(cycle=10)
 ```
 
@@ -262,7 +259,6 @@ minsamp %>%
                  aff_factor = c(energy, seed_type), 
                  deg_factor = region) %>%
    update_how("Gene4", how = 2) %>%
-   update_nodes() %>%
    simulate(cycle=10) %>%
    activate(edges) %>%       #from tidygraph package 
    select(comp_count_list, mirna_count_list) %>%
@@ -278,7 +274,6 @@ minsamp %>%
                  aff_factor = c(energy, seed_type), 
                  deg_factor = region) %>%
    update_how("Gene4", how = 2) %>%
-   update_nodes() %>%
    simulate(cycle=10) %>%
    activate(edges) %>%       #from tidygraph package 
    select(comp_count_list, mirna_count_list) %>%
@@ -297,7 +292,6 @@ minsamp %>%
                  aff_factor = c(energy, seed_type), 
                  deg_factor = region) %>%
    update_how("Gene4", how = 2) %>%
-   update_nodes() %>%
    simulate(cycle=10) %>%
    activate(edges)%>%
    select(comp_count_current, comp_count_pre)%>%
@@ -327,7 +321,6 @@ minsamp %>%
                  aff_factor = c(energy, seed_type), 
                  deg_factor = region) %>%
    update_variables(current_counts = new_counts) %>%
-   update_nodes() %>%
    simulate(3) %>%
    vis_graph(title = "Minsamp Graph After 3 Iteration")
 ```
@@ -341,7 +334,6 @@ minsamp %>%
                  aff_factor = c(energy, seed_type), 
                  deg_factor = region) %>%
    update_variables(current_counts = new_counts) %>%
-   update_nodes() %>%
    simulate_vis(3, title = "Minsamp Graph After Each Iteration")
 ```
 

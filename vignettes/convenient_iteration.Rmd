@@ -43,7 +43,6 @@ minsamp %>%
   priming_graph(competing_count = Competing_expression, 
                 miRNA_count = miRNA_expression) %>%
   update_how("Gene4",2) %>%
-  update_nodes() %>%
   simulate_vis(title = "Minsamp: Common element as trigger", cycle = 15)
 
 
@@ -51,7 +50,6 @@ minsamp %>%
   priming_graph(competing_count = Competing_expression, 
                 miRNA_count = miRNA_expression) %>%
   update_how("Gene4",2) %>%
-  update_nodes() %>%
   simulate(cycle = 5)
 ```
 
@@ -71,7 +69,6 @@ midsamp
 midsamp %>%
   priming_graph(Gene_expression, miRNA_expression) %>%
   update_how("Gene17",2) %>%
-  update_nodes() %>%
   simulate_vis(title = "Midsamp: Gene with higher degree as trigger", 15)
 ```
 
@@ -85,7 +82,6 @@ In the example below, *Gene2* is upregulated 2-fold and then iteration number at
 midsamp %>%
   priming_graph(Gene_expression, miRNA_expression) %>%
   update_how("Gene2",2) %>%
-  update_nodes() %>% 
   simulate(50) %>% 
   find_iteration(limit=0)
 
@@ -117,7 +113,6 @@ data("midsamp_new_counts")
 midsamp %>%
   priming_graph(Gene_expression, miRNA_expression) %>%
   update_variables(current_counts = midsamp_new_counts) %>%
-  update_nodes() %>% 
   simulate(50) %>% 
   find_iteration(limit=0)
 ```
@@ -128,7 +123,6 @@ midsamp %>%
 midsamp %>%
   priming_graph(Gene_expression, miRNA_expression) %>%
   update_how("Gene17",2) %>%
-  update_nodes() %>% 
   simulate(50) %>% 
   find_iteration(limit=0)
 
@@ -142,7 +136,6 @@ As shown in plot above, if "Gene17" is upregulated 2-fold, the network will need
 midsamp %>%
   priming_graph(Gene_expression, miRNA_expression) %>%
   update_how("Gene17", 2) %>%
-  update_nodes() %>%
   simulate_vis(title = "Midsamp: Gene17 2 fold increase, 25 cycles", 25)
 ```
 
