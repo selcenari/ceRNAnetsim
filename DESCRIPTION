@@ -27,7 +27,8 @@ Depends:
     future,
     furrr, 
     devtools,
-    extrafont
+    extrafont, 
+    png
 Suggests:
     knitr,
     rmarkdown,
