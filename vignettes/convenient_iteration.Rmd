@@ -95,13 +95,13 @@ Or
 
 #You can edit the dataset manually. You can change Gene2 expression value as 20000 and save that as a new dataset (midsamp_new_counts)
 
-edit(midsamp)-> midsamp_new_counts
+#edit(midsamp)-> midsamp_new_counts
 
-midsamp_new_counts%>%
-  select(Competing=Genes, miRNA= miRNAs, Competing_count=Gene_expression, miRNA_count= miRNA_expression)->midsamp_new_counts
+#midsamp_new_counts%>%
+#  select(Competing=Genes, miRNA= miRNAs, Competing_count=Gene_expression, miRNA_count= miRNA_expression)->midsamp_new_counts
 
 
-use_data(midsamp_new_counts, overwrite = TRUE)
+#use_data(midsamp_new_counts, overwrite = TRUE)
 
 ```
 

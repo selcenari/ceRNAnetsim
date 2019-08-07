@@ -16,11 +16,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-
-```{r, echo=FALSE, message= FALSE, warning=FALSE}
-library(svglite)
-```
-
 # Introduction
 
 This vignette is about the integration of gene and miRNA pairs and their expression dataset and analysis. The sample dataset in this demonstration, which contains human miRNA:target pairs, was retrieved from [miRTarBase](http://mirtarbase.mbc.nctu.edu.tw/php/download.php) website (Release 7.0).
