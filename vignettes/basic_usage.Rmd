@@ -112,6 +112,24 @@ priming_graph(basic_data, competing_count = Competing_expression, miRNA_count =m
 
 ```
 
+## In addition
+
+ceRNAnetsim also provides the simulation of gene knockdown in the network. In normal conditions, when a gene is up or down regulated, it is considered that amounts of gene transcripts change depended on interactions. But, the transcripts of the gene are not observed in the system when it is knocked down.
+
+In this context, we have developed 'gene_knockdown' and 'simulate_knockdown' functions. You can utilize these functions as following:
+
+```{r}
+data("midsamp")
+
+midsamp %>%
+   priming_graph(competing_count = Gene_expression, 
+                 miRNA_count = miRNA_expression, aff_factor = c(seeds, Energy), deg_factor = targeting_region)%>%
+  gene_knockdown("Gene4")%>%
+  simulate_knockdown(cycle = 10, "Gene4")
+
+
+```
+
 Briefly, ceRNAnetsim utilizes the change(s) as trigger and provides regulation of targets according to miRNA:target and target:total target ratios. 
 
 See the other vignettes for more information.

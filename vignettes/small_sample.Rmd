@@ -283,20 +283,6 @@ minsamp %>%
    .[[1]] %>% 
    round()
 
-
-
-#TODO: this problem was not occured. <!-- #TODO gene5 stays at 5000 and gene6 stays at 10000 for 10 cycles, is that normal?) When I run that chunk, this is not occured -->you can see at following:
-minsamp %>%
-   priming_graph(competing_count = Competing_expression, 
-                 miRNA_count = miRNA_expression,
-                 aff_factor = c(energy, seed_type), 
-                 deg_factor = region) %>%
-   update_how("Gene4", how = 2) %>%
-   simulate(cycle=10) %>%
-   activate(edges)%>%
-   select(comp_count_current, comp_count_pre)%>%
-   as_tibble()
-
 ```
 
 ## Visualisation of the graph

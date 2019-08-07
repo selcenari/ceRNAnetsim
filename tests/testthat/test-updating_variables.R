@@ -68,3 +68,34 @@ test_that("Check zero values", {
 
 
 
+test_that("Check gene knock down", {
+
+  data("midsamp")
+
+  midsamp %>%
+    priming_graph(competing_count = Gene_expression,
+                  miRNA_count = miRNA_expression, aff_factor = c(seeds, Energy), deg_factor = targeting_region)%>%
+    gene_knockdown("Gene4")%>%
+    as_tibble()%>%
+    filter( name == "Gene4")%>%
+    select(count_current)%>%
+    pull()-> res1
+
+
+  midsamp %>%
+    priming_graph(competing_count = Gene_expression,
+                  miRNA_count = miRNA_expression, aff_factor = c(seeds, Energy), deg_factor = targeting_region)%>%
+    gene_knockdown("Gene4")%>%
+    simulate_knockdown(cycle = 10, "Gene4")%>%
+    as_tibble()%>%
+    filter( name == "Gene4")%>%
+    select(count_current)%>%
+    pull()-> res2
+
+  expect_equal(res1, res2, 0)
+
+
+})
+
+
+
