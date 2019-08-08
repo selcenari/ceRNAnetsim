@@ -16,12 +16,12 @@ midsamp %>%
                 miRNA_count = miRNA_expression) %>%
   update_how(node_name = sample_n(midsamp, 1)$Genes, how= 3) %>%
   simulate(10) %>%
-  find_iteration() -> minsamp_iteration_test
+  find_iteration() -> midsamp_iteration_test
 
 
 
-  expect_is(minsamp_iteration_test, 'numeric')
-  expect_gt(minsamp_iteration_test,  0)
+  expect_is(midsamp_iteration_test, 'numeric')
+  expect_gt(midsamp_iteration_test,  0)
   expect_equal(attr(calc_test, "names"), c("perturbation_efficiency", "perturbed_count" ))
   expect_true(is.data.frame(find_node_perturbation(perturb_test)))
 
