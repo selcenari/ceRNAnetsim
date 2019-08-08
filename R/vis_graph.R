@@ -39,7 +39,6 @@ vis_graph <-function(input_graph, Competing_color = "green", mirna_color = "oran
 ")
   }
 
-  extrafont::loadfonts(device="postscript")
 
   input_graph%>%
     ggraph("manual", node.position=sample_layout)+
@@ -50,6 +49,6 @@ vis_graph <-function(input_graph, Competing_color = "green", mirna_color = "oran
     geom_node_point(aes(filter= (changes_variable == "Down"), color= "Down", size= count_current), shape= 16)+
     scale_colour_manual(name= "Types", values=c("Competing"=Competing_color, "miRNA"=mirna_color, "Up"=Upregulation, "Down"= Downregulation))+
     ggtitle(title) +
-    theme_graph(base_family = 'Arial Narrow')
+    theme_graph(base_family = 'sans')
 
 }
