@@ -38,9 +38,11 @@
 
 simulate_vis <- function(input_graph, cycle=1, Competing_color = "green", mirna_color = "orange", Upregulation = "red", Downregulation = "blue", title = "GRAPH", layout= "kk"){
 
-  extrafont::loadfonts()
+
 
   for(i in seq_along(1:cycle)){
+
+    extrafont::loadfonts()
 
     input_graph%>%
       tidygraph::activate(edges)%>%
