@@ -39,7 +39,7 @@ vis_graph <-function(input_graph, Competing_color = "green", mirna_color = "oran
 ")
   }
 
-  extrafont::loadfonts()
+  extrafont::loadfonts(device="postscript")
 
   input_graph%>%
     ggraph("manual", node.position=sample_layout)+

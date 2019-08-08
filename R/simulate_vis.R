@@ -42,7 +42,7 @@ simulate_vis <- function(input_graph, cycle=1, Competing_color = "green", mirna_
 
   for(i in seq_along(1:cycle)){
 
-    extrafont::loadfonts()
+    extrafont::loadfonts(device="postscript")
 
     input_graph%>%
       tidygraph::activate(edges)%>%
