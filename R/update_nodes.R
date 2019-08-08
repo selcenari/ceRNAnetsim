@@ -67,8 +67,7 @@ prepare_rhs <- function(input_graph){
 #'
 #' minsamp %>%
 #'   priming_graph(Competing_expression, miRNA_expression) %>%
-#'   update_how("Gene2",2) %>%
-#'   update_nodes() %>%
+#'   update_how("Gene2",2)
 #'
 #' @export
 

@@ -15,7 +15,6 @@
 #' midsamp %>%
 #'   priming_graph(Gene_expression, miRNA_expression) %>%
 #'   update_how("Gene2",2) %>%
-#'   update_nodes() %>%
 #'   simulate(10) %>%
 #'   find_iteration(limit=0)
 #'
