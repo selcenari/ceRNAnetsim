@@ -5,6 +5,8 @@
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/selcenari/ceRNAnetsim/master)
 
+[![Travis build status](https://travis-ci.org/selcenari/ceRNAnetsim.svg?branch=master)](https://travis-ci.org/selcenari/ceRNAnetsim)
+
 
 <p align="center">
   <img width="500" height="300" src="https://media.giphy.com/media/l0ErNdz1w5vt3YdZm/giphy.gif">
