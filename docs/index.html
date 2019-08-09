@@ -12,8 +12,8 @@
 <script src="pkgdown.js"></script><!-- docsearch --><script src="docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="Regulation Simulator of Interaction between miRNA and Competing RNAs (ceRNA)">
-<meta property="og:description" content="This package simulates regulations of ceRNA expression levels after a expression level change in one or more miRNA/mRNAs. The methodolgy adopted by the package has potential to incorparate any ceRNA (circRNA, lincRNA, etc.) into miRNA:target interaction network.
-    The package basically distributes miRNA expression over available ceRNAs where each ceRNA attracks miRNAs proportional to its amount. However, the package can utilize multiple parameters that modify miRNA effect on its target (seed type, binding energy, binding location, etc.). 
+<meta property="og:description" content="This package simulates regulations of ceRNA (competing endogenous) expression levels after a expression level change in one or more miRNA/mRNAs. The methodolgy adopted by the package has potential to incorparate any ceRNA (circRNA, lincRNA, etc.) into miRNA:target interaction network.
+    The package basically distributes miRNA expression over available ceRNAs where each ceRNA attracks miRNAs proportional to its amount. But, the package can utilize multiple parameters that modify miRNA effect on its target (seed type, binding energy, binding location, etc.). 
     The functions handle the given dataset as graph object and the processes progress via edge and node variables.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -129,6 +129,8 @@
 <h2 class="hasAnchor">
 <a href="#cernanetsim" class="anchor"></a>ceRNAnetsim</h2>
 
+<p><a href="https://mybinder.org/v2/gh/selcenari/ceRNAnetsim/master"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a></p>
+<p><a href="https://travis-ci.org/selcenari/ceRNAnetsim"><img src="https://travis-ci.org/selcenari/ceRNAnetsim.svg?branch=master" alt="Travis build status"></a></p>
 <p align="center">
   <img width="500" height="300" src="https://media.giphy.com/media/l0ErNdz1w5vt3YdZm/giphy.gif"></p>
 <p><code>ceRNAnetsim</code> helps to understanding complex miRNA:target interactions with the network based approach. It utilizes the amounts of miRNAs and their targets and interaction parameters optionally.</p>
@@ -182,11 +184,13 @@ priming_graph(minsamp,
 <a href="#vignettes" class="anchor"></a>Vignettes</h2>
 <p>The repository of ceRNAnetsim contents the vignettes that follow:</p>
 <ul>
+<li><a href="https://selcenari.github.io/ceRNAnetsim/articles/basic_usage.html">What does ceRNAnetsim do?</a></li>
 <li><a href="https://selcenari.github.io/ceRNAnetsim/articles/small_sample.html">Small example demonstrating the approach and the method</a></li>
 <li><a href="https://selcenari.github.io/ceRNAnetsim/articles/convenient_iteration.html">How to calculate proper number of iterations for simulation of the network</a></li>
 <li><a href="https://selcenari.github.io/ceRNAnetsim/articles/perturbation_sample.html">How to determine most effective node of network in equal conditions</a></li>
 <li><a href="https://selcenari.github.io/ceRNAnetsim/articles/realexample.html">How does the system do in the presence of interaction factors?</a></li>
-<li><a href="https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html">How does the system behave in the presence of interaction factors?</a></li>
+<li><a href="https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html">How does the system behave in dataset without interaction factors.</a></li>
+<li><a href="https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html">Helper functions for users.</a></li>
 </ul>
 </div>
 <div id="license" class="section level2">

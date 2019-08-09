@@ -58,11 +58,13 @@ The `ceRNAnetsim` provides various datasets for experimenting with package funct
 
 The repository of ceRNAnetsim contents the vignettes that follow:
 
+- [What does ceRNAnetsim do?](https://selcenari.github.io/ceRNAnetsim/articles/basic_usage.html)
 - [Small example demonstrating the approach and the method](https://selcenari.github.io/ceRNAnetsim/articles/small_sample.html)
 - [How to calculate proper number of iterations for simulation of the network](https://selcenari.github.io/ceRNAnetsim/articles/convenient_iteration.html)
 - [How to determine most effective node of network in equal conditions](https://selcenari.github.io/ceRNAnetsim/articles/perturbation_sample.html)
 - [How does the system do in the presence of interaction factors?](https://selcenari.github.io/ceRNAnetsim/articles/realexample.html)
-- [How does the system behave in the presence of interaction factors?](https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html)
+- [How does the system behave in dataset without interaction factors. ](https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html)
+- [Helper functions for users.](https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html)
 
 ## License
 
