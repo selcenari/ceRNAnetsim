@@ -10,6 +10,8 @@ env:
     - R_CHECK_ARGS="--no-build-vignettes --no-manual --timings"
     - _R_CHECK_TIMINGS_="0"
 
+warnings_are_errors: false
+
 r:
  - release
 
