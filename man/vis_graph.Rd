@@ -43,7 +43,6 @@ vis_graph ensures the process to be followed.
 
  priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)\%>\%
    update_variables(new_counts)\%>\%
-   update_nodes()\%>\%
    vis_graph()
 
 }
