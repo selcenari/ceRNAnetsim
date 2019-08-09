@@ -66,6 +66,8 @@ The repository of ceRNAnetsim contents the vignettes that follow:
 - [How does the system behave in dataset without interaction factors. ](https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html)
 - [Helper functions for users.](https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html)
 
+Also see [package webpage](https://selcenari.github.io/ceRNAnetsim/)
+
 ## License
 
 see the [LICENCE.md](https://github.com/selcenari/ceRNAnetsim/blob/master/LICENSE) file for details.
