@@ -5,12 +5,7 @@ cache: packages
 os:
   - linux
   - osx
-
-r:
-  - oldrel
-  - release
-  - devel
-  - bioc-devel
+  - windows
 
 env:
   global:
