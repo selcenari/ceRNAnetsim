@@ -45,9 +45,11 @@ matrix:
       r: devel
     - os: osx
       dist: trusty
+      sudo: true
       r: oldrel
     - os: osx
       dist: trusty
+      sudo: true
       r: release
     - os: osx
       dist: trusty
