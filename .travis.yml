@@ -2,64 +2,9 @@
 
 language: R
 cache: packages
-
-warnings_are_errors: false
-
-
-r_build_args: --no-build-vignettes --no-manual
-r_check_args: --no-build-vignettes --no-manual --timings
-
-matrix:
-  include:
-    - os: linux
-      dist: precise
-      sudo: false
-      r: oldrel
-    - os: linux
-      dist: precise
-      sudo: false
-      r: release
-    - os: linux
-      dist: precise
-      sudo: false
-      r: devel
-    - os: linux
-      dist: trusty
-      sudo: true
-      r: oldrel
-    - os: linux
-      dist: trusty
-      sudo: true
-      r: release
-    - os: linux
-      dist: trusty
-      sudo: true
-      r: devel
-    - os: osx
-      dist: precise
-      sudo: false
-      r: oldrel
-    - os: osx
-      dist: precise
-      sudo: false
-      r: release
-    - os: osx
-      dist: precise
-      sudo: false
-      r: devel
-    - os: osx
-      dist: trusty
-      sudo: true
-      r: oldrel
-    - os: osx
-      dist: trusty
-      sudo: true
-      r: release
-    - os: osx
-      dist: trusty
-      sudo: true
-      r: devel
-
+os:
+  - linux
+  - osx
 
 env:
   global:
@@ -67,4 +12,12 @@ env:
     - R_CHECK_ARGS="--no-build-vignettes --no-manual --timings"
     - _R_CHECK_TIMINGS_="0"
 
+warnings_are_errors: false
 
+r:
+  - release
+  - devel
+  - oldrel
+
+r_build_args: --no-build-vignettes --no-manual
+r_check_args: --no-build-vignettes --no-manual --timings
