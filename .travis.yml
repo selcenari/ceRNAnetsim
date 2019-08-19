@@ -35,8 +35,6 @@ matrix:
       dist: trusty
       sudo: true
       r: devel
-matrix:
-  include:
     - os: osx
       dist: precise
       sudo: false
