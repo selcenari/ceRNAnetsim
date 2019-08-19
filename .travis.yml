@@ -2,7 +2,15 @@
 
 language: R
 cache: packages
-os: osx
+os:
+  - linux
+  - osx
+
+r:
+  - oldrel
+  - release
+  - devel
+  - bioc-devel
 
 env:
   global:
