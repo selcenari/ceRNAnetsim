@@ -7,30 +7,41 @@ matrix:
   include:
     - os: linux
       dist: precise
+      sudo: false
       r: oldrel
     - os: linux
       dist: precise
+      sudo: false
       r: release
     - os: linux
       dist: precise
+      sudo: false
       r: devel
     - os: linux
       dist: trusty
+      sudo: true
       r: oldrel
     - os: linux
       dist: trusty
+      sudo: true
       r: release
     - os: linux
       dist: trusty
+      sudo: true
       r: devel
+matrix:
+  include:
     - os: osx
       dist: precise
+      sudo: false
       r: oldrel
     - os: osx
       dist: precise
+      sudo: false
       r: release
     - os: osx
       dist: precise
+      sudo: false
       r: devel
     - os: osx
       dist: trusty
@@ -40,6 +51,7 @@ matrix:
       r: release
     - os: osx
       dist: trusty
+      sudo: true
       r: devel
 
 
