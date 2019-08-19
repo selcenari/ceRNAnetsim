@@ -2,10 +2,46 @@
 
 language: R
 cache: packages
-os:
-  - linux
-  - osx
-  - windows
+
+matrix:
+  include:
+    - os: linux
+      dist: precise
+      r: oldrel
+    - os: linux
+      dist: precise
+      r: release
+    - os: linux
+      dist: precise
+      r: devel
+    - os: linux
+      dist: trusty
+      r: oldrel
+    - os: linux
+      dist: trusty
+      r: release
+    - os: linux
+      dist: trusty
+      r: devel
+    - os: osx
+      dist: precise
+      r: oldrel
+    - os: osx
+      dist: precise
+      r: release
+    - os: osx
+      dist: precise
+      r: devel
+    - os: osx
+      dist: trusty
+      r: oldrel
+    - os: osx
+      dist: trusty
+      r: release
+    - os: osx
+      dist: trusty
+      r: devel
+
 
 env:
   global:
@@ -15,8 +51,6 @@ env:
 
 warnings_are_errors: false
 
-r:
- - release
 
 r_build_args: --no-build-vignettes --no-manual
 r_check_args: --no-build-vignettes --no-manual --timings
