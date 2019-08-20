@@ -1,11 +1,7 @@
 
 ## ceRNAnetsim
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/selcenari/ceRNAnetsim_binder/master?filepath=rstudio)
-
-[![Travis build status](https://travis-ci.org/selcenari/ceRNAnetsim.svg?branch=master)](https://travis-ci.org/selcenari/ceRNAnetsim)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/selcenari/ceRNAnetsim_binder/master?urlpath=rstudio) [![Travis build status](https://travis-ci.org/selcenari/ceRNAnetsim.svg?branch=master)](https://travis-ci.org/selcenari/ceRNAnetsim)
 
 
 <p align="center">
