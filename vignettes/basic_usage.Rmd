@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 library(ceRNAnetsim)
 ```
 
-You can obtain your own dataset with basic commands as following:
+You can generate your own dataset with basic commands as following:
 
 ```{r, message= FALSE, warning=FALSE}
 # datapasta::tribble_paste()
@@ -77,8 +77,8 @@ interaction_simple
 
 ```{r}
 interaction_simple%>%
-  inner_join(gene_expression, by = "competing")%>%
-  inner_join(mirna_expression, "miRNA")->basic_data
+  inner_join(gene_expression, by = "competing") %>%
+  inner_join(mirna_expression, "miRNA") -> basic_data
 ```
 
 ## What does ceRNAnetsim do?
@@ -97,7 +97,8 @@ priming_graph(basic_data, competing_count = Competing_expression, miRNA_count =m
 
 ```{r}
 
-priming_graph(basic_data, competing_count = Competing_expression, miRNA_count =miRNA_expression)%>%
+priming_graph(basic_data, competing_count = Competing_expression, 
+              miRNA_count =miRNA_expression) %>%
   update_how(node_name = "Gene2", how=2)
 
 ```
@@ -108,31 +109,31 @@ You can see the current count of Gene2 node is 20000 and its change is specified
 
 ```{r}
 
-priming_graph(basic_data, competing_count = Competing_expression, miRNA_count =miRNA_expression)%>%
-  update_how(node_name = "Gene2", how=2)%>%
+priming_graph(basic_data, competing_count = Competing_expression, 
+              miRNA_count =miRNA_expression) %>%
+  update_how(node_name = "Gene2", how=2) %>%
   simulate(cycle = 5)
 
 ```
 
-## In addition
+## A special case: knockdown
 
-ceRNAnetsim also provides the simulation of gene knockdown in the network. In normal conditions, when a gene is up or down regulated, it is considered that amounts of gene transcripts change depended on interactions. But, the transcripts of the gene are not observed in the system when it is knocked down.
+ceRNAnetsim also provides the simulation of gene knockdown in the network. In normal conditions, when a gene is up or down regulated, it is considered that amounts of gene transcripts change depended on interactions. But, the transcripts of the gene are not observed in the system when it is knocked down. To achieve this case, you just need to define `howto` argument to 0 (zero) in `update_how` function.
 
-In this context, we have developed 'gene_knockdown' and 'simulate_knockdown' functions. You can utilize these functions as following:
 
 ```{r}
 data("midsamp")
 
 midsamp %>%
    priming_graph(competing_count = Gene_expression, 
-                 miRNA_count = miRNA_expression, aff_factor = c(seeds, Energy), deg_factor = targeting_region)%>%
-  gene_knockdown("Gene4")%>%
-  simulate_knockdown(cycle = 10, "Gene4")
-
-
+                 miRNA_count = miRNA_expression, 
+                 aff_factor = c(seeds, Energy), 
+                 deg_factor = targeting_region) %>%
+  update_how("Gene4", how=0) %>%
+  simulate(cycle = 10)
 ```
 
-Briefly, ceRNAnetsim utilizes the change(s) as trigger and provides regulation of targets according to miRNA:target and target:total target ratios. 
+Briefly, ceRNAnetsim utilizes the change(s) as trigger and calculates regulation of targets according to miRNA:target and target:total target ratios. 
 
 See the other vignettes for more information.
 
