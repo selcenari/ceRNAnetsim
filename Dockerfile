@@ -1,4 +1,4 @@
-FROM alperyilmaz/cerna-binder
+FROM selcenari/cernanetsim_binder
 
 COPY --chown=rstudio:rstudio ./vignettes/. ${HOME}/
 
