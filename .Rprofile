@@ -22,10 +22,5 @@
 #    fortunes::fortune()
 
 .First <- function(){
- library(ceRNAnetsim)
  cat("\n Welcome at ceRNAnetsim package vignettes! You can look at the ordered files in working directory. Let's begin with basic usage! \n\n") 
-}
-
-.Last <- function(){ 
- cat("\nGoodbye at ", date(), "\n")
 }
