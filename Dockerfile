@@ -1,3 +1,3 @@
 FROM alperyilmaz/cerna-binder
 
-COPY --chown=rstudio:rstudio ./vignettes/* ${HOME}
+COPY --chown=rstudio:rstudio ./vignettes/* ${HOME}/
