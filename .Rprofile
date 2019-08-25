@@ -8,9 +8,6 @@
 # options(help_type="text")
   options(help_type="html")
 
-# set a site library
-# .Library.site <- file.path(chartr("\\", "/", R.home()), "site-library")
-
 # set a CRAN mirror
 # local({r <- getOption("repos")
 #       r["CRAN"] <- "http://my.local.cran"
