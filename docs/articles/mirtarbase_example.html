@@ -126,7 +126,7 @@
       <h1>A TCGA dataset application</h1>
                         <h4 class="author">Selcen Ari</h4>
             
-            <h4 class="date">2019-08-22</h4>
+            <h4 class="date">2019-08-25</h4>
       
       
       <div class="hidden name"><code>mirtarbase_example.Rmd</code></div>
@@ -157,10 +157,7 @@
 <a class="sourceLine" id="cb1-13" title="13"><span class="co">#&gt; 4 hsa-miR-222-3p  STAT5A </span></a>
 <a class="sourceLine" id="cb1-14" title="14"><span class="co">#&gt; 5 hsa-miR-21-5p   RASGRP1</span></a>
 <a class="sourceLine" id="cb1-15" title="15"><span class="co">#&gt; 6 hsa-miR-148a-3p DNMT1</span></a></code></pre></div>
-<blockquote>
 <p><strong>NOTE</strong> if the mirna:target dataset includes miRNA genes as targets, the <code><a href="../reference/priming_graph.html">priming_graph()</a></code> function can fail. Because, the function define to miRNAs and targets without distinguishing between uppercase or lowercase.</p>
-</blockquote>
-<!-- #TODO we should fix this issue, labeling "competing" should not be regex based  #TODO priming_graph is fixed, it's not regex based anymore but this issue, miRNA affecting miRNA gene might need care, we should advice user about naming mature miRNA and miRNA gene in a distinguishable way -->
 </div>
 <div id="gene-expression-in-normal-and-tumor-samples" class="section level2">
 <h2 class="hasAnchor">
@@ -273,8 +270,6 @@
 #&gt;  9 MATR3   hsa-miR-155-5p      2
 #&gt; 10 MATR3   hsa-miR-16-1-3p     2
 #&gt; # ... with 16 more rows</code></pre>
-<!-- #TODO in the code above what is the purpose of TCGA_E9_A1N5_mirnagene %>% group_by(Target) %>% mutate(gene_expression= max(gene_expression)) %>% distinct() %>% ungroup() , are there multiple expressions per gene/miRNA-->
-<!-- yes, I did not understand why it occur when I processed the dataset. In chunk 9, you can see that dataset contains 2 expression values for 3 genes. Furthermore, you can find the integration process of this dataset in article repository and see that I have made merging process through ensembl gene id. Do you have any advice about that? -->
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(TCGA_E9_A1N5_mirnagene)</a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt; # A tibble: 6 x 4</span></a>
 <a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt;   Target  miRNA         total_read gene_expression</span></a>
@@ -302,7 +297,7 @@
 <a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> gene_expression, </a>
 <a class="sourceLine" id="cb11-3" title="3">                <span class="dt">miRNA_count =</span> total_read) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="st">"HIST1H3H"</span>, <span class="dv">30</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">10</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">20</span>)<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-6" title="6"><span class="st">  </span><span class="kw">as_tibble</span>()<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">FC=</span> count_current<span class="op">/</span>initial_count)<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-8" title="8"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(FC))</a>
@@ -322,45 +317,73 @@
 <a class="sourceLine" id="cb11-22" title="22"><span class="co">#&gt; 10 IFIT~ Comp~    6030          1550    1550.         1550. </span></a>
 <a class="sourceLine" id="cb11-23" title="23"><span class="co">#&gt; # ... with 13,422 more rows, and 2 more variables: changes_variable &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb11-24" title="24"><span class="co">#&gt; #   FC &lt;dbl&gt;</span></a></code></pre></div>
-<p>And then, we tried to simulate the network with the gene which has higher expression amount. For this, we selected <em>ACTB</em> node as shown in <a href="vignettes/auxiliary_commands.Rmd">The auxiliary commands which can help to the users</a></p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">TCGA_E9_A1N5_mirnagene <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb12-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> gene_expression, </a>
-<a class="sourceLine" id="cb12-3" title="3">                <span class="dt">miRNA_count =</span> total_read) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="dt">node_name =</span> <span class="st">"ACTB"</span>, <span class="dt">how =</span><span class="fl">1.87</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-6" title="6"><span class="st">  </span><span class="kw"><a href="../reference/find_iteration.html">find_iteration</a></span>(<span class="dt">plot=</span><span class="ot">TRUE</span>)</a></code></pre></div>
-<p><img src="mirtarbase_example_files/figure-html/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">TCGA_E9_A1N5_mirnagene <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-3" title="3">                <span class="dt">miRNA_count =</span> total_read)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/calc_perturbation.html">calc_perturbation</a></span>(<span class="dt">node_name=</span> <span class="st">"HIST1H3H"</span>, <span class="dt">cycle=</span><span class="dv">20</span>, <span class="dt">how=</span> <span class="dv">30</span>,<span class="dt">limit =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="co">#&gt; Warning in priming_graph(., competing_count = gene_expression, miRNA_count = total_read): First column is processed as competing and the second as miRNA.</span></a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
+<a class="sourceLine" id="cb12-7" title="7"><span class="co">#&gt;   perturbation_efficiency perturbed_count</span></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="co">#&gt;                     &lt;dbl&gt;           &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb12-9" title="9"><span class="co">#&gt; 1              0.00000493               0</span></a></code></pre></div>
+<p>And then, we tried to simulate the network with the gene which has higher expression value. For this, we selected <em>ACTB</em> node as shown in <a href="https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html">The auxiliary commands which can help to the users</a></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">TCGA_E9_A1N5_mirnagene <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> gene_expression, </a>
-<a class="sourceLine" id="cb13-3" title="3">                <span class="dt">miRNA_count =</span> total_read) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="st">"ACTB"</span>, <span class="fl">1.87</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">10</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-6" title="6"><span class="st">  </span><span class="kw">as_tibble</span>()<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">FC=</span> count_current<span class="op">/</span>initial_count)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-8" title="8"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(FC))</a>
-<a class="sourceLine" id="cb13-9" title="9"><span class="co">#&gt; Warning in priming_graph(., competing_count = gene_expression, miRNA_count = total_read): First column is processed as competing and the second as miRNA.</span></a>
-<a class="sourceLine" id="cb13-10" title="10"><span class="co">#&gt; # A tibble: 13,432 x 8</span></a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="co">#&gt;    name  type  node_id initial_count count_pre count_current</span></a>
-<a class="sourceLine" id="cb13-12" title="12"><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb13-13" title="13"><span class="co">#&gt;  1 ACTB  Comp~      84        101917  183710.       183710. </span></a>
-<a class="sourceLine" id="cb13-14" title="14"><span class="co">#&gt;  2 ADIP~ Comp~     319          3015    3026.         3026. </span></a>
-<a class="sourceLine" id="cb13-15" title="15"><span class="co">#&gt;  3 RRM2  Comp~      67          1479    1484.         1484. </span></a>
-<a class="sourceLine" id="cb13-16" title="16"><span class="co">#&gt;  4 FAM1~ Comp~     385           569     571.          571. </span></a>
-<a class="sourceLine" id="cb13-17" title="17"><span class="co">#&gt;  5 YOD1  Comp~     472           470     472.          472. </span></a>
-<a class="sourceLine" id="cb13-18" title="18"><span class="co">#&gt;  6 ZNF2~ Comp~     302          1395    1400.         1400. </span></a>
-<a class="sourceLine" id="cb13-19" title="19"><span class="co">#&gt;  7 DNAJ~ Comp~     557            60      60.2          60.2</span></a>
-<a class="sourceLine" id="cb13-20" title="20"><span class="co">#&gt;  8 FXN   Comp~     374           382     383.          383. </span></a>
-<a class="sourceLine" id="cb13-21" title="21"><span class="co">#&gt;  9 NKIR~ Comp~       4          1519    1524.         1524. </span></a>
-<a class="sourceLine" id="cb13-22" title="22"><span class="co">#&gt; 10 NRAS  Comp~       7          2311    2318.         2318. </span></a>
-<a class="sourceLine" id="cb13-23" title="23"><span class="co">#&gt; # ... with 13,422 more rows, and 2 more variables: changes_variable &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb13-24" title="24"><span class="co">#&gt; #   FC &lt;dbl&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-3" title="3">                <span class="dt">miRNA_count =</span> total_read) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="dt">node_name =</span> <span class="st">"ACTB"</span>, <span class="dt">how =</span><span class="fl">1.87</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="st">  </span><span class="kw"><a href="../reference/find_iteration.html">find_iteration</a></span>(<span class="dt">plot=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="mirtarbase_example_files/figure-html/unnamed-chunk-13-1.png" width="576" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">TCGA_E9_A1N5_mirnagene <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> gene_expression, </a>
+<a class="sourceLine" id="cb14-3" title="3">                <span class="dt">miRNA_count =</span> total_read) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="st">"ACTB"</span>, <span class="fl">1.87</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">20</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="st">  </span><span class="kw">as_tibble</span>()<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">FC=</span> count_current<span class="op">/</span>initial_count)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb14-8" title="8"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(FC))</a>
+<a class="sourceLine" id="cb14-9" title="9"><span class="co">#&gt; Warning in priming_graph(., competing_count = gene_expression, miRNA_count = total_read): First column is processed as competing and the second as miRNA.</span></a>
+<a class="sourceLine" id="cb14-10" title="10"><span class="co">#&gt; # A tibble: 13,432 x 8</span></a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="co">#&gt;    name  type  node_id initial_count count_pre count_current</span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb14-13" title="13"><span class="co">#&gt;  1 ACTB  Comp~      84        101917  183710.       183710. </span></a>
+<a class="sourceLine" id="cb14-14" title="14"><span class="co">#&gt;  2 ADIP~ Comp~     319          3015    3026.         3026. </span></a>
+<a class="sourceLine" id="cb14-15" title="15"><span class="co">#&gt;  3 RRM2  Comp~      67          1479    1484.         1484. </span></a>
+<a class="sourceLine" id="cb14-16" title="16"><span class="co">#&gt;  4 FAM1~ Comp~     385           569     571.          571. </span></a>
+<a class="sourceLine" id="cb14-17" title="17"><span class="co">#&gt;  5 YOD1  Comp~     472           470     472.          472. </span></a>
+<a class="sourceLine" id="cb14-18" title="18"><span class="co">#&gt;  6 ZNF2~ Comp~     302          1395    1400.         1400. </span></a>
+<a class="sourceLine" id="cb14-19" title="19"><span class="co">#&gt;  7 DNAJ~ Comp~     557            60      60.2          60.2</span></a>
+<a class="sourceLine" id="cb14-20" title="20"><span class="co">#&gt;  8 FXN   Comp~     374           382     383.          383. </span></a>
+<a class="sourceLine" id="cb14-21" title="21"><span class="co">#&gt;  9 NKIR~ Comp~       4          1519    1524.         1524. </span></a>
+<a class="sourceLine" id="cb14-22" title="22"><span class="co">#&gt; 10 NRAS  Comp~       7          2311    2318.         2318. </span></a>
+<a class="sourceLine" id="cb14-23" title="23"><span class="co">#&gt; # ... with 13,422 more rows, and 2 more variables: changes_variable &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb14-24" title="24"><span class="co">#&gt; #   FC &lt;dbl&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">TCGA_E9_A1N5_mirnagene <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> gene_expression, </a>
+<a class="sourceLine" id="cb15-3" title="3">                <span class="dt">miRNA_count =</span> total_read)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/calc_perturbation.html">calc_perturbation</a></span>(<span class="dt">node_name=</span> <span class="st">"ACTB"</span>, <span class="dt">cycle=</span><span class="dv">20</span>, <span class="dt">how=</span> <span class="fl">1.87</span>,<span class="dt">limit =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="co">#&gt; Warning in priming_graph(., competing_count = gene_expression, miRNA_count = total_read): First column is processed as competing and the second as miRNA.</span></a>
+<a class="sourceLine" id="cb15-6" title="6"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
+<a class="sourceLine" id="cb15-7" title="7"><span class="co">#&gt;   perturbation_efficiency perturbed_count</span></a>
+<a class="sourceLine" id="cb15-8" title="8"><span class="co">#&gt;                     &lt;dbl&gt;           &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb15-9" title="9"><span class="co">#&gt; 1                  0.0155             826</span></a></code></pre></div>
+<p>On the other hand, the perturbation eficiency of ATCB gene is higher, when this gene is regulated with 30-fold upregulation like in HIST1H3H.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">TCGA_E9_A1N5_mirnagene <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> gene_expression, </a>
+<a class="sourceLine" id="cb16-3" title="3">                <span class="dt">miRNA_count =</span> total_read)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/calc_perturbation.html">calc_perturbation</a></span>(<span class="dt">node_name=</span> <span class="st">"ACTB"</span>, <span class="dt">cycle=</span><span class="dv">20</span>, <span class="dt">how=</span> <span class="dv">30</span>,<span class="dt">limit =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="co">#&gt; Warning in priming_graph(., competing_count = gene_expression, miRNA_count = total_read): First column is processed as competing and the second as miRNA.</span></a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="co">#&gt; # A tibble: 1 x 2</span></a>
+<a class="sourceLine" id="cb16-7" title="7"><span class="co">#&gt;   perturbation_efficiency perturbed_count</span></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="co">#&gt;                     &lt;dbl&gt;           &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb16-9" title="9"><span class="co">#&gt; 1                   0.209            3712</span></a></code></pre></div>
 </div>
 <div id="the-sum-of-two-conditions" class="section level1">
 <h1 class="hasAnchor">
 <a href="#the-sum-of-two-conditions" class="anchor"></a>The sum of two conditions:</h1>
 <p>In a real biological sample, we tested perturbation efficiencies of two genes; * one with low expression but high fold change (HIST1H3H, 30-fold increase in tumor) * another one with high expression but small change in expression level (ACTB, 1.87-fold increase in tumor)</p>
-<p>With these two samples, we have been obtained that expression values of genes, rest of the perturbed gene, changed slightly</p>
-<p>Despite high fold change, former gene caused little perturbation. On the contrary, high expressing gene with very low fold increase in tumor caused greater perturbation in the network.</p>
+<p>With these two samples, it has been obtained that expression values of genes, rest of the perturbed gene, changed slightly.</p>
+<p>Despite high fold change, former gene caused little perturbation. When the perturbation efficiencies of both of these genes are analysed, it has been oberved that HIST1H3H does not affect the other genes in given limit. On the contrary, high expressing gene with very low fold increase in tumor causes greater perturbation in the network. Additionaly, the perturbation efficiency of ACTB gene is quite high from HIST1H3H with 30-fold change, when ACTB is simulated with 30 fold-change.</p>
 <p>Thus, if the perturbed node has lower target:total target ratio in group or groups, the efficiency of it can be weak, or vice versa. The efficiency of ACTB gene may be high for this reason, in comparison with HIST1H3H perturbation. In fact, it has been observed that ACTB has not strong perturbation efficiency too. This could be arisen from low miRNA:target ratio or ineffective target nodes which have very low expression levels.</p>
 </div>
   </div>

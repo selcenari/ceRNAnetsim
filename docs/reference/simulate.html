@@ -176,7 +176,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>simulate</span>(<span class='no'>input_graph</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>simulate</span>(<span class='no'>input_graph</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>knockdown</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -188,6 +188,10 @@
     <tr>
       <th>cycle</th>
       <td><p>Optimal iteration number for gaining steady-state.</p></td>
+    </tr>
+    <tr>
+      <th>threshold</th>
+      <td><p>absolute minimum amount of change required to be considered as up/down regulated element</p></td>
     </tr>
     </table>
     

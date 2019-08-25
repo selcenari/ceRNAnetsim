@@ -178,7 +178,7 @@ after `update_how` or `update_variables` functions</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>update_nodes</span>(<span class='no'>input_graph</span>, <span class='kw'>once</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>update_nodes</span>(<span class='no'>input_graph</span>, <span class='kw'>once</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -190,6 +190,10 @@ after `update_how` or `update_variables` functions</p>
     <tr>
       <th>once</th>
       <td><p>The argument is about when the carrying process runs (internal use only)</p></td>
+    </tr>
+    <tr>
+      <th>limit</th>
+      <td><p>absolute minimum amount of change required to be considered as up/down regulated element</p></td>
     </tr>
     </table>
     
