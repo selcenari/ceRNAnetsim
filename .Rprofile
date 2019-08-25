@@ -8,11 +8,6 @@
 # options(help_type="text")
   options(help_type="html")
 
-# set a CRAN mirror
-# local({r <- getOption("repos")
-#       r["CRAN"] <- "http://my.local.cran"
-#       options(repos=r)})
-
 # Give a fortune cookie, but only to interactive sessions
 # (This would need the fortunes package to be installed.)
 #  if (interactive())
