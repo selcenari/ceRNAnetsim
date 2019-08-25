@@ -4,12 +4,14 @@
 \alias{simulate}
 \title{Utilizes the change in expression value/s as triggering.}
 \usage{
-simulate(input_graph, cycle = 1)
+simulate(input_graph, cycle = 1, threshold = 0, knockdown = TRUE)
 }
 \arguments{
 \item{input_graph}{The graph object that processed in previous steps.}
 
 \item{cycle}{Optimal iteration number for gaining steady-state.}
+
+\item{threshold}{absolute minimum amount of change required to be considered as up/down regulated element}
 }
 \value{
 The graph.

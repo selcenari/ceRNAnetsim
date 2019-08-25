@@ -54,8 +54,8 @@ test_that("Check zero values", {
 
   midsamp%>%
     priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression,  aff_factor = c(seeds, Energy), deg_factor = targeting_region)%>%
-    update_how("Gene6", 0)%>%
-    simulate(10)%>%
+    update_how("Gene6", 0, knockdown = FALSE)%>%
+    simulate(10, knockdown = FALSE)%>%
     as_tibble()%>%
     dplyr::mutate(count_current= round(count_current, 2))%>%
     dplyr::select(count_current)%>%
@@ -75,9 +75,9 @@ test_that("Check gene knock down", {
   midsamp %>%
     priming_graph(competing_count = Gene_expression,
                   miRNA_count = miRNA_expression, aff_factor = c(seeds, Energy), deg_factor = targeting_region)%>%
-    gene_knockdown("Gene4")%>%
+    update_how("Gene2", how=0, knockdown = TRUE)%>%
     as_tibble()%>%
-    filter( name == "Gene4")%>%
+    filter( name == "Gene2")%>%
     select(count_current)%>%
     pull()-> res1
 
@@ -85,17 +85,66 @@ test_that("Check gene knock down", {
   midsamp %>%
     priming_graph(competing_count = Gene_expression,
                   miRNA_count = miRNA_expression, aff_factor = c(seeds, Energy), deg_factor = targeting_region)%>%
-    gene_knockdown("Gene4")%>%
-    simulate_knockdown(cycle = 10, "Gene4")%>%
+    update_how("Gene2", how=0, knockdown = TRUE)%>%
+    simulate(cycle = 5, knockdown = TRUE)%>%
     as_tibble()%>%
-    filter( name == "Gene4")%>%
+    filter( name == "Gene2")%>%
     select(count_current)%>%
     pull()-> res2
 
-  expect_equal(res1, res2, 0)
 
+  midsamp %>%
+    priming_graph(competing_count = Gene_expression,
+                  miRNA_count = miRNA_expression, aff_factor = c(seeds, Energy), deg_factor = targeting_region)%>%
+    update_how("Gene2", how=0, knockdown = TRUE)%>%
+    simulate(cycle = 5, knockdown = TRUE)%>%
+    activate(edges)%>%
+    as_tibble()%>%
+    filter( Competing_name == "Gene2")%>%
+    select(comp_count_pre)%>%
+    pull()-> res3
+
+
+  midsamp %>%
+    priming_graph(competing_count = Gene_expression,
+                  miRNA_count = miRNA_expression, aff_factor = c(seeds, Energy), deg_factor = targeting_region)%>%
+    update_how("Gene2", how=0, knockdown = TRUE)%>%
+    simulate(cycle = 5, knockdown = TRUE)%>%
+    activate(edges)%>%
+    as_tibble()%>%
+    filter(Competing_name == "Gene2")%>%
+    select(comp_count_current)%>%
+    pull()-> res4
+
+  expect_equal(res1, res2, 0)
+  expect_equal(res3, res4, 0)
+
+
+  midsamp %>%
+    priming_graph(competing_count = Gene_expression,
+                  miRNA_count = miRNA_expression, aff_factor = c(seeds, Energy), deg_factor = targeting_region)%>%
+    update_how("Gene2", how=0, knockdown = TRUE)%>%
+    simulate(cycle = 5, knockdown = TRUE)%>%
+    activate(edges)%>%
+    as_tibble()%>%
+    filter( Competing_name == "Gene2")%>%
+    select(comp_count_list)%>%
+    unnest()%>%
+    pull()-> sim_res
+
+  expect_equal(sim_res, c(10000, 0, 0, 0, 0, 0))
+
+  midsamp %>%
+    priming_graph(competing_count = Gene_expression,
+                  miRNA_count = miRNA_expression, aff_factor = c(seeds, Energy), deg_factor = targeting_region)%>%
+    update_how("Gene2", how=0, knockdown = FALSE)%>%
+    simulate(cycle = 5, knockdown = FALSE)%>%
+    as_tibble()%>%
+    filter(name== "Gene2")%>%
+    select(count_current)%>%
+    round(digits = 2)%>%
+    pull()->res5
+
+  expect_equal(res5, 6.58)
 
 })
-
-
-

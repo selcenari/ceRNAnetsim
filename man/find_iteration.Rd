@@ -2,7 +2,7 @@
 % Please edit documentation in R/find_iteration.R
 \name{find_iteration}
 \alias{find_iteration}
-\title{`find_iteration` Finds the iteration which provides maximum affected node number}
+\title{Finds the iteration which provides maximum affected node number}
 \usage{
 find_iteration(df, limit = 0.1, plot = FALSE)
 }

@@ -14,6 +14,7 @@
 #' @param Downregulation The color of Downregulated elements on the graph with "blue" default.
 #' @param title Title of the given graph.
 #' @param layout The layout that will be used for visualisation of the graph.
+#' @param threshold absolute minimum amount of change required to be considered as up/down regulated element
 #'
 #' @examples
 #'
@@ -34,7 +35,7 @@
 #' @export
 
 
-simulate_vis <- function(input_graph, cycle=1, Competing_color = "green", mirna_color = "orange", Upregulation = "red", Downregulation = "blue", title = "GRAPH", layout= "kk"){
+simulate_vis <- function(input_graph, cycle=1, threshold = 0, Competing_color = "green", mirna_color = "orange", Upregulation = "red", Downregulation = "blue", title = "GRAPH", layout= "kk"){
 
 
 
@@ -52,7 +53,7 @@ simulate_vis <- function(input_graph, cycle=1, Competing_color = "green", mirna_
       ungroup()%>%
       mutate(comp_count_list = pmap(list(comp_count_list, comp_count_current), c), effect_list = pmap(list(effect_list, effect_current), c), mirna_count_list = pmap(list(mirna_count_list, mirna_count_current), c))%>%
       tidygraph::activate(nodes)%>%
-      update_nodes()-> input_graph
+      update_nodes(limit = threshold)-> input_graph
 
     vis_graph(input_graph, Competing_color, mirna_color, Upregulation, Downregulation, title = paste(title, "-",i), layout)-> graph_vis
 

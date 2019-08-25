@@ -4,7 +4,7 @@
 \alias{gene_knockdown}
 \title{Knocks down given node.}
 \usage{
-gene_knockdown(input_graph, node_name, knockdown = TRUE)
+gene_knockdown(input_graph, node_name)
 }
 \arguments{
 \item{input_graph}{The graph object that processed in previous step/s.}
@@ -21,15 +21,4 @@ Knocks down given node.
 }
 \details{
 knocks down a given gene target.
-}
-\examples{
-
-data("minsamp")
-
-minsamp \%>\%
-priming_graph(competing_count = Competing_expression,
-              miRNA_count = miRNA_expression)\%>\%
-     gene_knockdown("Gene4", knockdown = TRUE)
-
-
 }

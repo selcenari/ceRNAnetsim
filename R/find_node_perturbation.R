@@ -1,6 +1,6 @@
-#' Calculates average expression changes of all  nodes and finds the perturbed node count for all nodes in system.
+#' Calculates average expression changes of all nodes except trigger and finds the perturbed node count for all nodes in system.
 #'
-#' calculates the mean of expression changes of all  nodes and finds the perturbed node count for all nodes in system.
+#' calculates the mean of expression changes of all nodes except trigger and finds the perturbed node count for all nodes in system.
 #'
 #' @return It gives a tibble form dataset that includes node names, perturbation efficiency and perturbed count of nodes.
 #'

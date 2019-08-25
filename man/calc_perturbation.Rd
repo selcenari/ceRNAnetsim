@@ -2,7 +2,7 @@
 % Please edit documentation in R/calc_perturbation.R
 \name{calc_perturbation}
 \alias{calc_perturbation}
-\title{Calculates average expression changes of all nodes and finds the perturbed node count for a given node.}
+\title{Calculates average expression changes of all nodes except trigger and finds the perturbed node count for a given node.}
 \usage{
 calc_perturbation(input_graph, node_name, how = 1, cycle = 1,
   limit = 0)
@@ -22,10 +22,10 @@ calc_perturbation(input_graph, node_name, how = 1, cycle = 1,
 a tibble with two columns, the perturbation efficiency and number of perturbed nodes.
 }
 \description{
-calculates mean of expression changes of all nodes and finds the perturbed node count for a given node.
+calculates mean of expression changes of all nodes except trigger and finds the perturbed node count for a given node.
 }
 \details{
-calc_perturbation calculates mean expression changes of elements after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
+calc_perturbation calculates mean expression changes of elements except trigger after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
  The function determines the perturbation efficiency and number of perturbed nodes after given change with how, cycle and limit parameter.
 }
 \examples{

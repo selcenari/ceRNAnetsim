@@ -1,8 +1,8 @@
-#' Calculates average expression changes of all nodes and finds the perturbed node count for a given node.
+#' Calculates average expression changes of all nodes except trigger and finds the perturbed node count for a given node.
 #'
-#' calculates mean of expression changes of all nodes and finds the perturbed node count for a given node.
+#' calculates mean of expression changes of all nodes except trigger and finds the perturbed node count for a given node.
 #'
-#' @details calc_perturbation calculates mean expression changes of elements after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
+#' @details calc_perturbation calculates mean expression changes of elements except trigger after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
 #'  The function determines the perturbation efficiency and number of perturbed nodes after given change with how, cycle and limit parameter.
 #'
 #' @param input_graph the graph object that was processed with priming graph in previous step.
@@ -34,7 +34,8 @@ calc_perturbation <- function(input_graph, node_name, how=1 , cycle=1, limit=0){
   input_graph%>%
     update_how(node_name, how)%>%
     simulate(cycle)%>%
-    tibble::as_tibble()-> res
+    tibble::as_tibble()%>%
+    filter(name!= node_name)-> res
 
   as.double((res%>%summarise(mean(abs(count_current-initial_count)*100/initial_count)))[[1]])-> perturbation_eff
 

@@ -4,14 +4,17 @@
 \alias{simulate_vis}
 \title{Provides visualisation of the graph in addition to simulate function.}
 \usage{
-simulate_vis(input_graph, cycle = 1, Competing_color = "green",
-  mirna_color = "orange", Upregulation = "red",
-  Downregulation = "blue", title = "GRAPH", layout = "kk")
+simulate_vis(input_graph, cycle = 1, threshold = 0,
+  Competing_color = "green", mirna_color = "orange",
+  Upregulation = "red", Downregulation = "blue", title = "GRAPH",
+  layout = "kk")
 }
 \arguments{
 \item{input_graph}{The graph object that processed in previous steps.}
 
 \item{cycle}{Optimal iteration number for gaining steady-state.}
+
+\item{threshold}{absolute minimum amount of change required to be considered as up/down regulated element}
 
 \item{Competing_color}{The color of competing elements on the graph with "green" default.}
 

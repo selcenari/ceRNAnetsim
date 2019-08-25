@@ -141,5 +141,18 @@ midsamp %>%
 
 ![Midsamp Gene17 perturbation with 25 iteration](gifs/con_iter_chunk7.gif)
 
+Note: If you ignore decimal change in gene expression, `threshold` argument can be used. With this method, system reaches steady-state early.
+
+```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
+
+midsamp %>%
+  priming_graph(Gene_expression, miRNA_expression) %>%
+  update_how("Gene17", 2) %>%
+  simulate_vis(title = "Midsamp: Gene17 2 fold increase, 6 cycles", 6, threshold = 1)
+
+```
+
+![Midsamp Gene17 perturbation with 6 iteration with threshold](gifs/con_iter_chunk8.gif)
+
 The workflow that is aforementioned in this vignette should be considered as suggestion. Because the `cycle` is a critical argument that is used with `simulate()` function and affects results of analysis. In light of this vignette and functions, the approach can be developed according to dataset.
 

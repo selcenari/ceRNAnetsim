@@ -22,7 +22,17 @@ knitr::opts_chunk$set(
 library(ceRNAnetsim)
 ```
 
-You can generate your own dataset with basic commands as following:
+### About preparing data
+
+The table used in minimal sample might look complicated thus let's see how it's constructed.
+
+The table is actually constructed by merging three different tables:
+
+* gene expression data
+* miRNA expression data
+* miRNA:gene pairs (might **optionally** contain data about the interaction)
+
+So, the `basic_data` table is constructed by merging following tables:
 
 ```{r, message= FALSE, warning=FALSE}
 # datapasta::tribble_paste()
@@ -118,8 +128,7 @@ priming_graph(basic_data, competing_count = Competing_expression,
 
 ## A special case: knockdown
 
-ceRNAnetsim also provides the simulation of gene knockdown in the network. In normal conditions, when a gene is up or down regulated, it is considered that amounts of gene transcripts change depended on interactions. But, the transcripts of the gene are not observed in the system when it is knocked down. To achieve this case, you just need to define `howto` argument to 0 (zero) in `update_how` function.
-
+ceRNAnetsim also provides the simulation of gene knockdown in the network. In normal conditions, when a gene is up or down regulated, it is considered that amounts of gene transcripts change depended on interactions. But, the transcripts of the gene are not observed in the system when it is knocked down. To achieve this case, you just need to define `how` argument to 0 (zero) in `update_how` function. Note that, If `how` argument is specified as `0`, *simulate()* and *update_how()* functions process the variables to knockdown of specified gene with default `knockdown = TRUE`. For this reason, the workflow must be done with `knockdown= FALSE`, when it is desirable that the presence of transcripts of specified gene in the system.
 
 ```{r}
 data("midsamp")

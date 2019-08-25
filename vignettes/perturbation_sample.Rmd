@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 # What is perturbation efficiency?
 
-The perturbation efficiency means that the disturbance and propagation efficiency of an element in the network. In a given network not all nodes have same or similar perturbation efficiency Changes in some nodes might propagate to whole network and for some nodes the effect might be limited to small subgraph of the network. Not only topology but also miRNA:target interaction dynamics determine perturbation efficiency.
+The perturbation efficiency means that the disturbance and propagation efficiency of an element in the network. In a given network not all nodes have same or similar perturbation efficiency. Changes in some nodes might propagate to whole network and for some nodes the effect might be limited to small subgraph of the network. Not only topology but also miRNA:target interaction dynamics determine perturbation efficiency.
 
 - Expression level and type of trigger element plays a crucial role. The trigger element can be an miRNA or competing target. The perturbation efficiency is affected from ratio of miRNA amount to sum of expression levels of its targets. Also, amount of competing element among whole competing elements is important since it determines distribution of miRNA. For example, if trigger is an miRNA with expression level of 1500 and if sum of expression levels of its targets is 1000000, then this miRNA will not perturb its neighborhood efficiently. So, miRNA:target ratio is important for regulation of interaction network.
 
@@ -46,7 +46,7 @@ midsamp
 
 This function works for a given node from network. It calculates and returns two values:
 
-* **perturbation efficiency** : mean of percentage of expression changes of all elements in the network 
+* **perturbation efficiency** : mean of percentage of expression changes of all elements except trigger in the network 
 * **perturbed count** : count of disturbed nodes for given iteration number and limit (the minimum change in expression level needed to be considered "disturbed" or "changed"). 
 
 In the example below, "Gene17" is up-regulated 3-fold in *midsamp* dataset where `Energy` and `seeds` columns are used for calculating affinity effect and `targeting_region` columns is used for calculating degradation effect. The network will be iterated over 30 times and number of disturbed nodes (as taking into account nodes that have changed more than the value of the threshold (0.1 percentage in terms of the change)) will be counted.

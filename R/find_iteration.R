@@ -1,4 +1,4 @@
-#' `find_iteration` Finds the iteration which provides maximum affected node number
+#'  Finds the iteration which provides maximum affected node number
 #'
 #'  searches the iteration that provides maximum affected node number. The user defines a symbolic iteration with .iter. The function calculates the number of affected nodes for each iteration and than selects the iteration that has maximum affected nodes' number.
 #'

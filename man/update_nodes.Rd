@@ -4,12 +4,14 @@
 \alias{update_nodes}
 \title{Carries variables from edge to node.}
 \usage{
-update_nodes(input_graph, once = FALSE)
+update_nodes(input_graph, once = FALSE, limit = 0)
 }
 \arguments{
 \item{input_graph}{Processed graph object in previous step.}
 
 \item{once}{The argument is about when the carrying process runs (internal use only)}
+
+\item{limit}{absolute minimum amount of change required to be considered as up/down regulated element}
 }
 \value{
 the graph object.

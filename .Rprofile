@@ -18,9 +18,12 @@
 
 # Give a fortune cookie, but only to interactive sessions
 # (This would need the fortunes package to be installed.)
-#  if (interactive()) 
+#  if (interactive())
 #    fortunes::fortune()
 
 .First <- function(){
- cat("\n Welcome at ceRNAnetsim package vignettes! You can look at the ordered files in working directory. Let's begin with basic usage! \n\n") 
+ cat("\n
+  Welcome at ceRNAnetsim package!
+  You can look at the ordered vignette files in working directory.
+  Let's begin with basic usage! \n\n")
 }

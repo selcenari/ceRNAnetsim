@@ -20,15 +20,25 @@
 #'  priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)%>%
 #'    update_how("Gene1", 3)
 #'
+#'    priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)%>%
+#'   update_how("Gene1", how=0, knockdown= TRUE)
+#'
 #'
 #'
 #' @export
 
-update_how <- function (input_graph, node_name, how){
+update_how <- function (input_graph, node_name, how, knockdown= TRUE){
 
   if ( how < 0) stop("Fold change should not be less than zero.
                      Please use decimal values for decrease. e.g. 0.5 for 2-fold decrease",
                      call. = FALSE)
+
+  if( how==0 & knockdown){
+
+    return(input_graph%>%
+           gene_knockdown(node_name)%>%
+             update_nodes())
+  }
 
   if(node_name %in% E(input_graph)$Competing_name){
 
@@ -64,32 +74,13 @@ update_how <- function (input_graph, node_name, how){
 #' @param node_name The name of the node whose count is to be knocked down.
 #' @param knockdown default is TRUE
 #'
-#' @examples
-#'
-#' data("minsamp")
-#'
-#' minsamp %>%
-#' priming_graph(competing_count = Competing_expression,
-#'               miRNA_count = miRNA_expression)%>%
-#'      gene_knockdown("Gene4", knockdown = TRUE)
-#'
-#'
-#' @export
 
-
-gene_knockdown <- function (input_graph, node_name, knockdown= TRUE){
-
-  if (knockdown){
+gene_knockdown <- function (input_graph, node_name){
 
     input_graph <- input_graph%>%
       tidygraph::activate(edges)%>%
       tidygraph::mutate(comp_count_current = ifelse(node_name == E(input_graph)$Competing_name, 0, comp_count_current))
 
     return(input_graph%>% update_nodes())
-
-
-  } else
-
-    stop("Please use 'update_how' or 'update_variables'.")
 
 }

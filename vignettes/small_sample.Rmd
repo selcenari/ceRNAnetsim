@@ -34,7 +34,7 @@ The `ceRNAnetsim` works by executing following steps:
 
 The workflow of `ceRNAnetsim` are shown as following:
 
-```{r pressure, echo=FALSE, fig.align='center', fig.width=4, fig.height=3, dpi=120}
+```{r pressure, echo=FALSE, fig.align='center', fig.width=6, fig.height=5, dpi=120}
 
 knitr::include_graphics("gifs/model_vignette.png")
 ```
@@ -65,17 +65,9 @@ minsamp
 
 ### About preparing data
 
-The table used in minimal sample might look complicated thus let's see how it's constructed.
+The dataset `basic_data` is constructed in [previous vignette](https://selcenari.github.io/ceRNAnetsim/articles/basic_usage.html). We can improve this dataset to obtain *minsamp* dataset as following.
 
-The table is actually constructed by merging three different tables:
-
-* gene expression data
-* miRNA expression data
-* miRNA:gene pairs (might **optionally** contain data about the interaction)
-
-So, the `minsamp` table is constructed by merging following tables:
-
-```{r echo=FALSE}
+```{r echo=FALSE, include=FALSE, message= FALSE, warning=FALSE}
 # datapasta::tribble_paste()
 gene_expression <- tibble::tribble(
                   ~competing, ~Competing_expression,
@@ -88,11 +80,7 @@ gene_expression <- tibble::tribble(
                   )
 ```
 
-```{r}
-gene_expression
-```
-
-```{r echo=FALSE}
+```{r echo=FALSE, include=FALSE, message= FALSE, warning=FALSE}
 # datapasta::tribble_paste()
 mirna_expression <- tibble::tribble(
                              ~miRNA, ~miRNA_expression,
@@ -101,13 +89,8 @@ mirna_expression <- tibble::tribble(
                              )
 ```
 
-```{r}
-mirna_expression
-```
 
-Third table should contain miRNA:gene interactions. This table can be as simple as
-
-```{r echo=FALSE}
+```{r echo=FALSE, include=FALSE, message= FALSE, warning=FALSE}
 #datapasta::tribble_paste()
 interaction_simple <- tibble::tribble(
                      ~competing, ~miRNA,
@@ -121,8 +104,14 @@ interaction_simple <- tibble::tribble(
                      )
 ```
 
+```{r echo=FALSE, include=FALSE, message= FALSE, warning=FALSE}
+interaction_simple%>%
+  inner_join(gene_expression, by = "competing") %>%
+  inner_join(mirna_expression, "miRNA") -> basic_data
+```
+
 ```{r}
-interaction_simple
+basic_data
 ```
 
 or it can contain extra information about each miRNA:gene interaction
@@ -145,7 +134,12 @@ interaction_complex <-tibble::tribble(
 interaction_complex
 ```
 
-By joining these 3 different tables, third table being simple or complex, your data will be ready for analysis.
+By joining these tables, your data will be ready for analysis.
+
+```{r}
+basic_data%>%
+   inner_join(interaction_complex, by= c("competing", "miRNA"))
+```
 
 ## Convert the dataset to graph
 
@@ -238,7 +232,7 @@ minsamp %>%
 
 Change in expression level of one or more nodes will trigger a perturbation in the system which will effect neighboring miRNA:target interactions. The effect will propagate and iterate over until it reaches steady-state.
 
-With `simulate()` function the changes in the system, are calculated iteratively. For example, in the example below, simulation will proceed ten cycles only.
+With `simulate()` function the changes in the system, are calculated iteratively. For example, in the example below, simulation will proceed ten cycles only. In simulation of the regulation, the important argument is `threshold` which provides to specify absolute minimum amount of change required to be considered changed element as up or down. 
 
 ```{r}
 minsamp %>%
@@ -247,7 +241,7 @@ minsamp %>%
                 aff_factor = c(energy, seed_type), 
                 deg_factor = region) %>%
   update_how("Gene4", how = 2) %>%
-  simulate(cycle=10)
+  simulate(cycle=10) #threshold with default 0.
 ```
 
 `simulate()` saves the expression level of previous iterations in list columns in edge data. The changes in expression level throughout the simulate cycles are accessible with standard `dplyr` functions. For example:
@@ -262,7 +256,7 @@ minsamp %>%
    simulate(cycle=10) %>%
    activate(edges) %>%       #from tidygraph package 
    select(comp_count_list, mirna_count_list) %>%
-   activate(nodes)   
+   as_tibble()  
 ```
 
 Here, `comp_count_list` and `mirna_count_list` are list-columns which track changes in both competing RNA and miRNA levels. In the sample above, "Gene4" has initial expression level of 10000 (after trigger, it's initial expression is 20000) and reached level of 19806 at 9th cycle (count_pre) and also stayed at 19806 in last cycle (count_current). The full history of expression level for Gene4 is as follows:
@@ -283,6 +277,18 @@ minsamp %>%
    .[[1]] %>% 
    round()
 
+```
+
+Actually, Gene4 seems like reached steady-state in iteration 4. But, this approach is sensitive to even small decimal numbers. So, threshold argument could be used to ignore very small decimal numbers. With a threshold value the system can reach steady-state early, like following.
+
+```{r}
+minsamp %>%
+  priming_graph(competing_count = Competing_expression, 
+                miRNA_count = miRNA_expression,
+                aff_factor = c(energy, seed_type), 
+                deg_factor = region) %>%
+  update_how("Gene4", how = 2) %>%
+  simulate(cycle=3, threshold = 1)
 ```
 
 ## Visualisation of the graph

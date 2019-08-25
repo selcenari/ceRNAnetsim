@@ -57,6 +57,7 @@ prepare_rhs <- function(input_graph){
 #'
 #' @param input_graph Processed graph object in previous step.
 #' @param once The argument is about when the carrying process runs (internal use only)
+#' @param limit absolute minimum amount of change required to be considered as up/down regulated element
 #'
 #' @details If the carrying process performs after priming_graph function, the argument must be TRUE.
 #'     The function helps to visualisation of processed graph object, especially that includes too many nodes.This step makes it easily to follow the processes.
@@ -71,7 +72,7 @@ prepare_rhs <- function(input_graph){
 #'
 #' @export
 
-update_nodes <- function(input_graph, once = FALSE){
+update_nodes <- function(input_graph, once = FALSE, limit = 0){
   if( once ) {
     rhs_table <- prepare_rhs_once(input_graph)
   } else {
@@ -87,8 +88,8 @@ update_nodes <- function(input_graph, once = FALSE){
   input_graph <- input_graph%>%
     tidygraph::activate(nodes)%>%
     left_join(rhs_table, by=c("node_id"="id"))%>%
-    mutate(changes_variable = ifelse( count_current-count_pre != 0, "Down", type),
-           changes_variable = ifelse(count_current-count_pre > 0, "Up", changes_variable))
+    mutate(changes_variable = ifelse( count_current-count_pre < -limit, "Down", type),
+           changes_variable = ifelse(count_current-count_pre > limit, "Up", changes_variable))
 
   input_graph
 }
