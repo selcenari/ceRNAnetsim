@@ -1,5 +1,5 @@
 ---
-title: "Basic Example for Usage of ceRNAnetsim"
+title: "Basic Use of ceRNAnetsim"
 author: "Selcen Ari"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -22,9 +22,15 @@ knitr::opts_chunk$set(
 library(ceRNAnetsim)
 ```
 
-### About preparing data
+## About the data
 
-The table used in minimal sample might look complicated thus let's see how it's constructed.
+Below is the minimal data that can be used with ceRNAnetsim.
+
+```{r echo=FALSE}
+minsamp %>% 
+  select(1:4)
+```
+
 
 The table is actually constructed by merging three different tables:
 
@@ -34,50 +40,31 @@ The table is actually constructed by merging three different tables:
 
 So, the `basic_data` table is constructed by merging following tables:
 
-```{r, message= FALSE, warning=FALSE}
-# datapasta::tribble_paste()
-gene_expression <- tibble::tribble(
-                  ~competing, ~Competing_expression,
-                     "Gene1",                 10000,
-                     "Gene2",                 10000,
-                     "Gene3",                  5000,
-                     "Gene4",                 10000,
-                     "Gene5",                  5000,
-                     "Gene6",                 10000
-                  )
+```{r, message= FALSE, warning=FALSE, echo=FALSE}
+minsamp %>% 
+  select(competing, Competing_expression) %>% 
+  distinct() -> gene_expression
 ```
 
 ```{r}
 gene_expression
 ```
 
-```{r, message= FALSE, warning=FALSE}
-# datapasta::tribble_paste()
-mirna_expression <- tibble::tribble(
-                             ~miRNA, ~miRNA_expression,
-                             "Mir1",              1000,
-                             "Mir2",              2000
-                             )
+```{r, message= FALSE, warning=FALSE, echo=FALSE}
+minsamp %>% 
+  select(miRNA, miRNA_expression) %>% 
+  distinct() -> mirna_expression
 ```
 
 ```{r}
 mirna_expression
 ```
 
-Third table should contain miRNA:gene interactions. This table can be as simple as
+Third table should contain miRNA:gene interactions per row. The `ceRNAnetsim` will assume first column contains competing RNA names and second column to be miRNA names. If the order is different the user should indicate column names accordingly. 
 
-```{r, message= FALSE, warning=FALSE}
-#datapasta::tribble_paste()
-interaction_simple <- tibble::tribble(
-                     ~competing, ~miRNA,
-                        "Gene1", "Mir1",
-                        "Gene2", "Mir1",
-                        "Gene3", "Mir1",
-                        "Gene4", "Mir1",
-                        "Gene4", "Mir2",
-                        "Gene5", "Mir2",
-                        "Gene6", "Mir2"
-                     )
+```{r, message= FALSE, warning=FALSE, echo=FALSE}
+minsamp %>% 
+  select(competing, miRNA) -> interaction_simple
 ```
 
 
@@ -85,17 +72,25 @@ interaction_simple <- tibble::tribble(
 interaction_simple
 ```
 
+The three tables can be joined in R (as shown below) or elsewhere to have interaction and expression data altogether in expected format.
+
 ```{r}
-interaction_simple%>%
+interaction_simple %>%
   inner_join(gene_expression, by = "competing") %>%
   inner_join(mirna_expression, "miRNA") -> basic_data
+
+basic_data
 ```
+
+
 
 ## What does ceRNAnetsim do?
 
-ceRNAnetsim processes your dataset as graph object and simulates competing behaviours of targets when steady-state is perturbed via one or more change. Let's run three steps
+ceRNAnetsim processes your dataset as graph object and simulates competing behaviours of targets when steady-state is perturbed via expression level changes in one or more genes. Let's go over three steps:
 
-## 1. Handle basic dataset
+### 1. Handle basic dataset
+
+In first step, the expression and interaction table is converted into graph/network. `tidygraph` is used importing the data thus both node and edge data are accessible as tables if needed. `priming_graph` generates many columns in edge/node table which are mostly for internal use.
 
 ```{r}
 #Convertion of dataset to graph.
@@ -103,7 +98,12 @@ ceRNAnetsim processes your dataset as graph object and simulates competing behav
 priming_graph(basic_data, competing_count = Competing_expression, miRNA_count =miRNA_expression)
 ```
 
-## 2. Trigger a change
+### 2. Trigger a change
+
+`update_how` function can be used to simulate a change in the network. (If multiple chnages are aimed to be used as trigger, `update_variables()` function should be used).
+
+In the example below, expression level of "Gene2" is increased to two-fold.
+
 
 ```{r}
 
@@ -113,9 +113,11 @@ priming_graph(basic_data, competing_count = Competing_expression,
 
 ```
 
-You can see the current count of Gene2 node is 20000 and its change is specified as "Up" in changes_variable column of node data of graph.
+You can see the current count of Gene2 node is 20000 and its change is denoted as "Up" in `changes_variable` column in node table data.
 
-## 3. Simulate the changes in graph
+### 3. Simulate the changes in graph
+
+Finally, with the help of `simulate` function, the effect of expression change (*i.e.* the trigger) on overall network. The example code advances only for 5 cycles.
 
 ```{r}
 
@@ -126,21 +128,22 @@ priming_graph(basic_data, competing_count = Competing_expression,
 
 ```
 
+`count_current`  column indicate results after 5 cycle of calculations for each node.
+
 ## A special case: knockdown
 
-ceRNAnetsim also provides the simulation of gene knockdown in the network. In normal conditions, when a gene is up or down regulated, it is considered that amounts of gene transcripts change depended on interactions. But, the transcripts of the gene are not observed in the system when it is knocked down. To achieve this case, you just need to define `how` argument to 0 (zero) in `update_how` function. Note that, If `how` argument is specified as `0`, *simulate()* and *update_how()* functions process the variables to knockdown of specified gene with default `knockdown = TRUE`. For this reason, the workflow must be done with `knockdown= FALSE`, when it is desirable that the presence of transcripts of specified gene in the system.
+ceRNAnetsim also provides the simulation of gene knockdown in the network. In normal conditions, when a gene is up or down regulated, it is considered that amounts of gene transcripts change depended on interactions. But, the transcripts of the gene are not observed in the system when it is knocked down. To achieve this case, you just need to define `how` argument to 0 (zero) in `update_how` function. (#TODO carry to manual: Note that, If `how` argument is specified as `0`, *simulate()* and *update_how()* functions process the variables to knockdown of specified gene with default `knockdown = TRUE` and knocked down competing RNA is kept at zero. However, if `knockdown= FALSE` argument is applied, competing RNA which has initial expression level of zero is allowed to increase or fluctuate during calculations.)
 
 ```{r}
-data("midsamp")
 
-midsamp %>%
-   priming_graph(competing_count = Gene_expression, 
-                 miRNA_count = miRNA_expression, 
-                 aff_factor = c(seeds, Energy), 
-                 deg_factor = targeting_region) %>%
-  update_how("Gene4", how=0) %>%
-  simulate(cycle = 10)
+priming_graph(basic_data, competing_count = Competing_expression, 
+              miRNA_count =miRNA_expression) %>%
+  update_how(node_name = "Gene2", how=0) %>%
+  simulate(cycle = 5)
+
 ```
+
+So, if Gene2 is knocked down, there will be more miRNA (Mir1 to be exact) available for Gene1, Gene3 and Gene4, thus lowering their transcript levels. Since Gene4 is has lower expression level, we can observe minute changes in Gene5 and Gene6 levels due to more miRNA (Mir2) being available for them. These changes can be observed in `current_count` column.
 
 Briefly, ceRNAnetsim utilizes the change(s) as trigger and calculates regulation of targets according to miRNA:target and target:total target ratios. 
 
