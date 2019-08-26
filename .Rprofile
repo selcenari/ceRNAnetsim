@@ -1,6 +1,5 @@
 # Things you might want to change
 
-# options(papersize="a4")
 # options(editor="notepad")
 # options(pager="internal")
 
