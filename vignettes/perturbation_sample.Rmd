@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# What is perturbation efficiency?
+## What is perturbation efficiency?
 
 The perturbation efficiency means that the disturbance and propagation efficiency of an element in the network. In a given network not all nodes have same or similar perturbation efficiency. Changes in some nodes might propagate to whole network and for some nodes the effect might be limited to small subgraph of the network. Not only topology but also miRNA:target interaction dynamics determine perturbation efficiency.
 

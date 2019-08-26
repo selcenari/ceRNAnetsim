@@ -29,7 +29,7 @@ library(ceRNAnetsim)
 library(png)
 ```
 
-# What is the problem or point?
+## What is the problem or point?
 
 In the `ceRNAnetsim` package, regulations of miRNA:target pairs are observed via direct or indirect interactions of elements in network. In this approach, change in expression level of single gene or miRNA can affect the whole network via "ripple effect". So, when the change is applied the system, it affects to primary neighborhood firstly, and then propagates to further neighborhoods.
 
@@ -53,7 +53,7 @@ minsamp %>%
   simulate(cycle = 5)
 ```
 
-![Minsamp common target perturbation](gifs/con_iter_chunk3.gif)
+![Minsamp common target perturbation](gifs/con_iter_chunk3.gif#center)
 
 For example, in *minsamp* dataset, the steady-state is occurred at iteration-14 (as seen above: after iteration-13, it is observed that there are only orange (miRNAs) and green (competing genes) nodes in network. In this case, genes have new regulated (steady) expression values while expression values of microRNAs are same in comparison with initial case.).
 
@@ -139,7 +139,7 @@ midsamp %>%
   simulate_vis(title = "Midsamp: Gene17 2 fold increase, 25 cycles", 25)
 ```
 
-![Midsamp Gene17 perturbation with 25 iteration](gifs/con_iter_chunk7.gif)
+![Midsamp Gene17 perturbation with 25 iteration](gifs/con_iter_chunk7.gif#center)
 
 Note: If you ignore decimal change in gene expression, `threshold` argument can be used. With this method, system reaches steady-state early.
 
@@ -152,7 +152,7 @@ midsamp %>%
 
 ```
 
-![Midsamp Gene17 perturbation with 6 iteration with threshold](gifs/con_iter_chunk8.gif)
+![Midsamp Gene17 perturbation with 6 iteration with threshold](gifs/con_iter_chunk8.gif#center)
 
 The workflow that is aforementioned in this vignette should be considered as suggestion. Because the `cycle` is a critical argument that is used with `simulate()` function and affects results of analysis. In light of this vignette and functions, the approach can be developed according to dataset.
 
