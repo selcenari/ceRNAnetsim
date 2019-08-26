@@ -22,11 +22,11 @@ knitr::opts_chunk$set(
 library(ceRNAnetsim)
 ```
 
-### About the data
+## About the data
 
 Below is the minimal data that can be used with ceRNAnetsim.
 
-```{r}
+```{r echo=FALSE}
 minsamp %>% 
   select(1:4)
 ```
@@ -88,7 +88,7 @@ basic_data
 
 ceRNAnetsim processes your dataset as graph object and simulates competing behaviours of targets when steady-state is perturbed via expression level changes in one or more genes. Let's go over three steps:
 
-## 1. Handle basic dataset
+### 1. Handle basic dataset
 
 In first step, the expression and interaction table is converted into graph/network. `tidygraph` is used importing the data thus both node and edge data are accessible as tables if needed. `priming_graph` generates many columns in edge/node table which are mostly for internal use.
 
@@ -98,7 +98,7 @@ In first step, the expression and interaction table is converted into graph/netw
 priming_graph(basic_data, competing_count = Competing_expression, miRNA_count =miRNA_expression)
 ```
 
-## 2. Trigger a change
+### 2. Trigger a change
 
 `update_how` function can be used to simulate a change in the network. (If multiple chnages are aimed to be used as trigger, `update_variables()` function should be used).
 
@@ -115,7 +115,7 @@ priming_graph(basic_data, competing_count = Competing_expression,
 
 You can see the current count of Gene2 node is 20000 and its change is denoted as "Up" in `changes_variable` column in node table data.
 
-## 3. Simulate the changes in graph
+### 3. Simulate the changes in graph
 
 Finally, with the help of `simulate` function, the effect of expression change (*i.e.* the trigger) on overall network. The example code advances only for 5 cycles.
 
@@ -128,7 +128,7 @@ priming_graph(basic_data, competing_count = Competing_expression,
 
 ```
 
-`count_current` and `changes_variable` columns indicate results after 5 cycle of calculations for each node.
+`count_current`  column indicate results after 5 cycle of calculations for each node.
 
 ## A special case: knockdown
 
