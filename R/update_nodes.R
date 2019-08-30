@@ -12,16 +12,16 @@ prepare_rhs_once <- function(input_graph){
 
   dplyr::bind_rows((as_tibble(input_graph%>%
                          activate(edges)%>%
-                         dplyr::select(comp_count_current, comp_count_pre))%>%
+                         select(Competing_name, comp_count_current, comp_count_pre))%>%
                mutate(initial_count = comp_count_pre)%>%
-               dplyr::select(id = from, initial_count, count_pre = comp_count_pre,  count_current = comp_count_current)%>%
-               dplyr::distinct()),
+               select(id = Competing_name, initial_count, count_pre = comp_count_pre,  count_current = comp_count_current)%>%
+               distinct()),
             (as_tibble(input_graph%>%
                          activate(edges)%>%
-                         dplyr::select(mirna_count_current, mirna_count_pre))%>%
+                         select(miRNA_name, mirna_count_current, mirna_count_pre))%>%
                mutate(initial_count = mirna_count_pre)%>%
-               dplyr::select(id = to, initial_count, count_pre = mirna_count_pre,  count_current = mirna_count_current)%>%
-               dplyr::distinct()))
+               select(id = miRNA_name, initial_count, count_pre = mirna_count_pre,  count_current = mirna_count_current)%>%
+               distinct()))
 
 
 }
@@ -40,12 +40,12 @@ prepare_rhs <- function(input_graph){
 
   dplyr::bind_rows((as_tibble(input_graph%>%
                          activate(edges))%>%
-               dplyr::select(id = from, count_current = comp_count_current)%>%
-               dplyr::distinct()),
+               select(id = Competing_name, count_current = comp_count_current)%>%
+               distinct()),
             (as_tibble(input_graph%>%
                          activate(edges))%>%
-               dplyr::select(id= to,  count_current = mirna_count_current)%>%
-               dplyr::distinct()))
+               select(id= miRNA_name,  count_current = mirna_count_current)%>%
+               distinct()))
 }
 
 #' Carries variables from edge to node.
@@ -87,7 +87,7 @@ update_nodes <- function(input_graph, once = FALSE, limit = 0){
 
   input_graph <- input_graph%>%
     tidygraph::activate(nodes)%>%
-    left_join(rhs_table, by=c("node_id"="id"))%>%
+    left_join(rhs_table, by=c("name"="id"))%>%
     mutate(changes_variable = ifelse( count_current-count_pre < -limit, "Down", type),
            changes_variable = ifelse(count_current-count_pre > limit, "Up", changes_variable))
 

@@ -6,6 +6,7 @@
 #'
 #' @return NULL
 #'
+#'
 
 
 normalize <- function(x){abs(x)/max(abs(x))}

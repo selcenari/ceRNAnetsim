@@ -1,6 +1,5 @@
-#' Calculates average expression changes of all nodes except trigger and finds the perturbed node count for all nodes in system.
+#' Calculates average expression changes of all (or specified) nodes except trigger and finds the perturbed node count for all (or specified) nodes in system.
 #'
-#' calculates the mean of expression changes of all nodes except trigger and finds the perturbed node count for all nodes in system.
 #'
 #' @return It gives a tibble form dataset that includes node names, perturbation efficiency and perturbed count of nodes.
 #'
@@ -11,6 +10,7 @@
 #' @param how The change of count (expression) of the given node in terms of fold change.
 #' @param cycle The iteration of simulation.
 #' @param limit The minimum fold change which can be taken into account for perturbation calculation on all nodes in terms of percentage.
+#' @param included specifies percentage of affected target in target expression. For example, if included = 1, the nodes that are affected from miRNA repression activity more than one percent of their expression is determined as subgraph.
 #'
 #' @examples
 #'
@@ -25,16 +25,41 @@
 #'   priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression, aff_factor = c(energy,seed_type), deg_factor = region)%>%
 #'   find_node_perturbation(how = 3, cycle = 4)
 #'
+#'  minsamp%>%
+#'   priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression)%>%
+#'   find_node_perturbation(how = 2, cycle= 3, limit=1, fast = 5)
+#'
 #'
 #' @export
 
-find_node_perturbation <- function(input_graph, how = 2, cycle=1, limit= 0){
+find_node_perturbation <- function(input_graph, how = 2, cycle=1, limit= 0, fast = 0){
+
+  if(fast==0){
 
   input_graph%>%
     activate(nodes)%>%
     mutate(eff_count =future_map(V(input_graph)$name, ~calc_perturbation(input_graph, .x, how, cycle, limit)))%>%
     tibble::as_tibble() %>%
     unnest(eff_count) -> result
+  }
+
+  if(fast >1){
+
+    input_graph%E>%
+      mutate(fast=ifelse(100*effect_current/comp_count_current > fast, TRUE, FALSE))%>%
+      morph(to_subgraph,fast)%E>%
+      .$subgraph%N>%
+      filter(name %in% E(.)$Competing_name | name %in% E(.)$miRNA_name)%>%
+      #election of non-isolated nodes
+      filter(centrality_degree(mode = "all") >0)%>%
+      activate(nodes)%>%
+      mutate(eff_count = map_bfs(node_is_center(), .f = function(graph, node, ...) {
+        calc_perturbation(graph, V(graph)$name[node], 2,2)
+      }))%>%
+      as_tibble()%>%
+      unnest()-> result
+
+  }
 
   return(result)
 }
