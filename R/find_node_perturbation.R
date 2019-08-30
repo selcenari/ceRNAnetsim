@@ -15,6 +15,7 @@
 #' @examples
 #'
 #' data("minsamp")
+#' data("midsamp")
 #'
 #'  minsamp%>%
 #'   priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression)%>%
@@ -25,7 +26,7 @@
 #'   priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression, aff_factor = c(energy,seed_type), deg_factor = region)%>%
 #'   find_node_perturbation(how = 3, cycle = 4)
 #'
-#'  minsamp%>%
+#'  midsamp%>%
 #'   priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression)%>%
 #'   find_node_perturbation(how = 2, cycle= 3, limit=1, fast = 5)
 #'
