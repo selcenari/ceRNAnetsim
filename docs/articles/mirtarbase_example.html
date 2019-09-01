@@ -126,7 +126,7 @@
       <h1>A TCGA dataset application</h1>
                         <h4 class="author">Selcen Ari</h4>
             
-            <h4 class="date">2019-08-25</h4>
+            <h4 class="date">2019-09-01</h4>
       
       
       <div class="hidden name"><code>mirtarbase_example.Rmd</code></div>
@@ -135,10 +135,11 @@
 
     
     
-<div id="introduction" class="section level1">
-<h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h1>
+<div id="introduction" class="section level2">
+<h2 class="hasAnchor">
+<a href="#introduction" class="anchor"></a>Introduction</h2>
 <p>This vignette is about the integration of gene and miRNA pairs and their expression dataset and analysis. The sample dataset in this demonstration, which contains human miRNA:target pairs, was retrieved from <a href="http://mirtarbase.mbc.nctu.edu.tw/php/download.php">miRTarBase</a> website (Release 7.0).</p>
+</div>
 <div id="mirnatarget-pairs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mirnatarget-pairs" class="anchor"></a>miRNA:target pairs</h2>
@@ -244,10 +245,9 @@
 </tbody>
 </table>
 </div>
-</div>
-<div id="integrating-data" class="section level1">
-<h1 class="hasAnchor">
-<a href="#integrating-data" class="anchor"></a>Integrating data</h1>
+<div id="integrating-data" class="section level2">
+<h2 class="hasAnchor">
+<a href="#integrating-data" class="anchor"></a>Integrating data</h2>
 <p>All of these datasets are integrated using the code below resulting in miRNA:target dataset that contains miRNA and gene expression values.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">TCGA_E9_A1N5_mirnanormal <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw">inner_join</span>(mirtarbasegene, <span class="dt">by=</span> <span class="st">"miRNA"</span>) <span class="op">%&gt;%</span></a>
@@ -378,9 +378,9 @@
 <a class="sourceLine" id="cb16-8" title="8"><span class="co">#&gt;                     &lt;dbl&gt;           &lt;dbl&gt;</span></a>
 <a class="sourceLine" id="cb16-9" title="9"><span class="co">#&gt; 1                   0.209            3712</span></a></code></pre></div>
 </div>
-<div id="the-sum-of-two-conditions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#the-sum-of-two-conditions" class="anchor"></a>The sum of two conditions:</h1>
+<div id="the-sum-of-two-conditions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#the-sum-of-two-conditions" class="anchor"></a>The sum of two conditions:</h2>
 <p>In a real biological sample, we tested perturbation efficiencies of two genes; * one with low expression but high fold change (HIST1H3H, 30-fold increase in tumor) * another one with high expression but small change in expression level (ACTB, 1.87-fold increase in tumor)</p>
 <p>With these two samples, it has been obtained that expression values of genes, rest of the perturbed gene, changed slightly.</p>
 <p>Despite high fold change, former gene caused little perturbation. When the perturbation efficiencies of both of these genes are analysed, it has been oberved that HIST1H3H does not affect the other genes in given limit. On the contrary, high expressing gene with very low fold increase in tumor causes greater perturbation in the network. Additionaly, the perturbation efficiency of ACTB gene is quite high from HIST1H3H with 30-fold change, when ACTB is simulated with 30 fold-change.</p>
@@ -393,13 +393,10 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li>
-<a href="#introduction">Introduction</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#mirnatarget-pairs">miRNA:target pairs</a></li>
+<li><a href="#introduction">Introduction</a></li>
+      <li><a href="#mirnatarget-pairs">miRNA:target pairs</a></li>
       <li><a href="#gene-expression-in-normal-and-tumor-samples">Gene expression in normal and tumor samples</a></li>
       <li><a href="#mirna-expression-data">miRNA expression data</a></li>
-      </ul>
-</li>
       <li><a href="#integrating-data">Integrating data</a></li>
       <li><a href="#the-sum-of-two-conditions">The sum of two conditions:</a></li>
       </ul>

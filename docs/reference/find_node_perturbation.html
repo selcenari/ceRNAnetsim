@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculates average expression changes of all nodes except trigger and finds the perturbed node count for all nodes in system. — find_node_perturbation • ceRNAnetsim</title>
+<title>Calculates average expression changes of all (or specified) nodes except trigger and finds the perturbed node count for all (or specified) nodes in system. — find_node_perturbation • ceRNAnetsim</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -36,9 +36,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Calculates average expression changes of all nodes except trigger and finds the perturbed node count for all nodes in system. — find_node_perturbation" />
+<meta property="og:title" content="Calculates average expression changes of all (or specified) nodes except trigger and finds the perturbed node count for all (or specified) nodes in system. — find_node_perturbation" />
 
-<meta property="og:description" content="calculates the mean of expression changes of all nodes except trigger and finds the perturbed node count for all nodes in system." />
+<meta property="og:description" content="Calculates average expression changes of all (or specified) nodes except trigger and finds the perturbed node count for all (or specified) nodes in system." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -165,18 +165,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculates average expression changes of all nodes except trigger and finds the perturbed node count for all nodes in system.</h1>
+    <h1>Calculates average expression changes of all (or specified) nodes except trigger and finds the perturbed node count for all (or specified) nodes in system.</h1>
     
     <div class="hidden name"><code>find_node_perturbation.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>calculates the mean of expression changes of all nodes except trigger and finds the perturbed node count for all nodes in system.</p>
+    <p>Calculates average expression changes of all (or specified) nodes except trigger and finds the perturbed node count for all (or specified) nodes in system.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>find_node_perturbation</span>(<span class='no'>input_graph</span>, <span class='kw'>how</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>find_node_perturbation</span>(<span class='no'>input_graph</span>, <span class='kw'>how</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>fast</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,6 +198,10 @@
       <th>limit</th>
       <td><p>The minimum fold change which can be taken into account for perturbation calculation on all nodes in terms of percentage.</p></td>
     </tr>
+    <tr>
+      <th>included</th>
+      <td><p>specifies percentage of affected target in target expression. For example, if included = 1, the nodes that are affected from miRNA repression activity more than one percent of their expression is determined as subgraph.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -212,6 +217,7 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>"minsamp"</span>)
+<span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>"midsamp"</span>)
 
  <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
   <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>)<span class='kw'>%&gt;%</span>
@@ -244,6 +250,30 @@
 #&gt; </span><span style='color: #555555;'>8</span><span> Mir2  miRNA       8          </span><span style='text-decoration: underline;'>2</span><span>000      </span><span style='text-decoration: underline;'>2</span><span>000          </span><span style='text-decoration: underline;'>2</span><span>000 miRNA           
 #&gt; </span><span style='color: #555555;'># ... with 2 more variables: perturbation_efficiency </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
 #&gt; #   perturbed_count </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
+ <span class='no'>midsamp</span><span class='kw'>%&gt;%</span>
+  <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Gene_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>)<span class='kw'>%&gt;%</span>
+  <span class='fu'>find_node_perturbation</span>(<span class='kw'>how</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>cycle</span><span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>limit</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>fast</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `as_quosure()` requires an explicit environment as of rlang 0.3.0.</span>
+#&gt; <span class='warning'>Please supply `env`.</span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once per session.</span><span></span></div><div class='output co'>#&gt; <span class='message'>Subsetting by edges</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 15 x 10</span><span>
+#&gt;    name  type  node_id initial_count count_pre count_current changes_variable
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>           
+#&gt; </span><span style='color: #555555;'> 1</span><span> Gene4 Comp~       4         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
+#&gt; </span><span style='color: #555555;'> 2</span><span> Gene6 Comp~       6         </span><span style='text-decoration: underline;'>10</span><span>000     </span><span style='text-decoration: underline;'>10</span><span>000         </span><span style='text-decoration: underline;'>10</span><span>000 Competing       
+#&gt; </span><span style='color: #555555;'> 3</span><span> Gene7 Comp~       7          </span><span style='text-decoration: underline;'>7</span><span>000      </span><span style='text-decoration: underline;'>7</span><span>000          </span><span style='text-decoration: underline;'>7</span><span>000 Competing       
+#&gt; </span><span style='color: #555555;'> 4</span><span> Gene8 Comp~       8          </span><span style='text-decoration: underline;'>3</span><span>000      </span><span style='text-decoration: underline;'>3</span><span>000          </span><span style='text-decoration: underline;'>3</span><span>000 Competing       
+#&gt; </span><span style='color: #555555;'> 5</span><span> Gene9 Comp~       9          </span><span style='text-decoration: underline;'>6</span><span>000      </span><span style='text-decoration: underline;'>6</span><span>000          </span><span style='text-decoration: underline;'>6</span><span>000 Competing       
+#&gt; </span><span style='color: #555555;'> 6</span><span> Gene~ Comp~      10          </span><span style='text-decoration: underline;'>2</span><span>000      </span><span style='text-decoration: underline;'>2</span><span>000          </span><span style='text-decoration: underline;'>2</span><span>000 Competing       
+#&gt; </span><span style='color: #555555;'> 7</span><span> Gene~ Comp~      11          </span><span style='text-decoration: underline;'>8</span><span>000      </span><span style='text-decoration: underline;'>8</span><span>000          </span><span style='text-decoration: underline;'>8</span><span>000 Competing       
+#&gt; </span><span style='color: #555555;'> 8</span><span> Gene~ Comp~      12          </span><span style='text-decoration: underline;'>1</span><span>500      </span><span style='text-decoration: underline;'>1</span><span>500          </span><span style='text-decoration: underline;'>1</span><span>500 Competing       
+#&gt; </span><span style='color: #555555;'> 9</span><span> Gene~ Comp~      13           500       500           500 Competing       
+#&gt; </span><span style='color: #555555;'>10</span><span> Gene~ Comp~      14          </span><span style='text-decoration: underline;'>7</span><span>000      </span><span style='text-decoration: underline;'>7</span><span>000          </span><span style='text-decoration: underline;'>7</span><span>000 Competing       
+#&gt; </span><span style='color: #555555;'>11</span><span> Gene~ Comp~      15          </span><span style='text-decoration: underline;'>3</span><span>000      </span><span style='text-decoration: underline;'>3</span><span>000          </span><span style='text-decoration: underline;'>3</span><span>000 Competing       
+#&gt; </span><span style='color: #555555;'>12</span><span> Gene~ Comp~      16          </span><span style='text-decoration: underline;'>2</span><span>000      </span><span style='text-decoration: underline;'>2</span><span>000          </span><span style='text-decoration: underline;'>2</span><span>000 Competing       
+#&gt; </span><span style='color: #555555;'>13</span><span> Gene~ Comp~      17          </span><span style='text-decoration: underline;'>6</span><span>000      </span><span style='text-decoration: underline;'>6</span><span>000          </span><span style='text-decoration: underline;'>6</span><span>000 Competing       
+#&gt; </span><span style='color: #555555;'>14</span><span> Mir3  miRNA      23          </span><span style='text-decoration: underline;'>3</span><span>000      </span><span style='text-decoration: underline;'>3</span><span>000          </span><span style='text-decoration: underline;'>3</span><span>000 miRNA           
+#&gt; </span><span style='color: #555555;'>15</span><span> Mir4  miRNA      24          </span><span style='text-decoration: underline;'>5</span><span>000      </span><span style='text-decoration: underline;'>5</span><span>000          </span><span style='text-decoration: underline;'>5</span><span>000 miRNA           
+#&gt; </span><span style='color: #555555;'># ... with 3 more variables: .tidygraph_node_index </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
+#&gt; #   perturbation_efficiency </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, perturbed_count </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 
 </div></span></pre>
   </div>
