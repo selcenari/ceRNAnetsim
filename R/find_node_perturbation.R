@@ -10,7 +10,7 @@
 #' @param how The change of count (expression) of the given node in terms of fold change.
 #' @param cycle The iteration of simulation.
 #' @param limit The minimum fold change which can be taken into account for perturbation calculation on all nodes in terms of percentage.
-#' @param included specifies percentage of affected target in target expression. For example, if included = 1, the nodes that are affected from miRNA repression activity more than one percent of their expression is determined as subgraph.
+#' @param included specifies percentage of affected target in target expression. For example, if fast = 1, the nodes that are affected from miRNA repression activity more than one percent of their expression is determined as subgraph.
 #'
 #' @examples
 #'
@@ -35,6 +35,8 @@
 
 find_node_perturbation <- function(input_graph, how = 2, cycle=1, limit= 0, fast = 0){
 
+  empty_result<- list(tibble(perturbation_efficiency= NA, perturbed_count = NA))
+
   if(fast==0){
 
   input_graph%>%
@@ -44,21 +46,23 @@ find_node_perturbation <- function(input_graph, how = 2, cycle=1, limit= 0, fast
     unnest(eff_count) -> result
   }
 
-  if(fast >1){
+  if(fast != 0){
 
     input_graph%E>%
-      mutate(fast=ifelse(100*effect_current/comp_count_current > fast, TRUE, FALSE))%>%
-      morph(to_subgraph,fast)%E>%
-      .$subgraph%N>%
-      filter(name %in% E(.)$Competing_name | name %in% E(.)$miRNA_name)%>%
-      #election of non-isolated nodes
-      filter(centrality_degree(mode = "all") >0)%>%
-      activate(nodes)%>%
+      mutate(fast=ifelse(100*effect_current/comp_count_current>fast, TRUE, FALSE))%E>%
+      morph(to_subgraph,fast)%N>%
+      mutate(degree= centrality_degree(mode="all"))%>%
+      filter(degree>0)%>%
       mutate(eff_count = map_bfs(node_is_center(), .f = function(graph, node, ...) {
-        calc_perturbation(graph, V(graph)$name[node], 2,2)
+        calc_perturbation(graph, V(graph)$name[node], how, cycle, limit)
       }))%>%
+      unmorph()%>%
+      mutate(len= map_dbl(eff_count, length),
+             eff_count= ifelse(len==0, empty_result, eff_count))%>%
       as_tibble()%>%
-      unnest()-> result
+      unnest()%>%
+      select(-degree, -len)-> result
+
 
   }
 

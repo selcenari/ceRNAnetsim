@@ -126,7 +126,7 @@
       <h1>Perturbation Efficiency in A Sample Dataset</h1>
                         <h4 class="author">Selcen Ari</h4>
             
-            <h4 class="date">2019-09-01</h4>
+            <h4 class="date">2019-09-03</h4>
       
       
       <div class="hidden name"><code>perturbation_sample.Rmd</code></div>
@@ -304,27 +304,69 @@
 <a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt; Please supply `env`.</span></a>
 <a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt; This warning is displayed once per session.</span></a>
 <a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt; Subsetting by edges</span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; # A tibble: 12 x 3</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; # A tibble: 24 x 3</span></a>
 <a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt;    name   perturbation_efficiency perturbed_count</span></a>
 <a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt;    &lt;chr&gt;                    &lt;dbl&gt;           &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt;  1 Gene6                     1.62               8</span></a>
-<a class="sourceLine" id="cb6-17" title="17"><span class="co">#&gt;  2 Gene9                     2.69               8</span></a>
-<a class="sourceLine" id="cb6-18" title="18"><span class="co">#&gt;  3 Gene10                    2.52               8</span></a>
-<a class="sourceLine" id="cb6-19" title="19"><span class="co">#&gt;  4 Gene11                    2.92               8</span></a>
-<a class="sourceLine" id="cb6-20" title="20"><span class="co">#&gt;  5 Gene12                    2.46               8</span></a>
-<a class="sourceLine" id="cb6-21" title="21"><span class="co">#&gt;  6 Gene13                    2.67               8</span></a>
-<a class="sourceLine" id="cb6-22" title="22"><span class="co">#&gt;  7 Gene14                    1.84               8</span></a>
-<a class="sourceLine" id="cb6-23" title="23"><span class="co">#&gt;  8 Gene19                    1.82               8</span></a>
-<a class="sourceLine" id="cb6-24" title="24"><span class="co">#&gt;  9 Gene20                    2.08               8</span></a>
-<a class="sourceLine" id="cb6-25" title="25"><span class="co">#&gt; 10 Mir2                      5.78               9</span></a>
-<a class="sourceLine" id="cb6-26" title="26"><span class="co">#&gt; 11 Mir3                      6.19               9</span></a>
-<a class="sourceLine" id="cb6-27" title="27"><span class="co">#&gt; 12 Mir4                     10.5                9</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt;  1 Gene1                    NA                 NA</span></a>
+<a class="sourceLine" id="cb6-17" title="17"><span class="co">#&gt;  2 Gene2                    NA                 NA</span></a>
+<a class="sourceLine" id="cb6-18" title="18"><span class="co">#&gt;  3 Gene3                    NA                 NA</span></a>
+<a class="sourceLine" id="cb6-19" title="19"><span class="co">#&gt;  4 Gene4                    NA                 NA</span></a>
+<a class="sourceLine" id="cb6-20" title="20"><span class="co">#&gt;  5 Gene5                    NA                 NA</span></a>
+<a class="sourceLine" id="cb6-21" title="21"><span class="co">#&gt;  6 Gene6                     1.26               8</span></a>
+<a class="sourceLine" id="cb6-22" title="22"><span class="co">#&gt;  7 Gene7                    NA                 NA</span></a>
+<a class="sourceLine" id="cb6-23" title="23"><span class="co">#&gt;  8 Gene8                    NA                 NA</span></a>
+<a class="sourceLine" id="cb6-24" title="24"><span class="co">#&gt;  9 Gene9                     3.12               8</span></a>
+<a class="sourceLine" id="cb6-25" title="25"><span class="co">#&gt; 10 Gene10                    2.90               8</span></a>
+<a class="sourceLine" id="cb6-26" title="26"><span class="co">#&gt; # ... with 14 more rows</span></a></code></pre></div>
 <p>The results of the <code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> will list effectiveness or importance of nodes in the network. This function can help selecting nodes which will have effective perturbation in network.</p>
 </div>
 <div id="what-are-the-limitations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-are-the-limitations" class="anchor"></a>What are the limitations?</h2>
 <p><code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> runs <code>calc_perturb</code> on all nodes in the network in parallel with help of the <code>future</code> and <code>furrr</code> packages. In this vignette, the function is demonstrated on the <code>midsamp</code> data. This dataset is not comparable to actual biological miRNA:target gene datasets in size and complexity. Although <code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> runs in parallel it might take long time to run in real huge biological datasets.</p>
+<p>In real biological datasets, more complex interactions whether functional or non-functional could be observed. We have improved our approach with <code>fast</code> argument in <code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> based on selection of elements that could be affected from perturbation. In this fucntion, <code>fast</code> argument specifies the percentage of the competing amount that can be affected within the initial competing amount and acts as a selection parameter. For instance, in huge_example data:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"huge_example"</span>)</a>
+<a class="sourceLine" id="cb7-2" title="2">huge_example<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> competing_counts, <span class="dt">miRNA_count =</span> mirnaexpression_normal)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/find_node_perturbation.html">find_node_perturbation</a></span>(<span class="dt">how=</span><span class="dv">5</span>, <span class="dt">cycle=</span><span class="dv">3</span>, <span class="dt">fast =</span> <span class="dv">3</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="st">  </span><span class="kw">select</span>(name, perturbation_efficiency, perturbed_count)</a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt; Warning in priming_graph(., competing_count = competing_counts, miRNA_count = mirnaexpression_normal): First column is processed as competing and the second as miRNA.</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt; Subsetting by edges</span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; # A tibble: 8,306 x 3</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt;    name     perturbation_efficiency perturbed_count</span></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt;    &lt;chr&gt;                      &lt;dbl&gt;           &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt;  1 TSPAN6                        NA              NA</span></a>
+<a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt;  2 DPM1                          NA              NA</span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt;  3 SCYL3                         NA              NA</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt;  4 C1orf112                      NA              NA</span></a>
+<a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt;  5 CFH                           NA              NA</span></a>
+<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt;  6 FUCA2                         NA              NA</span></a>
+<a class="sourceLine" id="cb7-17" title="17"><span class="co">#&gt;  7 GCLC                          NA              NA</span></a>
+<a class="sourceLine" id="cb7-18" title="18"><span class="co">#&gt;  8 NFYA                          NA              NA</span></a>
+<a class="sourceLine" id="cb7-19" title="19"><span class="co">#&gt;  9 LAS1L                         NA              NA</span></a>
+<a class="sourceLine" id="cb7-20" title="20"><span class="co">#&gt; 10 ANKIB1                        NA              NA</span></a>
+<a class="sourceLine" id="cb7-21" title="21"><span class="co">#&gt; # ... with 8,296 more rows</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">huge_example<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> competing_counts, <span class="dt">miRNA_count =</span> mirnaexpression_normal)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="st">  </span><span class="kw"><a href="../reference/find_node_perturbation.html">find_node_perturbation</a></span>(<span class="dt">how=</span><span class="dv">5</span>, <span class="dt">cycle=</span><span class="dv">3</span>, <span class="dt">fast =</span> <span class="dv">3</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(perturbation_efficiency), <span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(perturbed_count))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="st">  </span><span class="kw">select</span>(name, perturbation_efficiency, perturbed_count)</a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; Warning in priming_graph(., competing_count = competing_counts, miRNA_count = mirnaexpression_normal): First column is processed as competing and the second as miRNA.</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; Subsetting by edges</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt; # A tibble: 573 x 3</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt;    name    perturbation_efficiency perturbed_count</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt;    &lt;chr&gt;                     &lt;dbl&gt;           &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt;  1 AK2                   0.0794                542</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt;  2 SLC25A5               0.154                 542</span></a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt;  3 MSL3                  0.0324                542</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt;  4 MYCBP2                0.0314                514</span></a>
+<a class="sourceLine" id="cb8-15" title="15"><span class="co">#&gt;  5 VPS41                 0.0212                514</span></a>
+<a class="sourceLine" id="cb8-16" title="16"><span class="co">#&gt;  6 ADIPOR2               0.0804                542</span></a>
+<a class="sourceLine" id="cb8-17" title="17"><span class="co">#&gt;  7 CELSR3                0.00222               542</span></a>
+<a class="sourceLine" id="cb8-18" title="18"><span class="co">#&gt;  8 SCMH1                 0.0419                542</span></a>
+<a class="sourceLine" id="cb8-19" title="19"><span class="co">#&gt;  9 EXTL3                 0.0402                542</span></a>
+<a class="sourceLine" id="cb8-20" title="20"><span class="co">#&gt; 10 NR1H4                 0.0000103             542</span></a>
+<a class="sourceLine" id="cb8-21" title="21"><span class="co">#&gt; # ... with 563 more rows</span></a></code></pre></div>
 </div>
   </div>
 

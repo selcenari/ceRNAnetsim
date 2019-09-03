@@ -117,4 +117,23 @@ The results of the `find_node_perturbation()` will list effectiveness or importa
 
 ## What are the limitations?
 
-`find_node_perturbation()` runs `calc_perturb` on all nodes in the network in parallel with help of the `future` and `furrr` packages. In this vignette, the function is demonstrated on the `midsamp` data. This dataset is not comparable to actual biological miRNA:target gene datasets in size and complexity. Although `find_node_perturbation()` runs in parallel it might take long time to run in real huge biological datasets.
+`find_node_perturbation()` runs `calc_perturb` on all nodes in the network in parallel with help of the `future` and `furrr` packages. In this vignette, the function is demonstrated on the `midsamp` data. This dataset is not comparable to actual biological miRNA:target gene datasets in size and complexity. Although `find_node_perturbation()` runs in parallel it might take long time to run in real huge biological datasets. 
+
+In real biological datasets, more complex interactions whether functional or non-functional could be observed. We have improved our approach with `fast` argument in `find_node_perturbation()` based on selection of elements that could be affected from perturbation. In this fucntion, `fast` argument specifies the percentage of the competing amount that can be affected within the initial competing amount and acts as a selection parameter. For instance, in huge_example data:
+
+```{r}
+data("huge_example")
+huge_example%>%
+  priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
+  find_node_perturbation(how=5, cycle=3, fast = 3)%>%
+  select(name, perturbation_efficiency, perturbed_count)
+```
+
+```{r}
+huge_example%>%
+  priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
+  find_node_perturbation(how=5, cycle=3, fast = 3)%>%
+  filter(!is.na(perturbation_efficiency), !is.na(perturbed_count))%>%
+  select(name, perturbation_efficiency, perturbed_count)
+```
+

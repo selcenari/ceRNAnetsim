@@ -54,7 +54,7 @@ update_how <- function (input_graph, node_name, how, knockdown= TRUE){
 
   } else{
 
-    stop("Given node name was not found! Please check it.")
+    stop(paste0("Given node name", node_name, "was not found! Please check it."))
 
   }
 
