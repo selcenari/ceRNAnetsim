@@ -5,6 +5,8 @@ cache: packages
 branches:
     only:
         - master
+apt_packages:
+ - gdtools
 
 matrix:
  include:

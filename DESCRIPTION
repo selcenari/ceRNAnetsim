@@ -15,23 +15,18 @@ BugReports: https://github.com/selcenari/ceRNAnetsim/issues
 License: GPL-3.0
 Encoding: UTF-8
 LazyData: true
-Depends: 
+Depends:
+    dplyr
+Imports: 
     tidyr,
-    tidygraph, 
-    dplyr,
-    igraph, 
-    stringr,
+    tidygraph,
+    igraph,
     ggraph, 
     ggplot2,
     rlang,
     purrr,
-    future
-Imports: 
-    devtools,
-    furrr, 
-    extrafont,
-    svglite,
-    png
+    future,
+    furrr
 Suggests:
     knitr,
     rmarkdown,

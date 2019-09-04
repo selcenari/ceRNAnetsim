@@ -44,20 +44,20 @@ simulate_vis <- function(input_graph, cycle=1, threshold = 0, Competing_color = 
 
     input_graph%>%
       tidygraph::activate(edges)%>%
-      group_by(to)%>%
-      mutate(mirna_count_per_comp = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_comp = ifelse(is.na(mirna_count_per_comp), 0, mirna_count_per_comp))%>%
-      ungroup()%>%
-      mutate(effect_pre = effect_current, effect_current = mirna_count_per_comp*degg_factor)%>%
-      group_by(from)%>%
-      mutate(comp_count_pre = ifelse(comp_count_current< 0, 1, comp_count_current), comp_count_current = comp_count_pre - (sum(effect_current)-sum(effect_pre)), comp_count_current = ifelse(comp_count_current< 0, 1, comp_count_current))%>%
-      ungroup()%>%
-      mutate(comp_count_list = pmap(list(comp_count_list, comp_count_current), c), effect_list = pmap(list(effect_list, effect_current), c), mirna_count_list = pmap(list(mirna_count_list, mirna_count_current), c))%>%
+      tidygraph::group_by(to)%>%
+      tidygraph::mutate(mirna_count_per_comp = mirna_count_current*comp_count_current*afff_factor/sum(comp_count_current*afff_factor), mirna_count_per_comp = ifelse(is.na(mirna_count_per_comp), 0, mirna_count_per_comp))%>%
+      tidygraph::ungroup()%>%
+      tidygraph::mutate(effect_pre = effect_current, effect_current = mirna_count_per_comp*degg_factor)%>%
+      tidygraph::group_by(from)%>%
+      tidygraph::mutate(comp_count_pre = ifelse(comp_count_current< 0, 1, comp_count_current), comp_count_current = comp_count_pre - (sum(effect_current)-sum(effect_pre)), comp_count_current = ifelse(comp_count_current< 0, 1, comp_count_current))%>%
+      tidygraph::ungroup()%>%
+      tidygraph::mutate(comp_count_list = purrr::pmap(list(comp_count_list, comp_count_current), c), effect_list = purrr::pmap(list(effect_list, effect_current), c), mirna_count_list = purrr::pmap(list(mirna_count_list, mirna_count_current), c))%>%
       tidygraph::activate(nodes)%>%
       update_nodes(limit = threshold)-> input_graph
 
     vis_graph(input_graph, Competing_color, mirna_color, Upregulation, Downregulation, title = paste(title, "-",i), layout)-> graph_vis
 
-    ggsave(paste(title, ".png", sep = ""))
+    ggplot2::ggsave(paste(title, ".png", sep = ""))
 
     print(graph_vis)
   }

@@ -34,8 +34,8 @@ calc_perturbation <- function(input_graph, node_name, how=1 , cycle=1, limit=0){
   input_graph%>%
     update_how(node_name, how)%>%
     simulate(cycle)%>%
-    tibble::as_tibble()%>%
-    filter(name!= node_name)-> res
+    tidygraph::as_tibble()%>%
+    dplyr::filter(name!= node_name)-> res
 
   as.double((res%>%summarise(mean(abs(count_current-initial_count)*100/initial_count)))[[1]])-> perturbation_eff
 

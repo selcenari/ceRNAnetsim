@@ -22,7 +22,7 @@
 
 find_iteration <- function(df,  limit= 0.1, plot=FALSE){
 
-  len <- df %E>% as_tibble() %>% .$comp_count_list %>% .[[1]] %>%  length()
+  len <- df %>% activate(edges)%>% tidygraph::as_tibble() %>% .$comp_count_list %>% .[[1]] %>%  length()
   iteration <- data.frame(iter = seq(1,len-1, 1), effect= rep(0))
 
   for(i in 1:(len-1)){
@@ -31,23 +31,23 @@ find_iteration <- function(df,  limit= 0.1, plot=FALSE){
       tidygraph::activate(edges)%>%
       tibble::as_tibble()%>%
       dplyr::select(from, comp_count_list)%>%
-      mutate(dif= (abs(map_dbl(comp_count_list,i+1)) - abs(map_dbl(comp_count_list,i))))%>%
+      dplyr::mutate(dif= (abs(purrr:map_dbl(comp_count_list,i+1)) - abs(purrr:map_dbl(comp_count_list,i))))%>%
       dplyr::select(-comp_count_list)%>%
-      distinct()%>%
-      mutate(non_zero = ifelse(abs(dif)>limit, 1, 0))%>%
-      summarise(per= sum(non_zero)*100/n())%>%pull() -> iteration$effect[i]
+      dplyr::distinct()%>%
+      dplyr::mutate(non_zero = ifelse(abs(dif)>limit, 1, 0))%>%
+      dplyr::summarise(per= sum(non_zero)*100/n())%>%pull() -> iteration$effect[i]
 
   }
 
   if (plot){
     return(iteration%>%
-             ggplot(aes(y=effect, x=iter))+
+             ggplot2::ggplot(aes(y=effect, x=iter))+
              geom_line()+
              xlab("Iteration")+
              ylab("(%) The Disturbed Element"))
 
   } else{
     return((iteration%>%
-              filter(effect== max(effect)))[1,1])
+              dplyr::filter(effect== max(effect)))[1,1])
   }
 }

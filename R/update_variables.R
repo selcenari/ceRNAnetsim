@@ -21,21 +21,25 @@
 
 update_variables <- function (input_graph, current_counts){
 
-  if(isTRUE(all.equal(current_counts$Competing, E(input_graph)$Competing_name))){
+  if(isTRUE(all.equal(current_counts$Competing, igraph::E(input_graph)$Competing_name))){
 
-    E(input_graph)$comp_count_current[match(current_counts$Competing, E(input_graph)$Competing_name)] <- current_counts$Competing_count
-  }
-
-  if (isTRUE(all.equal(current_counts$miRNA, E(input_graph)$miRNA_name))) {
-
-    E(input_graph)$mirna_count_current[match(current_counts$miRNA, E(input_graph)$miRNA_name)] <- current_counts$miRNA_count
+    igraph::E(input_graph)$comp_count_current[match(current_counts$Competing, igraph::E(input_graph)$Competing_name)] <- current_counts$Competing_count
   }
 
   else{
+    stop("Current values include one or more different node name!", call. = FALSE)
 
-    stop("Current values include one or more different node name!")
   }
 
+  if (isTRUE(all.equal(current_counts$miRNA, igraph::E(input_graph)$miRNA_name))) {
+
+    igraph::E(input_graph)$mirna_count_current[match(current_counts$miRNA, igraph::E(input_graph)$miRNA_name)] <- current_counts$miRNA_count
+  }
+
+  else{
+    stop("Current values include one or more different node name!", call. = FALSE)
+
+  }
 
   return(input_graph%>%update_nodes())
 

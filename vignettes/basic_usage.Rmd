@@ -128,7 +128,17 @@ priming_graph(basic_data, competing_count = Competing_expression,
 
 ```
 
-`count_current`  column indicate results after 5 cycle of calculations for each node.
+`count_current`  column indicate results after 5 cycle of calculations for each node. You can see the gene expression changes after this perturbation and simulation. This table can be obtained easily at following:
+
+```{r}
+priming_graph(basic_data, competing_count = Competing_expression, 
+              miRNA_count =miRNA_expression) %>%
+  update_how(node_name = "Gene2", how=2) %>%
+  simulate(cycle = 5)%>%
+  as_tibble()%>%
+  select(name, initial_count, count_current)
+```
+
 
 ## A special case: knockdown
 

@@ -10,18 +10,18 @@
 
 prepare_rhs_once <- function(input_graph){
 
-  dplyr::bind_rows((as_tibble(input_graph%>%
-                         activate(edges)%>%
-                         select(Competing_name, comp_count_current, comp_count_pre))%>%
-               mutate(initial_count = comp_count_pre)%>%
-               select(id = Competing_name, initial_count, count_pre = comp_count_pre,  count_current = comp_count_current)%>%
-               distinct()),
-            (as_tibble(input_graph%>%
-                         activate(edges)%>%
-                         select(miRNA_name, mirna_count_current, mirna_count_pre))%>%
-               mutate(initial_count = mirna_count_pre)%>%
-               select(id = miRNA_name, initial_count, count_pre = mirna_count_pre,  count_current = mirna_count_current)%>%
-               distinct()))
+  dplyr::bind_rows((tidygraph::as_tibble(input_graph%>%
+                                          tidygraph::activate(edges)%>%
+                                          tidygraph::select(Competing_name, comp_count_current, comp_count_pre))%>%
+                      tidygraph::mutate(initial_count = comp_count_pre)%>%
+                      tidygraph::select(id = Competing_name, initial_count, count_pre = comp_count_pre,  count_current = comp_count_current)%>%
+                      tidygraph::distinct()),
+            (tidygraph::as_tibble(input_graph%>%
+                                   tidygraph::activate(edges)%>%
+                                   tidygraph::select(miRNA_name, mirna_count_current, mirna_count_pre))%>%
+               tidygraph::mutate(initial_count = mirna_count_pre)%>%
+               tidygraph::select(id = miRNA_name, initial_count, count_pre = mirna_count_pre,  count_current = mirna_count_current)%>%
+               tidygraph::distinct()))
 
 
 }
@@ -38,14 +38,14 @@ prepare_rhs_once <- function(input_graph){
 
 prepare_rhs <- function(input_graph){
 
-  dplyr::bind_rows((as_tibble(input_graph%>%
-                         activate(edges))%>%
-               select(id = Competing_name, count_current = comp_count_current)%>%
-               distinct()),
-            (as_tibble(input_graph%>%
-                         activate(edges))%>%
-               select(id= miRNA_name,  count_current = mirna_count_current)%>%
-               distinct()))
+  dplyr::bind_rows((tidygraph::as_tibble(input_graph%>%
+                                          tidygraph::activate(edges))%>%
+               dplyr::select(id = Competing_name, count_current = comp_count_current)%>%
+                 dplyr::distinct()),
+            (tidygraph::as_tibble(input_graph%>%
+                                    tidygraph::activate(edges))%>%
+               dplyr::select(id= miRNA_name,  count_current = mirna_count_current)%>%
+               dplyr::distinct()))
 }
 
 #' Carries variables from edge to node.
@@ -81,15 +81,15 @@ update_nodes <- function(input_graph, once = FALSE, limit = 0){
   if (!once){
     input_graph <- input_graph%>%
       tidygraph::activate(nodes)%>%
-      dplyr::select(-count_pre)%>%
-      dplyr::select(name, type, node_id, initial_count, count_pre = count_current)
+      tidygraph::select(-count_pre)%>%
+      tidygraph::select(name, type, node_id, initial_count, count_pre = count_current)
   }
 
   input_graph <- input_graph%>%
     tidygraph::activate(nodes)%>%
-    left_join(rhs_table, by=c("name"="id"))%>%
-    mutate(changes_variable = ifelse( count_current-count_pre < -limit, "Down", type),
-           changes_variable = ifelse(count_current-count_pre > limit, "Up", changes_variable))
+    tidygraph::left_join(rhs_table, by=c("name"="id"))%>%
+    tidygraph::mutate(changes_variable = ifelse( count_current-count_pre < -limit, "Down", type),
+               changes_variable = ifelse(count_current-count_pre > limit, "Up", changes_variable))
 
   input_graph
 }

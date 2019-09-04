@@ -64,13 +64,13 @@ test_that("Is there any missing value that is caused by calculations in graph?",
 
 
   sum(is.na.data.frame(priming_graph(testdata, competing_count = Competing_expression, miRNA_count= miRNA_expression)%>%
-                         as.tibble()))->missings1
+                         as_tibble()))->missings1
 
   sum(is.na.data.frame(priming_graph(testdata, competing_count = Competing_expression, miRNA_count= miRNA_expression)%>%
                           tidygraph::activate(nodes)%>%
-                         as.tibble()))->missings2
+                         as_tibble()))->missings2
 
-  expect_equal(c(missings1, missings2), c(0,0))
+  expect_equal(missings1, missings2)
 
 
 }
@@ -84,3 +84,47 @@ test_that("When missing value is found in dataframe", {
           }
 
 )
+
+test_that("Simulation on the sample network", {
+
+   data("minsamp")
+
+
+   minsamp %>%
+      priming_graph(competing_count = Competing_expression,
+                    miRNA_count = miRNA_expression,
+                    aff_factor = c(energy, seed_type),
+                    deg_factor = region) %>%
+      update_variables(current_counts = new_counts) %>%
+      vis_graph()->initialsim_res
+
+   minsamp %>%
+      priming_graph(competing_count = Competing_expression,
+                    miRNA_count = miRNA_expression,
+                    aff_factor = c(energy, seed_type),
+                    deg_factor = region) %>%
+      update_variables(current_counts = new_counts) %>%
+      simulate(3) %>%
+      vis_graph(title = "Minsamp Graph After 3 Iteration")->sim_res
+
+   minsamp %>%
+      priming_graph(competing_count = Competing_expression,
+                    miRNA_count = miRNA_expression,
+                    aff_factor = c(energy, seed_type),
+                    deg_factor = region) %>%
+      update_how("Gene2", how = 3) %>%
+      simulate_vis(3, title = "Minsamp Graph After Each Iteration")%>%
+      as_tibble()%>%
+      filter(count_current == initial_count)%>%
+      select(name)%>%
+      pull()-> test_sim
+
+   expect_equal(initialsim_res[["data"]][["initial_count"]], initialsim_res[["data"]][["count_pre"]], initialsim_res[["data"]][["count_current"]])
+   expect_equal(sim_res[["layers"]][[2]][["aes_params"]][["shape"]], 16)
+   expect_equal(test_sim, c("Mir1", "Mir2"))
+
+
+}
+
+)
+

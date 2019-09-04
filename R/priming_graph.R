@@ -67,10 +67,10 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
                   degg_factor = dplyr::select(., dplyr::ends_with("dnorm"))%>%purrr::reduce(`*`, .init =1))%>%
     tidygraph::as_tbl_graph()%>%
     tidygraph::activate(nodes)%>%
-    tidygraph::mutate(type = ifelse( centrality_degree(mode="in") > 0,
+    tidygraph::mutate(type = ifelse( tidygraph::centrality_degree(mode="in") > 0,
                                      "miRNA",
                                      "Competing") ) %>%
-    tidygraph::mutate(node_id = row_number()) %>%
+    tidygraph::mutate(node_id = dplyr::row_number()) %>%
     tidygraph::activate(edges)%>%
     tidygraph::mutate(comp_count_list = as.list(!!competing_exp),
                       comp_count_pre = !!competing_exp,

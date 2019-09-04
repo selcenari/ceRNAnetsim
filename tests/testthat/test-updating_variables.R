@@ -5,6 +5,8 @@ context("Check to Update")
 test_that("Check the functions which update the values on the datasets.", {
 
   data("midsamp")
+  data("minsamp")
+  data("new_counts")
 
   primerg<- midsamp%>%
     priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression)
@@ -13,12 +15,32 @@ test_that("Check the functions which update the values on the datasets.", {
   seconderg<- primerg%>%
     update_how(sample_n(midsamp, 1)$Genes, 2)
 
+  minsamp%>%
+    priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression)%>%
+    update_variables(new_counts)%>%
+    as_tibble()%>%
+    select(count_current)%>%
+    pull()-> min_res
+
+  new_counts%>%
+    mutate(Competing= ifelse(Competing== "Gene2", "Gene16", Competing))->new_counts2
+  new_counts%>%
+    mutate(miRNA= ifelse(miRNA== "Mir2", "Mir3", miRNA))-> new_counts3
 
   expect_equal(ncol(as_tibble(primerg%>%activate(nodes))), 7)
   expect_equal(ncol(as_tibble(seconderg%>%activate(nodes))), 7)
   expect_equal(ncol(as_tibble(seconderg%>%activate(edges))), ncol(as_tibble(primerg%>%activate(edges))))
-
-
+  expect_equal(min_res, c(10000, 20000, 5000, 10000, 5000, 10000, 1000, 2000))
+  expect_error(primerg%>%update_how("Gene30", 2), "Given node name Gene30 was not found! Please check it.")
+  expect_error(primerg%>%update_how("Gene3", -2), "Fold change should not be less than zero.\n                     Please use decimal values for decrease. e.g. 0.5 for 2-fold decrease")
+  expect_error(minsamp%>%
+                 priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression)%>%
+                 update_variables(current_counts=new_counts2),
+               "Current values include one or more different node name!")
+  expect_error(minsamp%>%
+                 priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression)%>%
+                 update_variables(current_counts=new_counts3),
+               "Current values include one or more different node name!")
 })
 
 
