@@ -16,6 +16,8 @@
 #'
 #' @examples
 #'
+#' data("minsamp")
+#'
 #' # Visualisation of graph in steady-state.
 #'
 #'  priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)%>%
@@ -38,9 +40,8 @@ vis_graph <-function(input_graph, Competing_color = "green", mirna_color = "oran
 ")
   }
 
-
   input_graph%>%
-    ggraph("manual", node.position=sample_layout)+
+    ggraph(layout = subset(sample_layout, name %in% V(.)$name, x:y))+
     geom_edge_link(colour = "#838B8B" , alpha = 0.5)+
     geom_node_point(aes(filter= (changes_variable == "Competing"), color = "Competing", size= count_current), shape= 16)+
     geom_node_point(aes(filter= (changes_variable == "miRNA"), color = "miRNA"), shape= 16, size= 2)+
@@ -49,5 +50,6 @@ vis_graph <-function(input_graph, Competing_color = "green", mirna_color = "oran
     scale_colour_manual(name= "Types", values=c("Competing"=Competing_color, "miRNA"=mirna_color, "Up"=Upregulation, "Down"= Downregulation))+
     ggtitle(title) +
     theme_graph(base_family = 'sans')
+
 
 }
