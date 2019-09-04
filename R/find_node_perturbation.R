@@ -41,23 +41,23 @@ find_node_perturbation <- function(input_graph, how = 2, cycle=1, limit= 0, fast
 
   input_graph%>%
     activate(nodes)%>%
-    tidygraph::mutate(eff_count =furrr::future_map(V(input_graph)$name, ~calc_perturbation(input_graph, .x, how, cycle, limit)))%>%
+    tidygraph::mutate(eff_count =furrr::future_map(igraph::V(input_graph)$name, ~calc_perturbation(input_graph, .x, how, cycle, limit)))%>%
     tibble::as_tibble() %>%
     tidyr::unnest(eff_count) -> result
   }
 
   if(fast != 0){
 
-    input_graph%E>%
-      tidygraph::mutate(fast=ifelse(100*effect_current/comp_count_current>fast, TRUE, FALSE))%E>%
-      tidygraph::morph(to_subgraph,fast)%N>%
-      tidygraph::mutate(degree= centrality_degree(mode="all"))%>%
+    input_graph%>% tidygraph::activate(edges)%>%
+      tidygraph::mutate(fast=ifelse(100*effect_current/comp_count_current>fast, TRUE, FALSE))%>%
+      tidygraph::morph(to_subgraph,fast)%>% tidygraph::activate(nodes)%>%
+      tidygraph::mutate(degree= tidygraph::centrality_degree(mode="all"))%>%
       tidygraph::filter(degree>0)%>%
-      tidygraph::mutate(eff_count = tidygraph::map_bfs(node_is_center(), .f = function(graph, node, ...) {
-        calc_perturbation(graph, V(graph)$name[node], how, cycle, limit)
+      tidygraph::mutate(eff_count = tidygraph::map_bfs(tidygraph::node_is_center(), .f = function(graph, node, ...) {
+        calc_perturbation(graph, igraph::V(graph)$name[node], how, cycle, limit)
       }))%>%
       tidygraph::unmorph()%>%
-      tidygraph::mutate(len= map_dbl(eff_count, length),
+      tidygraph::mutate(len= purrr::map_dbl(eff_count, length),
              eff_count= ifelse(len==0, empty_result, eff_count))%>%
       tidygraph::as_tibble()%>%
       tidyr::unnest()%>%

@@ -31,7 +31,7 @@ find_iteration <- function(df,  limit= 0.1, plot=FALSE){
       tidygraph::activate(edges)%>%
       tibble::as_tibble()%>%
       dplyr::select(from, comp_count_list)%>%
-      dplyr::mutate(dif= (abs(purrr:map_dbl(comp_count_list,i+1)) - abs(purrr:map_dbl(comp_count_list,i))))%>%
+      dplyr::mutate(dif= (abs(purrr::map_dbl(comp_count_list,i+1)) - abs(purrr::map_dbl(comp_count_list,i))))%>%
       dplyr::select(-comp_count_list)%>%
       dplyr::distinct()%>%
       dplyr::mutate(non_zero = ifelse(abs(dif)>limit, 1, 0))%>%
