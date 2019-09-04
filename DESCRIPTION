@@ -16,20 +16,22 @@ License: GPL-3.0
 Encoding: UTF-8
 LazyData: true
 Depends: 
-    tidyverse, 
+    tidyr,
     tidygraph, 
     dplyr,
     igraph, 
     stringr,
     ggraph, 
+    ggplot2,
     rlang,
     purrr,
-    future,
-    furrr, 
+    future
+Imports: 
     devtools,
-    extrafont, 
-    png, 
-    svglite
+    furrr, 
+    extrafont,
+    svglite,
+    png
 Suggests:
     knitr,
     rmarkdown,
