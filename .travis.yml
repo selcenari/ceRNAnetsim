@@ -19,6 +19,9 @@ matrix:
  - r: oldrel
    os: osx
 
+apt_packages:
+  - libxml2-dev
+
 env:
   global:
     - R_BUILD_ARGS="--no-build-vignettes --no-manual"
@@ -29,3 +32,6 @@ warnings_are_errors: false
 
 r_build_args: --no-build-vignettes --no-manual
 r_check_args: --no-build-vignettes --no-manual --timings
+
+after_success:
+  - Rscript -e 'covr::codecov()'
