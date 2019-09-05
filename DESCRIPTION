@@ -41,7 +41,8 @@ Imports:
     ggraph,
     igraph,
     purrr,
-    tidyr
+    tidyr,
+    future
 Suggests:
     knitr,
     png,

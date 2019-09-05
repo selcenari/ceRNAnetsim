@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A TCGA dataset application • ceRNAnetsim</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><!-- docsearch --><script src="../docsearch.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script><meta property="og:title" content="A TCGA dataset application">
@@ -106,7 +107,7 @@
   </a>
 </li>
       </ul>
-<form class="navbar-form navbar-right" role="search">
+<form class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
         <div class="form-group">
           <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
 </div>
@@ -120,13 +121,14 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>A TCGA dataset application</h1>
                         <h4 class="author">Selcen Ari</h4>
             
-            <h4 class="date">2019-09-03</h4>
+            <h4 class="date">2019-09-05</h4>
       
       
       <div class="hidden name"><code>mirtarbase_example.Rmd</code></div>
@@ -146,9 +148,9 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("devtools")</span></a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="co"># devtools::install_github("selcenari/ceRNAnetsim")</span></a>
 <a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ceRNAnetsim)</a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"mirtarbasegene"</span>)</a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(mirtarbasegene)</a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ceRNAnetsim)</a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"mirtarbasegene"</span>)</a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(mirtarbasegene)</a>
 <a class="sourceLine" id="cb1-7" title="7"><span class="co">#&gt; # A tibble: 6 x 2</span></a>
 <a class="sourceLine" id="cb1-8" title="8"><span class="co">#&gt;   miRNA           Target </span></a>
 <a class="sourceLine" id="cb1-9" title="9"><span class="co">#&gt;   &lt;chr&gt;           &lt;chr&gt;  </span></a>
@@ -165,8 +167,8 @@
 <a href="#gene-expression-in-normal-and-tumor-samples" class="anchor"></a>Gene expression in normal and tumor samples</h2>
 <p>The gene and mirna expression counts of patient barcoded with TCGA-E9-A1N5 is retrieved from TCGA via <code>TCGAbiolinks</code> package from <code>Bioconductor</code>. The instructions of retrieving data can be found at <code>TCGAbiolinks</code> manual.</p>
 <p>For this step you don’t have to use TCGA data, any other source or package can be utilized.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"TCGA_E9_A1N5_normal"</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(TCGA_E9_A1N5_normal)</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"TCGA_E9_A1N5_normal"</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(TCGA_E9_A1N5_normal)</a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
 <a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt;   patient sample barcode definition ensembl_gene_id external_gene_n~</span></a>
 <a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;           </span></a>
@@ -177,8 +179,8 @@
 <a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt; 5 TCGA-E~ TCGA-~ TCGA-E~ Solid Tis~ ENSG00000000460 C1orf112        </span></a>
 <a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; 6 TCGA-E~ TCGA-~ TCGA-E~ Solid Tis~ ENSG00000000938 FGR             </span></a>
 <a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; # ... with 1 more variable: gene_expression &lt;dbl&gt;</span></a></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"TCGA_E9_A1N5_tumor"</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(TCGA_E9_A1N5_tumor)</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"TCGA_E9_A1N5_tumor"</span>)</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(TCGA_E9_A1N5_tumor)</a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt;   patient sample barcode definition ensembl_gene_id external_gene_n~</span></a>
 <a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;           </span></a>
@@ -193,8 +195,8 @@
 <div id="mirna-expression-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#mirna-expression-data" class="anchor"></a>miRNA expression data</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"TCGA_E9_A1N5_mirnatumor"</span>)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(TCGA_E9_A1N5_mirnatumor)</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"TCGA_E9_A1N5_mirnatumor"</span>)</a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(TCGA_E9_A1N5_mirnatumor)</a>
 <a class="sourceLine" id="cb4-3" title="3"><span class="co">#&gt; # A tibble: 6 x 6</span></a>
 <a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt;   barcode             mirbase_ID   miRNA      Precusor total_read total_RPM</span></a>
 <a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt;   &lt;chr&gt;               &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;         &lt;int&gt;     &lt;dbl&gt;</span></a>
@@ -204,8 +206,8 @@
 <a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; 4 TCGA-E9-A1N5-01A-1~ MIMAT0000063 hsa-let-7~ MI00000~      43489  19785.  </span></a>
 <a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt; 5 TCGA-E9-A1N5-01A-1~ MIMAT0004482 hsa-let-7~ MI00000~        126     57.3 </span></a>
 <a class="sourceLine" id="cb4-11" title="11"><span class="co">#&gt; 6 TCGA-E9-A1N5-01A-1~ MIMAT0000064 hsa-let-7~ MI00000~       2002    911.</span></a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"TCGA_E9_A1N5_mirnanormal"</span>)</a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(TCGA_E9_A1N5_mirnanormal)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"TCGA_E9_A1N5_mirnanormal"</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(TCGA_E9_A1N5_mirnanormal)</a>
 <a class="sourceLine" id="cb5-3" title="3"><span class="co">#&gt; # A tibble: 6 x 6</span></a>
 <a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt;   barcode             mirbase_ID   miRNA      Precusor total_read total_RPM</span></a>
 <a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt;   &lt;chr&gt;               &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;         &lt;int&gt;     &lt;dbl&gt;</span></a>
@@ -252,7 +254,7 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">TCGA_E9_A1N5_mirnanormal <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw">inner_join</span>(mirtarbasegene, <span class="dt">by=</span> <span class="st">"miRNA"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span><span class="kw">inner_join</span>(TCGA_E9_A1N5_normal, </a>
-<a class="sourceLine" id="cb6-4" title="4">             <span class="dt">by =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Target"</span>=<span class="st"> "external_gene_name"</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-4" title="4">             <span class="dt">by =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Target"</span>=<span class="st"> "external_gene_name"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-5" title="5"><span class="st">  </span><span class="kw">select</span>(Target, miRNA, total_read, gene_expression) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb6-6" title="6"><span class="st">  </span><span class="kw">distinct</span>() -&gt;<span class="st"> </span>TCGA_E9_A1N5_mirnagene</a></code></pre></div>
 <pre><code>#&gt; # A tibble: 26 x 3
@@ -270,7 +272,7 @@
 #&gt;  9 MATR3   hsa-miR-155-5p      2
 #&gt; 10 MATR3   hsa-miR-16-1-3p     2
 #&gt; # ... with 16 more rows</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(TCGA_E9_A1N5_mirnagene)</a>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(TCGA_E9_A1N5_mirnagene)</a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt; # A tibble: 6 x 4</span></a>
 <a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt;   Target  miRNA         total_read gene_expression</span></a>
 <a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;              &lt;int&gt;           &lt;dbl&gt;</span></a>
@@ -283,7 +285,7 @@
 <p>When we compared the two gene expression dataset of TCGA-E9A1N5 patient, and selected a gene which has 30-fold increased expression, (gene name: HIST1H3H), this gene node will be used in the example. Note that the selected node must not be isolated one. If the an isolated node is selected the change in expression will not propagate in network. (You can see commands for node selection in the vignette <a href="https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html">The auxiliary commands which can help to the users</a>)</p>
 <p>Optionally, you can filter the low expressed gene nodes because they are not effective elements.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">TCGA_E9_A1N5_mirnagene<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(gene_expression <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>)-&gt;TCGA_E9_A1N5_mirnagene</a></code></pre></div>
+<a class="sourceLine" id="cb9-2" title="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(gene_expression <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>)-&gt;TCGA_E9_A1N5_mirnagene</a></code></pre></div>
 <p>The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with <em>HIST1H3H</em> node.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">TCGA_E9_A1N5_mirnagene <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb10-2" title="2"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> gene_expression, </a>
@@ -389,6 +391,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -406,13 +409,15 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Selcen Ari, Alper Yilmaz.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
 </div>
+
       </footer>
 </div>
 

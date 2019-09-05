@@ -1,7 +1,9 @@
 #' Calculates average expression changes of all (or specified) nodes except trigger and finds the perturbed node count for all (or specified) nodes in system.
 #'
 #'
-#' @importFrom furrr future_map
+#' @importFrom furrr future_map future_map_dfr
+#' @importFrom future plan
+#' @importFrom rlang set_names
 #' @importFrom igraph V "V<-"
 #' @importFrom purrr map_dbl
 #' @importFrom tidyr unnest
@@ -24,16 +26,19 @@
 #'
 #'  minsamp%>%
 #'   priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression)%>%
-#'   find_node_perturbation()
+#'   find_node_perturbation()%>%
+#'   select(name, perturbation_efficiency, perturbed_count)
 #'
 #'
 #'  minsamp%>%
 #'   priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression, aff_factor = c(energy,seed_type), deg_factor = region)%>%
-#'   find_node_perturbation(how = 3, cycle = 4)
+#'   find_node_perturbation(how = 3, cycle = 4)%>%
+#'   select(name, perturbation_efficiency, perturbed_count)
 #'
 #'  midsamp%>%
 #'   priming_graph(competing_count = Gene_expression, miRNA_count = miRNA_expression)%>%
-#'   find_node_perturbation(how = 2, cycle= 3, limit=1, fast = 5)
+#'   find_node_perturbation(how = 2, cycle= 3, limit=1, fast = 5)%>%
+#'   select(name, perturbation_efficiency, perturbed_count)
 #'
 #'
 #' @export

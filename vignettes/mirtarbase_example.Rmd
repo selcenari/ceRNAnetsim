@@ -117,7 +117,7 @@ TCGA_E9_A1N5_mirnagene%>%
 
 The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with *HIST1H3H* node.
 
-```{r, fig.height=4, fig.width=5, fig.align='center', warning=FALSE, eval=FALSE}
+```{r, fig.height=4, fig.width=5, fig.align='center', warning=FALSE}
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
@@ -128,7 +128,7 @@ TCGA_E9_A1N5_mirnagene %>%
 
 The graph was shown that the change in expression level of HIST1H3H results in weak perturbation efficiency, despite 30-fold change. The results of the simulation was shown in following:
 
-```{r, eval=FALSE}
+```{r}
 TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>%
@@ -139,7 +139,7 @@ TCGA_E9_A1N5_mirnagene %>%
   arrange(desc(FC))
 ```
 
-```{r, eval=FALSE}
+```{r}
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read)%>%
@@ -151,7 +151,7 @@ TCGA_E9_A1N5_mirnagene %>%
 
 And then, we tried to simulate the network with the gene which has higher expression value. For this, we selected *ACTB* node as shown in [The auxiliary commands which can help to the users](https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html)
 
-```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE, eval=FALSE}
+```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
@@ -161,7 +161,7 @@ TCGA_E9_A1N5_mirnagene %>%
 ```
 
 
-```{r, eval=FALSE}
+```{r}
 TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>%
@@ -172,7 +172,7 @@ TCGA_E9_A1N5_mirnagene %>%
   arrange(desc(FC))
 ```
 
-```{r, eval=FALSE}
+```{r}
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read)%>%
@@ -181,7 +181,7 @@ TCGA_E9_A1N5_mirnagene %>%
 
 On the other hand, the perturbation eficiency of ATCB gene is higher, when this gene is regulated with 30-fold upregulation like in HIST1H3H.
 
-```{r, eval=FALSE}
+```{r}
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read)%>%

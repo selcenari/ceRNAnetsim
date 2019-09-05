@@ -7,18 +7,6 @@ branches:
         - master
 latex: false
 
-r_packages:
- - dplyr
- - tidyr
- - tidygraph
- - igraph
- - ggraph
- - ggplot2
- - rlang
- - purrr
- - future
- - furrr
-
 matrix:
  include:
  - r: release

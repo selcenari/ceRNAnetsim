@@ -71,11 +71,12 @@ primed_mid <- midsamp %>%
 
 Now, let's calculate perturbation efficiency caused by 2-fold to 10-fold increase in Gene17
 
-```{r}
-plan(multiprocess)  # for parallel processing
+```{r, eval=FALSE}
+# for parallel processing
+# future::plan(multiprocess) 
 
 seq(2,10) %>%
-  set_names() %>% 
+  rlang::set_names() %>% 
   furrr::future_map_dfr(~ primed_mid %>% calc_perturbation("Gene17", .x, cycle = 30, limit = 0.1), .id="fold_change")
 ```
 
@@ -117,7 +118,7 @@ The results of the `find_node_perturbation()` will list effectiveness or importa
 
 In real biological datasets, more complex interactions whether functional or non-functional could be observed. We have improved our approach with `fast` argument in `find_node_perturbation()` based on selection of elements that could be affected from perturbation. In this fucntion, `fast` argument specifies the percentage of the competing amount that can be affected within the initial competing amount and acts as a selection parameter. For instance, in huge_example data:
 
-```{r,eval=FALSE}
+```{r}
 data("huge_example")
 huge_example%>%
   priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
@@ -125,7 +126,7 @@ huge_example%>%
   select(name, perturbation_efficiency, perturbed_count)
 ```
 
-```{r, eval=FALSE}
+```{r}
 huge_example%>%
   priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
   find_node_perturbation(how=5, cycle=3, fast = 3)%>%

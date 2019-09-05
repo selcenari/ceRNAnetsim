@@ -65,7 +65,7 @@ filtered_example %>%
 
 Let's visualize each step of simulation via `simulate_vis()` function.
 
-```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE, fig.show='hide', eval=FALSE}
+```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE, fig.show='hide'}
 filtered_example %>%
   priming_graph(competing_count = competing_counts, 
                 miRNA_count = mirnaexpression_normal, 
