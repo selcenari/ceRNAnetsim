@@ -2,6 +2,7 @@
 #'
 #' This function replaces new values with previous values of competing or miRNA counts.
 #'
+#' @importFrom igraph E "E<-"
 #' @return the graph object.
 #'
 #' @details update_variables function provides updating edge variables to current values. If the microRNA or competing expression (or both) change (decreasing or increasing), this function switches the values that are found in a new dataset provided by user. But the current value dataset must be equal with initial dataset in terms of node name.
@@ -21,9 +22,9 @@
 
 update_variables <- function (input_graph, current_counts){
 
-  if(isTRUE(all.equal(current_counts$Competing, igraph::E(input_graph)$Competing_name))){
+  if(isTRUE(all.equal(current_counts$Competing, E(input_graph)$Competing_name))){
 
-    igraph::E(input_graph)$comp_count_current[match(current_counts$Competing, igraph::E(input_graph)$Competing_name)] <- current_counts$Competing_count
+    E(input_graph)$comp_count_current[match(current_counts$Competing, E(input_graph)$Competing_name)] <- current_counts$Competing_count
   }
 
   else{
@@ -31,9 +32,9 @@ update_variables <- function (input_graph, current_counts){
 
   }
 
-  if (isTRUE(all.equal(current_counts$miRNA, igraph::E(input_graph)$miRNA_name))) {
+  if (isTRUE(all.equal(current_counts$miRNA, E(input_graph)$miRNA_name))) {
 
-    igraph::E(input_graph)$mirna_count_current[match(current_counts$miRNA, igraph::E(input_graph)$miRNA_name)] <- current_counts$miRNA_count
+    E(input_graph)$mirna_count_current[match(current_counts$miRNA, E(input_graph)$miRNA_name)] <- current_counts$miRNA_count
   }
 
   else{

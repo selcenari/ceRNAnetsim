@@ -2,6 +2,7 @@
 #'
 #' simulate function uses the change in expression value/s as triggering.
 #'
+#' @importFrom purrr pmap
 #' @return The graph.
 #'
 #' @details The steady-state conditions of the system are disturbed after the change in the graph (with update_how or update_variables). In this case, the system tend to be steady state again. The arrangement of competetive profiles of the targets continue until all nodes are updated and steady-state nearly. Note that, If `how` argument is specified as `0`, *simulate()* and *update_how()* functions process the variables to knockdown of specified gene with default `knockdown = TRUE` and knocked down competing RNA is kept at zero. However, if `knockdown= FALSE` argument is applied, competing RNA which has initial expression level of zero is allowed to increase or fluctuate during calculations.
@@ -44,7 +45,7 @@ simulate <- function(input_graph, cycle=1, threshold= 0, knockdown= TRUE){
         tidygraph::group_by(from)%>%
         tidygraph::mutate(comp_count_pre = ifelse(comp_count_current < 0, 1, comp_count_current), comp_count_current = ifelse(comp_count_pre==0, 0, comp_count_pre - (sum(effect_current)-sum(effect_pre))), comp_count_current = ifelse(comp_count_current< 0, 1, comp_count_current))%>%
         tidygraph::ungroup()%>%
-        tidygraph::mutate(comp_count_list = purrr::pmap(list(comp_count_list, comp_count_current), c), effect_list = purrr::pmap(list(effect_list, effect_current), c), mirna_count_list = purrr::pmap(list(mirna_count_list, mirna_count_current), c))%>%
+        tidygraph::mutate(comp_count_list = pmap(list(comp_count_list, comp_count_current), c), effect_list = pmap(list(effect_list, effect_current), c), mirna_count_list = pmap(list(mirna_count_list, mirna_count_current), c))%>%
         tidygraph::activate(nodes)%>%
         update_nodes(limit = threshold) ->input_graph
     }
@@ -64,7 +65,7 @@ simulate <- function(input_graph, cycle=1, threshold= 0, knockdown= TRUE){
         tidygraph::group_by(from)%>%
         tidygraph::mutate(comp_count_pre = ifelse(comp_count_current< 0, 1, comp_count_current), comp_count_current = comp_count_pre - (sum(effect_current)-sum(effect_pre)), comp_count_current = ifelse(comp_count_current< 0, 1, comp_count_current))%>%
         tidygraph::ungroup()%>%
-        tidygraph::mutate(comp_count_list = purrr::pmap(list(comp_count_list, comp_count_current), c), effect_list = purrr::pmap(list(effect_list, effect_current), c), mirna_count_list = purrr::pmap(list(mirna_count_list, mirna_count_current), c))%>%
+        tidygraph::mutate(comp_count_list = pmap(list(comp_count_list, comp_count_current), c), effect_list = pmap(list(effect_list, effect_current), c), mirna_count_list = pmap(list(mirna_count_list, mirna_count_current), c))%>%
         tidygraph::activate(nodes)%>%
       update_nodes(limit = threshold)-> input_graph
   }

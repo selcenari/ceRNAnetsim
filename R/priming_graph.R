@@ -15,6 +15,8 @@ normalize <- function(x){abs(x)/max(abs(x))}
 #'
 #'  The function converts the given dataframe using first variable as competing and the second as miRNA. If user defines interaction factors as affinity or degradation, the factors are taken into account.
 #'
+#' @importFrom purrr reduce
+#' @importFrom rlang enquo enquos
 #' @return the graph object.
 #'
 #' @param df A data frame that includes the miRNA and competing targets.
@@ -48,10 +50,10 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
 
   }
 
-  competing_exp <- rlang::enquo(competing_count)
-  mirna_exp <- rlang::enquo(miRNA_count)
-  affinity <- rlang::enquos(aff_factor)
-  degradation <- rlang::enquos(deg_factor)
+  competing_exp <- enquo(competing_count)
+  mirna_exp <- enquo(miRNA_count)
+  affinity <- enquos(aff_factor)
+  degradation <- enquos(deg_factor)
 
   df <- df%>%
     dplyr::mutate(competing = .[[1]], miRNA= .[[2]], Competing_name = .[[1]], miRNA_name= .[[2]], dummy=1)%>%
@@ -63,8 +65,8 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor=dummy, de
     dplyr::mutate_at(dplyr::vars(!!!affinity), dplyr::funs(anorm = normalize))%>%
     dplyr::mutate_at(dplyr::vars(!!!degradation), dplyr::funs(dnorm = normalize))%>%
     dplyr::ungroup()%>%
-    dplyr::mutate(afff_factor = dplyr::select(., dplyr::ends_with("anorm"))%>%purrr::reduce(`*`, .init = 1),
-                  degg_factor = dplyr::select(., dplyr::ends_with("dnorm"))%>%purrr::reduce(`*`, .init =1))%>%
+    dplyr::mutate(afff_factor = dplyr::select(., dplyr::ends_with("anorm"))%>%reduce(`*`, .init = 1),
+                  degg_factor = dplyr::select(., dplyr::ends_with("dnorm"))%>%reduce(`*`, .init =1))%>%
     tidygraph::as_tbl_graph()%>%
     tidygraph::activate(nodes)%>%
     tidygraph::mutate(type = ifelse( tidygraph::centrality_degree(mode="in") > 0,

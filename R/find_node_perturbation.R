@@ -1,6 +1,11 @@
 #' Calculates average expression changes of all (or specified) nodes except trigger and finds the perturbed node count for all (or specified) nodes in system.
 #'
 #'
+#' @importFrom furrr future_map
+#' @importFrom igraph V "V<-"
+#' @importFrom purrr map_dbl
+#' @importFrom tidyr unnest
+#'
 #' @return It gives a tibble form dataset that includes node names, perturbation efficiency and perturbed count of nodes.
 #'
 #' @details find_node_perturbation calculates mean expression changes of elements after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
@@ -41,9 +46,9 @@ find_node_perturbation <- function(input_graph, how = 2, cycle=1, limit= 0, fast
 
   input_graph%>%
     activate(nodes)%>%
-    tidygraph::mutate(eff_count =furrr::future_map(igraph::V(input_graph)$name, ~calc_perturbation(input_graph, .x, how, cycle, limit)))%>%
+    tidygraph::mutate(eff_count = future_map(V(input_graph)$name, ~calc_perturbation(input_graph, .x, how, cycle, limit)))%>%
     tibble::as_tibble() %>%
-    tidyr::unnest(eff_count) -> result
+    unnest(eff_count) -> result
   }
 
   if(fast != 0){
@@ -54,13 +59,13 @@ find_node_perturbation <- function(input_graph, how = 2, cycle=1, limit= 0, fast
       tidygraph::mutate(degree= tidygraph::centrality_degree(mode="all"))%>%
       tidygraph::filter(degree>0)%>%
       tidygraph::mutate(eff_count = tidygraph::map_bfs(tidygraph::node_is_center(), .f = function(graph, node, ...) {
-        calc_perturbation(graph, igraph::V(graph)$name[node], how, cycle, limit)
+        calc_perturbation(graph, V(graph)$name[node], how, cycle, limit)
       }))%>%
       tidygraph::unmorph()%>%
-      tidygraph::mutate(len= purrr::map_dbl(eff_count, length),
+      tidygraph::mutate(len= map_dbl(eff_count, length),
              eff_count= ifelse(len==0, empty_result, eff_count))%>%
       tidygraph::as_tibble()%>%
-      tidyr::unnest()%>%
+      unnest()%>%
       dplyr::select(-degree, -len)-> result
 
 

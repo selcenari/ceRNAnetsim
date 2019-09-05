@@ -2,6 +2,8 @@
 #'
 #' simulate_vis provides visualisation of the graph in addition to simulate function.
 #'
+#' @importFrom purrr pmap
+#' @importFrom ggplot2 ggsave
 #' @details simulate_vis gives the last graph object and each iterations' image.
 #'
 #' @return It gives a graph and the images of states in each iteration until the end of the simulation.
@@ -51,13 +53,13 @@ simulate_vis <- function(input_graph, cycle=1, threshold = 0, Competing_color = 
       tidygraph::group_by(from)%>%
       tidygraph::mutate(comp_count_pre = ifelse(comp_count_current< 0, 1, comp_count_current), comp_count_current = comp_count_pre - (sum(effect_current)-sum(effect_pre)), comp_count_current = ifelse(comp_count_current< 0, 1, comp_count_current))%>%
       tidygraph::ungroup()%>%
-      tidygraph::mutate(comp_count_list = purrr::pmap(list(comp_count_list, comp_count_current), c), effect_list = purrr::pmap(list(effect_list, effect_current), c), mirna_count_list = purrr::pmap(list(mirna_count_list, mirna_count_current), c))%>%
+      tidygraph::mutate(comp_count_list = pmap(list(comp_count_list, comp_count_current), c), effect_list = pmap(list(effect_list, effect_current), c), mirna_count_list = pmap(list(mirna_count_list, mirna_count_current), c))%>%
       tidygraph::activate(nodes)%>%
       update_nodes(limit = threshold)-> input_graph
 
     vis_graph(input_graph, Competing_color, mirna_color, Upregulation, Downregulation, title = paste(title, "-",i), layout)-> graph_vis
 
-    ggplot2::ggsave(paste(title, ".png", sep = ""))
+    ggsave(paste(title, ".png", sep = ""))
 
     print(graph_vis)
   }

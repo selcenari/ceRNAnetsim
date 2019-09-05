@@ -149,7 +149,7 @@ minsamp %>%
 ```
 
 
-```{r echo=FALSE, fig.align='center', fig.width=6, fig.height=5, dpi=120}
+```{r echo=FALSE, fig.align='center', fig.width=10, fig.height=8, dpi=120}
 knitr::include_graphics("gifs/small_sample_chunk10.png")
 ```
 
