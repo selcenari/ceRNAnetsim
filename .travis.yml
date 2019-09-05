@@ -5,6 +5,10 @@ cache: packages
 branches:
     only:
         - master
+latex: false
+
+apt_packages:
+  - libxml2-dev
 
 matrix:
  include:
@@ -18,9 +22,6 @@ matrix:
    os: linux
  - r: oldrel
    os: osx
-
-apt_packages:
-  - libxml2-dev
 
 env:
   global:
