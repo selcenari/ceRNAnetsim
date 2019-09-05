@@ -7,8 +7,17 @@ branches:
         - master
 latex: false
 
-apt_packages:
-  - libxml2-dev
+r_packages:
+ - dplyr
+ - tidyr
+ - tidygraph
+ - igraph
+ - ggraph
+ - ggplot2
+ - rlang
+ - purrr
+ - future
+ - furrr
 
 matrix:
  include:
