@@ -17,7 +17,7 @@
 #' @param how The change of count (expression) of the given node in terms of fold change.
 #' @param cycle The iteration of simulation.
 #' @param limit The minimum fold change which can be taken into account for perturbation calculation on all nodes in terms of percentage.
-#' @param included specifies percentage of affected target in target expression. For example, if fast = 1, the nodes that are affected from miRNA repression activity more than one percent of their expression is determined as subgraph.
+#' @param fast specifies percentage of affected target in target expression. For example, if fast = 1, the nodes that are affected from miRNA repression activity more than one percent of their expression is determined as subgraph.
 #'
 #' @examples
 #'

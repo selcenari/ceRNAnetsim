@@ -16,7 +16,7 @@ find_node_perturbation(input_graph, how = 2, cycle = 1, limit = 0,
 
 \item{limit}{The minimum fold change which can be taken into account for perturbation calculation on all nodes in terms of percentage.}
 
-\item{included}{specifies percentage of affected target in target expression. For example, if fast = 1, the nodes that are affected from miRNA repression activity more than one percent of their expression is determined as subgraph.}
+\item{fast}{specifies percentage of affected target in target expression. For example, if fast = 1, the nodes that are affected from miRNA repression activity more than one percent of their expression is determined as subgraph.}
 }
 \value{
 It gives a tibble form dataset that includes node names, perturbation efficiency and perturbed count of nodes.

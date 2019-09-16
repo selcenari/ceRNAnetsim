@@ -41,6 +41,7 @@ The table is actually constructed by merging three different tables:
 So, the `basic_data` table is constructed by merging following tables:
 
 ```{r, message= FALSE, warning=FALSE, echo=FALSE}
+data("minsamp")
 minsamp %>% 
   select(competing, Competing_expression) %>% 
   distinct() -> gene_expression
