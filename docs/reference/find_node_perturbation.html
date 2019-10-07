@@ -85,7 +85,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ceRNAnetsim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
       </span>
     </div>
 
@@ -203,7 +203,7 @@
       <td><p>The minimum fold change which can be taken into account for perturbation calculation on all nodes in terms of percentage.</p></td>
     </tr>
     <tr>
-      <th>included</th>
+      <th>fast</th>
       <td><p>specifies percentage of affected target in target expression. For example, if fast = 1, the nodes that are affected from miRNA repression activity more than one percent of their expression is determined as subgraph.</p></td>
     </tr>
     </table>
@@ -255,7 +255,8 @@
   <span class='fu'>find_node_perturbation</span>(<span class='kw'>how</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>cycle</span><span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>limit</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>fast</span> <span class='kw'>=</span> <span class='fl'>5</span>)<span class='kw'>%&gt;%</span>
   <span class='fu'>select</span>(<span class='no'>name</span>, <span class='no'>perturbation_efficiency</span>, <span class='no'>perturbed_count</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `as_quosure()` requires an explicit environment as of rlang 0.3.0.</span>
 #&gt; <span class='warning'>Please supply `env`.</span>
-#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once per session.</span><span></span></div><div class='output co'>#&gt; <span class='message'>Subsetting by edges</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 24 x 3</span><span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once per session.</span><span></span></div><div class='output co'>#&gt; <span class='message'>Subsetting by edges</span></div><div class='output co'>#&gt; <span class='warning'>Warning: `cols` is now required.</span>
+#&gt; <span class='warning'>Please use `cols = c(eff_count)`</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 24 x 3</span><span>
 #&gt;    name   perturbation_efficiency perturbed_count
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                    </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
 #&gt; </span><span style='color: #555555;'> 1</span><span> Gene1                   </span><span style='color: #BB0000;'>NA</span><span>                  </span><span style='color: #BB0000;'>NA</span><span>
@@ -287,11 +288,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Selcen Ari, Alper Yilmaz.</p>
+  <p>Developed by Selcen Ari Yuka, Alper Yilmaz.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>
