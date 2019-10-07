@@ -2,10 +2,10 @@ Type: Package
 Package: ceRNAnetsim
 Title: Regulation Simulator of Interaction between miRNA and
     Competing RNAs (ceRNA)
-Version: 0.1.0
+Version: 0.99.0
 Authors@R: 
     c(person(given = "Selcen",
-             family = "Ari",
+             family = "Ari Yuka",
              role = c("aut", "cre"),
              email = "selcenarii@gmail.com",
              comment = c(ORCID = "0000-0002-0028-2453")),
@@ -14,8 +14,7 @@ Authors@R:
              role = "aut",
              email = "alperyilmaz@gmail.com",
              comment = c(ORCID = "0000-0002-8827-4887")))
-Author: Selcen Ari [aut, cre], Alper Yilmaz [aut]
-Maintainer: Selcen Ari <selcenarii@gmail.com>
+Maintainer: Selcen Ari Yuka <selcenarii@gmail.com>
 Description: This package simulates regulations of ceRNA
     (Competing Endogenous) expression levels after a expression level
     change in one or more miRNA/mRNAs. The methodolgy adopted by the
@@ -51,6 +50,12 @@ Suggests:
     covr
 VignetteBuilder: 
     knitr
+biocViews:
+    NetworkInference, 
+    SystemsBiology,
+    Network,
+    GraphAndNetwork,
+    Transcriptomics
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1

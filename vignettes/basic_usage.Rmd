@@ -16,6 +16,30 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Introduction
+
+This vignette demonstrates how to analyse miRNA:Competing interactions via `ceRNAnetsim` package. The perturbations in the miRNA:target interactions are handled step by step in `ceRNAnetsim`. The package calculates and simulates regulation of miRNA:competing RNA interactions based on amounts of miRNA and the targets and interaction factors.
+
+The `ceRNAnetsim` works by executing following steps:
+
+- The input dataset is prepared for analysis. The first variable is arranged as competing and the second as miRNA.
+- The dataset is primed with `priming_graph()` function so that it's converted into a graph. This function makes calculations that are depended on miRNA amount, target (competing) amount and the interaction factors. It determines the efficiency of miRNA to each target and saves that values as edge data. All calculations are performed in edge data. After that, results of calculations are used in node data.
+- Now, the change in expression level of either miRNA or competing RNA can be introduced with `update_variables()` or `update_how()` functions.
+- The calculated values in edge are carried to node data through a helper function `update_nodes()`.
+- The change is perceived as a trigger and network-wise calculations are performed.
+- The trigger is used for simulation of regulations in `simulate()` or `simulate_vis()`.
+- These processes can generate various outputs such as graphs or graph objects.
+
+
+The workflow of `ceRNAnetsim` are shown as following:
+
+```{r pressure, echo=FALSE, fig.align='center', fig.width=6, fig.height=5, dpi=120}
+
+knitr::include_graphics("gifs/model_vignette.png")
+```
+
+ Firstly the package is loaded:
+
 ```{r setup, message= FALSE, warning=FALSE}
 #install.packages("devtools")
 #devtools::install_github("selcenari/ceRNAnetsim")
@@ -82,7 +106,6 @@ interaction_simple %>%
 
 basic_data
 ```
-
 
 
 ## What does ceRNAnetsim do?

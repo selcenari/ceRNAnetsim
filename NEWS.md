@@ -1,3 +1,3 @@
-# ceRNAnetsim 0.1.0
+Changes in ceRNAnetsim (0.99.0) package (2019-10-7)
 
-* First release of package
++ Submission to Bioconductor
