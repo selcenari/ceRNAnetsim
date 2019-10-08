@@ -3,7 +3,7 @@ inst/doc
 .Rhistory
 .RData
 .Ruserdata
-*.Rproject
+.Rproj
 .Rprofile
 ceRNAnetsim.Rcheck/
 ceRNAnetsim*.tar.gz
