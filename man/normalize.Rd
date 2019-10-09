@@ -9,6 +9,9 @@ normalize(x)
 \arguments{
 \item{x}{The variable name that is normalized.}
 }
+\value{
+normalized values
+}
 \description{
 normalizes the values according to maximum values inside a group. The helper function of priming_graph.
 }

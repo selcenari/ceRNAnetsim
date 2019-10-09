@@ -4,9 +4,8 @@
 #'
 #' @param x The variable name that is normalized.
 #'
-#' @return NULL
-#'
-#'
+#' @return normalized values
+#' 
 
 
 normalize <- function(x){abs(x)/max(abs(x))}

@@ -5,6 +5,7 @@
 #' @details The function is a helper function for processing of graph object with update_nodes function.
 #'
 #' @param input_graph Processed graph object in previous step.
+#' @return tibble object
 #'
 
 
@@ -33,6 +34,7 @@ prepare_rhs_once <- function(input_graph){
 #' @details The function is a helper function for processing of graph object with update_nodes function.
 #'
 #' @param input_graph Processed graph object in previous step.
+#' @return tibble object
 #'
 
 

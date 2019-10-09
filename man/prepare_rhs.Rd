@@ -9,6 +9,9 @@ prepare_rhs(input_graph)
 \arguments{
 \item{input_graph}{Processed graph object in previous step.}
 }
+\value{
+tibble object
+}
 \description{
 Carries the variables from edge to node.
 }

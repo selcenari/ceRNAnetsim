@@ -14,7 +14,6 @@ Authors@R:
              role = "aut",
              email = "alperyilmaz@gmail.com",
              comment = c(ORCID = "0000-0002-8827-4887")))
-Maintainer: Selcen Ari Yuka <selcenarii@gmail.com>
 Description: This package simulates regulations of ceRNA
     (Competing Endogenous) expression levels after a expression level
     change in one or more miRNA/mRNAs. The methodolgy adopted by the
@@ -27,7 +26,7 @@ Description: This package simulates regulations of ceRNA
     handle the given dataset as graph object and the processes progress
     via edge and node variables.
 License: GPL-3.0
-URL: https://selcenari.github.io/ceRNAnetsim/
+URL: https://github.com/selcenari/ceRNAnetsim
 BugReports: https://github.com/selcenari/ceRNAnetsim/issues
 Depends:
     dplyr,
