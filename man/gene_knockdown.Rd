@@ -10,8 +10,6 @@ gene_knockdown(input_graph, node_name)
 \item{input_graph}{The graph object that processed in previous step/s.}
 
 \item{node_name}{The name of the node whose count is to be knocked down.}
-
-\item{knockdown}{default is TRUE}
 }
 \value{
 the graph object.

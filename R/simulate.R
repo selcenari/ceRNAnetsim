@@ -1,7 +1,7 @@
 #' Utilizes the change in expression value/s as triggering.
 #'
 #' simulate function uses the change in expression value/s as triggering.
-#'
+#' @import dplyr tidygraph
 #' @importFrom purrr pmap
 #' @return The graph.
 #'
@@ -10,6 +10,7 @@
 #' @param input_graph The graph object that processed in previous steps.
 #' @param cycle Optimal iteration number for gaining steady-state.
 #' @param threshold absolute minimum amount of change required to be considered as up/down regulated element
+#' @param knockdown specifies gene knockdown with default TRUE
 #'
 #' @examples
 #'

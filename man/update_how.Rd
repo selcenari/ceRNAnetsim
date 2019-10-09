@@ -12,6 +12,8 @@ update_how(input_graph, node_name, how, knockdown = TRUE)
 \item{node_name}{The name of the node whose count is to be changed.}
 
 \item{how}{The change in terms of fold change.}
+
+\item{knockdown}{specifies gene knockdown with default TRUE}
 }
 \value{
 the graph object.

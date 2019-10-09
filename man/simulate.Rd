@@ -12,6 +12,8 @@ simulate(input_graph, cycle = 1, threshold = 0, knockdown = TRUE)
 \item{cycle}{Optimal iteration number for gaining steady-state.}
 
 \item{threshold}{absolute minimum amount of change required to be considered as up/down regulated element}
+
+\item{knockdown}{specifies gene knockdown with default TRUE}
 }
 \value{
 The graph.
