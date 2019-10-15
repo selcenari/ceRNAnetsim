@@ -117,18 +117,22 @@ TCGA_E9_A1N5_mirnagene%>%
 
 The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with *HIST1H3H* node.
 
-```{r, fig.height=4, fig.width=5, fig.align='center', warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
+
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
   update_how(node_name = "HIST1H3H", how =30) %>% 
   simulate(20) %>% 
   find_iteration(plot=TRUE)
+
 ```
 
-The graph was shown that the change in expression level of HIST1H3H results in weak perturbation efficiency, despite 30-fold change. The results of the simulation was shown in following:
+![Perturbation of HIST1H3H gene on each iteration](gifs/HIST13H_iter.png#center)
 
-```{r}
+The graph was shown that the change in expression level of HIST1H3H results in weak perturbation efficiency, despite 30-fold change. The code shown below can be used for calculation of fold changes after simulation HIST1H3H gene to 30 fold:
+
+```{r, eval=FALSE}
 TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>%
@@ -139,7 +143,9 @@ TCGA_E9_A1N5_mirnagene %>%
   arrange(desc(FC))
 ```
 
-```{r}
+Also, perturbation calculation (specifies efficiency of selected node) of HIST1H3H gene
+
+```{r, eval=FALSE}
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read)%>%
@@ -147,11 +153,13 @@ TCGA_E9_A1N5_mirnagene %>%
 
 ```
 
-
+|*perturbation_efficiency*|*perturbed_count*|
+|-------------------|-----------------|
+|4.930245e-06	| 0 |
 
 And then, we tried to simulate the network with the gene which has higher expression value. For this, we selected *ACTB* node as shown in [The auxiliary commands which can help to the users](https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html)
 
-```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
@@ -160,8 +168,11 @@ TCGA_E9_A1N5_mirnagene %>%
   find_iteration(plot=TRUE)
 ```
 
+![Perturbation of ACTB gene on each iteration](gifs/ACTB_iter.png#center)
 
-```{r}
+Following codes are shown entire gene fold changes after simulation ACTB gene to 1.87 fold:
+
+```{r, eval=FALSE}
 TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>%
@@ -172,21 +183,29 @@ TCGA_E9_A1N5_mirnagene %>%
   arrange(desc(FC))
 ```
 
-```{r}
+```{r, eval=FALSE}
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read)%>%
   calc_perturbation(node_name= "ACTB", cycle=20, how= 1.87,limit = 0.1)
 ```
 
+|*perturbation_efficiency*|*perturbed_count*|
+|-------------------|-----------------|
+|0.01548928	| 826 |
+
 On the other hand, the perturbation eficiency of ATCB gene is higher, when this gene is regulated with 30-fold upregulation like in HIST1H3H.
 
-```{r}
+```{r, eval=FALSE}
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read)%>%
   calc_perturbation(node_name= "ACTB", cycle=20, how= 30,limit = 0.1)
 ```
+
+|*perturbation_efficiency*|*perturbed_count*|
+|-------------------|-----------------|
+|0.2094567	| 3712 |
 
 ## The sum of two conditions:
 

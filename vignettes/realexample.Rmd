@@ -54,7 +54,7 @@ head(filtered_example)
 
 On the other hand, we chose the node *GAPDH* according to interaction count of the nodes. With the simulation, the graph was visualized after node *GAPDH* was increased to five fold.
 
-```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
+```{r, eval=FALSE}
 filtered_example %>%
   priming_graph(competing_count = competing_counts, 
                 miRNA_count = mirnaexpression_normal, 
@@ -63,9 +63,13 @@ filtered_example %>%
   vis_graph(title = "Distribution of GAPDH gene node")
 ```
 
+
+![Distribution of GAPDH gene node](gifs/GAPDH_dist.png#center)
+
+
 Let's visualize each step of simulation via `simulate_vis()` function.
 
-```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE, fig.show='hide'}
+```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE, eval=FALSE}
 filtered_example %>%
   priming_graph(competing_count = competing_counts, 
                 miRNA_count = mirnaexpression_normal, 

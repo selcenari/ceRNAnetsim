@@ -223,7 +223,7 @@ minsamp %>%
 
 On the other hand, the network of each step can be plotted individually by using `simulate_vis()` function. `simulate_vis()` processes the given network just like `simulate()` function does while saving image of each step.
   
-```{r, fig.height=4, fig.width=5, warning=FALSE, message=FALSE, fig.show='hide'}
+```{r, fig.height=4, fig.width=5, warning=FALSE, message=FALSE, eval=FALSE}
 minsamp %>%
    priming_graph(competing_count = Competing_expression, 
                  miRNA_count = miRNA_expression,

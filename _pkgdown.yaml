@@ -17,7 +17,6 @@ reference:
   - gene_knockdown
   - priming_graph
   - simulate
-  - simulate_knockdown
   - simulate_vis
   - update_how
   - update_nodes

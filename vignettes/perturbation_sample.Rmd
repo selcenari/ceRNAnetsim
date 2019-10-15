@@ -118,7 +118,7 @@ The results of the `find_node_perturbation()` will list effectiveness or importa
 
 In real biological datasets, more complex interactions whether functional or non-functional could be observed. We have improved our approach with `fast` argument in `find_node_perturbation()` based on selection of elements that could be affected from perturbation. In this fucntion, `fast` argument specifies the percentage of the competing amount that can be affected within the initial competing amount and acts as a selection parameter. For instance, in huge_example data:
 
-```{r}
+```{r, eval=FALSE}
 data("huge_example")
 huge_example%>%
   priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
@@ -126,11 +126,22 @@ huge_example%>%
   select(name, perturbation_efficiency, perturbed_count)
 ```
 
-```{r}
+```{r, eval=FALSE}
 huge_example%>%
   priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
   find_node_perturbation(how=5, cycle=3, fast = 3)%>%
   filter(!is.na(perturbation_efficiency), !is.na(perturbed_count))%>%
   select(name, perturbation_efficiency, perturbed_count)
 ```
-
+| *name* | *perturbation_efficiency* | *perturbed_count* |
+|------------------|--------------|--------------|
+| AK2 |	7.938457e-02 |	542	|	
+| SLC25A5 |	1.540258e-01 |	542	|
+| MSL3 |	3.241137e-02 |	542		|
+| MYCBP2 |	3.141119e-02 |	514	|	
+| VPS41 |	2.116591e-02 |	514		|
+| ADIPOR2 |	8.039431e-02 |	542	|	
+| CELSR3 |	2.220963e-03 |	542	|	
+| SCMH1 |	4.186803e-02 |	542		|
+| EXTL3 |	4.015119e-02 |	542		|
+| NR1H4 |	1.033477e-05 |	542	|

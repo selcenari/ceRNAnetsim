@@ -36,7 +36,7 @@ In the `ceRNAnetsim` package, regulations of miRNA:target pairs are observed via
 In the simple interaction network like *minsamp*, the ripple effect could be observed when expression level of *Gene4* changes and subsequently effecting other genes. In the non-complex networks like *minsamp*, the steady-state condition can be provided easily, after network disturbed.
 
 
-```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
+```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, eval=FALSE}
 data("minsamp")
 
 minsamp %>%
@@ -65,7 +65,7 @@ data("midsamp")
 midsamp
 ```
 
-```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
+```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, eval= FALSE}
 midsamp %>%
   priming_graph(Gene_expression, miRNA_expression) %>%
   update_how("Gene17",2) %>%
@@ -132,7 +132,7 @@ midsamp %>%
 
 As shown in plot above, if "Gene17" is upregulated 2-fold, the network will need around 22 iterations to reach the steady-state. Since we have an idea about appropriate iteration number, let's use `simulate()` function and iterate for 25 cycles using same trigger (Gene17 2-fold):
 
-```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
+```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, eval=FALSE}
 midsamp %>%
   priming_graph(Gene_expression, miRNA_expression) %>%
   update_how("Gene17", 2) %>%
@@ -143,7 +143,7 @@ midsamp %>%
 
 Note: If you ignore decimal change in gene expression, `threshold` argument can be used. With this method, system reaches steady-state early.
 
-```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
+```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, eval=FALSE}
 
 midsamp %>%
   priming_graph(Gene_expression, miRNA_expression) %>%
