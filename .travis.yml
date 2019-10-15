@@ -15,10 +15,6 @@ matrix:
    os: osx
  - r: devel
    os: linux
- - r: oldrel
-   os: linux
- - r: oldrel
-   os: osx
 
 env:
   global:
