@@ -16,6 +16,7 @@ normalize <- function(x){abs(x)/max(abs(x))}
 #'
 #' @importFrom purrr reduce
 #' @importFrom igraph edges edge
+#' @importFrom stats na.omit
 #' @importFrom rlang enquo enquos
 #' @return the graph object.
 #'
@@ -36,7 +37,8 @@ normalize <- function(x){abs(x)/max(abs(x))}
 #'
 #' priming_graph(minsamp, Competing_expression, miRNA_expression)
 #'
-#' priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = region)
+#' priming_graph(minsamp, Competing_expression, miRNA_expression,
+#'     aff_factor = c(seed_type,energy), deg_factor = region)
 #'
 #'
 #' @export

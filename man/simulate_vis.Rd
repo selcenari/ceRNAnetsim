@@ -49,7 +49,8 @@ priming_graph(minsamp, Competing_expression, miRNA_expression)\%>\%
   update_variables(new_counts)\%>\%
   simulate_vis()
 
-priming_graph(minsamp, Competing_expression, miRNA_expression, aff_factor = c(seed_type,energy), deg_factor = c(region))\%>\%
+priming_graph(minsamp, Competing_expression, miRNA_expression, 
+    aff_factor = c(seed_type,energy), deg_factor = c(region))\%>\%
   update_variables(new_counts)\%>\%
   simulate_vis(cycle = 12)
 
