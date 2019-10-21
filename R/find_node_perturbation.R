@@ -4,7 +4,7 @@
 #' @importFrom furrr future_map future_map_dfr
 #' @importFrom future plan
 #' @importFrom rlang set_names
-#' @importFrom igraph V "V<-"
+#' @importFrom igraph degree V "V<-"
 #' @importFrom purrr map_dbl
 #' @importFrom tidyr unnest
 #'
