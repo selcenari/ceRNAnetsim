@@ -40,7 +40,8 @@ data("midsamp")
 
 
  minsamp\%>\%
-  priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression, aff_factor = c(energy,seed_type), deg_factor = region)\%>\%
+  priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression,
+    aff_factor = c(energy,seed_type), deg_factor = region)\%>\%
   find_node_perturbation(how = 3, cycle = 4)\%>\%
   select(name, perturbation_efficiency, perturbed_count)
 
