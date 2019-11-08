@@ -1,4 +1,4 @@
-FROM selcenari/cernanetsim_binder
+FROM selcenari/cernanetsim_binder:latest
 
 COPY --chown=rstudio:rstudio ./vignettes/. ${HOME}/
 RUN echo '.First <- function(){\n cat("\\n\n  Welcome at ceRNAnetsim package!\n  You can look at the ordered vignette files in working directory.\n  Lets begin with basic usage! \\n\\n")\n}' > ${HOME}/.Rprofile && chown rstudio:rstudio ${HOME}/.Rprofile
