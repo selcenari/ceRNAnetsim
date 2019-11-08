@@ -27,8 +27,5 @@ warnings_are_errors: false
 r_build_args: --no-build-vignettes --no-manual
 r_check_args: --no-build-vignettes --no-manual --timings
 
-deploy:
-  - provider: script
-    script: Rscript -e 'covr::codecov()'
-    on:
-      branch: services
+after_success:
+  - Rscript -e 'covr::codecov()'

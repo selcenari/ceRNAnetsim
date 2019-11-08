@@ -17,6 +17,7 @@
 #' @param title Title of the given graph.
 #' @param layout The layout that will be used for visualisation of the graph.
 #' @param threshold absolute minimum amount of change required to be considered as up/down regulated element
+#' @param save provides to save graph output 
 #'
 #' @examples
 #'
@@ -25,6 +26,7 @@
 #' ## new_counts, the dataset that includes the current counts of nodes.
 #'
 #' data("minsamp")
+#' data("new_counts")
 #'
 #' priming_graph(minsamp, Competing_expression, miRNA_expression)%>%
 #'   update_variables(new_counts)%>%

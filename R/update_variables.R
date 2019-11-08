@@ -13,6 +13,7 @@
 #' @examples
 #'
 #' data("minsamp")
+#' data("new_counts")
 #'
 #'  minsamp%>%
 #'  priming_graph(Competing_expression, miRNA_expression, 

@@ -23,6 +23,7 @@ update_variables function provides updating edge variables to current values. If
 \examples{
 
 data("minsamp")
+data("new_counts")
 
  minsamp\%>\%
  priming_graph(Competing_expression, miRNA_expression, 

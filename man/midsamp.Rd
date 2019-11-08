@@ -10,7 +10,7 @@
   \item{miRNAs}{symol of miRNA}
   \item{Gene_Expression}{Expression values of competing gene}
   \item{miRNA_expression}{Expression value of miRNA}
-  \item{seed}{Coefficient for efficiency of seed type of miRNA:target interaction}
+  \item{seeds}{Coefficient for efficiency of seed type of miRNA:target interaction}
   \item{targeting_region}{Coefficient for efficiency of location on target}
   \item{Energy}{Energy of miRNA:target binding}
   }}

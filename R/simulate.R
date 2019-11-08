@@ -15,6 +15,7 @@
 #' @examples
 #'
 #' data("minsamp")
+#' data("new_counts")
 #'
 #' ## new_counts, the dataset that includes the current counts of nodes.
 #'
