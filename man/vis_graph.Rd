@@ -35,7 +35,7 @@ vis_graph ensures the process to be followed.
 \examples{
 
 data("minsamp")
-daa("new_counts")
+data("new_counts")
 
 # Visualisation of graph in steady-state.
 

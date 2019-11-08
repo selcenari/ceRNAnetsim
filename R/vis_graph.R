@@ -20,7 +20,7 @@
 #' @examples
 #'
 #' data("minsamp")
-#' daa("new_counts")
+#' data("new_counts")
 #'
 #' # Visualisation of graph in steady-state.
 #'

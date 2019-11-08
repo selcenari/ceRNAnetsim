@@ -16,6 +16,8 @@ simulate_vis(input_graph, cycle = 1, threshold = 0, save = FALSE,
 
 \item{threshold}{absolute minimum amount of change required to be considered as up/down regulated element}
 
+\item{save}{provides to save graph output}
+
 \item{Competing_color}{The color of competing elements on the graph with "green" default.}
 
 \item{mirna_color}{The color of miRNAs on the graph with "orange" default.}
@@ -36,4 +38,23 @@ simulate_vis provides visualisation of the graph in addition to simulate functio
 }
 \details{
 simulate_vis gives the last graph object and each iterations' image.
+}
+\examples{
+
+# When does the system gain steady-state conditions again?
+
+## new_counts, the dataset that includes the current counts of nodes.
+
+data("minsamp")
+data("new_counts")
+
+priming_graph(minsamp, Competing_expression, miRNA_expression)\%>\%
+  update_variables(new_counts)\%>\%
+  simulate_vis()
+
+priming_graph(minsamp, Competing_expression, miRNA_expression, 
+    aff_factor = c(seed_type,energy), deg_factor = c(region))\%>\%
+  update_variables(new_counts)\%>\%
+  simulate_vis(cycle = 12)
+
 }
