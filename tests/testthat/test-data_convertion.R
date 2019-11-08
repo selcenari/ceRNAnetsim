@@ -88,7 +88,7 @@ test_that("When missing value is found in dataframe", {
 test_that("Simulation on the sample network", {
 
    data("minsamp")
-
+   data("new_counts")
 
    minsamp %>%
       priming_graph(competing_count = Competing_expression,
