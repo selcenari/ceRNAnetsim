@@ -27,7 +27,7 @@ find_iteration <- function(df,  limit= 0.1, plot=FALSE){
   len <- df %>% tidygraph::activate(edges)%>% tidygraph::as_tibble() %>% .$comp_count_list %>% .[[1]] %>%  length()
   iteration <- data.frame(iter = seq(1,len-1, 1), effect= rep(0))
 
-  for(i in 1:(len-1)){
+  for(i in seq_len((len-1))){
 
     df%>%
       tidygraph::activate(edges)%>%

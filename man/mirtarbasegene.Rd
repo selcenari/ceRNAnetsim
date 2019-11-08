@@ -4,9 +4,14 @@
 \name{mirtarbasegene}
 \alias{mirtarbasegene}
 \title{mirtarbasegene}
+\format{Classes tbl_df, tbl and data.frame with 380627 observation of 2 variables:
+\describe{
+  \item{miRNA}{miRNA symbol}
+  \item{Target}{target gene symbol}
+  }}
 \source{
-mirtarbase
+\url{http://mirtarbase.mbc.nctu.edu.tw/php/index.php}
 }
 \description{
-the dataset imported from mirtarbase
+the dataset that includes miRNA:target gene interactions downloaded from mirtarbase
 }

@@ -38,11 +38,11 @@
 #' @export
 
 
-simulate_vis <- function(input_graph, cycle=1, threshold = 0, Competing_color = "green", mirna_color = "orange", Upregulation = "red", Downregulation = "blue", title = "GRAPH", layout= "kk"){
+simulate_vis <- function(input_graph, cycle=1, threshold = 0, save = FALSE, Competing_color = "green", mirna_color = "orange", Upregulation = "red", Downregulation = "blue", title = "GRAPH", layout= "kk"){
 
 
 
-  for(i in seq_along(1:cycle)){
+  for(i in seq_len(cycle)){
 
 
     input_graph%>%
@@ -60,9 +60,12 @@ simulate_vis <- function(input_graph, cycle=1, threshold = 0, Competing_color = 
 
     vis_graph(input_graph, Competing_color, mirna_color, Upregulation, Downregulation, title = paste(title, "-",i), layout)-> graph_vis
 
-    ggsave(paste(title, ".png", sep = ""))
-
     print(graph_vis)
+    
+    if(save){
+      
+      ggsave(paste(title, ".png", sep = ""))
+    }
   }
   input_graph
 

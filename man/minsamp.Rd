@@ -4,6 +4,19 @@
 \name{minsamp}
 \alias{minsamp}
 \title{minsamp}
+\format{A data frame with 7 variables and 7 observation of them:
+\describe{
+  \item{competing}{symbol of gene}
+  \item{miRNA}{symol of miRNA}
+  \item{Competing_Expression}{Expression values of competing gene}
+  \item{miRNA_expression}{Expression value of miRNA}
+  \item{seed_type}{Coefficient for efficiency of seed sequence of miRNA:target interaction}
+  \item{region}{Coefficient for efficiency of location on target}
+  \item{energy}{Energy of miRNA:target binding}
+  }}
+\source{
+Dataset was created by us.
+}
 \description{
 minimal sample dataset
 }

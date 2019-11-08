@@ -4,6 +4,20 @@
 \name{huge_example}
 \alias{huge_example}
 \title{huge example}
+\format{A data frame with 7 variables and 26176 observation:
+\describe{
+  \item{competing}{name of gene}
+  \item{miRNA}{name of miRNA}
+  \item{competing_counts}{Expression values of competing element (gene)}
+  \item{mirnaexpression_normal}{Expression value of miRNA elements in normal tissue}
+  \item{Energy}{Energy of miRNA:target binding}
+  \item{region_effect}{Coefficient for efficiency of location on target}
+  \item{seed_type_effect}{Coefficient for efficiency of seed sequence of miRNA:target interaction}
+  }}
+\source{
+Dataset was integrated by us.
+}
 \description{
-huge example dataset includes interaction factors
+A sample dataset which is utilised through integration of TCGA_E9_A1N5_normal, 
+    TCGA_E9_A1N5_mirnanormal and high-throughput experimental miRNA:gene dataset.
 }

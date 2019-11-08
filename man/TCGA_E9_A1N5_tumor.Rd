@@ -4,9 +4,19 @@
 \name{TCGA_E9_A1N5_tumor}
 \alias{TCGA_E9_A1N5_tumor}
 \title{TCGA_E9_A1N5_tumor}
+\format{Classes tbl_df, tbl and data.frame with	56830 observtion of  7 variables:
+\describe{
+  \item{patient}{Barcode of patient based on TCGA}
+  \item{sample}{Tissue sample barcode of the patient}
+  \item{barcode}{Sample barcode of the patient}
+  \item{definition}{Tissue type of sample (Primary solid Tumor)}
+  \item{ensembl_gene_id}{Gene id}
+  \item{external_gene_name}{Gene symbol}
+  \item{gene_expression}{Gene expression value}
+  }}
 \source{
-TCGA (The Cancer Genome Atlas)
+\url{https://portal.gdc.cancer.gov/}
 }
 \description{
-contains gene expression values for cancer tissue sample of TCGA_E9_A1N5 barcoded patient
+The dataset contains gene expression values for cancer tissue sample of TCGA-E9-A1N5 barcoded patient
 }

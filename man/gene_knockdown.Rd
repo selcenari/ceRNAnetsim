@@ -20,3 +20,4 @@ Knocks down given node.
 \details{
 knocks down a given gene target.
 }
+\keyword{internal}

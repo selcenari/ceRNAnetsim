@@ -41,7 +41,8 @@ Imports:
     igraph,
     purrr,
     tidyr,
-    future
+    future, 
+    stats
 Suggests:
     knitr,
     png,
@@ -57,5 +58,5 @@ biocViews:
     GraphAndNetwork,
     Transcriptomics
 Encoding: UTF-8
-LazyData: true
+LazyData: false
 RoxygenNote: 6.1.1

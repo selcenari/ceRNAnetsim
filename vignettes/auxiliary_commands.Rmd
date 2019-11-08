@@ -2,7 +2,9 @@
 title: "The auxiliary commands which can help to the users"
 author: "Selcen Ari"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+   toc: true
 vignette: >
   %\VignetteIndexEntry{auxiliary_commands}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,7 +22,19 @@ knitr::opts_chunk$set(
 library(ceRNAnetsim)
 ```
 
+# 1. Introduction
+
 In the other package vignettes, usage of ceRNAnetsim is explained in details. But in this vignette, some of commands which facitate to use of other vignette.
+
+# 2. Installation
+
+```{r, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("ceRNAnetsim")
+```
+
+# 3. Selection of perturbing element from dataset
 
 ```{r}
 data("TCGA_E9_A1N5_tumor")
@@ -77,3 +91,7 @@ TCGA_E9_A1N5_tumor%>%
 
 ```
 
+# 4. Session Info
+```{r sessioninfo}
+sessionInfo()
+```

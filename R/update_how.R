@@ -76,6 +76,8 @@ update_how <- function (input_graph, node_name, how, knockdown= TRUE){
 #'
 #' @param input_graph The graph object that processed in previous step/s.
 #' @param node_name The name of the node whose count is to be knocked down.
+#' 
+#' @keywords internal
 #'
 
 gene_knockdown <- function (input_graph, node_name){

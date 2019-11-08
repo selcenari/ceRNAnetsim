@@ -5,6 +5,7 @@
 #' @param x The variable name that is normalized.
 #'
 #' @return normalized values
+#' @keywords internal
 #' 
 
 
@@ -16,6 +17,7 @@ normalize <- function(x){abs(x)/max(abs(x))}
 #'
 #' @importFrom purrr reduce
 #' @importFrom igraph edges edge
+#' @importFrom stats na.omit
 #' @importFrom rlang enquo enquos
 #' @return the graph object.
 #'

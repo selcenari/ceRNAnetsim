@@ -36,7 +36,7 @@ simulate <- function(input_graph, cycle=1, threshold= 0, knockdown= TRUE){
 
   if(knockdown){
 
-    for(i in seq_along(1:cycle)){
+    for(i in seq_len(cycle)){
 
       input_graph%>%
         tidygraph::activate(edges)%>%
@@ -56,7 +56,7 @@ simulate <- function(input_graph, cycle=1, threshold= 0, knockdown= TRUE){
   }
 
 
-    for(i in seq_along(1:cycle)){
+    for(i in seq_len(cycle)){
 
     input_graph%>%
         tidygraph::activate(edges)%>%

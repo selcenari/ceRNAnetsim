@@ -1,6 +1,8 @@
 #' Calculates average expression changes of all nodes except trigger and finds the perturbed node count for a given node.
 #'
 #' calculates mean of expression changes of all nodes except trigger and finds the perturbed node count for a given node.
+#' 
+#' @importFrom tibble tibble
 #'
 #' @details calc_perturbation calculates mean expression changes of elements except trigger after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
 #'  The function determines the perturbation efficiency and number of perturbed nodes after given change with how, cycle and limit parameter.

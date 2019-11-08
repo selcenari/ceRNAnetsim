@@ -6,6 +6,7 @@
 #'
 #' @param input_graph Processed graph object in previous step.
 #' @return tibble object
+#' @keywords internal
 #'
 
 
@@ -35,6 +36,7 @@ prepare_rhs_once <- function(input_graph){
 #'
 #' @param input_graph Processed graph object in previous step.
 #' @return tibble object
+#' @keywords internal
 #'
 
 
