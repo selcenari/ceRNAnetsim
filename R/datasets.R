@@ -29,7 +29,7 @@ NULL
 #'   \item{miRNAs}{symol of miRNA}
 #'   \item{Gene_Expression}{Expression values of competing gene}
 #'   \item{miRNA_expression}{Expression value of miRNA}
-#'   \item{seed}{Coefficient for efficiency of seed type of miRNA:target interaction}
+#'   \item{seeds}{Coefficient for efficiency of seed type of miRNA:target interaction}
 #'   \item{targeting_region}{Coefficient for efficiency of location on target}
 #'   \item{Energy}{Energy of miRNA:target binding}
 #'   }
@@ -45,7 +45,7 @@ NULL
 #' @docType data
 #' @format A data frame with 4 variables and 26 observation of them:
 #' \describe{
-#'   \item{competing}{symbol of gene}
+#'   \item{Competing}{symbol of gene}
 #'   \item{miRNA}{symol of miRNA}
 #'   \item{Competing_count}{Expression values of competing gene}
 #'   \item{miRNA_count}{Expression value of miRNA}
@@ -63,7 +63,7 @@ NULL
 #' \describe{
 #'   \item{competing}{symbol of gene}
 #'   \item{miRNA}{symol of miRNA}
-#'   \item{Competing_Expression}{Expression values of competing gene}
+#'   \item{Competing_expression}{Expression values of competing gene}
 #'   \item{miRNA_expression}{Expression value of miRNA}
 #'   \item{seed_type}{Coefficient for efficiency of seed sequence of miRNA:target interaction}
 #'   \item{region}{Coefficient for efficiency of location on target}

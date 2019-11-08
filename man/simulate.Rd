@@ -27,6 +27,7 @@ The steady-state conditions of the system are disturbed after the change in the 
 \examples{
 
 data("minsamp")
+data("new_counts")
 
 ## new_counts, the dataset that includes the current counts of nodes.
 

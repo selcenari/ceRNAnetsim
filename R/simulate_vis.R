@@ -25,6 +25,7 @@
 #' ## new_counts, the dataset that includes the current counts of nodes.
 #'
 #' data("minsamp")
+#' data("new_counts)
 #'
 #' priming_graph(minsamp, Competing_expression, miRNA_expression)%>%
 #'   update_variables(new_counts)%>%
