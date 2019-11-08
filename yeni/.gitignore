@@ -1,0 +1,12 @@
+inst/doc
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+ceRNAnetsim.Rproj
+.Rprofile
+ceRNAnetsim.Rcheck/
+ceRNAnetsim*.tar.gz
+ceRNAnetsim*.tgz
+doc
+Meta

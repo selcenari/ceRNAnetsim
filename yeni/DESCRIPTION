@@ -1,0 +1,62 @@
+Type: Package
+Package: ceRNAnetsim
+Title: Regulation Simulator of Interaction between miRNA and
+    Competing RNAs (ceRNA)
+Version: 0.99.10
+Authors@R: 
+    c(person(given = "Selcen",
+             family = "Ari Yuka",
+             role = c("aut", "cre"),
+             email = "selcenarii@gmail.com",
+             comment = c(ORCID = "0000-0002-0028-2453")),
+      person(given = "Alper",
+             family = "Yilmaz",
+             role = "aut",
+             email = "alperyilmaz@gmail.com",
+             comment = c(ORCID = "0000-0002-8827-4887")))
+Description: This package simulates regulations of ceRNA
+    (competing endogenous) expression levels after a expression level
+    change in one or more miRNA/mRNAs. The methodolgy adopted by the
+    package has potential to incorparate any ceRNA (circRNA, lincRNA,
+    etc.) into miRNA:target interaction network.  The package basically
+    distributes miRNA expression over available ceRNAs where each ceRNA
+    attracks miRNAs proportional to its amount. But, the package can
+    utilize multiple parameters that modify miRNA effect on its target
+    (seed type, binding energy, binding location, etc.).  The functions
+    handle the given dataset as graph object and the processes progress
+    via edge and node variables.
+License: GPL (>= 3.0)
+URL: https://github.com/selcenari/ceRNAnetsim
+BugReports: https://github.com/selcenari/ceRNAnetsim/issues
+Depends:
+    R (>= 3.6),
+    dplyr,
+    tidygraph
+Imports: 
+    furrr,
+    rlang,
+    tibble,
+    ggplot2,
+    ggraph,
+    igraph,
+    purrr,
+    tidyr,
+    future, 
+    stats
+Suggests:
+    knitr,
+    png,
+    rmarkdown,
+    testthat,
+    covr
+VignetteBuilder: 
+    knitr
+biocViews:
+    NetworkInference, 
+    SystemsBiology,
+    Network,
+    GraphAndNetwork,
+    Transcriptomics
+Encoding: UTF-8
+LazyData: false
+RoxygenNote: 6.1.1
