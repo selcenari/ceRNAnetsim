@@ -92,7 +92,6 @@ midsamp %>%
   simulate(50) %>% 
   find_iteration(limit=0)
 
-minsamp
 ```
 
 NOTE: You can edit the dataset manually. You can change Gene2 expression value as 20000 and save that as a new dataset (midsamp_new_counts).
