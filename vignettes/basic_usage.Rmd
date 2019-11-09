@@ -60,6 +60,7 @@ BiocManager::install("ceRNAnetsim")
 Below is the minimal data that can be used with ceRNAnetsim.
 
 ```{r echo=FALSE}
+data("minsamp")
 minsamp %>% 
   select(1:4)
 ```
