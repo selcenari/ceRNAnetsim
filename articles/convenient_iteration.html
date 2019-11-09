@@ -297,25 +297,7 @@
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">50</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/find_iteration.html">find_iteration</a></span>(<span class="dt">limit=</span><span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; Warning in priming_graph(., Gene_expression, miRNA_expression): First column is processed as competing and the second as miRNA.</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; [1] 3</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9">minsamp</a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt;   competing miRNA Competing_expression miRNA_expression seed_type region</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; 1     Gene1  Mir1                10000             1000      0.43   0.30</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; 2     Gene2  Mir1                10000             1000      0.43   0.01</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; 3     Gene3  Mir1                 5000             1000      0.32   0.40</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; 4     Gene4  Mir1                10000             1000      0.23   0.50</span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; 5     Gene4  Mir2                10000             2000      0.35   0.90</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; 6     Gene5  Mir2                 5000             2000      0.05   0.40</span></a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; 7     Gene6  Mir2                10000             2000      0.01   0.80</span></a>
-<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt;   energy</span></a>
-<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; 1    -20</span></a>
-<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; 2    -15</span></a>
-<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; 3    -14</span></a>
-<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; 4    -10</span></a>
-<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt; 5    -12</span></a>
-<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt; 6    -11</span></a>
-<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="co">#&gt; 7    -25</span></a></code></pre></div>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; [1] 3</span></a></code></pre></div>
 <p>NOTE: You can edit the dataset manually. You can change Gene2 expression value as 20000 and save that as a new dataset (midsamp_new_counts).</p>
 <p>You can use the dataset that includes new expression values of miRNAs and genes.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"midsamp_new_counts"</span>)</a>
