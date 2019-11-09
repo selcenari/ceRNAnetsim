@@ -40,6 +40,7 @@ BiocManager::install("ceRNAnetsim")
 data("TCGA_E9_A1N5_tumor")
 data("TCGA_E9_A1N5_normal")
 data("mirtarbasegene")
+data("TCGA_E9_A1N5_mirnanormal")
 ```
 
 ## Selection of HIST1H3H gene at vignette [How does the system behave in mirtarbase dataset without interaction factors?](https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html)
