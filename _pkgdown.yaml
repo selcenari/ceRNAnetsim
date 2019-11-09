@@ -33,14 +33,8 @@ navbar:
       menu:
       -  text: What does ceRNAnetsim do?
          href: articles/basic_usage.html
-      -  text: Small example demonstrating the approach and the method
-         href: articles/small_sample.html
       -  text: How to calculate proper number of iterations for simulation of the network
          href: articles/convenient_iteration.html
-      -  text: How to determine most effective node of network in equal conditions
-         href: articles/perturbation_sample.html
-      -  text: How does the system do in the presence of interaction factors?
-         href: articles/realexample.html
       -  text: How does the system behave in mirtarbase dataset without interaction factors?
          href: articles/mirtarbase_example.html
       -  text: Helper Commands
