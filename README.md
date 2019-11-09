@@ -51,7 +51,7 @@ The `ceRNAnetsim` provides various datasets for experimenting with package funct
   - gene expression levels (RNA-Seq) retrieved from [TCGA-BRCA](https://portal.gdc.cancer.gov/projects?filters=%7B%22op%22%3A%22and%22%2C%22content%22%3A%5B%7B%22op%22%3A%22in%22%2C%22content%22%3A%7B%22field%22%3A%22projects.project_id%22%2C%22value%22%3A%5B%22TCGA-BRCA%22%5D%7D%7D%5D%7D) breast cancer 
   - miRNA expression of a breast cancer patient (from TCGA)
   - and the miRNA:target dataset gathered from two different high-throughput experimental studies. ([CLASH](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3650559/) & [CLEAR-CLiP](https://www.nature.com/articles/ncomms9864) methods)
-- The remaining datasets are used as reproducible example of methods shown as [Mirtarbase example](https://github.com/selcenari/regulationSimulatoR/blob/master/doc/mirtarbase_example.html)
+- The remaining datasets are used as reproducible example of methods shown as [Mirtarbase example](https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html)
 
 ## Vignettes
 
@@ -59,7 +59,7 @@ The repository of ceRNAnetsim contents the vignettes that follow:
 
 - [What does ceRNAnetsim do?](https://selcenari.github.io/ceRNAnetsim/articles/basic_usage.html)
 - [How to calculate proper number of iterations for simulation of the network](https://selcenari.github.io/ceRNAnetsim/articles/convenient_iteration.html)
-- [How does the system do in network?](https://selcenari.github.io/ceRNAnetsim/articles/realexample.html)
+- [How does the system do in a real-world network?](https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html)
 - [Helper functions for users.](https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html)
 
 Also see [package webpage](https://selcenari.github.io/ceRNAnetsim/)
