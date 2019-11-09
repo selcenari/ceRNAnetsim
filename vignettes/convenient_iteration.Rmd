@@ -41,7 +41,7 @@ BiocManager::install("ceRNAnetsim")
 
 # 3. Comparison of gaining steady-state durations of `middle` and `minimal` datasets
 
-```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, fig.height=5, fig.width=6, warning=FALSE, message=FALSE, fig.show='hide'}
 data("minsamp")
 
 minsamp %>%
@@ -92,7 +92,6 @@ midsamp %>%
   simulate(50) %>% 
   find_iteration(limit=0)
 
-minsamp
 ```
 
 NOTE: You can edit the dataset manually. You can change Gene2 expression value as 20000 and save that as a new dataset (midsamp_new_counts).
