@@ -8,7 +8,7 @@
 \describe{
   \item{Genes}{symbol of gene}
   \item{miRNAs}{symol of miRNA}
-  \item{Gene_Expression}{Expression values of competing gene}
+  \item{Gene_expression}{Expression values of competing gene}
   \item{miRNA_expression}{Expression value of miRNA}
   \item{seeds}{Coefficient for efficiency of seed type of miRNA:target interaction}
   \item{targeting_region}{Coefficient for efficiency of location on target}
