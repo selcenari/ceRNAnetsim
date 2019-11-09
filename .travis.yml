@@ -33,10 +33,10 @@ deploy:
     on:
       branch: services
 
-before_cache: Rscript -e 'remotes::install_cran("pkgdown")' 
+before_cache: Rscript -e 'remotes::install_cran("pkgdown"); remotes::install_version("rmarkdown", "1.15")' 
 deploy:
   - provider: script
-    script: Rscript -e 'pkgdown::deploy_site_github()'
+    script: Rscript -e 'devtools:install(); pkgdown::deploy_site_github()'
     on:
       branch: master
     skip_cleanup: true
