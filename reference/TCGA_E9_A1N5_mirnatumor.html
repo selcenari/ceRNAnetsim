@@ -12,8 +12,8 @@
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
@@ -33,16 +33,10 @@
 <script src="../pkgdown.js"></script>
 
 
-<!-- docsearch -->
-<script src="../docsearch.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
-<link href="../docsearch.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
-
 
 
 <meta property="og:title" content="TCGA_E9_A1N5_mirnatumor — TCGA_E9_A1N5_mirnatumor" />
-<meta property="og:description" content="contains mirna expression values for tumor tissue sample of TCGA_E9_A1N5 barcoded patient" />
+<meta property="og:description" content="The dataset contains mirna expression values for tumor tissue sample of TCGA-E9-A1N5 barcoded patient" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -58,23 +52,13 @@
 <![endif]-->
 
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-84499524-2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-84499524-2');
-</script>
-
 
   </head>
 
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
@@ -85,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ceRNAnetsim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.10</span>
       </span>
     </div>
 
@@ -93,72 +77,43 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
+<li>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa fas fa-book"></span>
-     
     Articles
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/basic_usage.html">What does ceRNAnetsim do?</a>
+      <a href="../articles/auxiliary_commands.html">The auxiliary commands which can help to the users</a>
     </li>
     <li>
-      <a href="../articles/small_sample.html">Small example demonstrating the approach and the method</a>
+      <a href="../articles/basic_usage.html">Basic Use of ceRNAnetsim</a>
     </li>
     <li>
-      <a href="../articles/convenient_iteration.html">How to calculate proper number of iterations for simulation of the network</a>
+      <a href="../articles/convenient_iteration.html">Calculating Number of Iterations Required to Reach Steady-State</a>
     </li>
     <li>
-      <a href="../articles/perturbation_sample.html">How to determine most effective node of network in equal conditions</a>
-    </li>
-    <li>
-      <a href="../articles/realexample.html">How does the system do in the presence of interaction factors?</a>
-    </li>
-    <li>
-      <a href="../articles/mirtarbase_example.html">How does the system behave in mirtarbase dataset without interaction factors?</a>
-    </li>
-    <li>
-      <a href="../articles/auxiliary_commands.html">Helper Commands</a>
+      <a href="../articles/mirtarbase_example.html">A TCGA dataset application</a>
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">
-    <span class="fa fa-newspaper-o"></span>
-     
-    news
-  </a>
-</li>
-<li>
-  <a href="../reference/index.html">
-    <span class="fa fa-file-code-o"></span>
-     
-    functions
-  </a>
-</li>
-<li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
   <a href="https://github.com/selcenari/ceRNAnetsim">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fab fa fab fa-github fa-lg"></span>
      
-    github
   </a>
 </li>
       </ul>
-      
-      <form class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
-        <div class="form-group">
-          <input type="search" class="form-control" name="search-input" id="search-input" placeholder="Search..." aria-label="Search for..." autocomplete="off">
-        </div>
-      </form>
       
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -177,19 +132,31 @@
     </div>
 
     <div class="ref-description">
-    <p>contains mirna expression values for tumor tissue sample of TCGA_E9_A1N5 barcoded patient</p>
+    <p>The dataset contains mirna expression values for tumor tissue sample of TCGA-E9-A1N5 barcoded patient</p>
     </div>
 
 
 
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>Classes tbl_df, tbl and data.frame with	648 observation of  6 variables:</p><dl class='dl-horizontal'>
+  <dt>barcode</dt><dd><p>Sample, tumor tissue, barcode of patient based on TCGA</p></dd>
+  <dt>mirbase_ID</dt><dd><p>mirbase id of miRNA</p></dd>
+  <dt>miRNA</dt><dd><p>miRNA name</p></dd>
+  <dt>Precusor</dt><dd><p>Precusor id of miRNA which is given in miRNA variable</p></dd>
+  <dt>total_read</dt><dd><p>total reading count of miRNA which is produced from different gene locations</p></dd>
+  <dt>total_RPM</dt><dd><p>total RPM (reading per million) of miRNA</p></dd>
+  
+</dl>
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
-    <p>TCGA (The Cancer Genome Atlas)</p>
+    <p><a href='https://portal.gdc.cancer.gov/'>https://portal.gdc.cancer.gov/</a></p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#format">Format</a></li>
       <li><a href="#source">Source</a></li>
     </ul>
 
@@ -210,23 +177,6 @@
    </div>
 
   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.js" integrity="sha256-GKvGqXDznoRYHCwKXGnuchvKSwmx9SRMrZOTh2g4Sb0=" crossorigin="anonymous"></script>
-<script>
-  docsearch({
-    
-    
-    apiKey: 'fbd8d79ed49f21fc9ca7b2cf601a3f5b',
-    indexName: 'ceRNAnetsim',
-    inputSelector: 'input#search-input.form-control',
-    transformData: function(hits) {
-      return hits.map(function (hit) {
-        hit.url = updateHitURL(hit);
-        return hit;
-      });
-    }
-  });
-</script>
-
 
 
   </body>

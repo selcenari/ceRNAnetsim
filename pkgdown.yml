@@ -1,4 +1,4 @@
-pandoc: 2.7.3
+pandoc: '2.2'
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
@@ -6,10 +6,4 @@ articles:
   basic_usage: basic_usage.html
   convenient_iteration: convenient_iteration.html
   mirtarbase_example: mirtarbase_example.html
-  perturbation_sample: perturbation_sample.html
-  realexample: realexample.html
-  small_sample: small_sample.html
-urls:
-  reference: https://selcenari.github.io/ceRNAnetsim//reference
-  article: https://selcenari.github.io/ceRNAnetsim//articles
 
