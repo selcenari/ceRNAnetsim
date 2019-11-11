@@ -38,5 +38,5 @@ deploy:
   - provider: script
     script: Rscript -e 'devtools::install(); pkgdown::deploy_site_github()'
     on:
-      branch: master
+      branch: services
     skip_cleanup: true
