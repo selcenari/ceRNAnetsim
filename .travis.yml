@@ -29,6 +29,12 @@ r_check_args: --no-build-vignettes --no-manual --timings
 
 deploy:
   - provider: script
+    script: git merge --no-ff master
+    on:
+      branch: services
+
+deploy:
+  - provider: script
     script: Rscript -e 'covr::codecov()'
     on:
       branch: services
