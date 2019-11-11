@@ -5,6 +5,7 @@ cache: packages
 branches:
     only:
         - master
+        - services
 latex: false
 
 matrix:
