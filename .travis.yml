@@ -22,11 +22,6 @@ env:
     - R_CHECK_ARGS="--no-build-vignettes --no-manual --timings"
     - _R_CHECK_TIMINGS_="0"
 
-before_install:
-  - git config credential.helper "store --file=.git/credentials"; echo "https://${GITHUB_OAUTH_TOKEN}:@github.com" > .git/credentials 2>/dev/null
-  - git config --global user.email "selcenari@gmail.com"
-  - git config --global user.name "selcenari"
-
 warnings_are_errors: false
 
 r_build_args: --no-build-vignettes --no-manual
