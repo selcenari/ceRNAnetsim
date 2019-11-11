@@ -32,7 +32,6 @@ deploy:
     script: git checkout services; git merge --no-ff master; git push -u origin services
     on:
       branch: master
-
 deploy:
   - provider: script
     script: Rscript -e 'covr::codecov()'
