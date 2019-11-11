@@ -7,6 +7,8 @@ template:
     docsearch:
       api_key: fbd8d79ed49f21fc9ca7b2cf601a3f5b
       index_name: ceRNAnetsim
+development:
+  mode:auto
 reference:
 - title: All functions
   desc: ~
