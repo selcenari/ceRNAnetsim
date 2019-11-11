@@ -4,13 +4,8 @@
 <!-- badges: start -->
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/selcenari/ceRNAnetsim/services?urlpath=rstudio) [![Travis build status](https://travis-ci.org/selcenari/ceRNAnetsim.svg?branch=master)](https://travis-ci.org/selcenari/ceRNAnetsim)
-  [![Codecov test coverage](https://codecov.io/gh/selcenari/ceRNAnetsim/branch/master/graph/badge.svg)](https://codecov.io/gh/selcenari/ceRNAnetsim?branch=master)
+ [![Codecov test coverage](https://codecov.io/gh/selcenari/ceRNAnetsim/branch/master/graph/badge.svg)](https://codecov.io/gh/selcenari/ceRNAnetsim?branch=master)
 <!-- badges: end -->
-
-
-<p align="center">
-  <img width="500" height="300" src="https://media.giphy.com/media/l0ErNdz1w5vt3YdZm/giphy.gif">
-</p>
 
 `ceRNAnetsim` helps to understanding complex miRNA:target interactions with the network based approach. It utilizes the amounts of miRNAs and their targets and interaction parameters optionally.
 
