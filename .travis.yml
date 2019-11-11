@@ -29,9 +29,9 @@ r_check_args: --no-build-vignettes --no-manual --timings
 
 deploy:
   - provider: script
-    script: git merge --no-ff master
+    script: git checkout services; git merge --no-ff master; git push -u origin services
     on:
-      branch: services
+      branch: master
 
 deploy:
   - provider: script
