@@ -1,55 +1,9 @@
 pandoc: '2.2'
 pkgdown: 1.4.1
 pkgdown_sha: ~
-title: ceRNAnetsim
-url: https://selcenari.github.io/ceRNAnetsim/
-template:
-  params:
-    bootswatch: flatly
-    ganalytics: UA-84499524-2
-    docsearch:
-      api_key: fbd8d79ed49f21fc9ca7b2cf601a3f5b
-      index_name: ceRNAnetsim
-development:
-  mode: auto
-reference:
-- title: All functions
-  desc: ~
-  contents:
-  - calc_perturbation
-  - find_iteration
-  - find_node_perturbation
-  - gene_knockdown
-  - priming_graph
-  - simulate
-  - simulate_vis
-  - update_how
-  - update_nodes
-  - update_variables
-  - vis_graph
-navbar:
-  type: inverse
-  left:
-    - icon: fa-home
-      href: index.html
-  right:
-    - text: "Articles"
-      icon: fas fa-book
-      menu:
-      -  text: What does ceRNAnetsim do?
-         href: articles/basic_usage.html
-      -  text: How to calculate proper number of iterations for simulation of the network
-         href: articles/convenient_iteration.html
-      -  text: How does the system behave in mirtarbase dataset without interaction factors?
-         href: articles/mirtarbase_example.html
-      -  text: Helper Commands
-         href: articles/auxiliary_commands.html
-    - icon: fa-newspaper-o
-      text: "news"
-      href: news/index.html
-    - icon: fa-file-code-o
-      text: "functions"
-      href: reference/index.html
-    - icon: fa-github fa-lg
-      text: "github"
-      href: https://github.com/selcenari/ceRNAnetsim
+articles:
+  auxiliary_commands: auxiliary_commands.html
+  basic_usage: basic_usage.html
+  convenient_iteration: convenient_iteration.html
+  mirtarbase_example: mirtarbase_example.html
+
