@@ -5,7 +5,6 @@ cache: packages
 branches:
     only:
         - master
-        - services
 latex: false
 
 matrix:
@@ -38,12 +37,12 @@ deploy:
   - provider: script
     script: Rscript -e 'covr::codecov()'
     on:
-      branch: services
+      branch: master
 
 before_cache: Rscript -e 'remotes::install_cran("devtools"); remotes::install_cran("pkgdown"); remotes::install_version("rmarkdown", "1.15")' 
 deploy:
   - provider: script
     script: Rscript -e 'devtools::install(); pkgdown::deploy_site_github()'
     on:
-      branch: services
+      branch: master
     skip_cleanup: true
