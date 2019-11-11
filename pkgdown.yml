@@ -1,9 +1,5 @@
 pandoc: '2.2'
 pkgdown: 1.4.1
 pkgdown_sha: ~
-articles:
-  auxiliary_commands: auxiliary_commands.html
-  basic_usage: basic_usage.html
-  convenient_iteration: convenient_iteration.html
-  mirtarbase_example: mirtarbase_example.html
+articles: []
 
