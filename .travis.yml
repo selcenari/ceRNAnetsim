@@ -27,21 +27,16 @@ warnings_are_errors: false
 r_build_args: --no-build-vignettes --no-manual
 r_check_args: --no-build-vignettes --no-manual --timings
 
-deploy:
-  - provider: script
-    script: git checkout services; git merge --no-ff master; git push -u origin services
-    on:
-      branch: master
-deploy:
-  - provider: script
-    script: Rscript -e 'covr::codecov()'
-    on:
-      branch: master
+before_deploy: 
+  - Rscript -e 'remotes::install_cran("devtools"); remotes::install_cran("pkgdown"); remotes::install_version("rmarkdown", "1.15")' 
+  - wget https://raw.githubusercontent.com/selcenari/ceRNAnetsim/services/_pkgdown.yaml
+  - wget https://raw.githubusercontent.com/selcenari/ceRNAnetsim/services/codecov.yml
+  - wget https://raw.githubusercontent.com/selcenari/ceRNAnetsim/services/deploy.sh
 
-before_cache: Rscript -e 'remotes::install_cran("devtools"); remotes::install_cran("pkgdown"); remotes::install_version("rmarkdown", "1.15")' 
 deploy:
   - provider: script
-    script: Rscript -e 'devtools::install(); pkgdown::deploy_site_github()'
+    script: bash deploy.sh
+    skip_cleanup: true
     on:
       branch: master
-    skip_cleanup: true
+    
