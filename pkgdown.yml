@@ -2,4 +2,7 @@ pandoc: '2.2'
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles: []
+urls:
+  reference: https://selcenari.github.io/ceRNAnetsim//reference
+  article: https://selcenari.github.io/ceRNAnetsim//articles
 
