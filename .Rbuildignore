@@ -1,0 +1,10 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^ceRNAnetsim\.Rcheck$
+^ceRNAnetsim.*\.tar\.gz$
+^ceRNAnetsim.*\.tgz$
+^doc$
+^Meta$
+^\.travis\.yml$
+^codecov\.yml$
+^_pkgdown\.yml$
