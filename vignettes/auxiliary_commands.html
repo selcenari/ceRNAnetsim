@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Selcen Ari" />
+
+<meta name="date" content="2019-11-13" />
+
+<title>The auxiliary commands which can help to the users</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">The auxiliary commands which can help to the users</h1>
+<h4 class="author">Selcen Ari</h4>
+<h4 class="date">2019-11-13</h4>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#installation">2. Installation</a></li>
+<li><a href="#selection-of-perturbing-element-from-dataset">3. Selection of perturbing element from dataset</a><ul>
+<li><a href="#selection-of-hist1h3h-gene-at-vignette-how-does-the-system-behave-in-mirtarbase-dataset-without-interaction-factors">Selection of HIST1H3H gene at vignette <span>How does the system behave in mirtarbase dataset without interaction factors?</span></a></li>
+<li><a href="#selection-of-actb-gene-at-vignette-how-does-the-system-behave-in-mirtarbase-dataset-without-interaction-factors">Selection of ACTB gene at vignette <span>How does the system behave in mirtarbase dataset without interaction factors?</span></a></li>
+</ul></li>
+<li><a href="#session-info">4. Session Info</a></li>
+</ul>
+</div>
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(ceRNAnetsim)</span></code></pre></div>
+<div id="introduction" class="section level1">
+<h1>1. Introduction</h1>
+<p>In the other package vignettes, usage of ceRNAnetsim is explained in details. But in this vignette, some of commands which facitate to use of other vignette.</p>
+</div>
+<div id="installation" class="section level1">
+<h1>2. Installation</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;BiocManager&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="kw">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>BiocManager<span class="op">::</span><span class="kw">install</span>(<span class="st">&quot;ceRNAnetsim&quot;</span>)</span></code></pre></div>
+</div>
+<div id="selection-of-perturbing-element-from-dataset" class="section level1">
+<h1>3. Selection of perturbing element from dataset</h1>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">data</span>(<span class="st">&quot;TCGA_E9_A1N5_tumor&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">data</span>(<span class="st">&quot;TCGA_E9_A1N5_normal&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">data</span>(<span class="st">&quot;mirtarbasegene&quot;</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">data</span>(<span class="st">&quot;TCGA_E9_A1N5_mirnanormal&quot;</span>)</span></code></pre></div>
+<div id="selection-of-hist1h3h-gene-at-vignette-how-does-the-system-behave-in-mirtarbase-dataset-without-interaction-factors" class="section level2">
+<h2>Selection of HIST1H3H gene at vignette <a href="https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html">How does the system behave in mirtarbase dataset without interaction factors?</a></h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>TCGA_E9_A1N5_mirnanormal <span class="op">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="st">  </span><span class="kw">inner_join</span>(mirtarbasegene, <span class="dt">by=</span> <span class="st">&quot;miRNA&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="st">  </span><span class="kw">inner_join</span>(TCGA_E9_A1N5_normal, </span>
+<span id="cb4-4"><a href="#cb4-4"></a>             <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;Target&quot;</span>=<span class="st"> &quot;external_gene_name&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="st">  </span><span class="kw">select</span>(Target, miRNA, total_read, gene_expression) <span class="op">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="st">  </span><span class="kw">distinct</span>() -&gt;<span class="st"> </span>TCGA_E9_A1N5_mirnagene</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>TCGA_E9_A1N5_tumor<span class="op">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="st">  </span><span class="kw">inner_join</span>(TCGA_E9_A1N5_normal, <span class="dt">by=</span> <span class="st">&quot;external_gene_name&quot;</span>)<span class="op">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="dt">patient =</span> patient.x, </span>
+<span id="cb5-4"><a href="#cb5-4"></a>         external_gene_name, </span>
+<span id="cb5-5"><a href="#cb5-5"></a>         <span class="dt">tumor_exp =</span> gene_expression.x, </span>
+<span id="cb5-6"><a href="#cb5-6"></a>         <span class="dt">normal_exp =</span> gene_expression.y)<span class="op">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="st">  </span><span class="kw">distinct</span>()<span class="op">%&gt;%</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="st">  </span><span class="kw">inner_join</span>(TCGA_E9_A1N5_mirnagene, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;external_gene_name&quot;</span>=<span class="st"> &quot;Target&quot;</span>))<span class="op">%&gt;%</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="st">  </span><span class="kw">filter</span>(tumor_exp <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>, normal_exp <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)<span class="op">%&gt;%</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">FC=</span> tumor_exp<span class="op">/</span>normal_exp)<span class="op">%&gt;%</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="st">  </span><span class="kw">filter</span>(external_gene_name<span class="op">==</span><span class="st"> &quot;HIST1H3H&quot;</span>)</span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; # A tibble: 13 x 8</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt;    patient external_gene_n~ tumor_exp normal_exp miRNA total_read</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;                &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;      &lt;int&gt;</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt;  1 TCGA-E~ HIST1H3H               825         27 hsa-~        193</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">#&gt;  2 TCGA-E~ HIST1H3H               825         27 hsa-~          7</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co">#&gt;  3 TCGA-E~ HIST1H3H               825         27 hsa-~          3</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">#&gt;  4 TCGA-E~ HIST1H3H               825         27 hsa-~        450</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co">#&gt;  5 TCGA-E~ HIST1H3H               825         27 hsa-~       1345</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="co">#&gt;  6 TCGA-E~ HIST1H3H               825         27 hsa-~         14</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="co">#&gt;  7 TCGA-E~ HIST1H3H               825         27 hsa-~          3</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="co">#&gt;  8 TCGA-E~ HIST1H3H               825         27 hsa-~         35</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="co">#&gt;  9 TCGA-E~ HIST1H3H               825         27 hsa-~        205</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="co">#&gt; 10 TCGA-E~ HIST1H3H               825         27 hsa-~        270</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="co">#&gt; 11 TCGA-E~ HIST1H3H               825         27 hsa-~         38</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="co">#&gt; 12 TCGA-E~ HIST1H3H               825         27 hsa-~          1</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="co">#&gt; 13 TCGA-E~ HIST1H3H               825         27 hsa-~          4</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="co">#&gt; # ... with 2 more variables: gene_expression &lt;dbl&gt;, FC &lt;dbl&gt;</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a></span>
+<span id="cb5-30"><a href="#cb5-30"></a><span class="co">#HIST1H3H: interacts with various miRNA in dataset, so we can say that HIST1H3H is non-isolated competing element and increases to 30-fold.</span></span></code></pre></div>
+</div>
+<div id="selection-of-actb-gene-at-vignette-how-does-the-system-behave-in-mirtarbase-dataset-without-interaction-factors" class="section level2">
+<h2>Selection of ACTB gene at vignette <a href="https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html">How does the system behave in mirtarbase dataset without interaction factors?</a></h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>TCGA_E9_A1N5_tumor<span class="op">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">inner_join</span>(TCGA_E9_A1N5_normal, <span class="dt">by=</span> <span class="st">&quot;external_gene_name&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="st">  </span><span class="kw">select</span>(<span class="dt">patient =</span> patient.x, </span>
+<span id="cb6-4"><a href="#cb6-4"></a>         external_gene_name, </span>
+<span id="cb6-5"><a href="#cb6-5"></a>         <span class="dt">tumor_exp =</span> gene_expression.x, </span>
+<span id="cb6-6"><a href="#cb6-6"></a>         <span class="dt">normal_exp =</span> gene_expression.y) <span class="op">%&gt;%</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="st">  </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="st">  </span><span class="kw">inner_join</span>(TCGA_E9_A1N5_mirnagene, </span>
+<span id="cb6-9"><a href="#cb6-9"></a>             <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;external_gene_name&quot;</span>=<span class="st"> &quot;Target&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="st">  </span><span class="kw">filter</span>(tumor_exp <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>, normal_exp <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">FC=</span> tumor_exp<span class="op">/</span>normal_exp) <span class="op">%&gt;%</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="st">  </span><span class="kw">filter</span>(external_gene_name <span class="op">==</span><span class="st"> &quot;ACTB&quot;</span>)</span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; # A tibble: 46 x 8</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt;    patient external_gene_n~ tumor_exp normal_exp miRNA total_read</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;                &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;      &lt;int&gt;</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt;  1 TCGA-E~ ACTB                191469     101917 hsa-~      67599</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt;  2 TCGA-E~ ACTB                191469     101917 hsa-~      47266</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt;  3 TCGA-E~ ACTB                191469     101917 hsa-~      14554</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt;  4 TCGA-E~ ACTB                191469     101917 hsa-~        191</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt;  5 TCGA-E~ ACTB                191469     101917 hsa-~          5</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt;  6 TCGA-E~ ACTB                191469     101917 hsa-~      12625</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt;  7 TCGA-E~ ACTB                191469     101917 hsa-~       5297</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt;  8 TCGA-E~ ACTB                191469     101917 hsa-~       2379</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="co">#&gt;  9 TCGA-E~ ACTB                191469     101917 hsa-~       8041</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">#&gt; 10 TCGA-E~ ACTB                191469     101917 hsa-~       1522</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co">#&gt; # ... with 36 more rows, and 2 more variables: gene_expression &lt;dbl&gt;,</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="co">#&gt; #   FC &lt;dbl&gt;</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="co">#ACTB: interacts with various miRNA in dataset, so ACTB is not isolated node in network and increases to 1.87-fold.</span></span></code></pre></div>
+</div>
+</div>
+<div id="session-info" class="section level1">
+<h1>4. Session Info</h1>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">sessionInfo</span>()</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; R version 3.6.1 (2019-07-05)</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; Platform: x86_64-w64-mingw32/x64 (64-bit)</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; Running under: Windows 10 x64 (build 18362)</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; </span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt; Matrix products: default</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt; </span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; locale:</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; [1] LC_COLLATE=C                    LC_CTYPE=Turkish_Turkey.1254   </span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; [3] LC_MONETARY=Turkish_Turkey.1254 LC_NUMERIC=C                   </span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; [5] LC_TIME=Turkish_Turkey.1254    </span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; </span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt; attached base packages:</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt; </span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt; other attached packages:</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt; [1] ceRNAnetsim_0.99.10 tidygraph_1.1.2     dplyr_0.8.3        </span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt; </span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt; loaded via a namespace (and not attached):</span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#&gt;  [1] ggrepel_0.8.1      Rcpp_1.0.2         tidyr_1.0.0       </span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt;  [4] listenv_0.7.0      prettyunits_1.0.2  ps_1.3.0          </span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt;  [7] utf8_1.1.4         assertthat_0.2.1   zeallot_0.1.0     </span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt; [10] rprojroot_1.3-2    digest_0.6.21      ggforce_0.3.1     </span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; [13] R6_2.4.0           backports_1.1.5    evaluate_0.14     </span></span>
+<span id="cb7-25"><a href="#cb7-25"></a><span class="co">#&gt; [16] ggplot2_3.2.1      pillar_1.4.2       rlang_0.4.0       </span></span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="co">#&gt; [19] lazyeval_0.2.2     rstudioapi_0.10    furrr_0.1.0       </span></span>
+<span id="cb7-27"><a href="#cb7-27"></a><span class="co">#&gt; [22] callr_3.3.2        rmarkdown_1.15     desc_1.2.0        </span></span>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="co">#&gt; [25] devtools_2.2.1     stringr_1.4.0      igraph_1.2.4.1    </span></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="co">#&gt; [28] polyclip_1.10-0    munsell_0.5.0      compiler_3.6.1    </span></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="co">#&gt; [31] xfun_0.10          pkgconfig_2.0.3    pkgbuild_1.0.5    </span></span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="co">#&gt; [34] htmltools_0.4.0    globals_0.12.4     tidyselect_0.2.5  </span></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="co">#&gt; [37] tibble_2.1.3       gridExtra_2.3      roxygen2_6.1.1    </span></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="co">#&gt; [40] codetools_0.2-16   graphlayouts_0.5.0 fansi_0.4.0       </span></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="co">#&gt; [43] future_1.14.0      viridisLite_0.3.0  crayon_1.3.4      </span></span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="co">#&gt; [46] withr_2.1.2        MASS_7.3-51.4      commonmark_1.7    </span></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co">#&gt; [49] grid_3.6.1         gtable_0.3.0       lifecycle_0.1.0   </span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="co">#&gt; [52] magrittr_1.5       scales_1.0.0       cli_1.1.0         </span></span>
+<span id="cb7-38"><a href="#cb7-38"></a><span class="co">#&gt; [55] stringi_1.4.3      farver_1.1.0       viridis_0.5.1     </span></span>
+<span id="cb7-39"><a href="#cb7-39"></a><span class="co">#&gt; [58] fs_1.3.1           remotes_2.1.0      testthat_2.2.1    </span></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="co">#&gt; [61] xml2_1.2.2         ellipsis_0.3.0     vctrs_0.2.0       </span></span>
+<span id="cb7-41"><a href="#cb7-41"></a><span class="co">#&gt; [64] tools_3.6.1        glue_1.3.1         tweenr_1.0.1      </span></span>
+<span id="cb7-42"><a href="#cb7-42"></a><span class="co">#&gt; [67] purrr_0.3.2        yaml_2.2.0         ggraph_2.0.0      </span></span>
+<span id="cb7-43"><a href="#cb7-43"></a><span class="co">#&gt; [70] processx_3.4.1     pkgload_1.0.2      parallel_3.6.1    </span></span>
+<span id="cb7-44"><a href="#cb7-44"></a><span class="co">#&gt; [73] colorspace_1.4-1   sessioninfo_1.1.1  memoise_1.1.0     </span></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="co">#&gt; [76] knitr_1.25         usethis_1.5.1</span></span></code></pre></div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
