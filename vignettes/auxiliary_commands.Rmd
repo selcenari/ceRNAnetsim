@@ -1,32 +1,61 @@
-## ---- include = FALSE----------------------------------------------------
+---
+title: "The auxiliary commands which can help to the users"
+author: "Selcen Ari"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+   toc: true
+vignette: >
+  %\VignetteIndexEntry{auxiliary_commands}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+```
 
-## ----setup, warning= FALSE, message=FALSE--------------------------------
+```{r setup, warning= FALSE, message=FALSE}
 library(ceRNAnetsim)
+```
 
-## ---- eval=FALSE---------------------------------------------------------
-#  if (!requireNamespace("BiocManager", quietly = TRUE))
-#      install.packages("BiocManager")
-#  BiocManager::install("ceRNAnetsim")
+# 1. Introduction
 
-## ------------------------------------------------------------------------
+In the other package vignettes, usage of ceRNAnetsim is explained in details. But in this vignette, some of commands which facitate to use of other vignette.
+
+# 2. Installation
+
+```{r, eval=FALSE}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("ceRNAnetsim")
+```
+
+# 3. Selection of perturbing element from dataset
+
+```{r}
 data("TCGA_E9_A1N5_tumor")
 data("TCGA_E9_A1N5_normal")
 data("mirtarbasegene")
 data("TCGA_E9_A1N5_mirnanormal")
+```
 
-## ------------------------------------------------------------------------
+## Selection of HIST1H3H gene at vignette [How does the system behave in mirtarbase dataset without interaction factors?](https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html)
+
+```{r}
 TCGA_E9_A1N5_mirnanormal %>%
   inner_join(mirtarbasegene, by= "miRNA") %>%
   inner_join(TCGA_E9_A1N5_normal, 
              by = c("Target"= "external_gene_name")) %>%
   select(Target, miRNA, total_read, gene_expression) %>%
   distinct() -> TCGA_E9_A1N5_mirnagene
+```
 
-## ------------------------------------------------------------------------
+
+```{r}
 TCGA_E9_A1N5_tumor%>%
   inner_join(TCGA_E9_A1N5_normal, by= "external_gene_name")%>%
   select(patient = patient.x, 
@@ -41,8 +70,11 @@ TCGA_E9_A1N5_tumor%>%
 
 #HIST1H3H: interacts with various miRNA in dataset, so we can say that HIST1H3H is non-isolated competing element and increases to 30-fold.
 
+```
 
-## ------------------------------------------------------------------------
+## Selection of ACTB gene at vignette [How does the system behave in mirtarbase dataset without interaction factors?](https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html)
+
+```{r}
 TCGA_E9_A1N5_tumor%>%
   inner_join(TCGA_E9_A1N5_normal, by= "external_gene_name") %>%
   select(patient = patient.x, 
@@ -58,7 +90,9 @@ TCGA_E9_A1N5_tumor%>%
 
 #ACTB: interacts with various miRNA in dataset, so ACTB is not isolated node in network and increases to 1.87-fold.
 
+```
 
-## ----sessioninfo---------------------------------------------------------
+# 4. Session Info
+```{r sessioninfo}
 sessionInfo()
-
+```
