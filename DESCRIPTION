@@ -2,7 +2,7 @@ Type: Package
 Package: ceRNAnetsim
 Title: Regulation Simulator of Interaction between miRNA and
     Competing RNAs (ceRNA)
-Version: 0.99.11
+Version: 0.99.12
 Authors@R: 
     c(person(given = "Selcen",
              family = "Ari Yuka",
@@ -29,7 +29,7 @@ License: GPL (>= 3.0)
 URL: https://github.com/selcenari/ceRNAnetsim
 BugReports: https://github.com/selcenari/ceRNAnetsim/issues
 Depends:
-    R (>= 4.0),
+    R (>= 4.0.0),
     dplyr,
     tidygraph
 Imports: 
