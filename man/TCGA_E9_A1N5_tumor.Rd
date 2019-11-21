@@ -4,7 +4,7 @@
 \name{TCGA_E9_A1N5_tumor}
 \alias{TCGA_E9_A1N5_tumor}
 \title{TCGA_E9_A1N5_tumor}
-\format{Classes tbl_df, tbl and data.frame with	56830 observtion of  7 variables:
+\format{Classes tbl_df, tbl and data.frame with 56830 observtion of 7 variables:
 \describe{
   \item{patient}{Barcode of patient based on TCGA}
   \item{sample}{Tissue sample barcode of the patient}

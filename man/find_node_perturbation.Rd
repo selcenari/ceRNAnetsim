@@ -2,7 +2,9 @@
 % Please edit documentation in R/find_node_perturbation.R
 \name{find_node_perturbation}
 \alias{find_node_perturbation}
-\title{Calculates average expression changes of all (or specified) nodes except trigger and finds the perturbed node count for all (or specified) nodes in system.}
+\title{Calculates average expression changes of all (or specified)
+nodes except trigger and finds the perturbed node count for
+all (or specified) nodes in system.}
 \usage{
 find_node_perturbation(input_graph, how = 2, cycle = 1, limit = 0,
   fast = 0)
@@ -14,24 +16,34 @@ find_node_perturbation(input_graph, how = 2, cycle = 1, limit = 0,
 
 \item{cycle}{The iteration of simulation.}
 
-\item{limit}{The minimum fold change which can be taken into account for perturbation calculation on all nodes in terms of percentage.}
+\item{limit}{The minimum fold change which can be taken into account for
+perturbation calculation on all nodes in terms of percentage.}
 
-\item{fast}{specifies percentage of affected target in target expression. For example, if fast = 1, the nodes that are affected from miRNA repression activity more than one percent of their expression is determined as subgraph.}
+\item{fast}{specifies percentage of affected target in target expression.
+For example, if fast = 1, the nodes that are affected from miRNA repression
+activity more than one percent of their expression is determined as subgraph.}
 }
 \value{
-It gives a tibble form dataset that includes node names, perturbation efficiency and perturbed count of nodes.
+It gives a tibble form dataset that includes node names,
+perturbation efficiency and perturbed count of nodes.
 }
 \description{
-Calculates average expression changes of all (or specified) nodes except trigger and finds the perturbed node count for all (or specified) nodes in system.
+Calculates average expression changes of all (or specified)
+nodes except trigger and finds the perturbed node count for
+all (or specified) nodes in system.
 }
 \details{
-find_node_perturbation calculates mean expression changes of elements after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
-  The outputs of the function are the perturbation efficiency and perturbed count of nodes for each nodes.
+find_node_perturbation calculates mean expression changes
+of elements after the change in the network in terms of percentage.
+It also calculates the number of nodes that have expression changes
+after the change occur in the network. The outputs of the function
+are the perturbation efficiency and perturbed count of nodes for
+each nodes.
 }
 \examples{
 
-data("minsamp")
-data("midsamp")
+data('minsamp')
+data('midsamp')
 
  minsamp\%>\%
   priming_graph(competing_count = Competing_expression, miRNA_count = miRNA_expression)\%>\%

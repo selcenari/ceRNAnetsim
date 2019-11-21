@@ -1,6 +1,6 @@
-#' @name huge_example 
+#' @name huge_example
 #' @title huge example
-#' @description A sample dataset which is utilised through integration of TCGA_E9_A1N5_normal, 
+#' @description A sample dataset which is utilised through integration of TCGA_E9_A1N5_normal,
 #'     TCGA_E9_A1N5_mirnanormal and high-throughput experimental miRNA:gene dataset.
 #' @docType data
 #' @format A data frame with 7 variables and 26176 observation:
@@ -14,12 +14,12 @@
 #'   \item{seed_type_effect}{Coefficient for efficiency of seed sequence of miRNA:target interaction}
 #'   }
 #' @source Dataset was integrated by us.
-#' 
+#'
 
 NULL
 
 
-#' @name midsamp 
+#' @name midsamp
 #' @title midsamp
 #' @description middle sized sample dataset
 #' @docType data
@@ -33,13 +33,13 @@ NULL
 #'   \item{targeting_region}{Coefficient for efficiency of location on target}
 #'   \item{Energy}{Energy of miRNA:target binding}
 #'   }
-#' 
+#'
 #' @source Dataset was created by us.
-#' 
+#'
 
 NULL
 
-#' @name midsamp_new_counts 
+#' @name midsamp_new_counts
 #' @title midsamp_new_counts
 #' @description includes new expression values for middle sized sample dataset
 #' @docType data
@@ -51,11 +51,11 @@ NULL
 #'   \item{miRNA_count}{Expression value of miRNA}
 #'   }
 #' @source Dataset was created by us.
-#' 
+#'
 
 NULL
 
-#' @name minsamp 
+#' @name minsamp
 #' @title minsamp
 #' @description minimal sample dataset
 #' @docType data
@@ -70,11 +70,11 @@ NULL
 #'   \item{energy}{Energy of miRNA:target binding}
 #'   }
 #' @source Dataset was created by us.
-#' 
+#'
 
 NULL
 
-#' @name new_counts 
+#' @name new_counts
 #' @title new_counts
 #' @description includes new expression values for minimal sample dataset
 #' @docType data
@@ -85,9 +85,9 @@ NULL
 #'   \item{Competing_count}{Expression values of competing gene}
 #'   \item{miRNA_count}{Expression value of miRNA}
 #'   }
-#' 
+#'
 #' @source Dataset was created by us.
-#' 
+#'
 
 NULL
 
@@ -105,10 +105,10 @@ NULL
 NULL
 
 #' @name TCGA_E9_A1N5_mirnanormal
-#' @title TCGA_E9_A1N5_mirnanormal 
+#' @title TCGA_E9_A1N5_mirnanormal
 #' @description The dataset contains mirna expression values for normal tissue sample of TCGA-E9-A1N5 barcoded patient
 #' @source \url{https://portal.gdc.cancer.gov/}
-#' @format Classes tbl_df, tbl and data.frame with	750 observation of  6 variables:
+#' @format Classes tbl_df, tbl and data.frame with 750 observation of 6 variables:
 #' \describe{
 #'   \item{barcode}{Sample, normal tissue, barcode of patient based on TCGA}
 #'   \item{mirbase_ID}{mirbase id of miRNA}
@@ -117,16 +117,16 @@ NULL
 #'   \item{total_read}{total reading count of miRNA which is produced from different gene locations}
 #'   \item{total_RPM}{total RPM (reading per million) of miRNA}
 #'   }
-#' 
+#'
 #' @docType data
 
 NULL
 
 #' @name TCGA_E9_A1N5_mirnatumor
-#' @title TCGA_E9_A1N5_mirnatumor 
+#' @title TCGA_E9_A1N5_mirnatumor
 #' @description The dataset contains mirna expression values for tumor tissue sample of TCGA-E9-A1N5 barcoded patient
 #' @source \url{https://portal.gdc.cancer.gov/}
-#' @format Classes tbl_df, tbl and data.frame with	648 observation of  6 variables:
+#' @format Classes tbl_df, tbl and data.frame with 648 observation of 6 variables:
 #' \describe{
 #'   \item{barcode}{Sample, tumor tissue, barcode of patient based on TCGA}
 #'   \item{mirbase_ID}{mirbase id of miRNA}
@@ -139,11 +139,11 @@ NULL
 
 NULL
 
-#' @name TCGA_E9_A1N5_normal 
+#' @name TCGA_E9_A1N5_normal
 #' @title TCGA_E9_A1N5_normal
 #' @description The dataset contains gene expression values for normal tissue sample of TCGA-E9-A1N5 barcoded patient
 #' @source \url{https://portal.gdc.cancer.gov/}
-#' @format Classes tbl_df, tbl and data.frame with	56830 observation of  7 variables:
+#' @format Classes tbl_df, tbl and data.frame with 56830 observation of 7 variables:
 #' \describe{
 #'   \item{patient}{Barcode of patient based on TCGA}
 #'   \item{sample}{Tissue sample barcode of the patient}
@@ -158,11 +158,11 @@ NULL
 
 NULL
 
-#' @name TCGA_E9_A1N5_tumor 
+#' @name TCGA_E9_A1N5_tumor
 #' @title TCGA_E9_A1N5_tumor
 #' @description The dataset contains gene expression values for cancer tissue sample of TCGA-E9-A1N5 barcoded patient
 #' @source \url{https://portal.gdc.cancer.gov/}
-#' @format Classes tbl_df, tbl and data.frame with	56830 observtion of  7 variables:
+#' @format Classes tbl_df, tbl and data.frame with 56830 observtion of 7 variables:
 #' \describe{
 #'   \item{patient}{Barcode of patient based on TCGA}
 #'   \item{sample}{Tissue sample barcode of the patient}

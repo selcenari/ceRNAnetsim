@@ -22,22 +22,24 @@ the graph object.
 this function converts the count value of the given node.
 }
 \details{
-update_how function calculates the current value of given mirna or gene node on the graph object. User must specify current value as fold change.
+update_how function calculates the current value of
+given mirna or gene node on the graph object. User must specify
+current value as fold change.
 }
 \examples{
 
-data("minsamp")
+data('minsamp')
 
 priming_graph(minsamp, Competing_expression, miRNA_expression)\%>\%
-   update_how("Gene1",3)
+   update_how('Gene1',3)
 
- priming_graph(minsamp, Competing_expression, miRNA_expression, 
+ priming_graph(minsamp, Competing_expression, miRNA_expression,
       aff_factor = c(seed_type,energy), deg_factor = region)\%>\%
-   update_how("Gene1", 3)
+   update_how('Gene1', 3)
 
    priming_graph(minsamp, Competing_expression, miRNA_expression,
        aff_factor = c(seed_type,energy), deg_factor = region)\%>\%
-  update_how("Gene1", how=0, knockdown= TRUE)
+  update_how('Gene1', how=0, knockdown= TRUE)
 
 
 

@@ -16,6 +16,7 @@ tibble object
 Carries the variables from edge to node.
 }
 \details{
-The function is a helper function for processing of graph object with update_nodes function.
+The function is a helper function for
+processing of graph object with update_nodes function.
 }
 \keyword{internal}

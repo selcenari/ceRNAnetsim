@@ -9,9 +9,11 @@ update_nodes(input_graph, once = FALSE, limit = 0)
 \arguments{
 \item{input_graph}{Processed graph object in previous step.}
 
-\item{once}{The argument is about when the carrying process runs (internal use only)}
+\item{once}{The argument is about when the carrying process
+runs (internal use only)}
 
-\item{limit}{absolute minimum amount of change required to be considered as up/down regulated element}
+\item{limit}{absolute minimum amount of change required to
+be considered as up/down regulated element}
 }
 \value{
 the graph object.
@@ -21,15 +23,18 @@ This function carries variables from edge to node and should be used
 after `update_how` or `update_variables` functions
 }
 \details{
-If the carrying process performs after priming_graph function, the argument must be TRUE.
-    The function helps to visualisation of processed graph object, especially that includes too many nodes.This step makes it easily to follow the processes.
+If the carrying process performs after priming_graph
+function, the argument must be TRUE. The function helps to
+visualisation of processed graph object, especially that
+includes too many nodes.This step makes it easily to follow
+the processes.
 }
 \examples{
 
-data("minsamp")
+data('minsamp')
 
 minsamp \%>\%
   priming_graph(Competing_expression, miRNA_expression) \%>\%
-  update_how("Gene2",2)
+  update_how('Gene2',2)
 
 }

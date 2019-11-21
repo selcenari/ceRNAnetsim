@@ -11,7 +11,8 @@ simulate(input_graph, cycle = 1, threshold = 0, knockdown = TRUE)
 
 \item{cycle}{Optimal iteration number for gaining steady-state.}
 
-\item{threshold}{absolute minimum amount of change required to be considered as up/down regulated element}
+\item{threshold}{absolute minimum amount of change required to be
+considered as up/down regulated element}
 
 \item{knockdown}{specifies gene knockdown with default TRUE}
 }
@@ -22,12 +23,21 @@ The graph.
 simulate function uses the change in expression value/s as triggering.
 }
 \details{
-The steady-state conditions of the system are disturbed after the change in the graph (with update_how or update_variables). In this case, the system tend to be steady state again. The arrangement of competetive profiles of the targets continue until all nodes are updated and steady-state nearly. Note that, If `how` argument is specified as `0`, *simulate()* and *update_how()* functions process the variables to knockdown of specified gene with default `knockdown = TRUE` and knocked down competing RNA is kept at zero. However, if `knockdown= FALSE` argument is applied, competing RNA which has initial expression level of zero is allowed to increase or fluctuate during calculations.
+The steady-state conditions of the system are disturbed
+after the change in the graph (with update_how or update_variables).
+In this case, the system tend to be steady state again. The arrangement
+of competetive profiles of the targets continue until all nodes are
+updated and steady-state nearly. Note that, If `how` argument is
+specified as `0`, *simulate()* and *update_how()* functions process
+the variables to knockdown of specified gene with default `knockdown = TRUE`
+and knocked down competing RNA is kept at zero. However, if `knockdown= FALSE`
+argument is applied, competing RNA which has initial expression level of zero
+is allowed to increase or fluctuate during calculations.
 }
 \examples{
 
-data("minsamp")
-data("new_counts")
+data('minsamp')
+data('new_counts')
 
 ## new_counts, the dataset that includes the current counts of nodes.
 
@@ -35,7 +45,7 @@ priming_graph(minsamp, Competing_expression, miRNA_expression)\%>\%
   update_variables(new_counts)\%>\%
   simulate()
 
-priming_graph(minsamp, Competing_expression, miRNA_expression, 
+priming_graph(minsamp, Competing_expression, miRNA_expression,
        aff_factor = c(seed_type,energy), deg_factor = region)\%>\%
   update_variables(new_counts)\%>\%
   simulate(cycle = 3)

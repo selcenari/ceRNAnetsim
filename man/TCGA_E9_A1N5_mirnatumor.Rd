@@ -4,7 +4,7 @@
 \name{TCGA_E9_A1N5_mirnatumor}
 \alias{TCGA_E9_A1N5_mirnatumor}
 \title{TCGA_E9_A1N5_mirnatumor}
-\format{Classes tbl_df, tbl and data.frame with	648 observation of  6 variables:
+\format{Classes tbl_df, tbl and data.frame with 648 observation of 6 variables:
 \describe{
   \item{barcode}{Sample, tumor tissue, barcode of patient based on TCGA}
   \item{mirbase_ID}{mirbase id of miRNA}

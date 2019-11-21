@@ -2,7 +2,8 @@
 % Please edit documentation in R/update_variables.R
 \name{update_variables}
 \alias{update_variables}
-\title{Replaces new values with previous values of competing or miRNA counts.}
+\title{Replaces new values with previous values of
+competing or miRNA counts.}
 \usage{
 update_variables(input_graph, current_counts)
 }
@@ -15,19 +16,26 @@ update_variables(input_graph, current_counts)
 the graph object.
 }
 \description{
-This function replaces new values with previous values of competing or miRNA counts.
+This function replaces new values with previous
+values of competing or miRNA counts.
 }
 \details{
-update_variables function provides updating edge variables to current values. If the microRNA or competing expression (or both) change (decreasing or increasing), this function switches the values that are found in a new dataset provided by user. But the current value dataset must be equal with initial dataset in terms of node name.
+update_variables function provides updating edge
+variables to current values. If the microRNA or competing
+expression (or both) change (decreasing or increasing),
+this function switches the values that are found in a new
+dataset provided by user. But the current value dataset
+must be equal with initial dataset in terms of node name.
 }
 \examples{
 
-data("minsamp")
-data("new_counts")
+data('minsamp')
+data('new_counts')
 
  minsamp\%>\%
- priming_graph(Competing_expression, miRNA_expression, 
+ priming_graph(Competing_expression, miRNA_expression,
      aff_factor = c(seed_type,energy), deg_factor = region)\%>\%
-   update_variables(new_counts)  #the dataset that includes the current counts of nodes.
+   update_variables(new_counts)
+   #new_counts includes the current counts of nodes.
 
 }

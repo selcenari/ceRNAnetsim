@@ -18,6 +18,6 @@
 Dataset was integrated by us.
 }
 \description{
-A sample dataset which is utilised through integration of TCGA_E9_A1N5_normal, 
+A sample dataset which is utilised through integration of TCGA_E9_A1N5_normal,
     TCGA_E9_A1N5_mirnanormal and high-throughput experimental miRNA:gene dataset.
 }

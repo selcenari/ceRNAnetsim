@@ -7,7 +7,8 @@
 find_iteration(df, limit = 0.1, plot = FALSE)
 }
 \arguments{
-\item{df}{A tbl graph that includes the miRNA and competing targets triggered and simulated for number of cycles.}
+\item{df}{A tbl graph that includes the miRNA and competing targets
+triggered and simulated for number of cycles.}
 
 \item{limit}{The minimum amount of change of any node.}
 
@@ -17,15 +18,18 @@ find_iteration(df, limit = 0.1, plot = FALSE)
 It gives an iteration number to use in simulate() function.
 }
 \description{
-searches the iteration that provides maximum affected node number. The user defines a symbolic iteration with .iter. The function calculates the number of affected nodes for each iteration and than selects the iteration that has maximum affected nodes' number.
+searches the iteration that provides maximum affected node number.
+ The user defines a symbolic iteration with .iter. The function
+ calculates the number of affected nodes for each iteration and
+ then selects the iteration that has maximum affected nodes' number.
 }
 \examples{
 
-data("midsamp")
+data('midsamp')
 
 midsamp \%>\%
   priming_graph(Gene_expression, miRNA_expression) \%>\%
-  update_how("Gene2",2) \%>\%
+  update_how('Gene2',2) \%>\%
   simulate(10) \%>\%
   find_iteration(limit=0)
 

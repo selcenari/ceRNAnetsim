@@ -11,17 +11,22 @@ vis_graph(input_graph, Competing_color = "green",
 \arguments{
 \item{input_graph}{The graph object.}
 
-\item{Competing_color}{The color of competing elements on the graph with "green" default.}
+\item{Competing_color}{The color of competing elements
+on the graph with 'green' default.}
 
-\item{mirna_color}{The color of miRNAs on the graph with "orange" default.}
+\item{mirna_color}{The color of miRNAs on the graph with
+'orange' default.}
 
-\item{Upregulation}{The color of Upregulated elements on the graph with "red" default.}
+\item{Upregulation}{The color of Upregulated elements on
+the graph with 'red' default.}
 
-\item{Downregulation}{The color of Downregulated elements on the graph with "blue" default.}
+\item{Downregulation}{The color of Downregulated elements
+on the graph with 'blue' default.}
 
 \item{title}{Title of the given graph.}
 
-\item{layout}{The layout that will be used for visualisation of the graph.}
+\item{layout}{The layout that will be used for
+visualisation of the graph.}
 }
 \value{
 The graph object.
@@ -34,18 +39,18 @@ vis_graph ensures the process to be followed.
 }
 \examples{
 
-data("minsamp")
-data("new_counts")
+data('minsamp')
+data('new_counts')
 
 # Visualisation of graph in steady-state.
 
- priming_graph(minsamp, Competing_expression, miRNA_expression, 
+ priming_graph(minsamp, Competing_expression, miRNA_expression,
     aff_factor = c(seed_type,energy), deg_factor = region)\%>\%
    vis_graph()
 
 # Visualisation of graph after the change.
 
- priming_graph(minsamp, Competing_expression, miRNA_expression, 
+ priming_graph(minsamp, Competing_expression, miRNA_expression,
     aff_factor = c(seed_type,energy), deg_factor = region)\%>\%
    update_variables(new_counts)\%>\%
    vis_graph()
