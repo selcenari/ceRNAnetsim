@@ -2,7 +2,7 @@ Type: Package
 Package: ceRNAnetsim
 Title: Regulation Simulator of Interaction between miRNA and
     Competing RNAs (ceRNA)
-Version: 0.99.15
+Version: 0.99.16
 Authors@R: 
     c(person(given = "Selcen",
              family = "Ari Yuka",
