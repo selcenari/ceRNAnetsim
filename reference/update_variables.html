@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Replaces new values with previous values of competing or miRNA counts. — update_variables • ceRNAnetsim</title>
+<title>Replaces new values with previous values of
+competing or miRNA counts. — update_variables • ceRNAnetsim</title>
 
 
 <!-- jquery -->
@@ -41,8 +42,10 @@
 
 
 
-<meta property="og:title" content="Replaces new values with previous values of competing or miRNA counts. — update_variables" />
-<meta property="og:description" content="This function replaces new values with previous values of competing or miRNA counts." />
+<meta property="og:title" content="Replaces new values with previous values of
+competing or miRNA counts. — update_variables" />
+<meta property="og:description" content="This function replaces new values with previous
+values of competing or miRNA counts." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -85,7 +88,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ceRNAnetsim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.15</span>
       </span>
     </div>
 
@@ -162,13 +165,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Replaces new values with previous values of competing or miRNA counts.</h1>
+    <h1>Replaces new values with previous values of
+competing or miRNA counts.</h1>
     <small class="dont-index">Source: <a href='https://github.com/selcenari/ceRNAnetsim/blob/master/R/update_variables.R'><code>R/update_variables.R</code></a></small>
     <div class="hidden name"><code>update_variables.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function replaces new values with previous values of competing or miRNA counts.</p>
+    <p>This function replaces new values with previous
+values of competing or miRNA counts.</p>
     </div>
 
     <pre class="usage"><span class='fu'>update_variables</span>(<span class='no'>input_graph</span>, <span class='no'>current_counts</span>)</pre>
@@ -191,17 +196,22 @@
     <p>the graph object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>update_variables function provides updating edge variables to current values. If the microRNA or competing expression (or both) change (decreasing or increasing), this function switches the values that are found in a new dataset provided by user. But the current value dataset must be equal with initial dataset in terms of node name.</p>
+    <p>update_variables function provides updating edge
+variables to current values. If the microRNA or competing
+expression (or both) change (decreasing or increasing),
+this function switches the values that are found in a new
+dataset provided by user. But the current value dataset
+must be equal with initial dataset in terms of node name.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"minsamp"</span>)
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"new_counts"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>'minsamp'</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>'new_counts'</span>)
 
  <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
  <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>,
      <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>seed_type</span>,<span class='no'>energy</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>update_variables</span>(<span class='no'>new_counts</span>)  <span class='co'>#the dataset that includes the current counts of nodes.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; # A tbl_graph: 8 nodes and 7 edges
+   <span class='fu'>update_variables</span>(<span class='no'>new_counts</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; # A tbl_graph: 8 nodes and 7 edges
 #&gt; #
 #&gt; # A rooted tree
 #&gt; #
@@ -227,7 +237,8 @@
 #&gt; #   comp_count_list &lt;list&gt;, comp_count_pre &lt;dbl&gt;, comp_count_current &lt;dbl&gt;,
 #&gt; #   mirna_count_list &lt;list&gt;, mirna_count_pre &lt;dbl&gt;, mirna_count_current &lt;dbl&gt;,
 #&gt; #   mirna_count_per_dep &lt;dbl&gt;, effect_current &lt;dbl&gt;, effect_pre &lt;dbl&gt;,
-#&gt; #   effect_list &lt;list&gt;</div><div class='input'>
+#&gt; #   effect_list &lt;list&gt;</div><div class='input'>   #new_counts includes the current counts of nodes.
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

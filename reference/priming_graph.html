@@ -6,7 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Converts the given dataframe using first variable as competing and the second as miRNA. — priming_graph • ceRNAnetsim</title>
+<title>Converts the given dataframe using first variable as
+competing and the second as miRNA.
+The function converts the given dataframe using first
+variable as competing and the second as miRNA. If user
+defines interaction factors as affinity or degradation,
+the factors are taken into account. — priming_graph • ceRNAnetsim</title>
 
 
 <!-- jquery -->
@@ -41,8 +46,18 @@
 
 
 
-<meta property="og:title" content="Converts the given dataframe using first variable as competing and the second as miRNA. — priming_graph" />
-<meta property="og:description" content="The function converts the given dataframe using first variable as competing and the second as miRNA. If user defines interaction factors as affinity or degradation, the factors are taken into account." />
+<meta property="og:title" content="Converts the given dataframe using first variable as
+competing and the second as miRNA.
+The function converts the given dataframe using first
+variable as competing and the second as miRNA. If user
+defines interaction factors as affinity or degradation,
+the factors are taken into account. — priming_graph" />
+<meta property="og:description" content="Converts the given dataframe using first variable as
+competing and the second as miRNA.
+The function converts the given dataframe using first
+variable as competing and the second as miRNA. If user
+defines interaction factors as affinity or degradation,
+the factors are taken into account." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -85,7 +100,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ceRNAnetsim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.15</span>
       </span>
     </div>
 
@@ -162,13 +177,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Converts the given dataframe using first variable as competing and the second as miRNA.</h1>
+    <h1>Converts the given dataframe using first variable as
+competing and the second as miRNA.
+The function converts the given dataframe using first
+variable as competing and the second as miRNA. If user
+defines interaction factors as affinity or degradation,
+the factors are taken into account.</h1>
     <small class="dont-index">Source: <a href='https://github.com/selcenari/ceRNAnetsim/blob/master/R/priming_graph.R'><code>R/priming_graph.R</code></a></small>
     <div class="hidden name"><code>priming_graph.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>The function converts the given dataframe using first variable as competing and the second as miRNA. If user defines interaction factors as affinity or degradation, the factors are taken into account.</p>
+    <p>Converts the given dataframe using first variable as
+competing and the second as miRNA.
+The function converts the given dataframe using first
+variable as competing and the second as miRNA. If user
+defines interaction factors as affinity or degradation,
+the factors are taken into account.</p>
     </div>
 
     <pre class="usage"><span class='fu'>priming_graph</span>(<span class='no'>df</span>, <span class='no'>competing_count</span>, <span class='no'>miRNA_count</span>, <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='no'>dummy</span>,
@@ -204,13 +229,21 @@
     <p>the graph object.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>priming_graph provides grouping of competing targets and evaluation of targets within the groups taking into account miRNA:target, target:total target, interaction and degradation parameters. The target groups are determined according to miRNAs. If the factors that are important in target interactions are specified as arguments, the factors also are evaluated separately within each group.
-priming_graph also calculates the miRNA efficiency in steady-state conditions. It is assumed that quantity of competing targets and miRNAs are shown in the steady-state system after the miRNAs exhibit repressive efficiency.
-Note that the data must not include missing values such as NA or "-".</p>
+    <p>priming_graph provides grouping of competing targets
+and evaluation of targets within the groups taking into account
+miRNA:target, target:total target, interaction and degradation
+parameters. The target groups are determined according to miRNAs.
+If the factors that are important in target interactions are
+specified as arguments, the factors also are evaluated separately
+within each group. priming_graph also calculates the miRNA efficiency
+in steady-state conditions. It is assumed that quantity of competing
+targets and miRNAs are shown in the steady-state system after the
+miRNAs exhibit repressive efficiency. Note that the data must not
+include missing values such as NA or '-'.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"minsamp"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>'minsamp'</span>)
 
 <span class='fu'>priming_graph</span>(<span class='no'>minsamp</span>, <span class='no'>Competing_expression</span>, <span class='no'>miRNA_expression</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; # A tbl_graph: 8 nodes and 7 edges
 #&gt; #

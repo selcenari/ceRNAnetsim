@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculates average expression changes of all nodes except trigger and finds the perturbed node count for a given node. — calc_perturbation • ceRNAnetsim</title>
+<title>Calculates average expression changes of all nodes except
+trigger and finds the perturbed node count for a given node. — calc_perturbation • ceRNAnetsim</title>
 
 
 <!-- jquery -->
@@ -41,8 +42,10 @@
 
 
 
-<meta property="og:title" content="Calculates average expression changes of all nodes except trigger and finds the perturbed node count for a given node. — calc_perturbation" />
-<meta property="og:description" content="calculates mean of expression changes of all nodes except trigger and finds the perturbed node count for a given node." />
+<meta property="og:title" content="Calculates average expression changes of all nodes except
+trigger and finds the perturbed node count for a given node. — calc_perturbation" />
+<meta property="og:description" content="Calculates average expression changes of all nodes except
+trigger and finds the perturbed node count for a given node." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -85,7 +88,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ceRNAnetsim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.14</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.15</span>
       </span>
     </div>
 
@@ -162,13 +165,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculates average expression changes of all nodes except trigger and finds the perturbed node count for a given node.</h1>
+    <h1>Calculates average expression changes of all nodes except
+trigger and finds the perturbed node count for a given node.</h1>
     <small class="dont-index">Source: <a href='https://github.com/selcenari/ceRNAnetsim/blob/master/R/calc_perturbation.R'><code>R/calc_perturbation.R</code></a></small>
     <div class="hidden name"><code>calc_perturbation.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>calculates mean of expression changes of all nodes except trigger and finds the perturbed node count for a given node.</p>
+    <p>Calculates average expression changes of all nodes except
+trigger and finds the perturbed node count for a given node.</p>
     </div>
 
     <pre class="usage"><span class='fu'>calc_perturbation</span>(<span class='no'>input_graph</span>, <span class='no'>node_name</span>, <span class='kw'>how</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>1</span>,
@@ -179,7 +184,8 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>input_graph</th>
-      <td><p>the graph object that was processed with priming graph in previous step.</p></td>
+      <td><p>the graph object that was processed with
+priming graph in previous step.</p></td>
     </tr>
     <tr>
       <th>node_name</th>
@@ -195,33 +201,40 @@
     </tr>
     <tr>
       <th>limit</th>
-      <td><p>The minimum fold change which can be taken into account for perturbation calculation on all nodes in terms of percentage.</p></td>
+      <td><p>The minimum fold change which can be taken into
+account for perturbation calculation on all nodes in terms of percentage.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a tibble with two columns, the perturbation efficiency and number of perturbed nodes.</p>
+    <p>a tibble with two columns, the perturbation
+efficiency and number of perturbed nodes.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>calc_perturbation calculates mean expression changes of elements except trigger after the change in the network in terms of percentage. It also calculates the number of nodes that have expression changes after the change occur in the network.
- The function determines the perturbation efficiency and number of perturbed nodes after given change with how, cycle and limit parameter.</p>
+    <p>calc_perturbation calculates mean expression changes
+of elements except trigger after the change in the network
+in terms of percentage. It also calculates the number of nodes
+that have expression changes after the change occur in the network.
+The function determines the perturbation efficiency and number
+of perturbed nodes after given change with how, cycle and
+limit parameter.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"minsamp"</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>'minsamp'</span>)
 
 <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
    <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>,
        <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>, <span class='kw'>how</span><span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
+   <span class='fu'>calc_perturbation</span>(<span class='st'>'Gene6'</span>, <span class='kw'>how</span><span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;   perturbation_efficiency perturbed_count
 #&gt;                     &lt;dbl&gt;           &lt;dbl&gt;
 #&gt; 1                   0.975               5</div><div class='input'>
  <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
    <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>,
        <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>energy</span>,<span class='no'>seed_type</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>calc_perturbation</span>(<span class='st'>"Gene6"</span>,<span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
+   <span class='fu'>calc_perturbation</span>(<span class='st'>'Gene6'</span>,<span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
 #&gt;   perturbation_efficiency perturbed_count
 #&gt;                     &lt;dbl&gt;           &lt;dbl&gt;
 #&gt; 1                   0.249               5</div><div class='input'>
