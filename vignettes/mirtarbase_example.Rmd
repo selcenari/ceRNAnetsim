@@ -208,7 +208,7 @@ TCGA_E9_A1N5_mirnagene %>%
 
 On the other hand, the perturbation eficiency of ATCB gene is higher, when this gene is regulated with 30-fold upregulation like in HIST1H3H.
 
-```{r}
+```{r, eval=FALSE}
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read)%>%
