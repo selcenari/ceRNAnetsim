@@ -130,13 +130,15 @@ TCGA_E9_A1N5_mirnagene%>%
 
 The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with *HIST1H3H* node.
 
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning=FALSE}
 
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
   update_how(node_name = "HIST1H3H", how =30) %>% 
-  simulate(20) %>% 
+  simulate(20) ->simulation_res_HIST
+
+simulation_res_HIST%>%
   find_iteration(plot=TRUE)
 
 ```
@@ -145,12 +147,9 @@ TCGA_E9_A1N5_mirnagene %>%
 
 The graph was shown that the change in expression level of HIST1H3H results in weak perturbation efficiency, despite 30-fold change. The code shown below can be used for calculation of fold changes after simulation HIST1H3H gene to 30 fold:
 
-```{r, eval=FALSE}
-TCGA_E9_A1N5_mirnagene %>%
-  priming_graph(competing_count = gene_expression, 
-                miRNA_count = total_read) %>%
-  update_how("HIST1H3H", 30) %>%
-  simulate(20)%>%
+```{r}
+
+simulation_res_HIST%>%
   as_tibble()%>%
   mutate(FC= count_current/initial_count)%>%
   arrange(desc(FC))
@@ -158,7 +157,8 @@ TCGA_E9_A1N5_mirnagene %>%
 
 Also, perturbation calculation (specifies efficiency of selected node) of HIST1H3H gene
 
-```{r, eval=FALSE}
+```{r}
+
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read)%>%
@@ -172,12 +172,14 @@ TCGA_E9_A1N5_mirnagene %>%
 
 And then, we tried to simulate the network with the gene which has higher expression value. For this, we selected *ACTB* node as shown in [The auxiliary commands which can help to the users](https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html)
 
-```{r, warning=FALSE, eval=FALSE}
-TCGA_E9_A1N5_mirnagene %>% 
+```{r, warning=FALSE}
+simulation_res_ACTB <- TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
   update_how(node_name = "ACTB", how =1.87) %>% 
-  simulate(20) %>% 
+  simulate(20)
+
+simulation_res_ACTB%>%
   find_iteration(plot=TRUE)
 ```
 
@@ -185,12 +187,9 @@ TCGA_E9_A1N5_mirnagene %>%
 
 Following codes are shown entire gene fold changes after simulation ACTB gene to 1.87 fold:
 
-```{r, eval=FALSE}
-TCGA_E9_A1N5_mirnagene %>%
-  priming_graph(competing_count = gene_expression, 
-                miRNA_count = total_read) %>%
-  update_how("ACTB", 1.87) %>%
-  simulate(20)%>%
+```{r}
+
+simulation_res_ACTB%>%
   as_tibble()%>%
   mutate(FC= count_current/initial_count)%>%
   arrange(desc(FC))
@@ -209,7 +208,7 @@ TCGA_E9_A1N5_mirnagene %>%
 
 On the other hand, the perturbation eficiency of ATCB gene is higher, when this gene is regulated with 30-fold upregulation like in HIST1H3H.
 
-```{r, eval=FALSE}
+```{r}
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read)%>%
@@ -268,12 +267,14 @@ head(filtered_example)
 
 On the other hand, we chose the node *GAPDH* according to interaction count of the nodes. With the simulation, the graph was visualized after node *GAPDH* was increased to five fold.
 
-```{r, eval=FALSE}
+```{r}
 filtered_example %>%
   priming_graph(competing_count = competing_counts, 
                 miRNA_count = mirnaexpression_normal, 
                 aff_factor = Energy) %>%
-  update_how("GAPDH", 5) %>%
+  update_how("GAPDH", 5) -> simulation_GAPDH
+
+simulation_GAPDH%>%
   vis_graph(title = "Distribution of GAPDH gene node")
 ```
 
@@ -282,12 +283,9 @@ filtered_example %>%
 
 Let's visualize each step of simulation via `simulate_vis()` function.
 
-```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE, eval=FALSE}
-filtered_example %>%
-  priming_graph(competing_count = competing_counts, 
-                miRNA_count = mirnaexpression_normal, 
-                aff_factor = Energy) %>%
-  update_how("GAPDH", 5) %>%
+```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
+
+simulation_GAPDH%>%
   simulate_vis(title = "GAPDH over expression in the real dataset", 3)
 ```
 
@@ -307,18 +305,18 @@ Now, we can track changes in expression levels at every node for 3 cycles when G
 
 In real biological datasets, more complex interactions whether functional or non-functional could be observed. We have improved our approach with `fast` argument in `find_node_perturbation()` based on selection of elements that could be affected from perturbation. In this fucntion, `fast` argument specifies the percentage of the competing amount that can be affected within the initial competing amount and acts as a selection parameter. For instance, in huge_example data:
 
-```{r, eval=FALSE}
+```{r}
 
 huge_example%>%
   priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
   find_node_perturbation(how=5, cycle=3, fast = 3)%>%
-  select(name, perturbation_efficiency, perturbed_count)
+  select(name, perturbation_efficiency, perturbed_count) -> entire_perturbation
+  
 ```
 
-```{r, eval=FALSE}
-huge_example%>%
-  priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
-  find_node_perturbation(how=5, cycle=3, fast = 3)%>%
+```{r}
+
+entire_perturbation%>%
   filter(!is.na(perturbation_efficiency), !is.na(perturbed_count))%>%
   select(name, perturbation_efficiency, perturbed_count)
 ```

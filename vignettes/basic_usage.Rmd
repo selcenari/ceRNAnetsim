@@ -59,7 +59,7 @@ BiocManager::install("ceRNAnetsim")
 
 Below is the minimal data that can be used with ceRNAnetsim.
 
-```{r echo=FALSE}
+```{r, echo=TRUE}
 data("minsamp")
 minsamp %>% 
   select(1:4)
@@ -74,7 +74,7 @@ The table is actually constructed by merging three different tables:
 
 So, the `basic_data` table is constructed by merging following tables:
 
-```{r, message= FALSE, warning=FALSE, echo=FALSE}
+```{r, message= FALSE, warning=FALSE, echo=TRUE}
 data("minsamp")
 minsamp %>% 
   select(competing, Competing_expression) %>% 
@@ -85,7 +85,7 @@ minsamp %>%
 gene_expression
 ```
 
-```{r, message= FALSE, warning=FALSE, echo=FALSE}
+```{r, message= FALSE, warning=FALSE, echo=TRUE}
 minsamp %>% 
   select(miRNA, miRNA_expression) %>% 
   distinct() -> mirna_expression
@@ -97,7 +97,7 @@ mirna_expression
 
 Third table should contain miRNA:gene interactions per row. The `ceRNAnetsim` will assume first column contains competing RNA names and second column to be miRNA names. If the order is different the user should indicate column names accordingly. 
 
-```{r, message= FALSE, warning=FALSE, echo=FALSE}
+```{r, message= FALSE, warning=FALSE, echo=TRUE}
 minsamp %>% 
   select(competing, miRNA) -> interaction_simple
 ```
