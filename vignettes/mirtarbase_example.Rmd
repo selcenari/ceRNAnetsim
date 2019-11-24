@@ -130,7 +130,7 @@ TCGA_E9_A1N5_mirnagene%>%
 
 The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with *HIST1H3H* node.
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
 
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
@@ -143,8 +143,6 @@ simulation_res_HIST%>%
 
 ```
 
-![Perturbation of HIST1H3H gene on each iteration](gifs/HIST13H_iter.png#center)
-
 The graph was shown that the change in expression level of HIST1H3H results in weak perturbation efficiency, despite 30-fold change. The code shown below can be used for calculation of fold changes after simulation HIST1H3H gene to 30 fold:
 
 ```{r}
@@ -155,24 +153,9 @@ simulation_res_HIST%>%
   arrange(desc(FC))
 ```
 
-Also, perturbation calculation (specifies efficiency of selected node) of HIST1H3H gene
-
-```{r}
-
-TCGA_E9_A1N5_mirnagene %>% 
-  priming_graph(competing_count = gene_expression, 
-                miRNA_count = total_read)%>%
-  calc_perturbation(node_name= "HIST1H3H", cycle=20, how= 30,limit = 0.1)
-
-```
-
-|*perturbation_efficiency*|*perturbed_count*|
-|-------------------|-----------------|
-|4.930245e-06| 0 |
-
 And then, we tried to simulate the network with the gene which has higher expression value. For this, we selected *ACTB* node as shown in [The auxiliary commands which can help to the users](https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html)
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
 simulation_res_ACTB <- TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
@@ -182,8 +165,6 @@ simulation_res_ACTB <- TCGA_E9_A1N5_mirnagene %>%
 simulation_res_ACTB%>%
   find_iteration(plot=TRUE)
 ```
-
-![Perturbation of ACTB gene on each iteration](gifs/ACTB_iter.png#center)
 
 Following codes are shown entire gene fold changes after simulation ACTB gene to 1.87 fold:
 
@@ -267,7 +248,7 @@ head(filtered_example)
 
 On the other hand, we chose the node *GAPDH* according to interaction count of the nodes. With the simulation, the graph was visualized after node *GAPDH* was increased to five fold.
 
-```{r}
+```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
 filtered_example %>%
   priming_graph(competing_count = competing_counts, 
                 miRNA_count = mirnaexpression_normal, 
@@ -278,12 +259,9 @@ simulation_GAPDH%>%
   vis_graph(title = "Distribution of GAPDH gene node")
 ```
 
-
-![Distribution of GAPDH gene node](gifs/GAPDH_dist.png#center)
-
 Let's visualize each step of simulation via `simulate_vis()` function.
 
-```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
+```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE, fig.show='hide'}
 
 simulation_GAPDH%>%
   simulate_vis(title = "GAPDH over expression in the real dataset", 3)
@@ -309,7 +287,7 @@ In real biological datasets, more complex interactions whether functional or non
 
 huge_example%>%
   priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
-  find_node_perturbation(how=5, cycle=3, fast = 3)%>%
+  find_node_perturbation(how=5, cycle=3, fast = 10)%>%
   select(name, perturbation_efficiency, perturbed_count) -> entire_perturbation
   
 ```
