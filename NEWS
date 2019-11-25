@@ -1,7 +1,10 @@
  Changes in version 0.99.0 (2019-10-07)
- + Submitted to Bioconductor
+ --------------------------------------------
+
+ * Submitted to Bioconductor
 
 
  Changes in version 0.99.16 (2019-11-20)
- + Fixed documentation fails
- + Re-arranged vignettes
+ --------------------------------------------
+ * Fixed documentation fails
+ * Re-arranged vignettes
