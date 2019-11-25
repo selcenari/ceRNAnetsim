@@ -176,29 +176,7 @@ simulation_res_ACTB%>%
   arrange(desc(FC))
 ```
 
-```{r, eval=FALSE}
-TCGA_E9_A1N5_mirnagene %>% 
-  priming_graph(competing_count = gene_expression, 
-                miRNA_count = total_read)%>%
-  calc_perturbation(node_name= "ACTB", cycle=10, how= 1.87,limit = 0.1)
-```
-
-|*perturbation_efficiency*|*perturbed_count*|
-|-------------------|-----------------|
-|0.015499| 827 |
-
-On the other hand, the perturbation eficiency of ATCB gene is higher, when this gene is regulated with 30-fold upregulation like in HIST1H3H.
-
-```{r, eval=FALSE}
-TCGA_E9_A1N5_mirnagene %>% 
-  priming_graph(competing_count = gene_expression, 
-                miRNA_count = total_read)%>%
-  calc_perturbation(node_name= "ACTB", cycle=10, how= 30,limit = 0.1)
-```
-
-|*perturbation_efficiency*|*perturbed_count*|
-|-------------------|-----------------|
-|0.209515| 3712 |
+Note: it can be useful that you look at [The auxiliary commands which can help to the users](https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html) for perturbation efficiency of ACTB gene by simulation with same conditions and different expression changes.
 
 ## 3.5. The sum of two conditions:
 
@@ -283,7 +261,7 @@ Now, we can track changes in expression levels at every node for 3 cycles when G
 
 In real biological datasets, more complex interactions whether functional or non-functional could be observed. We have improved our approach with `fast` argument in `find_node_perturbation()` based on selection of elements that could be affected from perturbation. In this fucntion, `fast` argument specifies the percentage of the competing amount that can be affected within the initial competing amount and acts as a selection parameter. For instance, in huge_example data:
 
-```{r}
+```{r, warning=FALSE}
 
 filtered_example%>%
   priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
@@ -292,7 +270,7 @@ filtered_example%>%
   
 ```
 
-```{r}
+```{r, warning=FALSE}
 
 entire_perturbation%>%
   filter(!is.na(perturbation_efficiency), !is.na(perturbed_count))%>%

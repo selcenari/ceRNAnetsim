@@ -43,7 +43,7 @@ data("mirtarbasegene")
 data("TCGA_E9_A1N5_mirnanormal")
 ```
 
-## Selection of HIST1H3H gene at vignette [How does the system behave in mirtarbase dataset without interaction factors?](https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html)
+## 3.1. Selection of HIST1H3H gene at vignette [How does the system behave in mirtarbase dataset without interaction factors?](https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html)
 
 ```{r}
 TCGA_E9_A1N5_mirnanormal %>%
@@ -72,7 +72,7 @@ TCGA_E9_A1N5_tumor%>%
 
 ```
 
-## Selection of ACTB gene at vignette [How does the system behave in mirtarbase dataset without interaction factors?](https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html)
+## 3.2. Selection of ACTB gene at vignette [How does the system behave in mirtarbase dataset without interaction factors?](https://selcenari.github.io/ceRNAnetsim/articles/mirtarbase_example.html)
 
 ```{r}
 TCGA_E9_A1N5_tumor%>%
@@ -92,7 +92,49 @@ TCGA_E9_A1N5_tumor%>%
 
 ```
 
-# 4. Session Info
+## 4. Determination of ACTB gene perturbation efficiency with different expression level changes
+
+Firstly, clean dataset as individual gene has one expression value. And then filter genes which have expression values greater than 10.
+
+```{r}
+TCGA_E9_A1N5_mirnagene %>%    
+  group_by(Target) %>%        
+  mutate(gene_expression= max(gene_expression)) %>%
+  distinct() %>%
+  ungroup() -> TCGA_E9_A1N5_mirnagene
+
+TCGA_E9_A1N5_mirnagene%>%
+  filter(gene_expression > 10)->TCGA_E9_A1N5_mirnagene
+
+```
+
+We can determine perturbation efficiency of an element on entire network as following:
+
+```{r, warning=FALSE}
+TCGA_E9_A1N5_mirnagene %>% 
+  priming_graph(competing_count = gene_expression, 
+                miRNA_count = total_read)%>%
+  calc_perturbation(node_name= "ACTB", cycle=10, how= 1.87,limit = 0.1)
+```
+
+|*perturbation_efficiency*|*perturbed_count*|
+|-------------------|-----------------|
+|0.01548667| 826 |
+
+On the other hand, the perturbation eficiency of ATCB gene is higher, when this gene is regulated with 30-fold upregulation like in HIST1H3H.
+
+```{r, warning=FALSE}
+TCGA_E9_A1N5_mirnagene %>% 
+  priming_graph(competing_count = gene_expression, 
+                miRNA_count = total_read)%>%
+  calc_perturbation(node_name= "ACTB", cycle=10, how= 30,limit = 0.1)
+```
+
+|*perturbation_efficiency*|*perturbed_count*|
+|-------------------|-----------------|
+|0.20942 | 3712 |
+
+# 5. Session Info
 ```{r sessioninfo}
 sessionInfo()
 ```

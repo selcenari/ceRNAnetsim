@@ -210,7 +210,7 @@ The `find_node_perturbation()` function calculates the perturbation efficiency a
 
 In the example below, each node is increased 2-fold and tested for perturbation efficiency for 4 cycles with threshold of 0.1
 
-```{r}
+```{r, warning=FALSE}
 midsamp %>%
   priming_graph(competing_count = Gene_expression,
                 miRNA_count = miRNA_expression,
