@@ -285,7 +285,7 @@ In real biological datasets, more complex interactions whether functional or non
 
 ```{r}
 
-huge_example%>%
+filtered_example%>%
   priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
   find_node_perturbation(how=5, cycle=3, fast = 10)%>%
   select(name, perturbation_efficiency, perturbed_count) -> entire_perturbation
