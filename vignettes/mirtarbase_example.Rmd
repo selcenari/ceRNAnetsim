@@ -136,7 +136,7 @@ TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
   update_how(node_name = "HIST1H3H", how =30) %>% 
-  simulate(20) ->simulation_res_HIST
+  simulate(15) ->simulation_res_HIST
 
 simulation_res_HIST%>%
   find_iteration(plot=TRUE)
@@ -160,7 +160,7 @@ simulation_res_ACTB <- TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
   update_how(node_name = "ACTB", how =1.87) %>% 
-  simulate(20)
+  simulate(15)
 
 simulation_res_ACTB%>%
   find_iteration(plot=TRUE)
@@ -180,12 +180,12 @@ simulation_res_ACTB%>%
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read)%>%
-  calc_perturbation(node_name= "ACTB", cycle=20, how= 1.87,limit = 0.1)
+  calc_perturbation(node_name= "ACTB", cycle=15, how= 1.87,limit = 0.1)
 ```
 
 |*perturbation_efficiency*|*perturbed_count*|
 |-------------------|-----------------|
-|0.01548928| 826 |
+|0.015499| 827 |
 
 On the other hand, the perturbation eficiency of ATCB gene is higher, when this gene is regulated with 30-fold upregulation like in HIST1H3H.
 
@@ -193,12 +193,12 @@ On the other hand, the perturbation eficiency of ATCB gene is higher, when this 
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read)%>%
-  calc_perturbation(node_name= "ACTB", cycle=20, how= 30,limit = 0.1)
+  calc_perturbation(node_name= "ACTB", cycle=15, how= 30,limit = 0.1)
 ```
 
 |*perturbation_efficiency*|*perturbed_count*|
 |-------------------|-----------------|
-|0.2094567| 3712 |
+|0.209515| 3712 |
 
 ## 3.5. The sum of two conditions:
 
