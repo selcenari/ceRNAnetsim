@@ -24,7 +24,7 @@ library(ceRNAnetsim)
 
 # 1. Introduction
 
-In the other package vignettes, usage of ceRNAnetsim is explained in details. But in this vignette, some of commands which facitate to use of other vignette.
+In the other package vignettes, usage of ceRNAnetsim is explained in details. But in this vignette, some of commands which facitate to use of other vignettes.
 
 # 2. Installation
 
@@ -110,16 +110,12 @@ TCGA_E9_A1N5_mirnagene%>%
 
 We can determine perturbation efficiency of an element on entire network as following:
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, eval=FALSE}
 TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read)%>%
   calc_perturbation(node_name= "ACTB", cycle=10, how= 1.87,limit = 0.1)
 ```
-
-|*perturbation_efficiency*|*perturbed_count*|
-|-------------------|-----------------|
-|0.01548667| 826 |
 
 On the other hand, the perturbation eficiency of ATCB gene is higher, when this gene is regulated with 30-fold upregulation like in HIST1H3H.
 
