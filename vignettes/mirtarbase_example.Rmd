@@ -90,12 +90,12 @@ Here's the summary of size of each dataset
 All of these datasets are integrated using the code below resulting in  miRNA:target dataset that contains miRNA and gene expression values.
 
 ```{r}
-TCGA_E9_A1N5_mirnanormal %>%
+TCGA_E9_A1N5_mirnagene <- TCGA_E9_A1N5_mirnanormal %>%
   inner_join(mirtarbasegene, by= "miRNA") %>%
   inner_join(TCGA_E9_A1N5_normal, 
              by = c("Target"= "external_gene_name")) %>%
   select(Target, miRNA, total_read, gene_expression) %>%
-  distinct() -> TCGA_E9_A1N5_mirnagene
+  distinct() 
 ```
 
 Note: Some of genes have expression values more than one because some of tissue samples were sequenced in two medium separately. So, we select maximum expression values of that genes at following:
@@ -124,19 +124,19 @@ When we compared the two gene expression dataset of TCGA-E9A1N5 patient, and sel
 Optionally, you can filter the low expressed gene nodes because they are not effective elements.
 
 ```{r}
-TCGA_E9_A1N5_mirnagene%>%
-  filter(gene_expression > 10)->TCGA_E9_A1N5_mirnagene
+TCGA_E9_A1N5_mirnagene <- TCGA_E9_A1N5_mirnagene%>%
+  filter(gene_expression > 10)
 ```
 
-The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with *HIST1H3H* node.
+The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with *HIST1H3H* node. As an example, `simulation()` function was used with `cycle = 5` argument, this argument can be arranged according to network. Note that it can be appropriate that using greater number of `cycle` for comprehensive network objects.
 
 ```{r, warning=FALSE, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
 
-TCGA_E9_A1N5_mirnagene %>% 
+simulation_res_HIST <- TCGA_E9_A1N5_mirnagene %>% 
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
   update_how(node_name = "HIST1H3H", how =30) %>% 
-  simulate(5) ->simulation_res_HIST
+  simulate(5)
 
 simulation_res_HIST%>%
   find_iteration(plot=TRUE)
@@ -216,10 +216,10 @@ The node that initiates simulation can be determined according your interest or 
 The dataset, which is a data frame, can be manipulated with [tidyverse packages](https://www.tidyverse.org/packages/). As an example, competing RNAs targeted by less than 5 miRNAs are eliminated to make the network manageable size.
 
 ```{r}
-huge_example %>%
+filtered_example <- huge_example %>%
   add_count(competing) %>%
   filter(n > 5) %>%
-  select(-n) -> filtered_example
+  select(-n)
 
 head(filtered_example)
 ```
@@ -227,11 +227,11 @@ head(filtered_example)
 On the other hand, we chose the node *GAPDH* according to interaction count of the nodes. With the simulation, the graph was visualized after node *GAPDH* was increased to five fold.
 
 ```{r, fig.height=5, fig.width=6, fig.align='center', warning=FALSE}
-filtered_example %>%
+simulation_GAPDH <- filtered_example %>%
   priming_graph(competing_count = competing_counts, 
                 miRNA_count = mirnaexpression_normal, 
                 aff_factor = Energy) %>%
-  update_how("GAPDH", 5) -> simulation_GAPDH
+  update_how("GAPDH", 5) 
 
 simulation_GAPDH%>%
   vis_graph(title = "Distribution of GAPDH gene node")
@@ -263,10 +263,10 @@ In real biological datasets, more complex interactions whether functional or non
 
 ```{r, warning=FALSE}
 
-filtered_example%>%
+entire_perturbation <- filtered_example%>%
   priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
   find_node_perturbation(how=5, cycle=3, fast = 15)%>%
-  select(name, perturbation_efficiency, perturbed_count) -> entire_perturbation
+  select(name, perturbation_efficiency, perturbed_count)
   
 ```
 
