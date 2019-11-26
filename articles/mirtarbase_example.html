@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ceRNAnetsim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.21</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.22</span>
       </span>
     </div>
 
@@ -291,7 +291,7 @@
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> gene_expression, </a>
 <a class="sourceLine" id="cb12-4" data-line-number="4">                <span class="dt">miRNA_count =</span> total_read) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="dt">node_name =</span> <span class="st">"HIST1H3H"</span>, <span class="dt">how =</span><span class="dv">30</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">10</span>) -&gt;simulation_res_HIST</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">8</span>) -&gt;simulation_res_HIST</a>
 <a class="sourceLine" id="cb12-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb12-8" data-line-number="8">simulation_res_HIST<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/find_iteration.html">find_iteration</a></span>(<span class="dt">plot=</span><span class="ot">TRUE</span>)</a></code></pre></div>
@@ -321,7 +321,7 @@
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> gene_expression, </a>
 <a class="sourceLine" id="cb14-3" data-line-number="3">                <span class="dt">miRNA_count =</span> total_read) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb14-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="dt">node_name =</span> <span class="st">"ACTB"</span>, <span class="dt">how =</span><span class="fl">1.87</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">8</span>)</a>
 <a class="sourceLine" id="cb14-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb14-7" data-line-number="7">simulation_res_ACTB<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb14-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/find_iteration.html">find_iteration</a></span>(<span class="dt">plot=</span><span class="ot">TRUE</span>)</a></code></pre></div>
@@ -514,7 +514,7 @@
 <a class="sourceLine" id="cb22-19" data-line-number="19"><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></a>
 <a class="sourceLine" id="cb22-20" data-line-number="20"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb22-21" data-line-number="21"><span class="co">#&gt; other attached packages:</span></a>
-<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; [1] ceRNAnetsim_0.99.21 tidygraph_1.1.2     dplyr_0.8.3        </span></a>
+<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; [1] ceRNAnetsim_0.99.22 tidygraph_1.1.2     dplyr_0.8.3        </span></a>
 <a class="sourceLine" id="cb22-23" data-line-number="23"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb22-24" data-line-number="24"><span class="co">#&gt; loaded via a namespace (and not attached):</span></a>
 <a class="sourceLine" id="cb22-25" data-line-number="25"><span class="co">#&gt;  [1] tidyselect_0.2.5   xfun_0.11          purrr_0.3.3        listenv_0.7.0     </span></a>
