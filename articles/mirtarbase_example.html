@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ceRNAnetsim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.22</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.23</span>
       </span>
     </div>
 
@@ -291,7 +291,7 @@
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> gene_expression, </a>
 <a class="sourceLine" id="cb12-4" data-line-number="4">                <span class="dt">miRNA_count =</span> total_read) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="dt">node_name =</span> <span class="st">"HIST1H3H"</span>, <span class="dt">how =</span><span class="dv">30</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">8</span>) -&gt;simulation_res_HIST</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">5</span>) -&gt;simulation_res_HIST</a>
 <a class="sourceLine" id="cb12-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb12-8" data-line-number="8">simulation_res_HIST<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/find_iteration.html">find_iteration</a></span>(<span class="dt">plot=</span><span class="ot">TRUE</span>)</a></code></pre></div>
@@ -305,23 +305,23 @@
 <a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; # A tibble: 13,432 x 8</span></a>
 <a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;    name  type  node_id initial_count count_pre count_current changes_variable</span></a>
 <a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;           </span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  1 HIST… Comp…    9705            27     808.          808.  Up              </span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt;  1 HIST… Comp…    9705            27     808.          808.  Down            </span></a>
 <a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt;  2 KLHL… Comp…     618           579     579.          579.  Up              </span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  3 YWHAZ Comp…     393         15845   15845.        15845.  Down            </span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;  3 YWHAZ Comp…     393         15845   15845.        15845.  Up              </span></a>
 <a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;  4 SOCS1 Comp…     433            27      27.0          27.0 Up              </span></a>
-<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  5 NNT   Comp…    3404          1909    1909.         1909.  Up              </span></a>
-<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt;  6 PPIP… Comp…    7084          2342    2342.         2342.  Up              </span></a>
-<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="co">#&gt;  7 LYVE1 Comp…   11198           916     916.          916.  Up              </span></a>
-<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="co">#&gt;  8 IL10  Comp…    1639            13      13.0          13.0 Up              </span></a>
-<a class="sourceLine" id="cb13-17" data-line-number="17"><span class="co">#&gt;  9 L1CAM Comp…    2651            60      60.0          60.0 Down            </span></a>
-<a class="sourceLine" id="cb13-18" data-line-number="18"><span class="co">#&gt; 10 IFIT… Comp…    6030          1550    1550.         1550.  Up              </span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;  5 NNT   Comp…    3404          1909    1909.         1909.  Down            </span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt;  6 PPIP… Comp…    7084          2342    2342.         2342.  Down            </span></a>
+<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="co">#&gt;  7 LYVE1 Comp…   11198           916     916.          916.  Down            </span></a>
+<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="co">#&gt;  8 IL10  Comp…    1639            13      13.0          13.0 Down            </span></a>
+<a class="sourceLine" id="cb13-17" data-line-number="17"><span class="co">#&gt;  9 L1CAM Comp…    2651            60      60.0          60.0 Up              </span></a>
+<a class="sourceLine" id="cb13-18" data-line-number="18"><span class="co">#&gt; 10 IFIT… Comp…    6030          1550    1550.         1550.  Down            </span></a>
 <a class="sourceLine" id="cb13-19" data-line-number="19"><span class="co">#&gt; # … with 13,422 more rows, and 1 more variable: FC &lt;dbl&gt;</span></a></code></pre></div>
 <p>And then, we tried to simulate the network with the gene which has higher expression value. For this, we selected <em>ACTB</em> node as shown in <a href="https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html">The auxiliary commands which can help to the users</a></p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">simulation_res_ACTB &lt;-<span class="st"> </span>TCGA_E9_A1N5_mirnagene <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> gene_expression, </a>
 <a class="sourceLine" id="cb14-3" data-line-number="3">                <span class="dt">miRNA_count =</span> total_read) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb14-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="dt">node_name =</span> <span class="st">"ACTB"</span>, <span class="dt">how =</span><span class="fl">1.87</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">8</span>)</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb14-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb14-7" data-line-number="7">simulation_res_ACTB<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb14-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/find_iteration.html">find_iteration</a></span>(<span class="dt">plot=</span><span class="ot">TRUE</span>)</a></code></pre></div>
@@ -335,16 +335,16 @@
 <a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt; # A tibble: 13,432 x 8</span></a>
 <a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt;    name  type  node_id initial_count count_pre count_current changes_variable</span></a>
 <a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;           </span></a>
-<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt;  1 ACTB  Comp…      84        101917  183710.       183710.  Up              </span></a>
-<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt;  2 ADIP… Comp…     319          3015    3026.         3026.  Up              </span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt;  1 ACTB  Comp…      84        101917  183711.       183710.  Down            </span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt;  2 ADIP… Comp…     319          3015    3026.         3026.  Down            </span></a>
 <a class="sourceLine" id="cb15-11" data-line-number="11"><span class="co">#&gt;  3 RRM2  Comp…      67          1479    1484.         1484.  Up              </span></a>
-<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co">#&gt;  4 FAM1… Comp…     385           569     571.          571.  Up              </span></a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="co">#&gt;  4 FAM1… Comp…     385           569     571.          571.  Down            </span></a>
 <a class="sourceLine" id="cb15-13" data-line-number="13"><span class="co">#&gt;  5 YOD1  Comp…     472           470     472.          472.  Up              </span></a>
 <a class="sourceLine" id="cb15-14" data-line-number="14"><span class="co">#&gt;  6 ZNF2… Comp…     302          1395    1400.         1400.  Up              </span></a>
-<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="co">#&gt;  7 DNAJ… Comp…     557            60      60.2          60.2 Up              </span></a>
+<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="co">#&gt;  7 DNAJ… Comp…     557            60      60.2          60.2 Down            </span></a>
 <a class="sourceLine" id="cb15-16" data-line-number="16"><span class="co">#&gt;  8 FXN   Comp…     374           382     383.          383.  Up              </span></a>
-<a class="sourceLine" id="cb15-17" data-line-number="17"><span class="co">#&gt;  9 NKIR… Comp…       4          1519    1524.         1524.  Up              </span></a>
-<a class="sourceLine" id="cb15-18" data-line-number="18"><span class="co">#&gt; 10 NRAS  Comp…       7          2311    2318.         2318.  Up              </span></a>
+<a class="sourceLine" id="cb15-17" data-line-number="17"><span class="co">#&gt;  9 NKIR… Comp…       4          1519    1524.         1524.  Down            </span></a>
+<a class="sourceLine" id="cb15-18" data-line-number="18"><span class="co">#&gt; 10 CDKN… Comp…      42          1172    1173.         1176.  Up              </span></a>
 <a class="sourceLine" id="cb15-19" data-line-number="19"><span class="co">#&gt; # … with 13,422 more rows, and 1 more variable: FC &lt;dbl&gt;</span></a></code></pre></div>
 <p>Note: it can be useful that you look at <a href="https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html">The auxiliary commands which can help to the users</a> for perturbation efficiency of ACTB gene by simulation with same conditions and different expression changes.</p>
 </div>
@@ -514,7 +514,7 @@
 <a class="sourceLine" id="cb22-19" data-line-number="19"><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></a>
 <a class="sourceLine" id="cb22-20" data-line-number="20"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb22-21" data-line-number="21"><span class="co">#&gt; other attached packages:</span></a>
-<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; [1] ceRNAnetsim_0.99.22 tidygraph_1.1.2     dplyr_0.8.3        </span></a>
+<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; [1] ceRNAnetsim_0.99.23 tidygraph_1.1.2     dplyr_0.8.3        </span></a>
 <a class="sourceLine" id="cb22-23" data-line-number="23"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb22-24" data-line-number="24"><span class="co">#&gt; loaded via a namespace (and not attached):</span></a>
 <a class="sourceLine" id="cb22-25" data-line-number="25"><span class="co">#&gt;  [1] tidyselect_0.2.5   xfun_0.11          purrr_0.3.3        listenv_0.7.0     </span></a>
