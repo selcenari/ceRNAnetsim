@@ -5,8 +5,7 @@
 \title{Calculates average expression changes of all nodes except
 trigger and finds the perturbed node count for a given node.}
 \usage{
-calc_perturbation(input_graph, node_name, how = 1, cycle = 1,
-  limit = 0)
+calc_perturbation(input_graph, node_name, how = 1, cycle = 1, limit = 0)
 }
 \arguments{
 \item{input_graph}{the graph object that was processed with

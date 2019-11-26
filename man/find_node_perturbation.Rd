@@ -6,8 +6,7 @@
 nodes except trigger and finds the perturbed node count for
 all (or specified) nodes in system.}
 \usage{
-find_node_perturbation(input_graph, how = 2, cycle = 1, limit = 0,
-  fast = 0)
+find_node_perturbation(input_graph, how = 2, cycle = 1, limit = 0, fast = 0)
 }
 \arguments{
 \item{input_graph}{The graph object that was processed with priming_graph function.}

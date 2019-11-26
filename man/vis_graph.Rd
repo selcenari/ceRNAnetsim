@@ -4,9 +4,15 @@
 \alias{vis_graph}
 \title{Provides visualisation of the graph.}
 \usage{
-vis_graph(input_graph, Competing_color = "green",
-  mirna_color = "orange", Upregulation = "red",
-  Downregulation = "blue", title = "GRAPH", layout = "kk")
+vis_graph(
+  input_graph,
+  Competing_color = "green",
+  mirna_color = "orange",
+  Upregulation = "red",
+  Downregulation = "blue",
+  title = "GRAPH",
+  layout = "kk"
+)
 }
 \arguments{
 \item{input_graph}{The graph object.}

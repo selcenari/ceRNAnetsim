@@ -9,8 +9,13 @@ variable as competing and the second as miRNA. If user
 defines interaction factors as affinity or degradation,
 the factors are taken into account.}
 \usage{
-priming_graph(df, competing_count, miRNA_count, aff_factor = dummy,
-  deg_factor = dummy)
+priming_graph(
+  df,
+  competing_count,
+  miRNA_count,
+  aff_factor = dummy,
+  deg_factor = dummy
+)
 }
 \arguments{
 \item{df}{A data frame that includes the miRNA and competing targets.}

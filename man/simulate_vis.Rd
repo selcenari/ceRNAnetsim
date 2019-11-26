@@ -4,10 +4,18 @@
 \alias{simulate_vis}
 \title{Provides visualisation of the graph in addition to simulate function.}
 \usage{
-simulate_vis(input_graph, cycle = 1, threshold = 0, save = FALSE,
-  Competing_color = "green", mirna_color = "orange",
-  Upregulation = "red", Downregulation = "blue", title = "GRAPH",
-  layout = "kk")
+simulate_vis(
+  input_graph,
+  cycle = 1,
+  threshold = 0,
+  save = FALSE,
+  Competing_color = "green",
+  mirna_color = "orange",
+  Upregulation = "red",
+  Downregulation = "blue",
+  title = "GRAPH",
+  layout = "kk"
+)
 }
 \arguments{
 \item{input_graph}{The graph object that processed in previous steps.}
