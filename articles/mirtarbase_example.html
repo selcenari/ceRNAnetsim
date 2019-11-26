@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ceRNAnetsim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.23</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.24</span>
       </span>
     </div>
 
@@ -249,12 +249,12 @@
 <h2 class="hasAnchor">
 <a href="#integrating-and-analysing-data" class="anchor"></a>3.4. Integrating and analysing data</h2>
 <p>All of these datasets are integrated using the code below resulting in miRNA:target dataset that contains miRNA and gene expression values.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">TCGA_E9_A1N5_mirnanormal <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">TCGA_E9_A1N5_mirnagene &lt;-<span class="st"> </span>TCGA_E9_A1N5_mirnanormal <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw">inner_join</span>(mirtarbasegene, <span class="dt">by=</span> <span class="st">"miRNA"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw">inner_join</span>(TCGA_E9_A1N5_normal, </a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">             <span class="dt">by =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Target"</span>=<span class="st"> "external_gene_name"</span>)) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="st">  </span><span class="kw">select</span>(Target, miRNA, total_read, gene_expression) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="st">  </span><span class="kw">distinct</span>() -&gt;<span class="st"> </span>TCGA_E9_A1N5_mirnagene</a></code></pre></div>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="st">  </span><span class="kw">distinct</span>() </a></code></pre></div>
 <p>Note: Some of genes have expression values more than one because some of tissue samples were sequenced in two medium separately. So, we select maximum expression values of that genes at following:</p>
 <pre><code>#&gt; # A tibble: 26 x 3
 #&gt; # Groups:   Target, miRNA [26]
@@ -283,15 +283,15 @@
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; 6 NF2     hsa-let-7a-5p      67599            1755</span></a></code></pre></div>
 <p>When we compared the two gene expression dataset of TCGA-E9A1N5 patient, and selected a gene which has 30-fold increased expression, (gene name: HIST1H3H), this gene node will be used in the example. Note that the selected node must not be isolated one. If the an isolated node is selected the change in expression will not propagate in network. (You can see commands for node selection in the vignette <a href="https://selcenari.github.io/ceRNAnetsim/articles/auxiliary_commands.html">The auxiliary commands which can help to the users</a>)</p>
 <p>Optionally, you can filter the low expressed gene nodes because they are not effective elements.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">TCGA_E9_A1N5_mirnagene<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(gene_expression <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>)-&gt;TCGA_E9_A1N5_mirnagene</a></code></pre></div>
-<p>The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with <em>HIST1H3H</em> node.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">TCGA_E9_A1N5_mirnagene &lt;-<span class="st"> </span>TCGA_E9_A1N5_mirnagene<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(gene_expression <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>)</a></code></pre></div>
+<p>The analysis is performed based on amounts of miRNAs and targets as seen. Firstly, we tried to find optimal iteration for the network when simulation start with <em>HIST1H3H</em> node. As an example, <code>simulation()</code> function was used with <code>cycle = 5</code> argument, this argument can be arranged according to network. Note that it can be appropriate that using greater number of <code>cycle</code> for comprehensive network objects.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">TCGA_E9_A1N5_mirnagene <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">simulation_res_HIST &lt;-<span class="st"> </span>TCGA_E9_A1N5_mirnagene <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> gene_expression, </a>
 <a class="sourceLine" id="cb12-4" data-line-number="4">                <span class="dt">miRNA_count =</span> total_read) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="dt">node_name =</span> <span class="st">"HIST1H3H"</span>, <span class="dt">how =</span><span class="dv">30</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">5</span>) -&gt;simulation_res_HIST</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/simulate.html">simulate</a></span>(<span class="dv">5</span>)</a>
 <a class="sourceLine" id="cb12-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb12-8" data-line-number="8">simulation_res_HIST<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/find_iteration.html">find_iteration</a></span>(<span class="dt">plot=</span><span class="ot">TRUE</span>)</a></code></pre></div>
@@ -392,10 +392,10 @@
 <a href="#select-a-node-as-trigger" class="anchor"></a>4.2. Select a node as trigger</h2>
 <p>The node that initiates simulation can be determined according your interest or research.</p>
 <p>The dataset, which is a data frame, can be manipulated with <a href="https://www.tidyverse.org/packages/">tidyverse packages</a>. As an example, competing RNAs targeted by less than 5 miRNAs are eliminated to make the network manageable size.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">huge_example <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">filtered_example &lt;-<span class="st"> </span>huge_example <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">add_count</span>(competing) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>n) -&gt;<span class="st"> </span>filtered_example</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>n)</a>
 <a class="sourceLine" id="cb17-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb17-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(filtered_example)</a>
 <a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
@@ -409,11 +409,11 @@
 <a class="sourceLine" id="cb17-15" data-line-number="15"><span class="co">#&gt; 6 MAD1L1    hsa-…             1909           5113.   -30.6          0.01</span></a>
 <a class="sourceLine" id="cb17-16" data-line-number="16"><span class="co">#&gt; # … with 1 more variable: seed_type_effect &lt;dbl&gt;</span></a></code></pre></div>
 <p>On the other hand, we chose the node <em>GAPDH</em> according to interaction count of the nodes. With the simulation, the graph was visualized after node <em>GAPDH</em> was increased to five fold.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">filtered_example <span class="op">%&gt;%</span></a>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">simulation_GAPDH &lt;-<span class="st"> </span>filtered_example <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> competing_counts, </a>
 <a class="sourceLine" id="cb18-3" data-line-number="3">                <span class="dt">miRNA_count =</span> mirnaexpression_normal, </a>
 <a class="sourceLine" id="cb18-4" data-line-number="4">                <span class="dt">aff_factor =</span> Energy) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="st">"GAPDH"</span>, <span class="dv">5</span>) -&gt;<span class="st"> </span>simulation_GAPDH</a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/update_how.html">update_how</a></span>(<span class="st">"GAPDH"</span>, <span class="dv">5</span>) </a>
 <a class="sourceLine" id="cb18-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb18-7" data-line-number="7">simulation_GAPDH<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb18-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/vis_graph.html">vis_graph</a></span>(<span class="dt">title =</span> <span class="st">"Distribution of GAPDH gene node"</span>)</a></code></pre></div>
@@ -466,10 +466,10 @@
 <p><code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> runs <code>calc_perturb</code> on all nodes in the network in parallel with help of the <code>future</code> and <code>furrr</code> packages. In this vignette, the function is demonstrated on the <code>midsamp</code> data. This dataset is not comparable to actual biological miRNA:target gene datasets in size and complexity. Although <code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> runs in parallel it might take long time to run in real huge biological datasets.</p>
 <p>In real biological datasets, more complex interactions whether functional or non-functional could be observed. We have improved our approach with <code>fast</code> argument in <code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> based on selection of elements that could be affected from perturbation. In this fucntion, <code>fast</code> argument specifies the percentage of the competing amount that can be affected within the initial competing amount and acts as a selection parameter. For instance, in filtered example data:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">filtered_example<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">entire_perturbation &lt;-<span class="st"> </span>filtered_example<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb20-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> competing_counts, <span class="dt">miRNA_count =</span> mirnaexpression_normal)<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb20-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/find_node_perturbation.html">find_node_perturbation</a></span>(<span class="dt">how=</span><span class="dv">5</span>, <span class="dt">cycle=</span><span class="dv">3</span>, <span class="dt">fast =</span> <span class="dv">15</span>)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="st">  </span><span class="kw">select</span>(name, perturbation_efficiency, perturbed_count) -&gt;<span class="st"> </span>entire_perturbation</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="st">  </span><span class="kw">select</span>(name, perturbation_efficiency, perturbed_count)</a>
 <a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">#&gt; Subsetting by edges</span></a></code></pre></div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"></a>
 <a class="sourceLine" id="cb21-2" data-line-number="2">entire_perturbation<span class="op">%&gt;%</span></a>
@@ -494,7 +494,7 @@
 <h1 class="hasAnchor">
 <a href="#session-info" class="anchor"></a>6. Session Info</h1>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span>()</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co">#&gt; R Under development (unstable) (2019-11-25 r77460)</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co">#&gt; R Under development (unstable) (2019-11-26 r77462)</span></a>
 <a class="sourceLine" id="cb22-3" data-line-number="3"><span class="co">#&gt; Platform: x86_64-pc-linux-gnu (64-bit)</span></a>
 <a class="sourceLine" id="cb22-4" data-line-number="4"><span class="co">#&gt; Running under: Ubuntu 16.04.6 LTS</span></a>
 <a class="sourceLine" id="cb22-5" data-line-number="5"><span class="co">#&gt; </span></a>
@@ -514,7 +514,7 @@
 <a class="sourceLine" id="cb22-19" data-line-number="19"><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></a>
 <a class="sourceLine" id="cb22-20" data-line-number="20"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb22-21" data-line-number="21"><span class="co">#&gt; other attached packages:</span></a>
-<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; [1] ceRNAnetsim_0.99.23 tidygraph_1.1.2     dplyr_0.8.3        </span></a>
+<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; [1] ceRNAnetsim_0.99.24 tidygraph_1.1.2     dplyr_0.8.3        </span></a>
 <a class="sourceLine" id="cb22-23" data-line-number="23"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb22-24" data-line-number="24"><span class="co">#&gt; loaded via a namespace (and not attached):</span></a>
 <a class="sourceLine" id="cb22-25" data-line-number="25"><span class="co">#&gt;  [1] tidyselect_0.2.5   xfun_0.11          purrr_0.3.3        listenv_0.7.0     </span></a>
