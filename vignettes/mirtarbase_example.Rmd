@@ -259,13 +259,13 @@ Now, we can track changes in expression levels at every node for 3 cycles when G
 
 `find_node_perturbation()` runs `calc_perturb` on all nodes in the network in parallel with help of the `future` and `furrr` packages. In this vignette, the function is demonstrated on the `midsamp` data. This dataset is not comparable to actual biological miRNA:target gene datasets in size and complexity. Although `find_node_perturbation()` runs in parallel it might take long time to run in real huge biological datasets. 
 
-In real biological datasets, more complex interactions whether functional or non-functional could be observed. We have improved our approach with `fast` argument in `find_node_perturbation()` based on selection of elements that could be affected from perturbation. In this fucntion, `fast` argument specifies the percentage of the competing amount that can be affected within the initial competing amount and acts as a selection parameter. For instance, in huge_example data:
+In real biological datasets, more complex interactions whether functional or non-functional could be observed. We have improved our approach with `fast` argument in `find_node_perturbation()` based on selection of elements that could be affected from perturbation. In this fucntion, `fast` argument specifies the percentage of the competing amount that can be affected within the initial competing amount and acts as a selection parameter. For instance, in filtered example data:
 
 ```{r, warning=FALSE}
 
 filtered_example%>%
   priming_graph(competing_count = competing_counts, miRNA_count = mirnaexpression_normal)%>%
-  find_node_perturbation(how=5, cycle=3, fast = 10)%>%
+  find_node_perturbation(how=5, cycle=3, fast = 15)%>%
   select(name, perturbation_efficiency, perturbed_count) -> entire_perturbation
   
 ```
