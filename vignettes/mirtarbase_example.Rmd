@@ -136,7 +136,7 @@ TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
   update_how(node_name = "HIST1H3H", how =30) %>% 
-  simulate(8) ->simulation_res_HIST
+  simulate(5) ->simulation_res_HIST
 
 simulation_res_HIST%>%
   find_iteration(plot=TRUE)
@@ -160,7 +160,7 @@ simulation_res_ACTB <- TCGA_E9_A1N5_mirnagene %>%
   priming_graph(competing_count = gene_expression, 
                 miRNA_count = total_read) %>% 
   update_how(node_name = "ACTB", how =1.87) %>% 
-  simulate(8)
+  simulate(5)
 
 simulation_res_ACTB%>%
   find_iteration(plot=TRUE)
