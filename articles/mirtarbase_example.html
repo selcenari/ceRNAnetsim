@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">ceRNAnetsim</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.19</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.21</span>
       </span>
     </div>
 
@@ -464,31 +464,31 @@
 <h1 class="hasAnchor">
 <a href="#finding-perturbation-efficiency-on-an-experimental-dataset" class="anchor"></a>5. Finding perturbation efficiency on an experimental dataset</h1>
 <p><code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> runs <code>calc_perturb</code> on all nodes in the network in parallel with help of the <code>future</code> and <code>furrr</code> packages. In this vignette, the function is demonstrated on the <code>midsamp</code> data. This dataset is not comparable to actual biological miRNA:target gene datasets in size and complexity. Although <code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> runs in parallel it might take long time to run in real huge biological datasets.</p>
-<p>In real biological datasets, more complex interactions whether functional or non-functional could be observed. We have improved our approach with <code>fast</code> argument in <code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> based on selection of elements that could be affected from perturbation. In this fucntion, <code>fast</code> argument specifies the percentage of the competing amount that can be affected within the initial competing amount and acts as a selection parameter. For instance, in huge_example data:</p>
+<p>In real biological datasets, more complex interactions whether functional or non-functional could be observed. We have improved our approach with <code>fast</code> argument in <code><a href="../reference/find_node_perturbation.html">find_node_perturbation()</a></code> based on selection of elements that could be affected from perturbation. In this fucntion, <code>fast</code> argument specifies the percentage of the competing amount that can be affected within the initial competing amount and acts as a selection parameter. For instance, in filtered example data:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"></a>
 <a class="sourceLine" id="cb20-2" data-line-number="2">filtered_example<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb20-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/priming_graph.html">priming_graph</a></span>(<span class="dt">competing_count =</span> competing_counts, <span class="dt">miRNA_count =</span> mirnaexpression_normal)<span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/find_node_perturbation.html">find_node_perturbation</a></span>(<span class="dt">how=</span><span class="dv">5</span>, <span class="dt">cycle=</span><span class="dv">3</span>, <span class="dt">fast =</span> <span class="dv">10</span>)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/find_node_perturbation.html">find_node_perturbation</a></span>(<span class="dt">how=</span><span class="dv">5</span>, <span class="dt">cycle=</span><span class="dv">3</span>, <span class="dt">fast =</span> <span class="dv">15</span>)<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb20-5" data-line-number="5"><span class="st">  </span><span class="kw">select</span>(name, perturbation_efficiency, perturbed_count) -&gt;<span class="st"> </span>entire_perturbation</a>
 <a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">#&gt; Subsetting by edges</span></a></code></pre></div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"></a>
 <a class="sourceLine" id="cb21-2" data-line-number="2">entire_perturbation<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb21-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(perturbation_efficiency), <span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(perturbed_count))<span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb21-4" data-line-number="4"><span class="st">  </span><span class="kw">select</span>(name, perturbation_efficiency, perturbed_count)</a>
-<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="co">#&gt; # A tibble: 223 x 3</span></a>
-<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="co">#&gt;    name    perturbation_efficiency perturbed_count</span></a>
-<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="co">#&gt;    &lt;chr&gt;                     &lt;dbl&gt;           &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="co">#&gt;  1 SLC25A5               0.320                 207</span></a>
-<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="co">#&gt;  2 MSL3                  0.0696                207</span></a>
-<a class="sourceLine" id="cb21-10" data-line-number="10"><span class="co">#&gt;  3 MYCBP2                0.0695                205</span></a>
-<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="co">#&gt;  4 VPS41                 0.0472                205</span></a>
-<a class="sourceLine" id="cb21-12" data-line-number="12"><span class="co">#&gt;  5 ADIPOR2               0.175                 207</span></a>
-<a class="sourceLine" id="cb21-13" data-line-number="13"><span class="co">#&gt;  6 SCMH1                 0.0879                207</span></a>
-<a class="sourceLine" id="cb21-14" data-line-number="14"><span class="co">#&gt;  7 NR1H4                 0.0000227             207</span></a>
-<a class="sourceLine" id="cb21-15" data-line-number="15"><span class="co">#&gt;  8 RALBP1                0.156                 207</span></a>
-<a class="sourceLine" id="cb21-16" data-line-number="16"><span class="co">#&gt;  9 VCL                   0.388                 207</span></a>
-<a class="sourceLine" id="cb21-17" data-line-number="17"><span class="co">#&gt; 10 CTNNA1                0.683                 207</span></a>
-<a class="sourceLine" id="cb21-18" data-line-number="18"><span class="co">#&gt; # … with 213 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="co">#&gt; # A tibble: 53 x 3</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="co">#&gt;    name     perturbation_efficiency perturbed_count</span></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="co">#&gt;    &lt;chr&gt;                      &lt;dbl&gt;           &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="co">#&gt;  1 SLC25A5                    1.34               43</span></a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="co">#&gt;  2 MSL3                       0.207              43</span></a>
+<a class="sourceLine" id="cb21-10" data-line-number="10"><span class="co">#&gt;  3 SCMH1                      0.369              43</span></a>
+<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="co">#&gt;  4 RALBP1                     0.657              43</span></a>
+<a class="sourceLine" id="cb21-12" data-line-number="12"><span class="co">#&gt;  5 THUMPD1                    0.654              43</span></a>
+<a class="sourceLine" id="cb21-13" data-line-number="13"><span class="co">#&gt;  6 ARFGEF1                    0.509              43</span></a>
+<a class="sourceLine" id="cb21-14" data-line-number="14"><span class="co">#&gt;  7 PABPC1                     6.35               43</span></a>
+<a class="sourceLine" id="cb21-15" data-line-number="15"><span class="co">#&gt;  8 CNOT4                      0                   0</span></a>
+<a class="sourceLine" id="cb21-16" data-line-number="16"><span class="co">#&gt;  9 PPP1R13B                   0.285              43</span></a>
+<a class="sourceLine" id="cb21-17" data-line-number="17"><span class="co">#&gt; 10 CSNK2A1                    0.570              43</span></a>
+<a class="sourceLine" id="cb21-18" data-line-number="18"><span class="co">#&gt; # … with 43 more rows</span></a></code></pre></div>
 </div>
 <div id="session-info" class="section level1">
 <h1 class="hasAnchor">
@@ -514,7 +514,7 @@
 <a class="sourceLine" id="cb22-19" data-line-number="19"><span class="co">#&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     </span></a>
 <a class="sourceLine" id="cb22-20" data-line-number="20"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb22-21" data-line-number="21"><span class="co">#&gt; other attached packages:</span></a>
-<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; [1] ceRNAnetsim_0.99.19 tidygraph_1.1.2     dplyr_0.8.3        </span></a>
+<a class="sourceLine" id="cb22-22" data-line-number="22"><span class="co">#&gt; [1] ceRNAnetsim_0.99.21 tidygraph_1.1.2     dplyr_0.8.3        </span></a>
 <a class="sourceLine" id="cb22-23" data-line-number="23"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb22-24" data-line-number="24"><span class="co">#&gt; loaded via a namespace (and not attached):</span></a>
 <a class="sourceLine" id="cb22-25" data-line-number="25"><span class="co">#&gt;  [1] tidyselect_0.2.5   xfun_0.11          purrr_0.3.3        listenv_0.7.0     </span></a>
