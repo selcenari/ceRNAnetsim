@@ -71,7 +71,7 @@ find_node_perturbation <- function(input_graph, how = 2, cycle = 1, limit = 0,
     result <- input_graph %>% tidygraph::activate(edges) %>% tidygraph::mutate(fast = ifelse(100 *
                                                                                                effect_current/comp_count_current > fast, TRUE, FALSE)) %>%
       tidygraph::morph(to_subgraph, fast) %>%
-      { if( igraph::gsize(crystallise(.)$graph[[1]])==0) stop("Your argument fast removed all nodes. Please try lower fast argument")   else .  }
+      { if( igraph::gsize(crystallise(.)$graph[[1]])==0) stop("Your argument fast removed all nodes. Please try lower fast argument")   else .  }%>%
       tidygraph::activate(nodes) %>%
       tidygraph::mutate(degree = tidygraph::centrality_degree(mode = "all")) %>%
       tidygraph::filter(degree > 0) %>% tidygraph::mutate(eff_count = tidygraph::map_bfs(tidygraph::node_is_center(),
