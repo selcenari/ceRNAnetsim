@@ -11,23 +11,27 @@ trigger and finds the perturbed node count for a given node. — calc_perturbati
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -36,7 +40,7 @@ trigger and finds the perturbed node count for a given node. — calc_perturbati
 
 <!-- docsearch -->
 <script src="../docsearch.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.1/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/docsearch.js/2.6.3/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous" />
 <link href="../docsearch.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
@@ -46,7 +50,6 @@ trigger and finds the perturbed node count for a given node. — calc_perturbati
 trigger and finds the perturbed node count for a given node. — calc_perturbation" />
 <meta property="og:description" content="Calculates average expression changes of all nodes except
 trigger and finds the perturbed node count for a given node." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -74,7 +77,7 @@ trigger and finds the perturbed node count for a given node." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -176,7 +179,7 @@ trigger and finds the perturbed node count for a given node.</h1>
 trigger and finds the perturbed node count for a given node.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>calc_perturbation</span>(<span class='no'>input_graph</span>, <span class='no'>node_name</span>, <span class='kw'>how</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>limit</span> <span class='kw'>=</span> <span class='fl'>0</span>)</pre>
+    <pre class="usage"><span class='fu'>calc_perturbation</span><span class='op'>(</span><span class='va'>input_graph</span>, <span class='va'>node_name</span>, how <span class='op'>=</span> <span class='fl'>1</span>, cycle <span class='op'>=</span> <span class='fl'>1</span>, limit <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -221,34 +224,46 @@ limit parameter.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>'minsamp'</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>'minsamp'</span><span class='op'>)</span>
 
-<span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
-   <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>,
-       <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>calc_perturbation</span>(<span class='st'>'Gene6'</span>, <span class='kw'>how</span><span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
+<span class='va'>minsamp</span><span class='op'>%&gt;%</span>
+   <span class='fu'><a href='priming_graph.html'>priming_graph</a></span><span class='op'>(</span>competing_count <span class='op'>=</span> <span class='va'>Competing_expression</span>,
+       miRNA_count <span class='op'>=</span> <span class='va'>miRNA_expression</span><span class='op'>)</span><span class='op'>%&gt;%</span>
+   <span class='fu'>calc_perturbation</span><span class='op'>(</span><span class='st'>'Gene6'</span>, how<span class='op'>=</span> <span class='fl'>3</span>, cycle <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `funs()` is deprecated as of dplyr 0.8.0.</span>
+#&gt; <span class='warning'>Please use a list of either functions or lambdas: </span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Simple named list: </span>
+#&gt; <span class='warning'>  list(mean = mean, median = median)</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Auto named with `tibble::lst()`: </span>
+#&gt; <span class='warning'>  tibble::lst(mean, median)</span>
+#&gt; <span class='warning'></span>
+#&gt; <span class='warning'>  # Using lambdas</span>
+#&gt; <span class='warning'>  list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span>
+#&gt; <span class='warning'><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='warning'>Warning: The `add` argument of `group_by()` is deprecated as of dplyr 1.0.0.</span>
+#&gt; <span class='warning'>Please use the `.add` argument instead.</span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>This warning is displayed once every 8 hours.</span><span></span>
+#&gt; <span class='warning'></span><span style='color: #555555;'>Call `lifecycle::last_warnings()` to see where this warning was generated.</span><span></span></div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;   perturbation_efficiency perturbed_count
-#&gt;                     &lt;dbl&gt;           &lt;dbl&gt;
-#&gt; 1                   0.975               5</div><div class='input'>
- <span class='no'>minsamp</span><span class='kw'>%&gt;%</span>
-   <span class='fu'><a href='priming_graph.html'>priming_graph</a></span>(<span class='kw'>competing_count</span> <span class='kw'>=</span> <span class='no'>Competing_expression</span>, <span class='kw'>miRNA_count</span> <span class='kw'>=</span> <span class='no'>miRNA_expression</span>,
-       <span class='kw'>aff_factor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>energy</span>,<span class='no'>seed_type</span>), <span class='kw'>deg_factor</span> <span class='kw'>=</span> <span class='no'>region</span>)<span class='kw'>%&gt;%</span>
-   <span class='fu'>calc_perturbation</span>(<span class='st'>'Gene6'</span>,<span class='fl'>3</span>, <span class='kw'>cycle</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; # A tibble: 1 x 2
+#&gt;                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>                   0.975               5</div><div class='input'>
+ <span class='va'>minsamp</span><span class='op'>%&gt;%</span>
+   <span class='fu'><a href='priming_graph.html'>priming_graph</a></span><span class='op'>(</span>competing_count <span class='op'>=</span> <span class='va'>Competing_expression</span>, miRNA_count <span class='op'>=</span> <span class='va'>miRNA_expression</span>,
+       aff_factor <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>energy</span>,<span class='va'>seed_type</span><span class='op'>)</span>, deg_factor <span class='op'>=</span> <span class='va'>region</span><span class='op'>)</span><span class='op'>%&gt;%</span>
+   <span class='fu'>calc_perturbation</span><span class='op'>(</span><span class='st'>'Gene6'</span>,<span class='fl'>3</span>, cycle <span class='op'>=</span> <span class='fl'>4</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: First column is processed as competing and the second as miRNA.</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1 x 2</span><span>
 #&gt;   perturbation_efficiency perturbed_count
-#&gt;                     &lt;dbl&gt;           &lt;dbl&gt;
-#&gt; 1                   0.249               5</div><div class='input'>
+#&gt;                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>           </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>                   0.249               5</div><div class='input'>
 
-</div></pre>
+</div></span></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -259,7 +274,7 @@ limit parameter.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
