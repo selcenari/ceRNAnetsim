@@ -24,7 +24,7 @@ warnings_are_errors: false
 
 
 before_deploy:
-  - apt-get install -y libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev
+  - sudo apt-get install -y libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev
   - Rscript -e 'remotes::install_cran("devtools"); remotes::install_cran("pkgdown"); remotes::install_version("rmarkdown", "1.15")'
   - wget https://raw.githubusercontent.com/selcenari/ceRNAnetsim/services/_pkgdown.yaml
   - wget https://raw.githubusercontent.com/selcenari/ceRNAnetsim/services/codecov.yml
