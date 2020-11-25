@@ -50,7 +50,6 @@ vis_graph <- function(input_graph, Competing_color = "green", mirna_color = "ora
     warning("Kamada-Kawai (kk) layout was used.")
   }
 
-
   input_graph%>% ggraph(layout = layout) + 
                   geom_edge_link(colour = "#838B8B", alpha = 0.5) + 
                   geom_node_point(aes(filter = (changes_variable == "Competing"), color = "Competing", size = count_current), shape = 16) +
