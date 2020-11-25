@@ -50,14 +50,14 @@ vis_graph <- function(input_graph, Competing_color = "green", mirna_color = "ora
     warning("Kamada-Kawai (kk) layout was used.")
   }
 
-  input_graph %>% ggraph(layout = layout) + geom_edge_link(colour = "#838B8B", alpha = 0.5) + geom_node_point(aes(filter = (changes_variable ==
-                                                                                                                                   "Competing"), color = "Competing", size = count_current), shape = 16) +
-    geom_node_point(aes(filter = (changes_variable == "miRNA"), color = "miRNA"),
-                    shape = 16, size = 2) + geom_node_point(aes(filter = (changes_variable ==
-                                                                            "Up"), color = "Up", size = count_current), shape = 16) + geom_node_point(aes(filter = (changes_variable ==
-                                                                                                                                                                      "Down"), color = "Down", size = count_current), shape = 16) + scale_colour_manual(name = "Types",
-                                                                                                                                                                                                                                                        values = c(Competing = Competing_color, miRNA = mirna_color, Up = Upregulation,
-                                                                                                                                                                                                                                                                   Down = Downregulation)) + ggtitle(title) + theme_graph(base_family = "sans")
+  input_graph%>% ggraph(layout = layout) + 
+                  geom_edge_link(colour = "#838B8B", alpha = 0.5) + 
+                  geom_node_point(aes(filter = (changes_variable == "Competing"), color = "Competing", size = count_current), shape = 16) +
+                  geom_node_point(aes(filter = (changes_variable == "miRNA"), color = "miRNA"),shape = 16, size = 2) + 
+                  geom_node_point(aes(filter = (changes_variable =="Up"), color = "Up", size = count_current), shape = 16) + 
+                  geom_node_point(aes(filter = (changes_variable == "Down"), color = "Down", size = count_current), shape = 16) + 
+                  scale_colour_manual(name = "Types", values = c(Competing = Competing_color, miRNA = mirna_color, Up = Upregulation, Down = Downregulation)) + 
+                  ggtitle(title) + theme_graph(base_family = "sans")
 
 
 }
