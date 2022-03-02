@@ -151,7 +151,7 @@ test_that("Check gene knock down", {
     as_tibble()%>%
     filter( Competing_name == "Gene2")%>%
     select(comp_count_list)%>%
-    unnest()%>%
+    unnest(comp_count_list)%>%
     pull()-> sim_res
 
   expect_equal(sim_res, c(10000, 0, 0, 0, 0, 0))

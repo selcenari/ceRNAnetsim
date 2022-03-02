@@ -4,7 +4,8 @@
 \name{TCGA_E9_A1N5_mirnatumor}
 \alias{TCGA_E9_A1N5_mirnatumor}
 \title{TCGA_E9_A1N5_mirnatumor}
-\format{Classes tbl_df, tbl and data.frame with 648 observation of 6 variables:
+\format{
+Classes tbl_df, tbl and data.frame with 648 observation of 6 variables:
 \describe{
   \item{barcode}{Sample, tumor tissue, barcode of patient based on TCGA}
   \item{mirbase_ID}{mirbase id of miRNA}
@@ -12,7 +13,8 @@
   \item{Precusor}{Precusor id of miRNA which is given in miRNA variable}
   \item{total_read}{total reading count of miRNA which is produced from different gene locations}
   \item{total_RPM}{total RPM (reading per million) of miRNA}
-  }}
+  }
+}
 \source{
 \url{https://portal.gdc.cancer.gov/}
 }

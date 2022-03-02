@@ -4,7 +4,8 @@
 \name{midsamp}
 \alias{midsamp}
 \title{midsamp}
-\format{A data frame with 7 variables and 26 observation of them:
+\format{
+A data frame with 7 variables and 26 observation of them:
 \describe{
   \item{Genes}{symbol of gene}
   \item{miRNAs}{symol of miRNA}
@@ -13,7 +14,8 @@
   \item{seeds}{Coefficient for efficiency of seed type of miRNA:target interaction}
   \item{targeting_region}{Coefficient for efficiency of location on target}
   \item{Energy}{Energy of miRNA:target binding}
-  }}
+  }
+}
 \source{
 Dataset was created by us.
 }

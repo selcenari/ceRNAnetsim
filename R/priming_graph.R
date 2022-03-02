@@ -25,6 +25,7 @@ normalize <- function(x) {
 #' @importFrom igraph edges edge
 #' @importFrom stats na.omit
 #' @importFrom rlang enquo enquos
+#' @importFrom dlpyr list 
 #' @return the graph object.
 #'
 #' @param df A data frame that includes the miRNA and competing targets.
@@ -80,20 +81,25 @@ priming_graph <- function(df, competing_count, miRNA_count, aff_factor = dummy,
 
 
   input_graph <- df %>% dplyr::group_by(miRNA) %>% dplyr::mutate_at(dplyr::vars(!!!affinity),
-                                                                    dplyr::funs(anorm = normalize)) %>% dplyr::mutate_at(dplyr::vars(!!!degradation),
-                                                                                                                         dplyr::funs(dnorm = normalize)) %>% dplyr::ungroup() %>% dplyr::mutate(afff_factor = dplyr::select(.,
-                                                                                                                                                                                                                            dplyr::ends_with("anorm")) %>% reduce(`*`, .init = 1), degg_factor = dplyr::select(.,
-                                                                                                                                                                                                                                                                                                               dplyr::ends_with("dnorm")) %>% reduce(`*`, .init = 1)) %>% tidygraph::as_tbl_graph() %>%
+                                                                    list(anorm = ~normalize(.))) %>% 
+                                                   dplyr::mutate_at(dplyr::vars(!!!degradation),
+                                                                    list(dnorm = ~normalize(.))) %>% 
+                                                   dplyr::ungroup() %>% 
+    dplyr::mutate(afff_factor = dplyr::select(., dplyr::ends_with("anorm")) %>% 
+                    reduce(`*`, .init = 1), degg_factor = dplyr::select(., dplyr::ends_with("dnorm")) %>% 
+                    reduce(`*`, .init = 1)) %>% 
+    tidygraph::as_tbl_graph() %>%
     tidygraph::activate(nodes) %>% tidygraph::mutate(type = ifelse(tidygraph::centrality_degree(mode = "in") >
                                                                      0, "miRNA", "Competing")) %>% tidygraph::mutate(node_id = dplyr::row_number()) %>%
     tidygraph::activate(edges) %>% tidygraph::mutate(comp_count_list = as.list(!!competing_exp),
                                                      comp_count_pre = !!competing_exp, comp_count_current = !!competing_exp,
                                                      mirna_count_list = as.list(!!mirna_exp), mirna_count_pre = !!mirna_exp,
                                                      mirna_count_current = !!mirna_exp) %>% tidygraph::group_by(to) %>%
-    tidygraph::mutate(mirna_count_per_dep = mirna_count_current * comp_count_current *
-                        afff_factor/sum(comp_count_current * afff_factor), mirna_count_per_dep = ifelse(is.na(mirna_count_per_dep),
-                                                                                                        0, mirna_count_per_dep)) %>% tidygraph::ungroup() %>% tidygraph::mutate(effect_current = mirna_count_per_dep *
-                                                                                                                                                                                  degg_factor, effect_pre = effect_current, effect_list = as.list(effect_current)) %>%
+    tidygraph::mutate(mirna_count_per_dep = mirna_count_current * comp_count_current *afff_factor/sum(comp_count_current * afff_factor), 
+                      mirna_count_per_dep = ifelse(is.na(mirna_count_per_dep),0, mirna_count_per_dep)) %>% 
+    tidygraph::ungroup() %>% tidygraph::mutate(effect_current = mirna_count_per_dep * degg_factor, 
+                                               effect_pre = effect_current, 
+                                               effect_list = as.list(effect_current)) %>%
     tidygraph::select(-dplyr::ends_with("norm"), dummy)
 
   warning("First column is processed as competing and the second as miRNA.

@@ -11,3 +11,5 @@ ceRNAnetsim*.tgz
 doc
 Meta
 NEWS.Rmd
+ISBRA_docs
+new_functions_find_targetings.Rmd

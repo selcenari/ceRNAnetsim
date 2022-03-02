@@ -4,7 +4,8 @@
 \name{huge_example}
 \alias{huge_example}
 \title{huge example}
-\format{A data frame with 7 variables and 26176 observation:
+\format{
+A data frame with 7 variables and 26176 observation:
 \describe{
   \item{competing}{name of gene}
   \item{miRNA}{name of miRNA}
@@ -13,7 +14,8 @@
   \item{Energy}{Energy of miRNA:target binding}
   \item{region_effect}{Coefficient for efficiency of location on target}
   \item{seed_type_effect}{Coefficient for efficiency of seed sequence of miRNA:target interaction}
-  }}
+  }
+}
 \source{
 Dataset was integrated by us.
 }

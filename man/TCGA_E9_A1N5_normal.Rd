@@ -4,7 +4,8 @@
 \name{TCGA_E9_A1N5_normal}
 \alias{TCGA_E9_A1N5_normal}
 \title{TCGA_E9_A1N5_normal}
-\format{Classes tbl_df, tbl and data.frame with 56830 observation of 7 variables:
+\format{
+Classes tbl_df, tbl and data.frame with 56830 observation of 7 variables:
 \describe{
   \item{patient}{Barcode of patient based on TCGA}
   \item{sample}{Tissue sample barcode of the patient}
@@ -13,7 +14,8 @@
   \item{ensembl_gene_id}{Gene id}
   \item{external_gene_name}{Gene symbol}
   \item{gene_expression}{Gene expression value}
-  }}
+  }
+}
 \source{
 \url{https://portal.gdc.cancer.gov/}
 }
