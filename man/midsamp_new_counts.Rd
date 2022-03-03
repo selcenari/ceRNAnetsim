@@ -4,13 +4,15 @@
 \name{midsamp_new_counts}
 \alias{midsamp_new_counts}
 \title{midsamp_new_counts}
-\format{A data frame with 4 variables and 26 observation of them:
+\format{
+A data frame with 4 variables and 26 observation of them:
 \describe{
   \item{Competing}{symbol of gene}
   \item{miRNA}{symol of miRNA}
   \item{Competing_count}{Expression values of competing gene}
   \item{miRNA_count}{Expression value of miRNA}
-  }}
+  }
+}
 \source{
 Dataset was created by us.
 }

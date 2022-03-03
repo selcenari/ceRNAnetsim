@@ -7,3 +7,8 @@ Changes in version 0.99.16 (2019-11-20)
 
 + Fixed documentation fails
 + Re-arranged vignettes
+
+Changes in 1.4.0
+
++ New functions, find_affected_nodes and find_targeting nodes
++ Fixed test files

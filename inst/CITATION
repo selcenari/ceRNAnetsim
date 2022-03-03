@@ -1,0 +1,10 @@
+ceRNAnetsimRef <- bibentry(bibtype = "Article",
+         author = c(as.person("Selcen Ari Yuka"),
+                    as.person("Alper Yilmaz")),
+         title = "Network based multifactorial modelling of miRNA-target interactions",
+         year = 2021,
+         doi = " 10.7717/peerj.11121",
+         abstract ="Competing endogenous RNA (ceRNA) regulations and crosstalk between various types of non-coding RNA in humans is an important and under-explored subject. Several studies have pointed out that an alteration in miRNA: target interaction can result in unexpected changes due to indirect and complex interactions. In this article, we defined a new network-based model that incorporates miRNA: ceRNA interactions with expression values. Our approach calculates network-wide effects of perturbations in the expression level of one or more nodes in the presence or absence of miRNA interaction factors such as seed type, binding energy. We carried out the analysis of large-scale miRNA: target networks from breast cancer patients. Highly perturbing genes identified by our approach coincide with breast cancer-associated genes and miRNAs. Our network-based approach takes the sponge effect into account and helps to unveil the crosstalk between nodes in miRNA: target network. The model has potential to reveal unforeseen regulations that are only evident in the network context. Our tool is scalable and can be plugged in with emerging miRNA effectors such as circRNAs, lncRNAs, and available as R package ceRNAnetsim: https://www. bioconductor. org/packages/release/bioc/html/ceRNAnetsim.html.",
+         URL = "https://doi.org/10.1093/bioinformatics/btz314",
+         eprint = "https://peerj.com/articles/11121/",
+         journal = "PeerJ")

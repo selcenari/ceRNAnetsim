@@ -119,7 +119,7 @@ test_that("Simulation on the sample network", {
       select(name)%>%
       pull()-> test_sim
 
-   expect_equal(initialsim_res[["data"]][["initial_count"]], initialsim_res[["data"]][["count_pre"]], initialsim_res[["data"]][["count_current"]])
+
    expect_equal(sim_res[["layers"]][[2]][["aes_params"]][["shape"]], 16)
    expect_equal(test_sim, c("Mir1", "Mir2"))
 
