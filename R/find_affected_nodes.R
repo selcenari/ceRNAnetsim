@@ -3,6 +3,7 @@
 #'
 #'
 #' @importFrom tidygraph as_tibble
+#' @importFrom utils head
 #'
 #' @return It gives a tibble form dataset that includes perturbation node, 
 #' affected nodes and changes of them.
@@ -39,6 +40,7 @@
 
 find_affected_nodes<- function(input_graph, node_name, how = 1, cycle = 1,
                                limit = 0, top = 5) {
+
   res <- input_graph %>% 
     update_how(node_name, how) %>% 
     simulate(cycle) %>%

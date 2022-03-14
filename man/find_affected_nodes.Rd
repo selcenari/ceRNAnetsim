@@ -17,6 +17,8 @@ find_affected_nodes(
 \arguments{
 \item{input_graph}{The graph object that was processed with priming_graph function.}
 
+\item{node_name}{The node to trigger perturbations.}
+
 \item{how}{The change of count (expression) of the given node in terms of fold change.}
 
 \item{cycle}{The iteration of simulation.}
@@ -27,7 +29,7 @@ perturbation calculation on all nodes in terms of percentage.}
 \item{top}{Determines how many nodes most affected will be listed.}
 }
 \value{
-It gives a tibble form dataset that includes parturbation node, 
+It gives a tibble form dataset that includes perturbation node, 
 affected nodes and changes of them.
 }
 \description{
@@ -50,8 +52,7 @@ priming_graph(competing_count = Gene_expression,
 find_affected_nodes(node_name = "Gene1", 
                     how = 2, 
                     cycle = 2, 
-                    top = 2)\%>\%
-unnest()
+                    top = 2)
 
 
 }

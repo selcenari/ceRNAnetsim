@@ -25,7 +25,6 @@ normalize <- function(x) {
 #' @importFrom igraph edges edge
 #' @importFrom stats na.omit
 #' @importFrom rlang enquo enquos
-#' @importFrom dlpyr list 
 #' @return the graph object.
 #'
 #' @param df A data frame that includes the miRNA and competing targets.

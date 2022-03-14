@@ -10,4 +10,5 @@ utils::globalVariables(c("name", "count_current", "initial_count", ".",
                          "effect_list", "mirna_count_list",
                          "count_pre", "type", "node_id",
                          "changes_variable", "x", "y",
-                         "mirna_count_pre", "effect_pre", "len"))
+                         "mirna_count_pre", "effect_pre", "len",
+                         "change", "node", "top_nodes", "initial_exp", "final_exp"))
