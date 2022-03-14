@@ -42,6 +42,7 @@
 
 find_targeting_nodes <- function(input_graph, how = 2, cycle = 1, limit = 0, fast = 0, top = 5, target = NULL) {
   
+
   empty_result <- list(dplyr::tibble(top_nodes = NA, change = NA, initial_exp = NA, final_exp=NA))
   
   if (fast == 0) {

@@ -24,6 +24,10 @@ find_targeting_nodes(
 \item{limit}{The minimum fold change which can be taken into account for
 perturbation calculation on all nodes in terms of percentage.}
 
+\item{fast}{specifies percentage of affected target in target expression.
+For example, if fast = 1, the nodes that are affected from miRNA repression
+activity more than one percent of their expression is determined as subgraph.}
+
 \item{top}{Determines how many nodes most affected will be evaluated.}
 
 \item{target}{The target node in which is being investigated.}
