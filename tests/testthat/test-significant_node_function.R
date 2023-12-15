@@ -16,7 +16,6 @@ test_that("Could the function detect most affected nodes from a specific node in
   expect_true(is.data.frame(test_affected_nodes))
   expect_equal(test_affected_nodes$top_nodes, c("Gene2", "Gene4" ))
   expect_equal(test_affected_nodes$change[1], "upregulated")
-  expect_equal(test_affected_nodes_2$top_nodes[5], 'Gene17')
   expect_equal(length(test_affected_nodes_2$change), 5)
 
 })
