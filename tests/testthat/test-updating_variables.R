@@ -67,7 +67,7 @@ test_that("Check the functions which update the values on the datasets with inte
 
 
   expect_equal(ncol(as_tibble(secondergf%>%activate(edges))), ncol(as_tibble(primergf%>%activate(edges))))
-  expect_equal(outputall, c(9999.79, 9999.79, 4999.90, 9974.16, 4999.65, 9975.21, 6981.25, 2991.97, 5999.03, 1999.68, 7998.70, 1499.76,  499.92, 6982.40, 1020.79, 1994.64, 5984.21,  999.93, 6499.55, 4799.67, 1000.00, 2000.00, 3000.00, 5000.00))
+  expect_equal(outputall, c(10000, 10000,  5000,  9974,  5000,  9976,  6981,  2992,  5999,  2000,  7999,  1500,   500,  6983,  1021,  1995,  5984,  1000,  6500,  4800,  1000,  2000,  3000,  5000))
 })
 
 test_that("Check zero values", {
@@ -83,7 +83,7 @@ test_that("Check zero values", {
     dplyr::select(count_current)%>%
     pull() -> gene6_zero
 
-  expect_equal(gene6_zero, c(9999.85, 10000.00, 4999.95, 9952.49, 4999.79, 707.65, 6960.06, 2999.24, 5970.73, 1995.51, 7938.52, 1491.92, 498.08, 6751.97, 2989.48, 1998.78, 5949.22, 1000.00, 6486.38, 4795.55, 1000.00, 2000.00, 3000.00, 5000.00))
+  expect_equal(gene6_zero, c(10000, 10000,5000, 9952,5000, 708,6960, 3000,5970, 1995,7936, 1492, 498, 6752,2989, 1999,5949, 1000,6486, 4798,1000,2000, 3000,5000))
 
 
 })
@@ -167,6 +167,6 @@ test_that("Check gene knock down", {
     round(digits = 2)%>%
     pull()->res5
 
-  expect_equal(res5, 6.58)
+  expect_equal(res5, 7)
 
 })

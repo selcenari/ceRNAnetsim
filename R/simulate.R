@@ -40,55 +40,76 @@
 #'
 #' @export
 
-simulate <- function(input_graph, cycle = 1, threshold = 0, knockdown = TRUE) {
-
-  # seq_along causes unwanted behavor for 1:-2, so check no of cycles
+simulate <- function(input_graph, cycle = 1, threshold = 0, knockdown=TRUE) {
+  
+  
   if (cycle < 1)
     stop("number of cycles should be more than 1", call. = FALSE)
-
+  
   if (knockdown) {
-
+    
     for (i in seq_len(cycle)) {
-
-      input_graph <- input_graph %>% tidygraph::activate(edges) %>%
-        tidygraph::group_by(to) %>% tidygraph::mutate(mirna_count_per_comp = mirna_count_current *
-                                                        comp_count_current * afff_factor/sum(comp_count_current *
-                                                                                               afff_factor), mirna_count_per_comp = ifelse(is.na(mirna_count_per_comp),
-                                                                                                                                           0, mirna_count_per_comp)) %>% tidygraph::ungroup() %>%
-        tidygraph::mutate(effect_pre = effect_current, effect_current = mirna_count_per_comp *
-                            degg_factor) %>% tidygraph::group_by(from) %>% tidygraph::mutate(comp_count_pre = ifelse(comp_count_current <
-                                                                                                                       0, 1, comp_count_current), comp_count_current = ifelse(comp_count_pre ==
-                                                                                                                                                                                0, 0, comp_count_pre - (sum(effect_current) - sum(effect_pre))),
-                                                                                             comp_count_current = ifelse(comp_count_current < 0, 1,
-                                                                                                                         comp_count_current)) %>% tidygraph::ungroup() %>% tidygraph::mutate(comp_count_list = pmap(list(comp_count_list,
-                                                                                                                                                                                                                         comp_count_current), c), effect_list = pmap(list(effect_list,
-                                                                                                                                                                                                                                                                          effect_current), c), mirna_count_list = pmap(list(mirna_count_list,
-                                                                                                                                                                                                                                                                                                                            mirna_count_current), c)) %>% tidygraph::activate(nodes) %>%
+      
+      input_graph <- input_graph %>% 
+        tidygraph::activate(edges) %>%
+        tidygraph::group_by(to) %>% 
+        tidygraph::mutate(mirna_count_per_comp = mirna_count_current *comp_count_current * afff_factor/sum(comp_count_current *afff_factor),
+                          mirna_count_per_comp = ifelse(is.na(mirna_count_per_comp),0, mirna_count_per_comp)) %>% 
+        tidygraph::ungroup() %>%
+        tidygraph::mutate(effect_pre = effect_current, 
+                          effect_current = mirna_count_per_comp *degg_factor) %>% 
+        tidygraph::group_by(from) %>%
+        # NEW
+        tidygraph::mutate(avg_count_current = round((comp_count_pre+comp_count_current)/2, 0)) %>% 
+        tidygraph::mutate(comp_count_pre = ifelse(comp_count_current < 0, 1, comp_count_current), 
+                          comp_count_current = ifelse(comp_count_pre ==0, 0, comp_count_pre - (sum(effect_current) - sum(effect_pre))),
+                          comp_count_current = ifelse(comp_count_current < 0, 1, comp_count_current)) %>% 
+        # NEW 
+        tidygraph::mutate(avg_count_pre = avg_count_current, 
+                          avg_count_current = round((comp_count_pre+comp_count_current)/2, 0)) %>% 
+        tidygraph::ungroup() %>% 
+        # NEW: this fixes the ossilation issue:
+        mutate(comp_count_current = ifelse(abs(avg_count_pre - avg_count_current) < 0.001*avg_count_current, avg_count_current, comp_count_current)) %>% 
+        #mutate(comp_count_current = ifelse(avg_count_pre == avg_count_current, avg_count_current, comp_count_current)) %>% 
+        tidygraph::mutate(comp_count_list = pmap(list(comp_count_list,comp_count_current), c), 
+                          effect_list = pmap(list(effect_list, effect_current), c),
+                          mirna_count_list = pmap(list(mirna_count_list, mirna_count_current), c)) %>% 
+        tidygraph::activate(nodes) %>%
         update_nodes(limit = threshold)
     }
-    return(input_graph)
-
+    return(input_graph %>% activate(edges) %>% select(-avg_count_current, -avg_count_pre) %>% activate(nodes))
+    
   }
-
-
+  
   for (i in seq_len(cycle)) {
-
-    input_graph <- input_graph %>% tidygraph::activate(edges) %>% tidygraph::group_by(to) %>%
-      tidygraph::mutate(mirna_count_per_comp = mirna_count_current *
-                          comp_count_current * afff_factor/sum(comp_count_current *
-                                                                 afff_factor), mirna_count_per_comp = ifelse(is.na(mirna_count_per_comp),
-                                                                                                             0, mirna_count_per_comp)) %>% tidygraph::ungroup() %>%
-      tidygraph::mutate(effect_pre = effect_current, effect_current = mirna_count_per_comp *
-                          degg_factor) %>% tidygraph::group_by(from) %>% tidygraph::mutate(comp_count_pre = ifelse(comp_count_current <
-                                                                                                                     0, 1, comp_count_current), comp_count_current = comp_count_pre -
-                                                                                             (sum(effect_current) - sum(effect_pre)), comp_count_current = ifelse(comp_count_current <
-                                                                                                                                                                    0, 1, comp_count_current)) %>% tidygraph::ungroup() %>% tidygraph::mutate(comp_count_list = pmap(list(comp_count_list,
-                                                                                                                                                                                                                                                                          comp_count_current), c), effect_list = pmap(list(effect_list,
-                                                                                                                                                                                                                                                                                                                           effect_current), c), mirna_count_list = pmap(list(mirna_count_list,
-                                                                                                                                                                                                                                                                                                                                                                             mirna_count_current), c)) %>% tidygraph::activate(nodes) %>%
+    
+    input_graph <- input_graph %>% 
+      tidygraph::activate(edges) %>% 
+      tidygraph::group_by(to) %>%
+      tidygraph::mutate(mirna_count_per_comp = mirna_count_current * comp_count_current * afff_factor/sum(comp_count_current * afff_factor), 
+                        mirna_count_per_comp = ifelse(is.na(mirna_count_per_comp), 0, mirna_count_per_comp)) %>% 
+      tidygraph::ungroup() %>%
+      tidygraph::mutate(effect_pre = effect_current, effect_current = mirna_count_per_comp *degg_factor) %>% 
+      tidygraph::group_by(from) %>% 
+      # NEW
+      tidygraph::mutate(avg_count_current = round((comp_count_pre+comp_count_current)/2, 0)) %>% 
+      tidygraph::mutate(comp_count_pre = ifelse(comp_count_current <0, 1, comp_count_current), 
+                        comp_count_current = comp_count_pre -(sum(effect_current) - sum(effect_pre)), 
+                        comp_count_current = ifelse(comp_count_current <0, 1, comp_count_current)) %>% 
+      # NEW 
+      tidygraph::mutate(avg_count_pre = avg_count_current, 
+                        avg_count_current = round((comp_count_pre+comp_count_current)/2, 0)) %>% 
+      tidygraph::ungroup() %>% 
+      # NEW: this fixes the ossilation issue:
+      mutate(comp_count_current = ifelse(abs(avg_count_pre - avg_count_current) < 0.001*avg_count_current, avg_count_current, comp_count_current)) %>% 
+      #mutate(comp_count_current = ifelse(avg_count_pre == avg_count_current, avg_count_current, comp_count_current)) %>% 
+      tidygraph::mutate(comp_count_list = pmap(list(comp_count_list,comp_count_current), c), 
+                        effect_list = pmap(list(effect_list, effect_current), c),
+                        mirna_count_list = pmap(list(mirna_count_list, mirna_count_current), c)) %>% 
+      tidygraph::activate(nodes) %>%
       update_nodes(limit = threshold)
   }
-  return(input_graph)
+  return(input_graph %>% activate(edges) %>% select(-avg_count_current, -avg_count_pre) %>% activate(nodes))
 }
 
 
