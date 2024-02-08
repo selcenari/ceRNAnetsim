@@ -90,8 +90,7 @@ find_node_perturbation <- function(input_graph, how = 2, cycle = 1, limit = 0, f
       left_join(res_calc_per, by = "name")
     
   }
-
-  
   return(result)
   
 }
+
