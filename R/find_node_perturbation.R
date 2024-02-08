@@ -7,7 +7,7 @@
 #' @importFrom future plan
 #' @importFrom rlang set_names
 #' @importFrom igraph gsize degree V 'V<-'
-#' @importFrom purrr map_dbl
+#' @importFrom purrr map_dbl map
 #' @importFrom tidyr unnest
 #'
 #' @return It gives a tibble form dataset that includes node names,
@@ -54,37 +54,44 @@
 #'
 #' @export
 
-find_node_perturbation <- function(input_graph, how = 2, cycle = 1, limit = 0,
-                                   fast = 0) {
-
-  empty_result <- list(dplyr::tibble(perturbation_efficiency = NA, perturbed_count = NA))
-
+find_node_perturbation <- function(input_graph, how = 2, cycle = 1, limit = 0, fast = 0) {
+  
   if (fast == 0) {
-
-    result <- input_graph %>% activate(nodes) %>% tidygraph::mutate(eff_count = future_map(V(input_graph)$name,
-                                                                                           ~calc_perturbation(input_graph, .x, how, cycle, limit))) %>%
-      tibble::as_tibble() %>% unnest(eff_count)
+    
+    result <- input_graph %>% 
+      activate(nodes) %>% 
+      tidygraph::mutate(eff_count = future_map(V(input_graph)$name, ~calc_perturbation(input_graph, .x, how, cycle, limit))) %>%
+      tibble::as_tibble() %>% 
+      unnest(eff_count)
   }
-
+  
   if (fast != 0) {
-
-    result <- input_graph %>% tidygraph::activate(edges) %>% tidygraph::mutate(fast = ifelse(100 *
-                                                                                               effect_current/comp_count_current > fast, TRUE, FALSE)) %>%
-      tidygraph::morph(to_subgraph, fast) %>%
-      { if( igraph::gsize(crystallise(.)$graph[[1]])==0) stop("Your argument fast removed all nodes. Please try lower fast argument")   else .  }%>%
+    
+    input_graph %>% 
+      tidygraph::activate(edges) -> main_graph
+    
+    main_graph %>% 
+      tidygraph::mutate(fast = ifelse(100*effect_current/comp_count_current > fast, TRUE, FALSE)) %>%
+      tidygraph::filter(fast) %>%
       tidygraph::activate(nodes) %>%
       tidygraph::mutate(degree = tidygraph::centrality_degree(mode = "all")) %>%
-      tidygraph::filter(degree > 0) %>% tidygraph::mutate(eff_count = tidygraph::map_bfs(tidygraph::node_is_center(),
-                                                                                         .f = function(graph, node, ...) {
-                                                                                           calc_perturbation(graph, V(graph)$name[node], how, cycle,
-                                                                                                             limit)
-                                                                                         })) %>% tidygraph::unmorph() %>% tidygraph::mutate(len = map_dbl(eff_count,
-                                                                                                                                                          length), eff_count = ifelse(len == 0, empty_result, eff_count)) %>%
-      tidygraph::as_tibble() %>% unnest() %>% dplyr::select(-degree,
-                                                            -len)
-
-
+      tidygraph::filter(degree > 0) -> fast_graph
+    
+    fast_graph %>% 
+      tidygraph::mutate(eff_count = purrr::map(name, ~calc_perturbation(fast_graph, .x,  how, cycle, limit))) %>% 
+      activate(nodes) %>% 
+      as_tibble() %>% 
+      unnest() %>% 
+      dplyr::select(name, perturbation_efficiency, perturbed_count)-> res_calc_per
+    
+    result<- main_graph %>% 
+      activate(nodes) %>% 
+      as_tibble() %>% 
+      left_join(res_calc_per, by = "name")
+    
   }
 
+  
   return(result)
+  
 }
