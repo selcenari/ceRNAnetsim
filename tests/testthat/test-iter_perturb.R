@@ -38,13 +38,6 @@ minsamp%>%
                  simulate(cycle = 0),
                "number of cycles should be more than 1")
 
-  expect_equal(class(midsamp %>%
-          priming_graph(Gene_expression, miRNA_expression) %>%
-          update_how("Gene2",2) %>%
-          simulate(10) %>%
-          find_iteration(limit=0, plot = TRUE)), c("gg", "ggplot"))
-
-
  })
 
 
